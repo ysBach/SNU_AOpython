@@ -436,7 +436,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 17:52:02 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 18:37:33 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -482,7 +482,7 @@ document.write(`
 
 <span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
 
-<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../../Tutorial_Data&#39;</span><span class="p">)</span>
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../Tutorial_Data&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -512,18 +512,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">allfits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATAPATH</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*p4179*.fits&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">allfits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">hdr</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">data</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-<span class="ne">IndexError</span>: list index out of range
-</pre></div>
-</div>
+<img alt="../_images/f638389dd243ba1473370ba59e74b1f1560053423d8a858714b9c81bb0eb3577.png" src="../_images/f638389dd243ba1473370ba59e74b1f1560053423d8a858714b9c81bb0eb3577.png" />
 </div>
 </div>
 </section>
@@ -568,16 +557,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">thresh_3sig</span> <span class="o">=</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">mask_3sig</span> <span class="o">=</span> <span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">thresh_3sig</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;cut_hdu&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601666 41.04309455]
 </pre></div>
 </div>
+<img alt="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" src="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" />
 </div>
 </div>
 <p>In the code, I overplotted the image onto the <code class="docutils literal notranslate"><span class="pre">mask_3sig</span></code>. The faint background-like feature is the original image, and the highlight means the pixels used for the centroid calculation. Red cross is the thus found centroid.</p>

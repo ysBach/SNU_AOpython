@@ -437,7 +437,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 17:51:59 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 18:37:30 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -483,7 +483,7 @@ document.write(`
 
 <span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
 
-<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../../Tutorial_Data&#39;</span><span class="p">)</span>
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../Tutorial_Data&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -501,7 +501,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 0 fits files in ../../../Tutorial_Data.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 7 fits files in ../../Tutorial_Data.
+../../Tutorial_Data/20180413SAAO_p4179_010449.fits
+../../Tutorial_Data/20180413SAAO_p4179_010451.fits
+../../Tutorial_Data/20180413SAAO_p4179_010453.fits
+../../Tutorial_Data/20180413SAAO_p4179_010455.fits
+../../Tutorial_Data/20180413SAAO_p4179_010457.fits
+../../Tutorial_Data/20180413SAAO_p4179_010459.fits
+../../Tutorial_Data/20180413SAAO_p4179_010461.fits
 </pre></div>
 </div>
 </div>
@@ -539,6 +546,50 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010449.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010451.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010453.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010455.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010457.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010459.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/20180413SAAO_p4179_010461.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
+</pre></div>
+</div>
+</div>
 </div>
 <p>As can be seen, each FITS file consist of two extensions called <code class="docutils literal notranslate"><span class="pre">PRIMARY</span></code> and <code class="docutils literal notranslate"><span class="pre">MASK</span></code>.</p>
 <div class="tip admonition">
@@ -557,17 +608,13 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Type of hdul:
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type of hdul:&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">hdul</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hdul.info():&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">hdul</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+&lt;class &#39;astropy.io.fits.hdu.hdulist.HDUList&#39;&gt;
 
-<span class="ne">NameError</span>: name &#39;hdul&#39; is not defined
+hdul.info():
+Filename: ../../Tutorial_Data/20180413SAAO_p4179_010461.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     292   (999, 999)   float32   
+  1  MASK          1 ImageHDU         8   (999, 999)   uint8   
 </pre></div>
 </div>
 </div>
@@ -583,17 +630,12 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First 2x2 data of the 0-th element of hdul: hdul[0].data
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 2x2 data of the 0-th element of hdul: hdul[0].data&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 2x2 data of the 1-th element of hdul: hdul[1].data&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+[[ 81.99481   78.62892 ]
+ [107.25767   86.931755]]
 
-<span class="ne">NameError</span>: name &#39;hdul&#39; is not defined
+First 2x2 data of the 1-th element of hdul: hdul[1].data
+[[0 0]
+ [0 0]]
 </pre></div>
 </div>
 </div>
@@ -613,17 +655,10 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First 10 header keywords for hdul[0].header
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 10 header keywords for hdul[0].header&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DATE-OBS (UT time of the **start** of the exposure) of hdul[0]: hdul[0].header[&#39;DATE-OBS&#39;]&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;DATE-OBS&#39;</span><span class="p">])</span>
+[&#39;SIMPLE&#39;, &#39;BITPIX&#39;, &#39;NAXIS&#39;, &#39;NAXIS1&#39;, &#39;NAXIS2&#39;, &#39;EXTEND&#39;, &#39;ORIGIN&#39;, &#39;DATE&#39;, &#39;IRAF-TLM&#39;, &#39;OBJECT&#39;]
 
-<span class="ne">NameError</span>: name &#39;hdul&#39; is not defined
+DATE-OBS (UT time of the **start** of the exposure) of hdul[0]: hdul[0].header[&#39;DATE-OBS&#39;]
+2018-04-13T21:57:39
 </pre></div>
 </div>
 </div>
@@ -660,12 +695,26 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;hdul&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SIMPLE  =                    T / conforms to FITS standard                      
+BITPIX  =                  -32 / array data type                                
+NAXIS   =                    2 / number of array dimensions                     
+NAXIS1  =                  999                                                  
+NAXIS2  =                  999                                                  
+EXTEND  =                    T                                                  
+ORIGIN  = &#39;NOAO-IRAF FITS Image Kernel July 2003&#39; / FITS file originator        
+DATE    = &#39;2018-05-15T05:12:02&#39; / Date FITS file was generated                  
+IRAF-TLM= &#39;2018-05-15T05:12:02&#39; / Time of last modification                     
+OBJECT  = &#39;A00360-TO&#39;          / Name of the object observed                    
+BUNIT   = &#39;adu     &#39;           / units of physical values (LBT)                 
+DETECTOR= &#39;e2v CCD290-99&#39;         / Detector name                               
+NAMPS   =                    8 / Number of amplifiers in the detector           
+GAINDL                         / Pixel integration time, in sequencer clocks    
+PIXITIME                       / Pixel integration time, in seconds             
+CCDXBIN =                    1 / CCD X-axis Binning Factor                      
+CCDYBIN =                    1 / CCD Y-axis Binning Factor                      
+OVERSCNX=                   32 / Horizontal overscan pixels per amplifier       
+OVERSCNY=                    0 / Vertical overscan pixels                       
+PRESCANX=                   27 / Horizontal prepixels per amplifier             
 </pre></div>
 </div>
 </div>
@@ -689,14 +738,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">obst</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;DATE-OBS&quot;</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">expt</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;EXPTIME&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The start of the observation time is  :&quot;</span><span class="p">,</span> <span class="n">obst</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;hdul&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The start of the observation time is  : 2018-04-13T21:57:39.000
+The middle of the observation time is : 2018-04-13T21:58:09.000
+The end of the observation time is    : 2018-04-13T21:58:39.000
 </pre></div>
 </div>
 </div>
@@ -753,16 +797,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">IndexError</span>: list index out of range
-</pre></div>
-</div>
+<img alt="../_images/696a61887643073b9255999155d2de001b44717716ed18453994997e60957da9.png" src="../_images/696a61887643073b9255999155d2de001b44717716ed18453994997e60957da9.png" />
 </div>
 </div>
 <p>This itself is of course inferior to <code class="docutils literal notranslate"><span class="pre">ds9</span></code> and <code class="docutils literal notranslate"><span class="pre">ginga</span></code>, because we cannot do much interactive works.</p>
@@ -801,16 +836,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">data</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">300</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="mi">650</span><span class="p">:</span><span class="mi">750</span><span class="p">])</span>
-
-<span class="ne">IndexError</span>: list index out of range
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_819/2916193753.py:3: RuntimeWarning: invalid value encountered in sqrt
+  newdata = np.sqrt(data[300:400, 650:750])
+</pre></div>
+</div>
+<img alt="../_images/111094c4ecef82d80dba78c1885ca502536d64b43f3b0e6057af89e5e83cafff.png" src="../_images/111094c4ecef82d80dba78c1885ca502536d64b43f3b0e6057af89e5e83cafff.png" />
 </div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">[300:400,</span> <span class="pre">650:750]</span></code> will select 100x100 pixels.</p>
@@ -819,17 +852,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">newdata</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="n">newhdu</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;tmp&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;test.fits&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_verify</span><span class="o">=</span><span class="s1">&#39;fix&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">newhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">newdata</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">newhdu</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;tmp&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;test.fits&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_verify</span><span class="o">=</span><span class="s1">&#39;fix&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;newdata&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -895,34 +917,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">nccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;LTV2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nccd</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LTV2&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">cutout</span><span class="o">.</span><span class="n">origin_original</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">return</span> <span class="n">nccd</span>
-<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">cut</span> <span class="o">=</span> <span class="n">cut_ccd</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">350</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="nb">print</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="ne">IndexError</span>: list index out of range
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
+the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_819/2677194592.py:28: RuntimeWarning: invalid value encountered in sqrt
+  cut.data = np.sqrt(cut.data)
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
+</pre></div>
+</div>
+<img alt="../_images/111094c4ecef82d80dba78c1885ca502536d64b43f3b0e6057af89e5e83cafff.png" src="../_images/111094c4ecef82d80dba78c1885ca502536d64b43f3b0e6057af89e5e83cafff.png" />
 </div>
 </div>
 <p>Because <code class="docutils literal notranslate"><span class="pre">cut</span></code> is now <code class="docutils literal notranslate"><span class="pre">CCDData</span></code>, you may use <code class="docutils literal notranslate"><span class="pre">.write</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cut</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;tmp&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;test.fits&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_verify</span><span class="o">=</span><span class="s1">&#39;fix&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cut</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;tmp&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;test.fits&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_verify</span><span class="o">=</span><span class="s1">&#39;fix&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;cut&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -963,16 +973,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">cut</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">imslice</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">trimsec</span><span class="o">=</span><span class="s2">&quot;[650:749, 300:399]&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="ne">IndexError</span>: list index out of range
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
+the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_819/1339730229.py:4: RuntimeWarning: invalid value encountered in sqrt
+  cut.data = np.sqrt(cut.data)
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
+</pre></div>
+</div>
+<img alt="../_images/19c1f3b657b83e04b75d8f6de1bd112b7dccc558d5fbc34144562fe1b24c0d07.png" src="../_images/19c1f3b657b83e04b75d8f6de1bd112b7dccc558d5fbc34144562fe1b24c0d07.png" />
 </div>
 </div>
 <p>Note than you had to use 749 and 399 instead of 750 and 400. This is because the traditional FITS section (IRAF section) is 1-indexing, and includes the last number. For example, to select the first pixel, python would use <code class="docutils literal notranslate"><span class="pre">[0:1,</span> <span class="pre">0:1]</span></code> while traditional IRAF would use <code class="docutils literal notranslate"><span class="pre">[1:1,</span> <span class="pre">1:1]</span></code>.</p>
