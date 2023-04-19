@@ -1,7 +1,7 @@
 # SNU AO Class
 (SNU = Seoul National University, South Korea; AO = Astronomical Observation class)
 
-This is the lecture note initially made by me (Yoonsoo P. Bach, @ysBach). The original contents started to be created in 2016 Fall, when I first took the TA role in the AO class. It used to be maintained until around 2021, and I left the TA role and it was left as was. At the end of 2022, I was kindly asked to make the material more sustainable and stable. Before I leave SNU after getting the PhD, I felt it was my duty (social responsibility) to finish this work.
+This is the lecture note initially made by me (Yoonsoo P. Bach, [@ysBach](https://github.com/ysBach)). The original contents started to be created in 2016 Fall, when I first took the TA role in the AO class. It used to be maintained until around 2021, and I left the TA role and it was left as was. At the end of 2022, I was kindly asked to make the material more sustainable and stable. Before I leave SNU after getting the PhD, I felt it was my duty (social responsibility) to finish this work.
 
 ```{admonition} Brief reasons why I made this
 :class: dropdown
@@ -20,7 +20,7 @@ Theoretical lecture (Books)
 : The theory part (mathematical derivations, verbal explanations, etc) is made with **TeX** as a book-like format.
 ```{admonition} Why not Jupyter-Book?
 :class: dropdown, tip
-I tried to migrate those practical parts into Jupyter-Book too, but I found such kind of documents must be stored in TeX for the ultimate reproducibility. Jupyter-Book is also an evolving package, which means that it may undergo backward-incompatible upgrade in the near future, or even disappear as computational facilities (computers, OS, programming languages, etc) evolve. TeX, on the other hand, will be as is forever by design.
+I tried to migrate those theoretical parts into Jupyter-Book too, but (1) I was running out of time to do that and (2) as a lazy justification, such kind of documents must be stored in TeX for the ultimate reproducibility. Jupyter-Book is also an evolving package, which means that it may undergo backward-incompatible upgrade in the near future, or even disappear as computational facilities (computers, OS, programming languages, etc) evolve. TeX, on the other hand, will be as is forever by design.
 
 Students may also feel more comfortable to see long equations + figures + tables as PDF file rather than HTML.
 ```
