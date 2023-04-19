@@ -1,0 +1,46 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+defaults:  # The defaults key will be applied to all chapters and sub-sections
+  titlesonly: false
+
+# If you're using parts, then the options: key has no effect. You should configure each part individually
+# see: https://jupyterbook.org/structure/configure.html
+# options:  # The options key will be applied to all chapters, but not sub-sections
+#   numbered: True
+
+
+parts:
+- caption: Intro
+  chapters:
+  - file: chaps/00-Syllabus
+  - file: chaps/00-Philosophy
+- caption: Prerequisite
+  numbered: 3  # Only applies to chapters in this part, up to 3 letters.
+  chapters:
+  - file: chaps/prerequisites/00-1_Softwares
+  - file: chaps/prerequisites/00-2_UNIX
+  - file: chaps/prerequisites/00-3_Prepare_Python
+  - file: chaps/python_prep/00-python_prep
+    sections:
+    - file: chaps/python_prep/01-numpy
+    - file: chaps/python_prep/02-pandas
+    - file: chaps/python_prep/03-FITS_and_astropy
+- caption: Python in Astronomy
+  numbered: 3  # Only applies to chapters in this Part
+  chapters:
+  - file: chaps/01-fits-basic
+  - file: chaps/02-center
+    # sections:
+    # - file: notebooks
+- caption: Homework Assignments
+  numbered: false  # Only applies to chapters in this Part
+  chapters:
+  - file: chaps/prerequisites/99-HW_swtools
+  - file: chaps/python_prep/99-HW_python_pathlib
+  - file: chaps/python_prep/99-HW_numpy
+  - file: chaps/python_prep/99-HW_pandas
+  - file: chaps/python_prep/99-HW_astropy-fits
+

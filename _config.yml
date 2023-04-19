@@ -1,0 +1,110 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: SNU AO Class
+author: Yoonsoo P. Bach
+logo: logo.png
+# only_build_toc_files: true
+
+description: >-
+  The practical lecture materials for Seoul National University, South Korea, Astronomical Observation (AO) class.
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks : auto # https://jupyterbook.org/en/stable/content/execute.html#trigger-notebook-execution
+  allow_errors      : true
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_engine: "xelatex"
+  latex_documents:
+    targetname: SNU_AOclass_book.tex
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    # - html_admonition
+    - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+    - tasklist
+  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognised as external URLs in Markdown links
+  myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Launch button settings
+launch_buttons:
+  notebook_interface: classic
+  binderhub_url: ""
+  jupyterhub_url: ""
+  thebe: false
+  colab_url: ""
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/ysBach/SNU_AOclass  # Online location of your book
+  path_to_book: JupyterBook  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  favicon: "logo.jpg"
+  # google_analytics_id: UA-185350287-1
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  use_multitoc_numbering: false  # https://jupyterbook.org/en/stable/structure/configure.html?highlight=toc#restart-numbering-between-parts
+  # comments:
+  #   utterances:
+  #     repo: "Pseudo-Lab/Tutorial-Book"
+
+sphinx:
+  config:
+    language: en
+    bibtex_reference_style: author_year
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    latex_elements:
+        preamble: |  # % below from https://tex.stackexchange.com/questions/80286/can-i-define-a-new-unit-that-behaves-like-ang-in-siunitx
+          \newcommand*{\hms}[2][]{{
+              \ang[
+                  math-degree=\textsuperscript{h},             % Solution 2
+                  text-degree=\textsuperscript{h},             % Solution 2
+                  math-arcminute=\textsuperscript{m},          % Solution 2
+                  text-arcminute=\textsuperscript{m},          % Solution 2
+                  math-arcsecond=\textsuperscript{s},          % Solution 2
+                  text-arcsecond=\textsuperscript{s},          % Solution 2
+                  #1]{#2}%
+          }}
+          \newcommand*{\m}[2][]{{
+              \ang[
+                  math-degree=\textsuperscript{m},             % Solution 2
+                  text-degree=\textsuperscript{m},             % Solution 2
+                  #1]{#2}%
+          }}
+          \renewcommand{\lg}{\ensuremath{\log_{10}}}
+          \newcommand{\degr}{\ensuremath{\degree}}
+          \newcommand{\sun}{\ensuremath{\odot}}
+          \newcommand{\earth}{\ensuremath{\oplus}}
+          \newcommand{\lineseg}[1]{\ensuremath{\overline{\mathrm{#1}}}}
+          \newcommand{\triang}[1]{\ensuremath{\triangle \mathrm{#1}}}
+          \newcommand{\rect}[1]{\ensuremath{\Box \mathrm{#1}}}
+          \newcommand{\linevec}[1]{\ensuremath{\overrightarrow{\mathrm{#1}}}}
+          \newcommand{\sep}{\quad;\quad}
+          \newcommand{\simdot}{\mathrel{\dot{\sim}}}
+
+
+  extra_extensions:
+    - sphinx_proof
+    - sphinx_examples
+
+
