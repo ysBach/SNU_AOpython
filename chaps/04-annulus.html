@@ -408,6 +408,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annulus-object">4.2. <code class="docutils literal notranslate"><span class="pre">Annulus</span></code> Object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-sky">4.3. Robust Sky</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">4.3.1. Sigma-Clipping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-estimation">4.3.2. Mode Estimation</a></li>
 </ul>
 </li>
 </ul>
@@ -439,7 +440,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 22:02:17 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 22:05:02 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -683,7 +684,10 @@ sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 83.53
 <p>Note that the 27 pixels masked in sigma-clipping are marked by red crosses and masked in this version of plot.</p>
 <p>Also, the median and mean are now slightly lowered (because most rejections were for high pixel values) and they match quite well with each other.</p>
 <p>For elementary photometry, this is ehough. Even for publication level, if we are sure there are no nearby objects, this is a reasonable guess.</p>
-<p>However, you may still feel uncomfortable because some pixels that could have been affected by the nearby star (lower right corner) are remaining. Long story short, the modeal value (the most frequent value of sky) is a more robust statistic than median. However, it is difficult to find the mode, because if you set the histogram bin to, e.g., 0.0000001 ADU, any bin will have height 1. Thus, it is bin-size dependent. <a class="reference external" href="https://academic.oup.com/biomet/article/11/4/425/192665">Doodon A. T. 1917</a> first proved that the mode of a unimodal distribution should be approximately related to mean and median by</p>
+</section>
+<section id="mode-estimation">
+<h3><span class="section-number">4.3.2. </span>Mode Estimation<a class="headerlink" href="#mode-estimation" title="Permalink to this headline">#</a></h3>
+<p>However, you may still feel uncomfortable because some pixels that could have been affected by the nearby star (lower right corner) are remaining. Long story short, the mode or the modeal value (the most frequent value of sky) is a more robust statistic than median. However, it is difficult to find the mode, because if you set the histogram bin to, e.g., 0.0000001 ADU, any bin will have height 1. Thus, it is bin-size dependent. <a class="reference external" href="https://academic.oup.com/biomet/article/11/4/425/192665">Doodon A. T. 1917</a> first proved that the mode of a unimodal distribution should be approximately related to mean and median by</p>
 <div class="math notranslate nohighlight">
 \[
 \mathrm{mode} = 3\times\mathrm{median} - 2\times \mathrm{mean} ~.
@@ -915,6 +919,7 @@ sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 83.53
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annulus-object">4.2. <code class="docutils literal notranslate"><span class="pre">Annulus</span></code> Object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-sky">4.3. Robust Sky</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">4.3.1. Sigma-Clipping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-estimation">4.3.2. Mode Estimation</a></li>
 </ul>
 </li>
 </ul>
