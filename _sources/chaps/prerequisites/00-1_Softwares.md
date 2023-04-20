@@ -259,7 +259,7 @@ In astronomical image reduction process, you need some tools to display images o
 Many useful documentations and YouTube videos: [SAOImageDS9 - Documentation](https://sites.google.com/cfa.harvard.edu/saoimageds9/documentation?authuser=0) (retrieved 2022-11-30).
 
 ```{note}
-Among the materials, I think this [lecture note by George J. Bendo](../../../references/S01_BendoGJ_2020_DS9.pdf) (or also at http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf) is a perfect DS9 tutorial.
+Among the materials, I think this [lecture note by George J. Bendo](https://github.com/ysBach/SNU_AOclass/blob/master/references/S01_BendoGJ_2020_DS9.pdf) (or also at http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf) is a perfect DS9 tutorial.
 ```
 
 ```{warning}

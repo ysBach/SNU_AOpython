@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/02-center';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="HW Software &amp; Tools" href="prerequisites/99-HW_swtools.html" />
+    <link rel="next" title="3. Aperture" href="03-aperture.html" />
     <link rel="prev" title="1. Basics about FITS" href="01-fits-basic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -159,12 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intro</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -176,10 +171,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python in Astronomy</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">1. Markdown Files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -188,6 +189,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -438,17 +444,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 19:34:20 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 18:51:41 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.12.0
+1 IPython    8.7.0
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.24.2
+4 numpy      1.23.2
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 photutils  1.6.0
+7 photutils  1.6.1.dev103+gad22185f
 8 version_information 1.0.4
 </pre></div>
 </div>
@@ -565,8 +571,8 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601666 41.04309455]
-(273.09601666127566, 314.04309454723943)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601482 41.04309313]
+(273.0960148219882, 314.0430931254746)
 </pre></div>
 </div>
 <img alt="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" src="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" />
@@ -660,7 +666,7 @@ Length = 42 rows
 <p class="admonition-title">Practice</p>
 <p>Find the astropy table documentation by yourself and try other print options.</p>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">DAOStarFinder</span></code> has multiple parameters that is required a priori. Among them, <strong><code class="docutils literal notranslate"><span class="pre">fwhm</span></code></strong> is the FWHM of the Gaussian kernel, which must be given. Also, <strong><code class="docutils literal notranslate"><span class="pre">sigma_radius=1.5</span></code></strong> is the factor that determines the size of the kernel. The kernel size is calculated by <a class="reference external" href="https://github.com/astropy/photutils/blob/main/photutils/detection/core.py"><code class="docutils literal notranslate"><span class="pre">_StarFinderKernel</span></code></a>.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">DAOStarFinder</span></code> has multiple parameters that is required a priori. Among them, <strong><code class="docutils literal notranslate"><span class="pre">fwhm</span></code></strong> is the FWHM of the Gaussian kernel, which must be given. Also, the bounds for roundness and sharpness related parameters have to be set properly especially when field stars are “trailed” (e.g., your telescope could not follow the stars). <strong><code class="docutils literal notranslate"><span class="pre">sigma_radius=1.5</span></code></strong> is the factor that determines the size of the kernel. The kernel size is calculated by <a class="reference external" href="https://github.com/astropy/photutils/blob/main/photutils/detection/core.py"><code class="docutils literal notranslate"><span class="pre">_StarFinderKernel</span></code></a>.</p>
 <p>Now if you are interested in all of these, you are good to go. To find the object that is nearest to our expected location, you may do distance calculation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,7 +678,7 @@ Length = 42 rows
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><i>Row index=0</i>
-<table id="table4533640624">
+<table id="table5341707664">
 <thead><tr><th>id</th><th>xcentroid</th><th>ycentroid</th><th>sharpness</th><th>roundness1</th><th>roundness2</th><th>npix</th><th>sky</th><th>peak</th><th>flux</th><th>mag</th><th>dist</th></tr></thead>
 <thead><tr><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
 <tr><td>16</td><td>273.13</td><td>314.14</td><td>0.42</td><td>-0.21</td><td>-0.06</td><td>25</td><td>0.00</td><td>1972.81</td><td>32.66</td><td>-3.79</td><td>6.643679381248131</td></tr>
@@ -730,11 +736,11 @@ Length = 42 rows
       </div>
     </a>
     <a class="right-next"
-       href="prerequisites/99-HW_swtools.html"
+       href="03-aperture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">HW Software &amp; Tools</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Aperture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

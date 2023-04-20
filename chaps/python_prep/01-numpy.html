@@ -159,12 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intro</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -176,10 +171,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python in Astronomy</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02-center.html">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../markdown.html">1. Markdown Files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -188,6 +189,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -600,11 +606,11 @@ arr2.ndim  = 2
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float128</span><span class="p">))</span>
 
-<span class="nn">File ~/miniforge3/envs/snuao/lib/python3.10/site-packages/numpy/__init__.py:320,</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span>     <span class="kn">from</span> <span class="nn">.testing</span> <span class="kn">import</span> <span class="n">Tester</span>
-<span class="g g-Whitespace">    </span><span class="mi">318</span>     <span class="k">return</span> <span class="n">Tester</span>
-<span class="ne">--&gt; </span><span class="mi">320</span> <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;module </span><span class="si">{!r}</span><span class="s2"> has no attribute &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>                      <span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+<span class="nn">File ~/miniforge3/lib/python3.10/site-packages/numpy/__init__.py:311,</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>     <span class="kn">from</span> <span class="nn">.testing</span> <span class="kn">import</span> <span class="n">Tester</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>     <span class="k">return</span> <span class="n">Tester</span>
+<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;module </span><span class="si">{!r}</span><span class="s2"> has no attribute &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>                      <span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
 
 <span class="ne">AttributeError</span>: module &#39;numpy&#39; has no attribute &#39;float128&#39;
 </pre></div>
@@ -743,7 +749,7 @@ arr2.ndim  = 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11842dba0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x11aec01c0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/428b586becbc857285cbfdbbb9a5823565cec4a0c91c8c60840d8f26aefd3efc.png" src="../../_images/428b586becbc857285cbfdbbb9a5823565cec4a0c91c8c60840d8f26aefd3efc.png" />
@@ -1129,7 +1135,7 @@ vstack
  [ -5.33333333  -8.5        -18.                  inf]]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_79011/2058048057.py:1: RuntimeWarning: divide by zero encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_23716/2058048057.py:1: RuntimeWarning: divide by zero encountered in divide
   print(ref1/ref2)
 </pre></div>
 </div>
@@ -1167,7 +1173,7 @@ vstack
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_79011/4165815205.py:1: RuntimeWarning: divide by zero encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_23716/4165815205.py:1: RuntimeWarning: divide by zero encountered in divide
   ref1_ref2 = ref1/ref2
 </pre></div>
 </div>
@@ -1196,7 +1202,7 @@ vstack
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_79011/916304143.py:1: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_23716/916304143.py:1: RuntimeWarning: invalid value encountered in log
   np.isnan(np.log(-1))
 </pre></div>
 </div>
@@ -1433,10 +1439,10 @@ In 1-sigma ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.36 µs ± 50.3 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.15 µs ± 22.8 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.7 µs ± 311 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.7 µs ± 172 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1468,11 +1474,11 @@ In 1-sigma ratio
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(
-  data=[[-1.0856306033005612, --, --, -1.5062947139180922],
+  data=[[-1.0856306033005612, --, --, -1.506294713918092],
         [--, 1.651436537097151, -2.426679243393074, --],
-        [1.2659362587055338, --, --, --],
+        [1.265936258705534, --, --, --],
         [1.4913896261242878, --, --, --],
-        [2.205930082725455, 2.1867860889737862, 1.004053897878877, --]],
+        [2.2059300827254558, 2.1867860889737867, 1.004053897878877, --]],
   mask=[[False,  True,  True, False],
         [ True, False, False,  True],
         [False,  True,  True,  True],
@@ -1493,8 +1499,8 @@ In 1-sigma ratio
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(
   data=[[0.7373685758962422, 1.490732028150799, -0.9358338684023914,
          1.1758290447821034],
-        [-1.2538806677490124, -0.6377515024534103, 0.9071051958003014,
-         -1.4286807002259692],
+        [-1.2538806677490124, -0.6377515024534103, 0.9071051958003012,
+         -1.428680700225969],
         [-0.1400687201886661, --, --, -2.7985891054607244],
         [-1.771533104509847, -0.6998772345979173, 0.9274624317585825,
          -0.1736356827902158],
@@ -1550,7 +1556,7 @@ In 1-sigma ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11441773195529015 0.5318808812103737
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11441773195529023 0.5318808812103739
 </pre></div>
 </div>
 </div>
@@ -1564,11 +1570,11 @@ In 1-sigma ratio
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(
-  data=[[-0.348262027404319, --, --, -0.33046566913598885],
+  data=[[-0.348262027404319, --, --, -0.3304656691359886],
         [--, 1.013685034643741, -1.5195740475927728, --],
-        [1.1258675385168677, --, --, --],
+        [1.125867538516868, --, --, --],
         [-0.2801434783855592, --, --, --],
-        [2.208775998622266, 2.8750088000760714, 0.12451755486982519, --]],
+        [2.208775998622267, 2.8750088000760714, 0.12451755486982519, --]],
   mask=[[False,  True,  True, False],
         [ True, False, False,  True],
         [False,  True,  True,  True],
