@@ -438,7 +438,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 18:51:46 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 20:05:56 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -492,6 +492,7 @@ document.write(`
 </div>
 <section id="simplest-aperture-photometry">
 <h2><span class="section-number">3.1. </span>Simplest Aperture Photometry<a class="headerlink" href="#simplest-aperture-photometry" title="Permalink to this headline">#</a></h2>
+<p>Photometry (photo: light, metry: measurement, so 側光) in optical astronomy means 2-D measurements of light from the sky. It basically means the measurement of the flux of an object, but can also include morphological studies. If fluxes are measured in multiple filters, it’s colorimetry, with multiple polarizing filters, it becoms polarimetry. Sometimes the locational information of objects are of interest, which we call astrometry.</p>
 <section id="single-star">
 <h3><span class="section-number">3.1.1. </span>Single-Star<a class="headerlink" href="#single-star" title="Permalink to this headline">#</a></h3>
 <div class="tip admonition">
@@ -586,13 +587,16 @@ m_a - m_b = -2.5 \lg\frac{I_{0, a}}{I_{0, b}} = -2.5 \lg\frac{57219.06}{50000} =
 \]</div>
 <p>So <span class="math notranslate nohighlight">\(m_a = 9.85\)</span>.</p>
 </div>
-<p>Before going further, now that you have a basic idea what “aperture” is, please read and practice the tutorial materials given in <a class="reference external" href="https://photutils.readthedocs.io/en/stable/aperture.html">photutils/aperture photometry</a> before proceed further. You have to read</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before proceed, now that you have a basic idea what “aperture” is, please read and practice the tutorial materials given in <a class="reference external" href="https://photutils.readthedocs.io/en/stable/aperture.html">photutils/aperture photometry</a> before proceed further. You have to read</p>
 <ul class="simple">
 <li><p>How to creat <code class="docutils literal notranslate"><span class="pre">Aperture</span></code> object</p></li>
 <li><p>How to perfore aperture photometry (including the <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter)</p></li>
 <li><p>How to set multiple aperture at a given position</p></li>
 </ul>
 <p>You don’t have to read the background subtraction part yet.</p>
+</div>
 </section>
 <section id="multiple-stars">
 <h3><span class="section-number">3.1.2. </span>Multiple-Stars<a class="headerlink" href="#multiple-stars" title="Permalink to this headline">#</a></h3>
@@ -631,7 +635,7 @@ m_a - m_b = -2.5 \lg\frac{I_{0, a}}{I_{0, b}} = -2.5 \lg\frac{57219.06}{50000} =
 </div>
 </div>
 <p>Later when you learn how to query online to know the magnitudes of these stars, you can even draw some diagnostic plots of instrumental magnitude and catalog magnitudes. From that analyses, you can determine some parameters such as zero point. Then you can determine the magnitude of the unknown target within the image.</p>
-<p>As of photutils 1.4, you can also get basic statistics within aperture (see the <a class="reference external" href="https://photutils.readthedocs.io/en/stable/aperture.html#aperture-statistics">photutils/aperture/aperture statistics</a> document and the <a class="reference external" href="https://photutils.readthedocs.io/en/stable/api/photutils.aperture.ApertureStats.html#photutils.aperture.ApertureStats">API reference</a>):</p>
+<p>As of photutils 1.4, you can also get basic statistics within aperture.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ap_stats</span> <span class="o">=</span> <span class="n">ApertureStats</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">aps1</span><span class="p">)</span>
@@ -646,6 +650,10 @@ Median ellipticity:  0.01094306912802967
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Read the <a class="reference external" href="https://photutils.readthedocs.io/en/stable/aperture.html#aperture-statistics">photutils/aperture/aperture statistics</a> document and the <a class="reference external" href="https://photutils.readthedocs.io/en/stable/api/photutils.aperture.ApertureStats.html#photutils.aperture.ApertureStats">API reference</a></p>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>

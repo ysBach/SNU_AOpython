@@ -422,7 +422,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 18:51:48 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 20:03:58 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -492,7 +492,211 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 </div>
-<p>In previous</p>
+<p>In previous notes, you have learned how to detect objects in the image, and then how to set up apertures. Then you learned how to do photometry. The example I showed in the note, i.e., measuring the star’s flux using the fluxes of two different apertures, are reasonable when a 2-D measurement is impossible. If we know the pixel values around the star (the 2-D information)</p>
+<p>In this note, I will show you the power of 2-D analyses for obtaining better photometry.</p>
+<p>First, result from the previous note as a reference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Load data</span>
+<span class="n">allfits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATAPATH</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*p4179*.fits&quot;</span><span class="p">))</span>
+<span class="n">allfits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">310</span><span class="p">:</span><span class="mi">320</span><span class="p">,</span> <span class="mi">299</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">280</span><span class="p">:</span><span class="mi">290</span><span class="p">,</span> <span class="mi">270</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="n">Cutout2D</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">273</span><span class="p">,</span> <span class="mi">314</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># 2. Set the two &quot;apertures&quot;</span>
+<span class="n">ap1</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">cut</span><span class="o">.</span><span class="n">center_cutout</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ap2</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">cut</span><span class="o">.</span><span class="n">center_cutout</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="c1"># I used radius 12 and 24 because I know the star is &lt;20 pixels in diameter.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inner aperture:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ap1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outer aperture:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ap2</span><span class="p">)</span>
+
+<span class="c1"># 3. Perform photometry</span>
+<span class="n">phot</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="n">ap1</span><span class="p">,</span> <span class="n">ap2</span><span class="p">])</span>
+<span class="n">flux1</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s1">&#39;aperture_sum_0&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">flux2</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s1">&#39;aperture_sum_1&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 4. Calculate the sky flux and the total flux</span>
+<span class="n">flux_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">flux2</span> <span class="o">-</span> <span class="n">flux1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ap2</span><span class="o">.</span><span class="n">area</span> <span class="o">-</span> <span class="n">ap1</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+<span class="n">flux0</span> <span class="o">=</span> <span class="n">flux1</span> <span class="o">-</span> <span class="n">flux_s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">12</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># 5. Print out the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;flux at aperture 1 and 2 are </span><span class="si">{</span><span class="n">flux1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">flux2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = </span><span class="si">{</span><span class="n">flux_s</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;∴ flux0 = </span><span class="si">{</span><span class="n">flux0</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
+the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inner aperture:
+ Aperture: CircularAperture
+positions: [49.5, 49.5]
+r: 12.0
+
+Outer aperture:
+ Aperture: CircularAperture
+positions: [49.5, 49.5]
+r: 24.0
+flux at aperture 1 and 2 are 94631.81 and 206870.05
+sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 82.70
+∴ flux0 = 57219.06
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Take a note of the sky value 82.70 ADU/pix &amp; flux 57219.06.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before proceed, please read the <strong>aperture mask part</strong> of <a class="reference external" href="https://photutils.readthedocs.io/en/stable/aperture.html">photutils/Aperture</a>.</p>
+</div>
+<p>Now you have learned how to initialize an annulus (basically it is similar to <code class="docutils literal notranslate"><span class="pre">Aperture</span></code> object) and make a “mask” to extract the pixels in it. I will extract only the pixels with center is inside an annulus of inner/outer radii of 20 and 28:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">an1</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">cut</span><span class="o">.</span><span class="n">center_cutout</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
+<span class="n">skymask</span> <span class="o">=</span> <span class="n">an1</span><span class="o">.</span><span class="n">to_mask</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">skyvals</span> <span class="o">=</span> <span class="n">skymask</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">skyvals</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">skymask</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">0</span>
+<span class="n">med</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">skyvals</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+<span class="n">avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">skyvals</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ap1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">an1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">skymask</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">skyvals</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">med</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median = </span><span class="si">{</span><span class="n">med</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">avg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cutout image&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sky mask&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of sky values&quot;</span><span class="p">,</span>
+           <span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Sky value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8adc40c3dd1d854ce2acd2cc9733db1050056f5f835bada5039f306e5d808f47.png" src="../_images/8adc40c3dd1d854ce2acd2cc9733db1050056f5f835bada5039f306e5d808f47.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Practice</p>
+<ol class="arabic simple">
+<li><p>What does <code class="docutils literal notranslate"><span class="pre">skymask.data</span></code> mean?</p></li>
+<li><p>Why did I use <code class="docutils literal notranslate"><span class="pre">skyvals[skymask.data==0]</span> <span class="pre">=</span> <span class="pre">np.nan</span></code>? (What will happen without this line?)</p></li>
+</ol>
+</div>
+<p>Now let me ask you. The flux within the red aperture will contain both the star’s flux and the sky flux. And although I didn’t mention explicitly, you can easily understand the sky annulus (cyan) is set to estimate this sky value. From the right panel, how would you calculate the sky value?</p>
+<p>The histogram includes the distribution of the sky values. However, you can see some bright cosmic-ray spots at the right and bottom part in the annulus (that I artifically added when I loaded it for visualization purpose). Because of this, the histogram is slightly skewed to the right. Therefore, average and median are quite diffent, and you can see simple average value of the pixels is not a good option.</p>
+<p>One suggestion: How about use sigma-clipping?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clip</span>
+
+<span class="n">sigc</span> <span class="o">=</span> <span class="n">sigma_clip</span><span class="p">(</span><span class="n">skyvals</span><span class="p">)</span>  <span class="c1"># default 3-sigma 5-iteration clipping</span>
+<span class="n">med</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">sigc</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+<span class="n">avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">sigc</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+<span class="n">sigc_masked</span> <span class="o">=</span> <span class="n">skyvals</span><span class="o">.</span><span class="n">mask</span> <span class="o">^</span> <span class="n">sigc</span><span class="o">.</span><span class="n">mask</span>  
+<span class="c1"># What is ^? --&gt; Search for the &quot;bitwise XOR operator in Python&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of rejected sky values:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sigc_masked</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ap1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">an1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">skymap</span> <span class="o">=</span> <span class="n">skymask</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">skymap</span><span class="p">[</span><span class="n">sigc</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">skymap</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">sigc_masked</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;rx&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sigc</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">med</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median = </span><span class="si">{</span><span class="n">med</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">avg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean = </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cutout image&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sky mask&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram of sky values&quot;</span><span class="p">,</span>
+           <span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Sky value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of rejected sky values: 11
+</pre></div>
+</div>
+<img alt="../_images/ed0ad2994cada78b47018857879b5158b1a43cd5085c3d04d26bbdede0ae5aa9.png" src="../_images/ed0ad2994cada78b47018857879b5158b1a43cd5085c3d04d26bbdede0ae5aa9.png" />
+</div>
+</div>
+<p>Note that the 11 pixels masked in sigma-clipping are marked by red crosses and masked in this version of plot.</p>
+<p>Also, the median and mean are now slightly lowered (because most rejections were for high pixel values) and they match quite well with each other.</p>
+<p>For elementary photometry, this is ehough. Even for publication level, if we are sure there are no nearby objects, this is a reasonable guess ()</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigc</span><span class="o">.</span><span class="n">compressed</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 74.18838501,  95.39729309,  69.27059937, ...,  68.38792419,
+        69.2440567 , 106.67719269])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skymask</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       ...,
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the mean value is closer to median, which is what we would expect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">sigc</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82.44230733439638
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the median and mean are</p>
 </section>
 
     <script type="text/x-thebe-config">
