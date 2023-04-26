@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/02-center';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="HW Software &amp; Tools" href="prerequisites/99-HW_swtools.html" />
+    <link rel="next" title="3. Aperture" href="03-aperture.html" />
     <link rel="prev" title="1. Basics about FITS" href="01-fits-basic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -159,12 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intro</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -176,10 +171,17 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python in Astronomy</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">1. Markdown Files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -188,6 +190,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -401,8 +408,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2.1. Prepare Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-centroid">2.2. Finding Centroid</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-center-of-mass">2.2.1. Simple Center-of-Mass</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daofind">2.2.2. DAOFIND</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-centroid">2.3. Accuracy of the Centroid</a></li>
 </ul>
             </nav>
         </div>
@@ -420,7 +429,10 @@ document.write(`
 <ol class="arabic simple">
 <li><p>Basic ways to find the centroid (center of mass) position using few methods.</p></li>
 </ol>
-<p>First, read <a class="reference external" href="https://photutils.readthedocs.io/en/stable/centroids.html">this photutils/centroids tutorial</a> and <a class="reference external" href="https://photutils.readthedocs.io/en/stable/detection.html">this photutils/detection tutorial</a>. Follow the tutorials before starting this lecture note.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before proceed, read <a class="reference external" href="https://photutils.readthedocs.io/en/stable/centroids.html">this photutils/centroids tutorial</a> and <a class="reference external" href="https://photutils.readthedocs.io/en/stable/detection.html">this photutils/detection tutorial</a>. Follow the tutorials before starting this lecture note.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ignore this cell if you encounter errors</span>
@@ -436,17 +448,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-19 17:52:02 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-26 19:18:04 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.12.0
+1 IPython    8.7.0
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.24.2
+4 numpy      1.23.2
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 photutils  1.6.0
+7 photutils  1.6.1.dev103+gad22185f
 8 version_information 1.0.4
 </pre></div>
 </div>
@@ -477,12 +489,15 @@ document.write(`
 
 <span class="kn">from</span> <span class="nn">photutils.centroids</span> <span class="kn">import</span> <span class="n">centroid_com</span>
 
+<span class="kn">import</span> <span class="nn">ysfitsutilpy</span> <span class="k">as</span> <span class="nn">yfu</span>
+<span class="kn">import</span> <span class="nn">ysphotutilpy</span> <span class="k">as</span> <span class="nn">ypu</span>
+
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
 
-<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../../Tutorial_Data&#39;</span><span class="p">)</span>
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../Tutorial_Data&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
 <span class="n">TMPDIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -500,30 +515,21 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">allfits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATAPATH</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*p4179*.fits&quot;</span><span class="p">))</span>
 <span class="n">allfits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
-<span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">hdr</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">cut_hdu</span> <span class="o">=</span> <span class="n">Cutout2D</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">270</span><span class="p">,</span><span class="mi">320</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="n">Cutout2D</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">(</span><span class="mi">270</span><span class="p">,</span><span class="mi">320</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">allfits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATAPATH</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*p4179*.fits&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">allfits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">hdr</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">data</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-<span class="ne">IndexError</span>: list index out of range
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
+the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </pre></div>
 </div>
+<img alt="../_images/f638389dd243ba1473370ba59e74b1f1560053423d8a858714b9c81bb0eb3577.png" src="../_images/f638389dd243ba1473370ba59e74b1f1560053423d8a858714b9c81bb0eb3577.png" />
 </div>
 </div>
 </section>
@@ -533,14 +539,14 @@ document.write(`
 <ol class="arabic simple">
 <li><p>The center-of-mass of the image.</p></li>
 <li><p>Using Gaussian function.</p></li>
-<li><p>Find the center by DAOPHOT-like algorithm (see below)</p></li>
-<li><p>Find the center by SExtractor-like algorithm (see below)</p></li>
+<li><p>Find the center by DAOPHOT-like algorithm</p></li>
+<li><p>Find the center by SExtractor-like algorithm</p></li>
 </ol>
 <p>The center of mass is easy to calculate, but in python, <code class="docutils literal notranslate"><span class="pre">scipy</span></code> provides a simple function <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.center_of_mass.html"><code class="docutils literal notranslate"><span class="pre">center_of_mass</span></code></a>. In astronomical images, people will just use <a class="reference external" href="https://photutils.readthedocs.io/en/stable/api/photutils.centroids.centroid_com.html#photutils.centroids.centroid_com"><code class="docutils literal notranslate"><span class="pre">photutils.centroids.centroid_com</span></code></a>.</p>
 <p>To fit Gaussian function to the image, there are several ways to do this. First, decide whether you want a circular Gaussian (4 parameters = x-center, y-center, amplitude, sigma), or an elliptical Gaussian (6 parameters = same as circular case except sigma_x, sigma_y, theta). Then you can directly fit 2-D Gaussian to the image. When background level is non-zero, you need one more constant parameter.</p>
 <p>Due to the mathematical characteristic of Gaussian function, you can also prove this: Say <span class="math notranslate nohighlight">\(I(x, y) = G_x(x | \mu_x, \sigma_x) \times G_y(y | \mu_y, \sigma_y)\)</span>. Here <span class="math notranslate nohighlight">\(G_x\)</span> and <span class="math notranslate nohighlight">\(G_y\)</span> are the Gaussian fitting results for the image is summed along the y- and x-direction, respectively. <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are the center and standard deviation of fitted Gaussians, respectively. For example, <span class="math notranslate nohighlight">\(G_x(x| \mu_x, \sigma_y)\)</span> is the fitted Gaussian to data <span class="math notranslate nohighlight">\(D(x) = \sum_{y=1}{N_y} D(x, y)\)</span>. Then <span class="math notranslate nohighlight">\(I(x, y)\)</span> is a Gaussian with center <span class="math notranslate nohighlight">\((\mu_x, \mu_y)\)</span>. This holds true only if <span class="math notranslate nohighlight">\(\mathrm{min} \{I\} = 0\)</span> is guaranteed, which is usually not the case in real images.</p>
-<p>For several reasons, Gaussian fitting is not always the best choice.</p>
-<p>DAOPHOT algorithm is that described in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson 1987</a> and you have already used it in photutils/detection tutorial. This is basically used when you are dealing with <strong>circular stars</strong>.  If you are studying extended sources (nebula, galaxy, non-sidereal objects, etc), it may not work properly.</p>
+<p>For several reasons, Gaussian fitting is not always the best choice. Although it’s a personal taste, but I prefer using DAOFIND or Extractor-like algorithms over Gaussian fitting.</p>
+<p>DAOPHOT’s DAOFIND algorithm is that described in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson 1987</a> and you have already used it in photutils/detection tutorial. This is basically used when you are dealing with <strong>circular stars</strong>.  If you are studying extended sources (nebula, galaxy, non-sidereal objects, etc), it may not work properly or you may undergo hard time fine-tuning the parameters.</p>
 <p>SExtractor-like algorithm is basically used to detect general objects and also has power to calculate proper/useful center information. You will study this later in extended sources lecture note.</p>
 <section id="simple-center-of-mass">
 <h3><span class="section-number">2.2.1. </span>Simple Center-of-Mass<a class="headerlink" href="#simple-center-of-mass" title="Permalink to this headline">#</a></h3>
@@ -553,33 +559,30 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
 <span class="n">thresh_3sig</span> <span class="o">=</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span>
-<span class="n">mask_3sig</span> <span class="o">=</span> <span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">thresh_3sig</span><span class="p">)</span>
-<span class="n">center</span> <span class="o">=</span> <span class="n">centroid_com</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask_3sig</span><span class="p">)</span>
+<span class="n">mask_3sig</span> <span class="o">=</span> <span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">thresh_3sig</span><span class="p">)</span>
+<span class="n">center</span> <span class="o">=</span> <span class="n">centroid_com</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask_3sig</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">center</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">to_original_position</span><span class="p">(</span><span class="n">center</span><span class="p">))</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">mask_3sig</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
-<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">cut</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">center</span><span class="p">,</span> <span class="s1">&#39;rx&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">thresh_3sig</span> <span class="o">=</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">mask_3sig</span> <span class="o">=</span> <span class="p">(</span><span class="n">cut_hdu</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">thresh_3sig</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;cut_hdu&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601482 41.04309313]
+(273.0960148219882, 314.0430931254746)
 </pre></div>
 </div>
+<img alt="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" src="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" />
 </div>
 </div>
+<p>Thus, <code class="docutils literal notranslate"><span class="pre">(273.10,</span> <span class="pre">314.04)</span></code> is the found centroid.</p>
 <p>In the code, I overplotted the image onto the <code class="docutils literal notranslate"><span class="pre">mask_3sig</span></code>. The faint background-like feature is the original image, and the highlight means the pixels used for the centroid calculation. Red cross is the thus found centroid.</p>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>
@@ -587,6 +590,113 @@ document.write(`
 <p>Consider you have to know the center of mass of this object (e.g., you cannot use Gaussian fitting, DAOPHOT, etc). How would you calculate it <strong>robustly</strong>? Give at least three possible algorithms/methods/improvements you can think of. Possible hints: You can use <code class="docutils literal notranslate"><span class="pre">mask</span></code>, bad-pixel rejection/interpolation, etc. You may have an idea which of them will work best only after you encounter an enormous amount of real data…</p>
 </div>
 </section>
+<section id="daofind">
+<h3><span class="section-number">2.2.2. </span>DAOFIND<a class="headerlink" href="#daofind" title="Permalink to this headline">#</a></h3>
+<p>As you already have learnt it from the photutils tutorial, I will quickly go through the detection part:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">photutils.detection</span> <span class="kn">import</span> <span class="n">DAOStarFinder</span>
+<span class="kn">from</span> <span class="nn">photutils.aperture</span> <span class="kn">import</span> <span class="n">CircularAperture</span>
+
+<span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">DAOStarFinder</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">5.</span><span class="o">*</span><span class="n">std</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">exclude_border</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">sources</span> <span class="o">=</span> <span class="n">finder</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span>  
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">sources</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>  
+    <span class="n">sources</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;npix&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span>
+<span class="n">sources</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">max_width</span><span class="o">=</span><span class="mi">76</span><span class="p">)</span>  <span class="c1"># astropy Table</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">]))</span>
+<span class="n">aps</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
+<span class="n">aps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> id xcentroid ycentroid sharpness roundness1 ... sky    peak   flux  mag 
+--- --------- --------- --------- ---------- ... ---- ------- ----- -----
+  1    175.60     15.85      0.36       0.18 ... 0.00   82.02  1.43 -0.39
+  2    572.53     45.07      0.39      -0.14 ... 0.00  358.09  6.22 -1.98
+  3    788.41     46.58      0.38      -0.32 ... 0.00  570.82  9.35 -2.43
+  4    150.12     62.00      0.41      -0.21 ... 0.00  424.43  7.18 -2.14
+  5     68.21     76.65      0.34      -0.56 ... 0.00   68.67  1.19 -0.19
+  6    430.40     86.52      0.44      -0.33 ... 0.00  298.27  4.92 -1.73
+  7    514.85    131.52      0.45      -0.10 ... 0.00  169.61  2.83 -1.13
+  8    406.48    152.47      0.36      -0.25 ... 0.00  255.01  4.51 -1.63
+  9    455.38    182.60      0.49      -0.60 ... 0.00  128.59  2.32 -0.91
+ 10    733.55    185.89      0.40      -0.26 ... 0.00  438.38  7.39 -2.17
+ 11      8.49    234.83      0.43      -0.35 ... 0.00  189.61  3.38 -1.32
+ 12    852.94    245.47      0.32      -0.30 ... 0.00  259.96  4.89 -1.72
+ 13    989.26    245.81      0.24      -0.30 ... 0.00   98.44  1.93 -0.72
+ 14    366.73    259.55      0.50      -0.30 ... 0.00  297.76  4.56 -1.65
+ 15     99.22    311.19      0.41      -0.23 ... 0.00 1100.25 18.58 -3.17
+ 16    273.13    314.14      0.42      -0.21 ... 0.00 1972.81 32.66 -3.79
+ 17    835.50    351.49      0.22      -0.46 ... 0.00   71.58  1.54 -0.47
+ 18    683.60    352.10      0.42      -0.32 ... 0.00 2583.85 42.66 -4.08
+ 19    979.67    417.63      0.42      -0.20 ... 0.00 4548.72 73.96 -4.67
+ 20    398.62    428.02      0.42      -0.25 ... 0.00  233.51  3.57 -1.38
+ 21    354.83    450.93      0.37      -0.60 ... 0.00   81.11  1.42 -0.38
+ 22    499.84    500.13      0.36      -0.91 ... 0.00   31.97  1.00 -0.00
+ 23    823.93    526.23      0.35      -0.17 ... 0.00   71.80  1.40 -0.37
+ 24    988.46    539.78      0.45      -0.33 ... 0.00  376.02  6.17 -1.98
+ 25    892.30    619.67      0.27      -0.06 ... 0.00  127.36  2.52 -1.00
+ 26    885.56    625.93      0.38      -0.13 ... 0.00  301.92  5.34 -1.82
+ 27    204.33    649.61      0.35      -0.27 ... 0.00  110.41  2.00 -0.75
+ 28    913.12    652.41      0.38      -0.18 ... 0.00  358.40  6.17 -1.98
+ 29    118.52    661.34      0.26      -0.63 ... 0.00   56.86  1.27 -0.26
+ 30    958.73    664.12      0.42      -0.35 ... 0.00 1001.99 16.08 -3.02
+ 31    961.49    689.83      0.59      -0.59 ... 0.00  112.69  1.68 -0.56
+ 32    834.10    751.03      0.45       0.14 ... 0.00  186.52  3.45 -1.35
+ 33    378.47    753.85      0.36      -0.35 ... 0.00   62.34  1.24 -0.23
+ 34    581.31    772.72      0.36      -0.23 ... 0.00  193.50  3.23 -1.27
+ 35    197.80    775.26      0.50      -0.05 ... 0.00  121.26  1.84 -0.66
+ 36    700.40    775.54      0.39      -0.02 ... 0.00  521.16  8.82 -2.36
+ 37    667.09    819.09      0.56      -0.24 ... 0.00   87.42  1.44 -0.40
+ 38    277.67    893.89      0.42      -0.34 ... 0.00   96.85  1.75 -0.61
+ 39    729.21    915.12      0.42      -0.34 ... 0.00  384.59  6.78 -2.08
+ 40    813.20    930.60      0.37      -0.31 ... 0.00 1043.05 17.96 -3.14
+ 41    561.69    949.95      0.50      -0.15 ... 0.00  101.47  1.53 -0.46
+ 42    373.76    965.13      0.40      -0.28 ... 0.00  238.18  4.18 -1.55
+</pre></div>
+</div>
+<img alt="../_images/7394f7c2063a58545b9791432115ebc756144353a964e70815c6e3fbd8a188ee.png" src="../_images/7394f7c2063a58545b9791432115ebc756144353a964e70815c6e3fbd8a188ee.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Practice</p>
+<p>Find the astropy table documentation by yourself and try other print options.</p>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">DAOStarFinder</span></code> has multiple parameters that is required a priori. Among them, <strong><code class="docutils literal notranslate"><span class="pre">fwhm</span></code></strong> is the FWHM of the Gaussian kernel, which must be given. Also, the bounds for roundness and sharpness related parameters have to be set properly especially when field stars are “trailed” (e.g., your telescope could not follow the stars). <strong><code class="docutils literal notranslate"><span class="pre">sigma_radius=1.5</span></code></strong> is the factor that determines the size of the kernel. The kernel size is calculated by <a class="reference external" href="https://github.com/astropy/photutils/blob/main/photutils/detection/core.py"><code class="docutils literal notranslate"><span class="pre">_StarFinderKernel</span></code></a>.</p>
+<p>Now if you are interested in all of these, you are good to go. To find the object that is nearest to our expected location, you may do distance calculation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sources</span><span class="p">[</span><span class="s2">&quot;dist&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pos</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">270</span><span class="p">,</span> <span class="mi">320</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">sources</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&quot;dist&quot;</span><span class="p">)</span>
+<span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><i>Row index=0</i>
+<table id="table5233438208">
+<thead><tr><th>id</th><th>xcentroid</th><th>ycentroid</th><th>sharpness</th><th>roundness1</th><th>roundness2</th><th>npix</th><th>sky</th><th>peak</th><th>flux</th><th>mag</th><th>dist</th></tr></thead>
+<thead><tr><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>16</td><td>273.13</td><td>314.14</td><td>0.42</td><td>-0.21</td><td>-0.06</td><td>25</td><td>0.00</td><td>1972.81</td><td>32.66</td><td>-3.79</td><td>6.643679381248131</td></tr>
+</table></div></div>
+</div>
+<p>Thus, <code class="docutils literal notranslate"><span class="pre">(273.13,</span> <span class="pre">314.14)</span></code> is the found centroid.</p>
+</section>
+</section>
+<section id="accuracy-of-the-centroid">
+<h2><span class="section-number">2.3. </span>Accuracy of the Centroid<a class="headerlink" href="#accuracy-of-the-centroid" title="Permalink to this headline">#</a></h2>
+<p>In this simple case, the two methods gave very similar center location (differ by &lt; 0.1 pix).</p>
+<p>You have learned how to calculate the uncertainty in the centroid location from mathematics in theory class. However, in reality, the uncertainty due to the sky subtraction, instrumental defects (bad pixels or problematic flat correction, etc), cosmic-rays, etc can be larger than the centroid uncertainty. How accurate this centroid should be?</p>
+<p>This question can be rephrased: “How accurate photometry (or astrometry) do you need?” It is difficult to give a general answer to this question because it really depends on what you are looking for. In case you only seek for 0.1 mag accuracy and aperture radius is about 3 FWHM = 6 pixels, change in centroid of 0.1 pixel order will not affect the final photometry, because (1) vast majority of flux will already have been included in 3 FWHM radius and (2) 0.1 pixel shift is much smaller than 6 pixel radius (or 12 pixel diameter). In this specific case, the partial-pixel summation algorithm would give more error than the centroid error of &lt; 0.1 pixel.</p>
 </section>
 </section>
 
@@ -631,11 +741,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="prerequisites/99-HW_swtools.html"
+       href="03-aperture.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">HW Software &amp; Tools</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Aperture</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -660,8 +770,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2.1. Prepare Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-centroid">2.2. Finding Centroid</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-center-of-mass">2.2.1. Simple Center-of-Mass</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daofind">2.2.2. DAOFIND</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-centroid">2.3. Accuracy of the Centroid</a></li>
 </ul>
   </nav></div>
 

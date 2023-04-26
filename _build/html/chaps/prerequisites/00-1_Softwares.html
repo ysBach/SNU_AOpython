@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2. UNIX Shell" href="00-2_UNIX.html" />
-    <link rel="prev" title="Philosophy" href="../00-Philosophy.html" />
+    <link rel="prev" title="SNU AO Class" href="../../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,12 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intro</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -174,10 +169,17 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python in Astronomy</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02-center.html">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05-query.html">5. Querying from the Catalog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../markdown.html">1. Markdown Files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -186,6 +188,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -705,7 +712,7 @@ conda create -n iraf python=2.7 iraf-all pyraf-all stsci
 <p>Many useful documentations and YouTube videos: <a class="reference external" href="https://sites.google.com/cfa.harvard.edu/saoimageds9/documentation?authuser=0">SAOImageDS9 - Documentation</a> (retrieved 2022-11-30).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Among the materials, I think this <span class="xref myst">lecture note by George J. Bendo</span> (or also at <a class="reference external" href="http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf">http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf</a>) is a perfect DS9 tutorial.</p>
+<p>Among the materials, I think this <a class="reference external" href="https://github.com/ysBach/SNU_AOclass/blob/master/references/S01_BendoGJ_2020_DS9.pdf">lecture note by George J. Bendo</a> (or also at <a class="reference external" href="http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf">http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf</a>) is a perfect DS9 tutorial.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -796,12 +803,12 @@ conda create -n iraf python=2.7 iraf-all pyraf-all stsci
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../00-Philosophy.html"
+       href="../../index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Philosophy</p>
+        <p class="prev-next-title">SNU AO Class</p>
       </div>
     </a>
     <a class="right-next"

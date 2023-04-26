@@ -12,8 +12,9 @@ description: >-
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks : auto # https://jupyterbook.org/en/stable/content/execute.html#trigger-notebook-execution
+  execute_notebooks : cache # https://jupyterbook.org/en/stable/content/execute.html#trigger-notebook-execution
   allow_errors      : true
+  timeout           : -1
 
 # Define the name of the latex output file for PDF builds
 latex:

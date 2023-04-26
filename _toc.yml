@@ -13,10 +13,6 @@ defaults:  # The defaults key will be applied to all chapters and sub-sections
 
 
 parts:
-- caption: Intro
-  chapters:
-  - file: chaps/00-Syllabus
-  - file: chaps/00-Philosophy
 - caption: Prerequisite
   numbered: 3  # Only applies to chapters in this part, up to 3 letters.
   chapters:
@@ -28,13 +24,18 @@ parts:
     - file: chaps/python_prep/01-numpy
     - file: chaps/python_prep/02-pandas
     - file: chaps/python_prep/03-FITS_and_astropy
-- caption: Python in Astronomy
+- caption: Basics
   numbered: 3  # Only applies to chapters in this Part
   chapters:
   - file: chaps/01-fits-basic
   - file: chaps/02-center
-    # sections:
-    # - file: notebooks
+  - file: chaps/03-aperture
+  - file: chaps/04-annulus
+  - file: chaps/05-query
+- caption: Photometry
+  numbered: 3 # Only applies to chapters in this Part
+  chapters:
+  - file: markdown
 - caption: Homework Assignments
   numbered: false  # Only applies to chapters in this Part
   chapters:
@@ -43,4 +44,7 @@ parts:
   - file: chaps/python_prep/99-HW_numpy
   - file: chaps/python_prep/99-HW_pandas
   - file: chaps/python_prep/99-HW_astropy-fits
-
+- caption: Appendix
+  chapters:
+  - file: chaps/00-Syllabus
+  - file: chaps/00-Philosophy
