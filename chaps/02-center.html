@@ -177,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Centering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
@@ -447,7 +448,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-20 20:05:51 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-26 19:18:04 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -638,7 +639,9 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
  17    835.50    351.49      0.22      -0.46 ... 0.00   71.58  1.54 -0.47
  18    683.60    352.10      0.42      -0.32 ... 0.00 2583.85 42.66 -4.08
  19    979.67    417.63      0.42      -0.20 ... 0.00 4548.72 73.96 -4.67
-...       ...       ...       ...        ... ...  ...     ...   ...   ...
+ 20    398.62    428.02      0.42      -0.25 ... 0.00  233.51  3.57 -1.38
+ 21    354.83    450.93      0.37      -0.60 ... 0.00   81.11  1.42 -0.38
+ 22    499.84    500.13      0.36      -0.91 ... 0.00   31.97  1.00 -0.00
  23    823.93    526.23      0.35      -0.17 ... 0.00   71.80  1.40 -0.37
  24    988.46    539.78      0.45      -0.33 ... 0.00  376.02  6.17 -1.98
  25    892.30    619.67      0.27      -0.06 ... 0.00  127.36  2.52 -1.00
@@ -659,7 +662,6 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
  40    813.20    930.60      0.37      -0.31 ... 0.00 1043.05 17.96 -3.14
  41    561.69    949.95      0.50      -0.15 ... 0.00  101.47  1.53 -0.46
  42    373.76    965.13      0.40      -0.28 ... 0.00  238.18  4.18 -1.55
-Length = 42 rows
 </pre></div>
 </div>
 <img alt="../_images/7394f7c2063a58545b9791432115ebc756144353a964e70815c6e3fbd8a188ee.png" src="../_images/7394f7c2063a58545b9791432115ebc756144353a964e70815c6e3fbd8a188ee.png" />
@@ -681,7 +683,7 @@ Length = 42 rows
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><i>Row index=0</i>
-<table id="table5760213696">
+<table id="table5233438208">
 <thead><tr><th>id</th><th>xcentroid</th><th>ycentroid</th><th>sharpness</th><th>roundness1</th><th>roundness2</th><th>npix</th><th>sky</th><th>peak</th><th>flux</th><th>mag</th><th>dist</th></tr></thead>
 <thead><tr><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
 <tr><td>16</td><td>273.13</td><td>314.14</td><td>0.42</td><td>-0.21</td><td>-0.06</td><td>25</td><td>0.00</td><td>1972.81</td><td>32.66</td><td>-3.79</td><td>6.643679381248131</td></tr>
