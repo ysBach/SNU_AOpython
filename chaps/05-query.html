@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Querying from the Catalog &#8212; SNU AO Class</title>
+    <title>5. Querying from the Catalog &#8212; SNU AO Class Python</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/05-query';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Markdown Files" href="../markdown.html" />
+    <link rel="next" title="1. Differential Photometry" href="06-diffphot.html" />
     <link rel="prev" title="4. Annulus &amp; Local Sky" href="04-annulus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,13 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-center.html">2. Centering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture &amp; DAOFIND</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Querying from the Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../markdown.html">1. Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -249,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -266,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/edit/master/JupyterBook/chaps/05-query.ipynb" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/05-query.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -283,7 +283,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/issues/new?title=Issue%20on%20page%20%2Fchaps/05-query.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/05-query.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,6 +414,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-short-discussion">5.3.4. A Short Discussion</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jpl-horizons-solar-system">5.4. JPL HORIZONS (Solar System)</a></li>
 </ul>
             </nav>
         </div>
@@ -428,8 +429,9 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="querying-from-the-catalog">
 <span id="ch-query"></span><h1><span class="section-number">5. </span>Querying from the Catalog<a class="headerlink" href="#querying-from-the-catalog" title="Permalink to this headline">#</a></h1>
 <p>If WCS(World Coordinate System: converts image XY pixel to, e.g., RA/DEC. See slides 4-7 of <a class="reference external" href="http://www.atnf.csiro.au/people/mcalabre/WCS/Intro/WCS01.html">this</a>, for example) is properly implemented, we should be able to find stars in the image automatically.</p>
-<p><code class="docutils literal notranslate"><span class="pre">astroquery</span></code> is an <a class="reference external" href="https://www.astropy.org/affiliated/">astropy-affiliated python package</a> for such query. Here I will demonstrate how to query Pan-STARRS DR2 and Gaia catalog, which are two of the widely used catalogs as of 2023.</p>
-<p>We will use <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/vizier/vizier.html"><code class="docutils literal notranslate"><span class="pre">vizier</span></code></a> and <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/jplhorizons/jplhorizons.html"><code class="docutils literal notranslate"><span class="pre">JPLHorizons</span></code></a> modules.</p>
+<p><code class="docutils literal notranslate"><span class="pre">astroquery</span></code> is an <a class="reference external" href="https://www.astropy.org/affiliated/">astropy-affiliated python package</a> for such query.</p>
+<p>Here I will demonstrate how to query Pan-STARRS DR2 and Gaia catalog, which are two of the widely used catalogs as of 2023.</p>
+<p>And in the later part, I will show how to use JPL HORIZONS, that is used for querying the ephemerides (positional information of celestial objects) of solar system objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> version_information
@@ -444,7 +446,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-26 19:28:55 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 21:22:42 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -477,9 +479,11 @@ document.write(`
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">from</span> <span class="nn">astropy.nddata</span> <span class="kn">import</span> <span class="n">CCDData</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
 
 <span class="kn">from</span> <span class="nn">astroquery.gaia</span> <span class="kn">import</span> <span class="n">Gaia</span>
 <span class="kn">from</span> <span class="nn">astroquery.mast</span> <span class="kn">import</span> <span class="n">Catalogs</span>
+<span class="kn">from</span> <span class="nn">astroquery.jplhorizons</span> <span class="kn">import</span> <span class="n">Horizons</span>
 <span class="n">Gaia</span><span class="o">.</span><span class="n">ROW_LIMIT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># no limit</span>
 
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -524,10 +528,12 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 <section id="archives">
 <h2><span class="section-number">5.2. </span>Archives<a class="headerlink" href="#archives" title="Permalink to this headline">#</a></h2>
 <p>There are multiple archive services for large-scale astronomical datasets:</p>
-<p><a class="reference external" href="https://vizier.unistra.fr/"><strong>VizieR</strong></a> (<a class="reference external" href="https://en.wikipedia.org/wiki/VizieR">Wikipedia</a>)
-:A catalog service run by Université de Strasbourg/CNRS. I feel many people archive their observational results (e.g., galaxy redshift catalog, asteroid polarimetric observation results, etc) to VizieR. Sometimes, for some reasons I cannot understand, large-catalog data are not accessible from VizieR for very long time. Also, the column names in VizieR is always very different from other catalog services. You can go to <a class="reference external" href="https://vizier.cfa.harvard.edu/viz-bin/VizieR-2">here</a> and search for <code class="docutils literal notranslate"><span class="pre">gaia</span></code> or <code class="docutils literal notranslate"><span class="pre">ps1</span></code> for instance.</p>
-<p><a class="reference external" href="https://archive.stsci.edu/"><strong>MAST</strong></a> (kulski Archive for Space Telescopes; <a class="reference external" href="https://en.wikipedia.org/wiki/Mikulski_Archive_for_Space_Telescopes">Wikipedia</a>)
-:A catalog survice run by STScI. I feel MAST mainly goes with space telescope data (HST, JWST, Gaia, TESS, …). <a class="reference external" href="https://archive.stsci.edu/missions-and-data">Two main ground-based mission data are available</a>, namely Pan-STARRS and VLA-FIRST.</p>
+<dl class="simple myst">
+<dt><a class="reference external" href="https://vizier.unistra.fr/"><strong>VizieR</strong></a> (<a class="reference external" href="https://en.wikipedia.org/wiki/VizieR">Wikipedia</a>)</dt><dd><p>A catalog service run by Université de Strasbourg/CNRS. I feel many people archive their observational results (e.g., galaxy redshift catalog, asteroid polarimetric observation results, etc) to VizieR. Sometimes, for some reasons I cannot understand, large-catalog data are not accessible from VizieR for very long time. Also, the column names in VizieR is always very different from other catalog services. You can go to <a class="reference external" href="https://vizier.cfa.harvard.edu/viz-bin/VizieR-2">here</a> and search for <code class="docutils literal notranslate"><span class="pre">gaia</span></code> or <code class="docutils literal notranslate"><span class="pre">ps1</span></code> for instance.</p>
+</dd>
+<dt><a class="reference external" href="https://archive.stsci.edu/"><strong>MAST</strong></a> (kulski Archive for Space Telescopes; <a class="reference external" href="https://en.wikipedia.org/wiki/Mikulski_Archive_for_Space_Telescopes">Wikipedia</a>)</dt><dd><p>A catalog survice run by STScI. I feel MAST mainly goes with space telescope data (HST, JWST, Gaia, TESS, …). <a class="reference external" href="https://archive.stsci.edu/missions-and-data">Two main ground-based mission data are available</a>, namely Pan-STARRS and VLA-FIRST.</p>
+</dd>
+</dl>
 <p>It seems like the most official way to access Gaia is through <code class="docutils literal notranslate"><span class="pre">astroquery.Gaia</span></code> using TAP+ (see <a class="reference external" href="https://www.cosmos.esa.int/web/gaia/data-release-3">official website</a>’s “PYTHON ACCESS”). Indeed, Gaia DR3 is available only from here, not from MAST.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -714,7 +720,7 @@ C = G_\mathrm{BP} - G_\mathrm{RP} = -2.5 \lg \frac{I_\mathrm{BP}}{I_\mathrm{RP}}
 </pre></div>
 </div>
 <div class="output text_html"><div><i>Table length=65</i>
-<table id="table5287248992" class="table-striped table-bordered table-condensed">
+<table id="table4794710864" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>bp_rp</th><th>g_snr</th><th>bp_snr</th><th>rp_snr</th><th>dC</th><th>V</th><th>dV</th><th>x</th><th>y</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float64</th><th>float64</th></tr></thead>
@@ -854,69 +860,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
   </thead>
   <tbody>
     <tr>
-      <th>2</th>
-      <td>204.410444</td>
-      <td>-9.543147</td>
-      <td>19.949100</td>
-      <td>19.042500</td>
-      <td>19.478228</td>
-      <td>18.785735</td>
-      <td>0.021401</td>
-      <td>0.031288</td>
-      <td>68.791659</td>
-      <td>76.814691</td>
+      <th>8</th>
+      <td>204.383898</td>
+      <td>-9.541704</td>
+      <td>21.864799</td>
+      <td>20.627501</td>
+      <td>21.219980</td>
+      <td>20.327414</td>
+      <td>0.102489</td>
+      <td>0.047267</td>
+      <td>306.340812</td>
+      <td>90.485363</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>204.313122</td>
-      <td>-9.517118</td>
-      <td>20.951200</td>
-      <td>20.234800</td>
-      <td>20.580374</td>
-      <td>20.002952</td>
-      <td>0.023930</td>
-      <td>0.027035</td>
-      <td>938.166977</td>
-      <td>315.222076</td>
+      <th>9</th>
+      <td>204.389292</td>
+      <td>-9.541549</td>
+      <td>22.023300</td>
+      <td>20.671101</td>
+      <td>21.318043</td>
+      <td>20.355962</td>
+      <td>0.079715</td>
+      <td>0.065230</td>
+      <td>258.012015</td>
+      <td>91.794949</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>204.322624</td>
-      <td>-9.524781</td>
-      <td>18.504400</td>
-      <td>17.985399</td>
-      <td>18.237406</td>
-      <td>17.779410</td>
-      <td>0.012597</td>
-      <td>0.016538</td>
-      <td>853.773794</td>
-      <td>245.408823</td>
+      <th>10</th>
+      <td>204.399304</td>
+      <td>-9.536326</td>
+      <td>21.129200</td>
+      <td>20.920200</td>
+      <td>21.025266</td>
+      <td>20.754821</td>
+      <td>0.040271</td>
+      <td>0.076215</td>
+      <td>167.772652</td>
+      <td>139.074981</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>204.387721</td>
-      <td>-9.502643</td>
-      <td>22.124399</td>
-      <td>21.484301</td>
-      <td>21.793707</td>
-      <td>21.262448</td>
-      <td>0.079612</td>
-      <td>0.109307</td>
-      <td>267.797195</td>
-      <td>445.429511</td>
+      <th>11</th>
+      <td>204.412353</td>
+      <td>-9.539098</td>
+      <td>22.118200</td>
+      <td>21.650200</td>
+      <td>21.878032</td>
+      <td>21.450892</td>
+      <td>0.097092</td>
+      <td>0.101480</td>
+      <td>51.260896</td>
+      <td>113.583026</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>204.413848</td>
-      <td>-9.503995</td>
-      <td>22.077999</td>
-      <td>21.634600</td>
-      <td>21.850771</td>
-      <td>21.438514</td>
-      <td>0.109889</td>
-      <td>0.135453</td>
-      <td>34.077485</td>
-      <td>432.497826</td>
+      <th>15</th>
+      <td>204.311010</td>
+      <td>-9.515467</td>
+      <td>21.590200</td>
+      <td>20.997900</td>
+      <td>21.284650</td>
+      <td>20.782309</td>
+      <td>0.049365</td>
+      <td>0.096945</td>
+      <td>956.931503</td>
+      <td>330.264384</td>
     </tr>
     <tr>
       <th>...</th>
@@ -932,69 +938,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
       <td>...</td>
     </tr>
     <tr>
-      <th>191</th>
-      <td>204.352190</td>
-      <td>-9.466705</td>
-      <td>19.158899</td>
-      <td>18.009300</td>
-      <td>18.560210</td>
-      <td>17.720703</td>
-      <td>0.013098</td>
-      <td>0.016917</td>
-      <td>582.191122</td>
-      <td>772.542005</td>
-    </tr>
-    <tr>
       <th>192</th>
-      <td>204.385610</td>
-      <td>-9.445685</td>
-      <td>21.233101</td>
-      <td>20.859301</td>
-      <td>21.042482</td>
-      <td>20.672333</td>
-      <td>0.028622</td>
-      <td>0.053270</td>
-      <td>280.660857</td>
-      <td>962.402604</td>
+      <td>204.342720</td>
+      <td>-9.449497</td>
+      <td>22.207399</td>
+      <td>21.408600</td>
+      <td>21.793231</td>
+      <td>21.165957</td>
+      <td>0.044630</td>
+      <td>0.056535</td>
+      <td>665.216258</td>
+      <td>928.915029</td>
     </tr>
     <tr>
       <th>193</th>
-      <td>204.391725</td>
-      <td>-9.449751</td>
-      <td>21.913401</td>
-      <td>19.827200</td>
-      <td>20.822059</td>
-      <td>19.415908</td>
-      <td>0.114143</td>
-      <td>0.057990</td>
-      <td>226.350935</td>
-      <td>925.358571</td>
+      <td>204.354148</td>
+      <td>-9.447167</td>
+      <td>19.893700</td>
+      <td>18.702700</td>
+      <td>19.273234</td>
+      <td>18.408679</td>
+      <td>0.013002</td>
+      <td>0.015657</td>
+      <td>562.567403</td>
+      <td>949.785849</td>
     </tr>
     <tr>
       <th>194</th>
-      <td>204.391725</td>
-      <td>-9.449731</td>
-      <td>20.910900</td>
-      <td>19.654699</td>
-      <td>20.256139</td>
-      <td>19.352137</td>
-      <td>0.023311</td>
-      <td>0.034164</td>
-      <td>226.344244</td>
-      <td>925.539059</td>
+      <td>204.360523</td>
+      <td>-9.448080</td>
+      <td>22.289000</td>
+      <td>21.528999</td>
+      <td>21.895239</td>
+      <td>21.291439</td>
+      <td>0.093729</td>
+      <td>0.070890</td>
+      <td>505.551747</td>
+      <td>941.339148</td>
     </tr>
     <tr>
       <th>195</th>
-      <td>204.409944</td>
-      <td>-9.450248</td>
-      <td>21.397699</td>
-      <td>20.540300</td>
-      <td>20.952707</td>
-      <td>20.289981</td>
-      <td>0.061518</td>
-      <td>0.117752</td>
-      <td>63.384671</td>
-      <td>920.312548</td>
+      <td>204.370492</td>
+      <td>-9.447672</td>
+      <td>22.021601</td>
+      <td>21.791401</td>
+      <td>21.906516</td>
+      <td>21.623245</td>
+      <td>0.058209</td>
+      <td>0.096113</td>
+      <td>416.218785</td>
+      <td>944.790675</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>204.375115</td>
+      <td>-9.445436</td>
+      <td>18.942101</td>
+      <td>17.854401</td>
+      <td>18.375970</td>
+      <td>17.573912</td>
+      <td>0.013423</td>
+      <td>0.017981</td>
+      <td>374.592011</td>
+      <td>964.949328</td>
     </tr>
   </tbody>
 </table>
@@ -1026,7 +1032,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9e21e6a050b9d3be826e401d2ba27b7c5e3e47ae0764aa6794a144d5f675b7d8.png" src="../_images/9e21e6a050b9d3be826e401d2ba27b7c5e3e47ae0764aa6794a144d5f675b7d8.png" />
+<img alt="../_images/6b7ff38e4a212c49604b49183730f4ac2940ce345cc838a5c90e6d7118d640e0.png" src="../_images/6b7ff38e4a212c49604b49183730f4ac2940ce345cc838a5c90e6d7118d640e0.png" />
 </div>
 </div>
 </section>
@@ -1034,6 +1040,102 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 <h3><span class="section-number">5.3.4. </span>A Short Discussion<a class="headerlink" href="#a-short-discussion" title="Permalink to this headline">#</a></h3>
 <p>Note that there are more objects in PS1 than Gaia. Since Gaia’s main purpose is astrometry, it is not surprising that PS1 is sensing more celestial objects. Also, PS1 has the filter system that is closer to the classical filter systems (it uses grizy). Thus, for ground-based differential photometry, PS1 catalog will be more useful.</p>
 </section>
+</section>
+<section id="jpl-horizons-solar-system">
+<h2><span class="section-number">5.4. </span>JPL HORIZONS (Solar System)<a class="headerlink" href="#jpl-horizons-solar-system" title="Permalink to this headline">#</a></h2>
+<p>JPL <a class="reference external" href="https://ssd.jpl.nasa.gov/horizons/app.html#top">HORIZONS</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Ephemeris">ephemeris</a> (plural ephemerides) service operated by NASA JPL. The main purpose of this tool is to perform precise N-body simulation, including the modern computational algorithms, and provide the results to the users. There are many cases you may need it, but the main purpose is to obtain the positional information of the solar system objects or satellite or spacecrafts at certain epoch(s).</p>
+<div class="tip admonition">
+<p class="admonition-title">Practice</p>
+<p>For example, let’s query the information of our target in the CCD image that we are using. We took the image of asteroid (4179) Toutatis on UT 2018-04-13T21:30 (see <code class="docutils literal notranslate"><span class="pre">ccd.header[&quot;DATE-OBS&quot;]</span></code>).</p>
+<p><img alt="" src="../_images/horizons_00.png" /></p>
+<p>Set the table as below:</p>
+<ol class="arabic simple">
+<li><p><strong>Ephemeris Type</strong>: <code class="docutils literal notranslate"><span class="pre">&quot;Observer</span> <span class="pre">Table&quot;</span></code></p></li>
+<li><p><strong>Target Body</strong>: Click edit and search for <code class="docutils literal notranslate"><span class="pre">4179</span></code>.</p></li>
+<li><p><strong>Observer Location</strong>: Search for <code class="docutils literal notranslate"><span class="pre">SAAO</span></code> and select <code class="docutils literal notranslate"><span class="pre">Korea</span> <span class="pre">Microlensing</span> <span class="pre">Telescope</span> <span class="pre">Network-SAAO</span> <span class="pre">(code:</span> <span class="pre">L32)</span></code></p></li>
+<li><p><strong>Time Specification</strong>: Insert start/stop times as <code class="docutils literal notranslate"><span class="pre">2018-04-13</span></code> and <code class="docutils literal notranslate"><span class="pre">2018-04-14</span></code>. Type Step size of <code class="docutils literal notranslate"><span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;minutes&quot;</span></code>.</p></li>
+<li><p><strong>Table Settings</strong>: Click edit and select <code class="docutils literal notranslate"><span class="pre">&quot;Default&quot;</span></code> button.</p>
+<ul class="simple">
+<li><p>“Additional Table Settings”: <strong>Elevation cutoff</strong>: <code class="docutils literal notranslate"><span class="pre">10</span></code>, check the box of “<strong>Skip daylight</strong>”</p></li>
+</ul>
+</li>
+</ol>
+<p>Then hit the “Generate Ephemeris” button. You will see a long output, but what’s important is just the lines near the observation time (UT 2018-04-13T21:30):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Date__(UT)__HR:MN     R.A._____(ICRF)_____DEC    APmag   S-brt             delta      deldot     S-O-T /r     S-T-O  Sky_motion  Sky_mot_PA  RelVel-ANG  Lun_Sky_Brt  sky_SNR
+2018-Apr-13 22:30     13 37 24.57 -09 29 35.4   20.609   7.453  2.82285755430415   2.9894066  177.5789 /L    0.6391   0.5987445   290.83331   8.3188634         n.a.     n.a.
+</pre></div>
+</div>
+<p>The explanation for each column is given at the bottom of the website. Important ones are the time (<code class="docutils literal notranslate"><span class="pre">Date__(UT)__HR:MN</span></code>), RA/DEC (<code class="docutils literal notranslate"><span class="pre">R.A._____(ICRF)_____DEC</span></code>), and the expected V-band magnitude (<code class="docutils literal notranslate"><span class="pre">APmag</span></code>). Sometimes you may need the heliocentric and geocentric distances (go to the Table Settings and check number 19 &amp; 20).</p>
+</div>
+<p>After generating the ephemerides, you can see the detailed explanations of each column at the bottom part of the result page.
+<a class="reference external" href="https://astroquery.readthedocs.io/en/latest/jplhorizons/jplhorizons.html">https://astroquery.readthedocs.io/en/latest/jplhorizons/jplhorizons.html</a></p>
+<p>From python, you can access HORIZONS using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code>’s <code class="docutils literal notranslate"><span class="pre">JPLHorizons</span></code> module, thanks to M. Mommert:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objname</span> <span class="o">=</span> <span class="s2">&quot;4179&quot;</span>
+<span class="n">observat</span> <span class="o">=</span> <span class="s2">&quot;L32&quot;</span>
+<span class="n">t_obs</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;DATE-OBS&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;EXPTIME&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">Horizons</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">objname</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">observat</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">t_obs</span><span class="o">.</span><span class="n">jd</span><span class="p">)</span>
+<span class="n">obj_q</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">ephemerides</span><span class="p">()</span>
+<span class="n">obj_q</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">max_width</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       targetname             datetime_str          datetime_jd    ... alpha_true  PABLon  PABLat
+          ---                     ---                    d         ...    deg       deg     deg  
+----------------------- ------------------------ ----------------- ... ---------- -------- ------
+4179 Toutatis (1989 AC) 2018-Apr-13 21:30:56.000 2458222.396481481 ...     0.6463 205.7217 0.5207
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">obj_q</span></code> contains many columns and they have slightly different names than that of HORIZONS you saw above. They are summarized in <a class="reference external" href="https://astroquery.readthedocs.io/en/v0.3.9/api/astroquery.jplhorizons.HorizonsClass.html#astroquery.jplhorizons.HorizonsClass.ephemerides">the official documentation</a>. Few important columns are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RA</span></code> and <code class="docutils literal notranslate"><span class="pre">DEC</span></code>: The RA/DEC in degrees.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lighttime</span></code>: asteroid-observer distance / c = time delay. The true time of light when it departed the object is, thus, observed time - <code class="docutils literal notranslate"><span class="pre">lighttime</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: The phase angle in degrees (<code class="docutils literal notranslate"><span class="pre">alpha</span></code> differ from <code class="docutils literal notranslate"><span class="pre">alpha_true</span></code> by only less than around 1 arcmin, so astronomers just use <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, not <code class="docutils literal notranslate"><span class="pre">alpha_true</span></code>).</p></li>
+</ul>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Practice</p>
+<p>What if observatory has no designated code (e.g., SNU observatory)?</p>
+<p>The answer is clearly written in the <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/jplhorizons/jplhorizons.html">documentation</a>. For SNU bldg 45 and 46, you can use <code class="docutils literal notranslate"><span class="pre">location=dict(lon=126.95,</span> <span class="pre">lat=37.45,</span> <span class="pre">elevation=0.1)</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In real work, you don’t want to query this for every image (as it takes a lot of time). Better way is to obtain the <code class="docutils literal notranslate"><span class="pre">t_obs</span></code> for all the images and pass that as <code class="docutils literal notranslate"><span class="pre">Horizons(...,</span> <span class="pre">epochs=t_obs_list)</span></code> as python list object. See the official <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/jplhorizons/jplhorizons.html">documentation</a> for the usage, if necessary.</p>
+</div>
+<p>Once we know the RA/DEC, we can convert those to the image XY coordinate by using the WCS information in the header, as we did for stars:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos_sky</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj_q</span><span class="p">[</span><span class="s2">&quot;RA&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">obj_q</span><span class="p">[</span><span class="s2">&quot;DEC&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">pos_pix</span> <span class="o">=</span> <span class="n">pos_sky</span><span class="o">.</span><span class="n">to_pixel</span><span class="p">(</span><span class="n">wcs</span><span class="o">=</span><span class="n">ccd</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pos_sky</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pos_pix</span><span class="p">)</span>
+
+<span class="n">ap0</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pos_pix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_pix</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">aps2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="n">ap0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;SkyCoord (ICRS): (ra, dec) in deg
+    (204.36166, -9.49665)&gt;
+(array(500.58291238), array(500.43561473))
+</pre></div>
+</div>
+<img alt="../_images/3e3600a802b8cf8ef1b04687f9e25b7379b7c23072bb316e4909be35c79bd284.png" src="../_images/3e3600a802b8cf8ef1b04687f9e25b7379b7c23072bb316e4909be35c79bd284.png" />
+</div>
+</div>
+<p>The red circle is the location of our asteoid, (4179) Toutatis.</p>
 </section>
 </section>
 
@@ -1078,11 +1180,11 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
       </div>
     </a>
     <a class="right-next"
-       href="../markdown.html"
+       href="06-diffphot.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Markdown Files</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Differential Photometry</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1113,6 +1215,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-short-discussion">5.3.4. A Short Discussion</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jpl-horizons-solar-system">5.4. JPL HORIZONS (Solar System)</a></li>
 </ul>
   </nav></div>
 
