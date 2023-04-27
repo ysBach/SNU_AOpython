@@ -155,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -454,7 +454,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 21:52:33 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 22:11:36 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -596,11 +596,11 @@ FILTER     V                    Filter Name in the beam
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" src="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
   err = np.sqrt(_arr/gn + (rd/gn)**2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
 </pre></div>
 </div>
 </div>
@@ -831,7 +831,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" src="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" />
+<img alt="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" src="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" />
 </div>
 </div>
 <p>The stars indicated by red circles are the stars that are <strong>too close to each other</strong>. These are removed in <code class="docutils literal notranslate"><span class="pre">q2_close</span></code> DataFrame. (rigorously speaking, they are close to each other based on the catalog, not based on the observed image)</p>
@@ -864,7 +864,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" src="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" />
+<img alt="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" src="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -1045,7 +1045,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" src="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" />
+<img alt="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" src="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" />
 </div>
 </div>
 <ol class="arabic simple">
@@ -1069,7 +1069,7 @@ FILTER     V                    Filter Name in the beam
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">zeropt</span>
 <span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;dV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;merr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dzeropt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">phot_targ</span><span class="p">[[</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">]]</span>
+<span class="n">phot_targ</span><span class="p">[[</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">,</span> <span class="s2">&quot;snr&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -1094,6 +1094,7 @@ FILTER     V                    Filter Name in the beam
       <th></th>
       <th>xcenter</th>
       <th>ycenter</th>
+      <th>snr</th>
       <th>V</th>
       <th>dV</th>
     </tr>
@@ -1103,6 +1104,7 @@ FILTER     V                    Filter Name in the beam
       <th>0</th>
       <td>500.582912</td>
       <td>500.435615</td>
+      <td>3.133608</td>
       <td>20.550977</td>
       <td>0.347353</td>
     </tr>
