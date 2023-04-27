@@ -41,7 +41,7 @@ cd astroscrappy && pip install -e . && cd ..
 Finally
 
 ```
-pip install astro-ndslice==0.2 ysfitsutilpy==0.2 ysphotutilpy==0.1 --no-deps
+pip install astro-ndslice==0.2 ysfitsutilpy==0.2 ysphotutilpy==0.1.1 --no-deps
 ```
 
 ### Reading Materials

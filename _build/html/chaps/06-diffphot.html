@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; SNU AO Class</title>
+    <title>1. Differential Photometry &#8212; SNU AO Class Python</title>
   
   
   
@@ -62,9 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/06-diffphot';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HW Software &amp; Tools" href="prerequisites/99-HW_swtools.html" />
+    <link rel="prev" title="5. Querying from the Catalog" href="05-query.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,13 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-center.html">2. Centering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture &amp; DAOFIND</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../markdown.html">1. Markdown Files</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Differential Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -245,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/edit/master/JupyterBook/chaps/06-diffphot.ipynb" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/06-diffphot.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +283,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/issues/new?title=Issue%20on%20page%20%2Fchaps/06-diffphot.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/06-diffphot.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -391,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Differential Photometry</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -400,9 +404,20 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">1.1. Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#target-photometry">1.2. Target Photometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#star-photometry">1.3. Star Photometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy">1.3.1. Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-closely-located-stars-from-catalog">1.3.2. Drop Closely Located Stars from Catalog</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-closely-located-stars-from-daofind">1.3.3. Drop Closely Located Stars from DAOFIND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-match-catalog-daofind">1.3.4. Cross-Match Catalog &amp; DAOFIND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aperture-photometry-of-stars">1.3.5. Aperture Photometry of Stars</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-standardization">1.4. Find Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-result">1.5. Final result</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -413,22 +428,694 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="differential-photometry">
+<span id="ch-diffphot"></span><h1><span class="section-number">1. </span>Differential Photometry<a class="headerlink" href="#differential-photometry" title="Permalink to this headline">#</a></h1>
+<p>As you have learned from theory lecture, <strong>differential photometry</strong> (also called <strong>relative photometry</strong>) is a way to measure the magnitude (or flux) of your target when nearby object’s magnitudes are known.</p>
+<p>Here, we will combine the aperture photometry technique and star/solar system querying technique to perform the differential photometry.</p>
+<ol class="arabic simple">
+<li><p>Query the location of our asteroid in the image. (JPL HORIZONS)</p></li>
+<li><p>Get the flux of our asteroid in the image.</p></li>
+<li><p>Query the PS1 catalog stars in the FoV.</p></li>
+<li><p>Get the flux of those stars in the image.</p></li>
+<li><p>Analyze the image zero point we learned in the theory lecture.</p></li>
+<li><p>Finally obtain the magnitude of our asteroid.</p></li>
+</ol>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ch</span><span class="p">:</span><span class="n">diffphot</span><span class="p">)</span><span class="o">=</span>
-<span class="c1"># Differential Photometry</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> version_information
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S (%Z = GMT%z)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook was generated at </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="o">%</span><span class="k">version_information</span> astropy, numpy, scipy, matplotlib, astroquery, photutils, version_information
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">packages</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pkg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pkg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="p">(</span><span class="n">ch</span><span class="p">:</span><span class="n">diffphot</span><span class="p">)</span><span class="o">=</span>
-       <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 21:52:33 (KST = GMT+0900) 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
+1 IPython    8.7.0
+2 OS         macOS 13.1 arm64 arm 64bit
+3 astropy    5.2.2
+4 numpy      1.23.2
+5 scipy      1.10.1
+6 matplotlib 3.7.1
+7 astroquery 0.4.7.dev8438
+8 photutils  1.6.1.dev103+gad22185f
+9 version_information 1.0.4
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %matplotlib notebook</span>
+<span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s1">&#39;last_expr&#39;</span>
+<span class="n">ipython</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.nddata</span> <span class="kn">import</span> <span class="n">CCDData</span><span class="p">,</span> <span class="n">Cutout2D</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clipped_stats</span>
+
+<span class="kn">from</span> <span class="nn">astroquery.mast</span> <span class="kn">import</span> <span class="n">Catalogs</span>
+<span class="kn">from</span> <span class="nn">astroquery.jplhorizons</span> <span class="kn">import</span> <span class="n">Horizons</span>
+
+<span class="kn">import</span> <span class="nn">ysfitsutilpy</span> <span class="k">as</span> <span class="nn">yfu</span>
+<span class="kn">import</span> <span class="nn">ysphotutilpy</span> <span class="k">as</span> <span class="nn">ypu</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">})</span>
+
+<span class="kn">from</span> <span class="nn">photutils.aperture</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CircularAperture</span><span class="p">,</span> <span class="n">CircularAnnulus</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">photutils.detection</span> <span class="kn">import</span> <span class="n">DAOStarFinder</span>
+<span class="kn">from</span> <span class="nn">photutils.psf.groupstars</span> <span class="kn">import</span> <span class="n">DAOGroup</span>
+
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
+
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../../Tutorial_Data&#39;</span><span class="p">)</span>
+<span class="n">TMPDIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
+<span class="n">TMPDIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">allfits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATAPATH</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*p4179*.fits&quot;</span><span class="p">))</span>
+<span class="n">allfits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">allfits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
+the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="data-description">
+<h2><span class="section-number">1.1. </span>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">#</a></h2>
+<p>Below is the basic information of our observation, logged in the FITS header. For your information, the target we observed is a near-Earth asteroid (4179) Toutatis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;DATE-OBS&quot;</span><span class="p">,</span> <span class="s2">&quot;EXPTIME&quot;</span><span class="p">,</span> <span class="s2">&quot;FILTER&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">:</span><span class="s2">10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">comments</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATE-OBS   2018-04-13T21:30:26  ISO-8601 observation date matching MJD-OBS
+EXPTIME    60                   Exposure time [seconds]
+FILTER     V                    Filter Name in the beam
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="target-photometry">
+<h2><span class="section-number">1.2. </span>Target Photometry<a class="headerlink" href="#target-photometry" title="Permalink to this headline">#</a></h2>
+<p>As we learned, first query the ephemeris of the target.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objname</span> <span class="o">=</span> <span class="s2">&quot;4179&quot;</span>
+<span class="n">observat</span> <span class="o">=</span> <span class="s2">&quot;B31&quot;</span>
+<span class="n">t_obs</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;DATE-OBS&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;EXPTIME&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">Horizons</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">objname</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">observat</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">t_obs</span><span class="o">.</span><span class="n">jd</span><span class="p">)</span>
+<span class="n">q_obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">ephemerides</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we perform aperture photometry to the target using</p>
+<ul class="simple">
+<li><p>Circular aperture</p></li>
+<li><p>Aperture radius 15 pixel</p></li>
+<li><p>Sky estimating annulus of 25-40 pixels.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos_sky</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">q_obj</span><span class="p">[</span><span class="s2">&quot;RA&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">q_obj</span><span class="p">[</span><span class="s2">&quot;DEC&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">pos_pix</span> <span class="o">=</span> <span class="n">pos_sky</span><span class="o">.</span><span class="n">to_pixel</span><span class="p">(</span><span class="n">wcs</span><span class="o">=</span><span class="n">ccd</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>
+<span class="n">pos_pix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pos_pix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_pix</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">ap0</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">pos_pix</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">an0</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">pos_pix</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ap0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="n">an0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">phot_targ</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">ap0</span><span class="p">,</span> <span class="n">an0</span><span class="p">)</span>
+<span class="n">m_targ</span> <span class="o">=</span> <span class="n">phot_targ</span><span class="p">[</span><span class="s1">&#39;mag&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dm_targ</span> <span class="o">=</span> <span class="n">phot_targ</span><span class="p">[</span><span class="s1">&#39;merr&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Instrumental magntiude = </span><span class="si">{</span><span class="n">m_targ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">dm_targ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" src="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
+  err = np.sqrt(_arr/gn + (rd/gn)**2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The instrumental magnitude of our target is v = -3.060 ± 0.346.</p>
+</div>
+</section>
+<section id="star-photometry">
+<h2><span class="section-number">1.3. </span>Star Photometry<a class="headerlink" href="#star-photometry" title="Permalink to this headline">#</a></h2>
+<p>As we learned, first query the stars in the FoV:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pix_scale</span> <span class="o">=</span> <span class="mf">0.4</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span>
+<span class="n">center_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">center_radec</span> <span class="o">=</span> <span class="n">ccd</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">wcs_pix2world</span><span class="p">(</span><span class="o">*</span><span class="n">center_xy</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">center_coo</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="o">*</span><span class="n">center_radec</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">fov_radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pix_scale</span>
+<span class="n">q_ps</span> <span class="o">=</span> <span class="n">Catalogs</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">center_coo</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">fov_radius</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;Panstarrs&quot;</span><span class="p">,</span> 
+                             <span class="n">data_release</span><span class="o">=</span><span class="s2">&quot;dr2&quot;</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="c1"># Change some column names for convenience.</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;raMean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ra&quot;</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;decMean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;dec&quot;</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;gMeanPSFMag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;g&quot;</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;rMeanPSFMag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span>
+
+<span class="c1"># drop stars with unknown magnitudes</span>
+<span class="n">q_ps</span> <span class="o">=</span> <span class="n">q_ps</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">])</span>
+
+<span class="c1"># Calculate V and R, and their errors</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.006</span> <span class="o">+</span> <span class="mf">0.474</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.526</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.138</span> <span class="o">-</span> <span class="mf">0.131</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.131</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;dV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="mf">0.474</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;gMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> 
+    <span class="o">+</span> <span class="mf">0.526</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;rMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.012</span><span class="o">**</span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;dR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="mf">0.131</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;gMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+    <span class="o">+</span> <span class="mf">1.131</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;rMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.015</span><span class="o">**</span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;dgr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;gMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">q_ps</span><span class="p">[</span><span class="s2">&quot;rMeanPSFMagErr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Select only important columns</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">q_ps</span><span class="p">[[</span><span class="s2">&quot;ra&quot;</span><span class="p">,</span> <span class="s2">&quot;dec&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;dgr&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">,</span> <span class="s2">&quot;dR&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Select only brighter than 22 mag</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">q2</span><span class="p">[(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">22</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">22</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Calculate x, y position</span>
+<span class="n">coo</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;ra&quot;</span><span class="p">],</span> <span class="n">q2</span><span class="p">[</span><span class="s2">&quot;dec&quot;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">q2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">q2</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ccd</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">wcs_world2pix</span><span class="p">(</span><span class="n">coo</span><span class="o">.</span><span class="n">ra</span><span class="p">,</span> <span class="n">coo</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Remove stars outside the image</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">q2</span><span class="p">[(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ccd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span> 
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ccd</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">20</span><span class="p">)]</span>
+
+<span class="n">q2</span> <span class="o">=</span> <span class="n">q2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="si">}</span><span class="s2"> stars from PS1 DR2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total 122 stars from PS1 DR2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also, as we learned, run DAOFIND algorithm:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># by default, 3-sigma 5-iteration.</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">DAOStarFinder</span><span class="p">(</span>
+    <span class="n">fwhm</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># In reality, FWHM must be measured a priori using, e.g., `ginga`</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">std</span><span class="p">,</span> 
+    <span class="n">sharplo</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">sharphi</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>   <span class="c1"># default values 0.2 and 1.0</span>
+    <span class="n">roundlo</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">roundhi</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># default values -1 and +1</span>
+    <span class="n">sigma_radius</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>           <span class="c1"># default values 1.5</span>
+    <span class="n">ratio</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>                  <span class="c1"># 1.0: circular gaussian</span>
+    <span class="n">exclude_border</span><span class="o">=</span><span class="kc">True</span>         <span class="c1"># To exclude sources near edges</span>
+<span class="p">)</span>
+
+<span class="c1"># The DAOStarFinder object ``finder`` gets at least one input: the image.</span>
+<span class="c1"># Then it returns the astropy table which contains the aperture photometry results:</span>
+<span class="n">dao</span> <span class="o">=</span> <span class="n">finder</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dao</span><span class="p">)</span><span class="si">}</span><span class="s2"> stars from DAOStarFinder with threshold = </span><span class="si">{</span><span class="n">finder</span><span class="o">.</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total 57 stars from DAOStarFinder with threshold = 34.9
+</pre></div>
+</div>
+</div>
+</div>
+<section id="strategy">
+<h3><span class="section-number">1.3.1. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this headline">#</a></h3>
+<p>There are multiple ways to match the star you queried above with the object visible in the image. Here, we use the X Y coordinates in <code class="docutils literal notranslate"><span class="pre">q2</span></code>. Use it as the initial guess, crop the small portion (e.g., 7 by 7 pixel) of the image near the initial guess, and do centroiding at each position in the image iteratively until it converges.</p>
+<p>So our strategy will be:</p>
+<ol class="arabic simple">
+<li><p>Drop the stars with close distance in queried catalog stars (overlapping stars)</p></li>
+<li><p>Drop the stars with close distance from DAOFIND (overlapping stars)</p></li>
+<li><p>Match the stars (i.e., append the xy position from DAOFIND to corresponding queried stars.)</p>
+<ul class="simple">
+<li><p>Thus, queried catalog stars with no matching DAOFIND star will be removed.</p></li>
+</ul>
+</li>
+<li><p>Do photometry of stars</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some may ask why we should drop stars from DAOFIND, because we have already dropped nearby stars in previous step (stars from query). In the previous step, we dropped nearby stars based solely on the catalogued positions. Some objects may be bright enough but not catalogued for some reason, so they are detected only by this star finding process. In unfortunate cases, such stars may be near to the star that we may have expected to be “isolated” from the nearby object removal in the above. What if we skip the above process but drop stars only based on the star finding algorithm? There might be faint object which were bright enough to be catalogued, but unfortunately unresolved in our image. Then as they are not distinguishable in our image, our instrumental magnitude will be the sum of the objects, while we will use the catalogue magnitude of only one of the overlapping stars. Thus, <strong>the two processes are both necessary</strong>.</p>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title">Centroiding</p>
+<p>Sometimes you may notice that <strong>stars are not at the expected locations</strong>. There can be several reasons, such as wrong WCS, image distortion, moving object, transient (supernovae), cosmic-ray confusion, etc. One possibility is the proper motion of stars. If the queried star has a large proper motion (say it moved 10 arcsec from J2000 to the current epoch, say J2020.2) and the image has small pixel scale, say 0.5 arcsec per pixel, so that your star is away from the queried position by more than 20 pixels. Then the cropped subimage (7 by 7 pixel) centered at the expected location does not contain the star. Thus, the centroiding algorithm will result in an unrealistic result.</p>
+<p>Although <strong>“centeroid”</strong> (or finding center of the star) sounds like an easy task, the centroiding algorithms actually do not converge many times, so you may have hard time coding them. Algorithmically, it is actually one of the hardest problem especially under the low SNR. You may refer to <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson87</a> (<a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/digiphot/daophot/centerpars.html">IRAF/DAOPHOT algorithm</a>). Also, you can look into IRAF’s centering algorithms such as <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/images/tv/imexamine.html">IMEXAMINE</a>, which is a centering algorithm for radial profile.</p>
+<p>A lot of practical tricks can be developed, and any observational astronomer will use slightly different algorithm from the other colleagues. However, a researcher should choose one that does not affect the final result much.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before proceed further, please read and follow the tutorial of <a class="reference external" href="https://photutils.readthedocs.io/en/stable/grouping.html">photutils/grouping</a>.</p>
+</div>
+</section>
+<section id="drop-closely-located-stars-from-catalog">
+<h3><span class="section-number">1.3.2. </span>Drop Closely Located Stars from Catalog<a class="headerlink" href="#drop-closely-located-stars-from-catalog" title="Permalink to this headline">#</a></h3>
+<p>Since we have already queired stars, let me drop stars with close distance (20 pixels in this example, using DAOGROUP algorithm):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">group_stars</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">crit_separation</span><span class="p">,</span> <span class="n">xcol</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ycol</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">index_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Group stars using DAOGROUP algorithm and return row indices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table : astropy.table.Table</span>
+<span class="sd">        The queried result table.</span>
+
+<span class="sd">    crit_separation : float or int</span>
+<span class="sd">        Distance, in units of pixels, such that any two stars separated by less</span>
+<span class="sd">        than this distance will be placed in the same group.</span>
+
+<span class="sd">    xcol, ycol : str, optional</span>
+<span class="sd">        The column names for x and y positions. This is necessary since</span>
+<span class="sd">        `~photutils.DAOGroup accepts a table which has x y positions designated</span>
+<span class="sd">        as ``&quot;x_0&quot;`` and ``&quot;y_0&quot;``.</span>
+
+<span class="sd">    index : bool, optional</span>
+<span class="sd">        Whether to return only the index of the grouped rows (group information</span>
+<span class="sd">        is lost) or the full grouped table (after group_by).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Assuming the psf fwhm to be known, ``crit_separation`` may be set to</span>
+<span class="sd">    ``k * fwhm``, for some positive real k.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    photutils.DAOStarFinder</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] Stetson, Astronomical Society of the Pacific, Publications,</span>
+<span class="sd">        (ISSN 0004-6280), vol. 99, March 1987, p. 191-222.</span>
+<span class="sd">        Available at: http://adsabs.harvard.edu/abs/1987PASP...99..191S</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    gtab: Table</span>
+<span class="sd">        Returned when ``index_only=False``. The table underwent</span>
+<span class="sd">        ``.group_by(&quot;group_id&quot;)``.</span>
+
+<span class="sd">    grouped_rows: list</span>
+<span class="sd">        Returned when ``index_only=True``.</span>
+<span class="sd">        The indices of the rows which are &quot;grouped&quot; stars. You may remove such</span>
+<span class="sd">        rows using ``table.remove_rows(grouped_rows)``.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Convert to astropy.Table because DAOGroup only accepts astropy.Table.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">Table</span><span class="p">):</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">tab</span><span class="p">[</span><span class="n">xcol</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;x_0&quot;</span>
+    <span class="n">tab</span><span class="p">[</span><span class="n">ycol</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;y_0&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">gtab</span> <span class="o">=</span> <span class="n">DAOGroup</span><span class="p">(</span><span class="n">crit_separation</span><span class="o">=</span><span class="n">crit_separation</span><span class="p">)(</span><span class="n">tab</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>  <span class="c1"># empty tab (len(tab) == 0)</span>
+        <span class="n">gtab</span> <span class="o">=</span> <span class="n">tab</span>
+        <span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">index_only</span><span class="p">:</span>
+        <span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;x_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">xcol</span>
+        <span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;y_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">ycol</span>
+        <span class="k">return</span> <span class="n">gtab</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gid</span><span class="p">,</span> <span class="n">gnum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">gmask</span> <span class="o">=</span> <span class="n">gid</span><span class="p">[</span><span class="n">gnum</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># group id with &gt; 1 stars</span>
+        <span class="n">grouped_rows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gtab</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">gid</span> <span class="ow">in</span> <span class="n">gmask</span><span class="p">:</span>
+                <span class="n">grouped_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grouped_rows</span>
+
+
+<span class="n">rows2rm</span> <span class="o">=</span> <span class="n">group_stars</span><span class="p">(</span><span class="n">q2</span><span class="p">,</span> <span class="n">crit_separation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+<span class="n">q2_close</span> <span class="o">=</span> <span class="n">q2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">rows2rm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">aps_all</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">q2</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">aps_close</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">aps_all</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="n">aps_close</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" src="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" />
+</div>
+</div>
+<p>The stars indicated by red circles are the stars that are <strong>too close to each other</strong>. These are removed in <code class="docutils literal notranslate"><span class="pre">q2_close</span></code> DataFrame. (rigorously speaking, they are close to each other based on the catalog, not based on the observed image)</p>
+</section>
+<section id="drop-closely-located-stars-from-daofind">
+<h3><span class="section-number">1.3.3. </span>Drop Closely Located Stars from DAOFIND<a class="headerlink" href="#drop-closely-located-stars-from-daofind" title="Permalink to this headline">#</a></h3>
+<p>Now drop the stars that has nearby objects (based on DAOFIND result and reuse the previously used <code class="docutils literal notranslate"><span class="pre">group_stars</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop nearby objects</span>
+<span class="n">rows2rm</span> <span class="o">=</span> <span class="n">group_stars</span><span class="p">(</span><span class="n">dao</span><span class="p">,</span> <span class="n">crit_separation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">xcol</span><span class="o">=</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">,</span> <span class="n">ycol</span><span class="o">=</span><span class="s2">&quot;ycentroid&quot;</span><span class="p">)</span>
+<span class="n">dao</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">rows2rm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">aps_dao</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">dao</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">dao</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">aps_dao</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="n">aps_close</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;DAO&quot;</span><span class="p">,</span> <span class="s2">&quot;PS1&quot;</span><span class="p">]):</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" src="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Practice</p>
+<p>Change <code class="docutils literal notranslate"><span class="pre">roundlo=-1.0,</span> <span class="pre">roundhi=1.0</span></code>, to <code class="docutils literal notranslate"><span class="pre">roundlo=-.5,</span> <span class="pre">roundhi=.5</span></code>, then see our object, at the center of image, is not detected from star finder.</p>
+<p>Also, change parameters, such as <code class="docutils literal notranslate"><span class="pre">sigma_radius</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>. The red star which is missed in the star finder will now be found.</p>
+</div>
+</section>
+<section id="cross-match-catalog-daofind">
+<h3><span class="section-number">1.3.4. </span>Cross-Match Catalog &amp; DAOFIND<a class="headerlink" href="#cross-match-catalog-daofind" title="Permalink to this headline">#</a></h3>
+<p>Match for each position from the catalog, find if there is any star found by DAOFIND within 10x10 pixel (<em>absolute delta-x and delta-y smaller than 5</em>). If multiple stars in this box, select the closest. Then add the <code class="docutils literal notranslate"><span class="pre">xcentroid</span></code> and <code class="docutils literal notranslate"><span class="pre">ycentroid</span></code> information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">],</span> <span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;ycentroid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">q2_close</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="c1"># Find closest DAOStarFinder source with distance no larger than 5 pix</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">dao</span><span class="p">[</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">dao</span><span class="p">[</span><span class="s2">&quot;ycentroid&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span>
+    <span class="n">candidate</span> <span class="o">=</span> <span class="n">dao</span><span class="p">[(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># Find the closest one</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">))]</span>
+    
+    <span class="n">q2_close</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;xcentroid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">q2_close</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;ycentroid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[</span><span class="s2">&quot;ycentroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">q2_close</span> <span class="o">=</span> <span class="n">q2_close</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aperture-photometry-of-stars">
+<h3><span class="section-number">1.3.5. </span>Aperture Photometry of Stars<a class="headerlink" href="#aperture-photometry-of-stars" title="Permalink to this headline">#</a></h3>
+<p>Do the aperture photometry to the stars, and add this information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>). Identical to our target,</p>
+<ul class="simple">
+<li><p>Circular aperture</p></li>
+<li><p>Aperture radius 15 pixel</p></li>
+<li><p>Sky estimating annulus of 25-40 pixels.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q2_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;xcentroid&quot;</span><span class="p">],</span> <span class="n">q2_close</span><span class="p">[</span><span class="s2">&quot;ycentroid&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">ap_stars</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">q2_xy</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">an_stars</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">q2_xy</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">phot</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">ap_stars</span><span class="p">,</span> <span class="n">an_stars</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">phot</span> <span class="o">=</span> <span class="n">q2_close</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">phot</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
+  err = np.sqrt(_arr/gn + (rd/gn)**2)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="find-standardization">
+<h2><span class="section-number">1.4. </span>Find Standardization<a class="headerlink" href="#find-standardization" title="Permalink to this headline">#</a></h2>
+<p>Our observation was made in V-band (check <code class="docutils literal notranslate"><span class="pre">ccd.header[&quot;FILTER&quot;]</span></code>), so we need to use the V-band magnitude.</p>
+<p>Two methods are shown to calculate the image zero point. We learned:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  M_f = m_f + (\mathrm{effect\ of\ atmosphere}) + (\mathrm{effect\ of\ CCD}) \\
+    \approx m_f - k_f' X - k_f''XC + z_f + k_f C \\
+\end{split}\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( f \)</span>: The filter (V, B, g’, etc). In our case, V.</p></li>
+<li><p><span class="math notranslate nohighlight">\( X \)</span>: airmass (the simplest approximation is the secant of zenith angle, <span class="math notranslate nohighlight">\( \sec Z \)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\( M_f \)</span>: The <strong>standard</strong> apparent magnitude (or the <strong>true</strong> apparent magnitude) at filter <span class="math notranslate nohighlight">\( f \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( m_f \)</span>: The <strong>instrumental</strong> magnitude (<span class="math notranslate nohighlight">\( m_f = -2.5 \lg N \)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\( C \)</span>: The <strong>true</strong> color index, e.g., <span class="math notranslate nohighlight">\( B - V \)</span> or <span class="math notranslate nohighlight">\( r' - i' \)</span>. (Not necessarily include filter <span class="math notranslate nohighlight">\( f \)</span>, but it is better that the wavelength ranges of the selected two filters “<em>contain</em>” the range of <span class="math notranslate nohighlight">\( f \)</span> for interpolation purpose. Also in many classical literatures, you will see the <span class="math notranslate nohighlight">\( C \)</span> in this equation is the <em>observed</em> color, not the true color. This is just a matter of preference.)</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_f' \)</span>: The first order extinction coefficient at filter <span class="math notranslate nohighlight">\( f \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_f'' \)</span>: The second order extinction coefficient at filter <span class="math notranslate nohighlight">\( f \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( z_f \)</span>: The zero point at filter <span class="math notranslate nohighlight">\( f \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_f \)</span>: The system transform coefficient at filter <span class="math notranslate nohighlight">\( f \)</span>.</p></li>
+<li><p>Note: In the lecture note, lower- and upper-cased letters are used for the <strong>instrumental</strong> and <strong>true</strong> magnitudes, respectively (For example, <span class="math notranslate nohighlight">\( v \)</span>, <span class="math notranslate nohighlight">\( b \)</span>, <span class="math notranslate nohighlight">\( m_{g'} \)</span> are instrumental magnitudes of an object and <span class="math notranslate nohighlight">\( V \)</span>, <span class="math notranslate nohighlight">\( B \)</span>, and <span class="math notranslate nohighlight">\( M_{g'} \)</span> are true appparent magnitudes of it.).</p></li>
+</ul>
+<p>In the simplest case,</p>
+<div class="math notranslate nohighlight">
+\[
+  v = V + Z
+\]</div>
+<p>for the zero point <span class="math notranslate nohighlight">\(Z\)</span> (i.e., assume all the terms are constant). In our case, we calculate the zero point in this single image, and since the airmass <span class="math notranslate nohighlight">\(X\)</span> is identical for every object in the FoV, this is quite a reasonalble guess. The color-term will be shown to be negligible (see below).</p>
+<p>Note that putting <span class="math notranslate nohighlight">\(v (= m_f)\)</span> to the LHS is to put it in the ordinate in the fitting process below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Weighted_arithmetic_mean#Variance_weights">weighted mean with variance weighting</a> of <span class="math notranslate nohighlight">\(x_i\)</span> is given as</p>
+<div class="math notranslate nohighlight">
+\[ 
+\bar{x} = \frac{\sum_i x_i / \sigma_i^2}{\sum_i 1 / \sigma_i^2} 
+\quad;\quad
+\sigma_{\bar{x}} = \frac{1}{\sqrt{\sum_{i=1}^{N} 1 / \sigma_i^2} } ~.
+\]</div>
+<p>The weighted-mean of variance weight is widely used because it is <em>the</em> solution of the chi-square minimization (least square) technique, for Gaussian errors. In otherwords, this is the least-square fitting solution of a <em>constant function</em> to the data.</p>
+</div>
+<p>In the simplest formalism, <span class="math notranslate nohighlight">\(Z = v - V\)</span> can be calculated for multiple stars. The <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(dZ\)</span> values can be calculated from this weighed mean, using <span class="math notranslate nohighlight">\(Z_i\)</span> for the i-th stars will be the zero point value. The error-bar of each can be roughly estimated as <span class="math notranslate nohighlight">\(dZ_i = \sqrt{dv^2 + dV^2}\)</span>. However, if the error-bar of each star (i.e., the dv and dV values) are not correctly measured (many times it is the case), it is sometimes better to use simple sample standard deviation: <code class="docutils literal notranslate"><span class="pre">np.std(Z_i,</span> <span class="pre">ddof=1)</span></code>. Normally many people use whichever is larger:</p>
+<div class="math notranslate nohighlight">
+\[
+  dZ = \mathrm{max} \left( \frac{1}{\sqrt{\sum 1/dZ_i^2}}, \frac{\mathtt{np.std(Z_i, ddof=1))}}{\sqrt{N}} \right) 
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="k">def</span> <span class="nf">linf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">mcat</span><span class="p">,</span> <span class="n">dmcat</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">],</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;dV&quot;</span><span class="p">]</span>
+<span class="n">mobs</span><span class="p">,</span> <span class="n">dmobs</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">],</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;merr&quot;</span><span class="p">]</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="n">dmtot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dmcat</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dmobs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># === Calculate zero point and errors</span>
+<span class="n">zeropt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">dmtot</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dzeropt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">dmtot</span><span class="o">**</span><span class="mi">2</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mcat</span><span class="p">))])</span>
+<span class="n">dmtot2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dmtot</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dzeropt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># === Find fitting lines</span>
+<span class="c1"># Search for the usage of scipy.optimize.curve_fit.</span>
+<span class="n">poptm</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">linf</span><span class="p">,</span> <span class="n">mcat</span><span class="p">,</span> <span class="n">mobs</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">dmobs</span><span class="p">,</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">poptc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">linf</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">mobs</span><span class="o">-</span><span class="n">mcat</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">dmtot2</span><span class="p">,</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># === Plot</span>
+<span class="c1"># --- Set some useful things</span>
+<span class="n">errkw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># --- Main plot with error bars and fitting lines</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot_mosaic</span><span class="p">(</span><span class="s2">&quot;mc</span><span class="se">\n</span><span class="s2">mc</span><span class="se">\n</span><span class="s2">rc&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># m = magnitudes, c=colors, r=residuals</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mcat</span><span class="p">,</span> <span class="n">mobs</span><span class="p">,</span> <span class="s2">&quot;k.&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">mcat</span><span class="p">,</span> <span class="n">mobs</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">dmcat</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">dmobs</span><span class="p">,</span> <span class="o">**</span><span class="n">errkw</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mcat</span><span class="p">,</span> <span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span> <span class="o">-</span> <span class="n">zeropt</span><span class="p">,</span> <span class="s2">&quot;k.&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">mcat</span><span class="p">,</span> <span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span> <span class="o">-</span> <span class="n">zeropt</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">dmcat</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">dmtot2</span><span class="p">,</span> <span class="o">**</span><span class="n">errkw</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span><span class="p">,</span> <span class="s2">&quot;k.&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">mobs</span> <span class="o">-</span> <span class="n">mcat</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">phot</span><span class="p">[</span><span class="s2">&quot;dgr&quot;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">dmtot2</span><span class="p">,</span> <span class="o">**</span><span class="n">errkw</span><span class="p">)</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
+
+<span class="c1"># Fitted lines</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">zeropt</span> <span class="o">+</span> <span class="n">mm</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Z = </span><span class="si">{</span><span class="n">zeropt</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2"> (fix slope)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">linf</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="o">*</span><span class="n">poptm</span><span class="p">),</span> <span class="s2">&quot;b:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;y = </span><span class="si">{</span><span class="n">poptm</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">x </span><span class="si">{</span><span class="n">poptm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">linf</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="o">*</span><span class="n">poptc</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;y = </span><span class="si">{</span><span class="n">poptc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">x </span><span class="si">{</span><span class="n">poptc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Some codes to make the plot prettier</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">m_targ</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Target v = </span><span class="si">{</span><span class="n">m_targ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">dm_targ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="n">m_targ</span><span class="o">+</span><span class="n">dm_targ</span><span class="p">,</span> <span class="n">m_targ</span><span class="o">-</span><span class="n">dm_targ</span><span class="p">],</span> <span class="o">*</span><span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">phot</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">zeropt</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="n">mm</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;v (Instrumental V-mag)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="n">mm</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())),</span> 
+             <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;v - V_PS1 - Z&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;PS1 V-mag&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;v - V_PS1 = (z + k&#39;X) + (k&#39;&#39;X + k)C&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;g - r (PS1)&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="n">dzeropt</span><span class="p">,</span> <span class="o">-</span><span class="n">dzeropt</span><span class="p">],</span> <span class="o">*</span><span class="n">mm</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span> <span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">zeropt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Z = </span><span class="si">{</span><span class="n">zeropt</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">dzeropt</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="n">zeropt</span><span class="o">+</span><span class="n">dzeropt</span><span class="p">,</span> <span class="n">zeropt</span><span class="o">-</span><span class="n">dzeropt</span><span class="p">],</span> <span class="o">*</span><span class="n">cc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span> <span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" src="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" />
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>The linearity curve (top left) looks quite linear, in that the fitted linear line has a slope of 0.989 ~ 1.0.</p>
+<ul class="simple">
+<li><p><strong>NOTE</strong>: The target has instrumental magnitude v = -3.060, which is at the faint-end of the field stars.</p></li>
+</ul>
+</li>
+<li><p>The residual plot (bottom left) shows the scatter gets larger for fainter object, as expected.</p></li>
+<li><p>The color plot shows no clear trend of the <code class="docutils literal notranslate"><span class="pre">Z</span></code> value against the g-r color (slope ~ 0.03) and the linear fit is within 1-sigma error-bar of Z value. As we cover the color of range ~0 to ~1.2, we conclude that we can safely ignore any color effect within the accuracy we want.</p>
+<ul class="simple">
+<li><p><strong>NOTE</strong>: The uncertainty that will arise due to the color term will be ~ 0.025x0.5 ~ 0.01 mag, assuming the ± 0.5 mag of color uncertainty of our object.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="final-result">
+<h2><span class="section-number">1.5. </span>Final result<a class="headerlink" href="#final-result" title="Permalink to this headline">#</a></h2>
+<p>Since we know the zero point value, we can calculate the V-magnitude of our target based on the Z value and the instrumental magnitude value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">zeropt</span>
+<span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;dV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;merr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dzeropt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">phot_targ</span><span class="p">[[</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>xcenter</th>
+      <th>ycenter</th>
+      <th>V</th>
+      <th>dV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>500.582912</td>
+      <td>500.435615</td>
+      <td>20.550977</td>
+      <td>0.347353</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>The instrumental mag: v = -3.060 ± 0.346</p></li>
+<li><p>The standard mag: V = 20.551 ± 0.347</p></li>
+</ul>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -461,6 +1148,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="05-query.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Querying from the Catalog</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="prerequisites/99-HW_swtools.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HW Software &amp; Tools</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -478,9 +1183,20 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">1.1. Data Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#target-photometry">1.2. Target Photometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#star-photometry">1.3. Star Photometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strategy">1.3.1. Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-closely-located-stars-from-catalog">1.3.2. Drop Closely Located Stars from Catalog</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-closely-located-stars-from-daofind">1.3.3. Drop Closely Located Stars from DAOFIND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-match-catalog-daofind">1.3.4. Cross-Match Catalog &amp; DAOFIND</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aperture-photometry-of-stars">1.3.5. Aperture Photometry of Stars</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-standardization">1.4. Find Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-result">1.5. Final result</a></li>
+</ul>
   </nav></div>
 
 </div></div>

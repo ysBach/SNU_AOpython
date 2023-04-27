@@ -35,7 +35,7 @@ parts:
 - caption: Photometry
   numbered: 3 # Only applies to chapters in this Part
   chapters:
-  - file: markdown
+  - file: chaps/06-diffphot
 - caption: Homework Assignments
   numbered: false  # Only applies to chapters in this Part
   chapters:

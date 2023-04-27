@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Aperture &#8212; SNU AO Class</title>
+    <title>3. Aperture &amp; DAOFIND &#8212; SNU AO Class Python</title>
   
   
   
@@ -175,13 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-center.html">2. Centering</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Aperture</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Aperture &amp; DAOFIND</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../markdown.html">1. Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -249,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -266,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/edit/master/JupyterBook/chaps/03-aperture.ipynb" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/03-aperture.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -283,7 +283,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOclass/issues/new?title=Issue%20on%20page%20%2Fchaps/03-aperture.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/03-aperture.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -395,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Aperture</h1>
+    <h1>Aperture & DAOFIND</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -421,8 +421,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="aperture">
-<span id="ch-aperture"></span><h1><span class="section-number">3. </span>Aperture<a class="headerlink" href="#aperture" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="aperture-daofind">
+<span id="ch-aperture"></span><h1><span class="section-number">3. </span>Aperture &amp; DAOFIND<a class="headerlink" href="#aperture-daofind" title="Permalink to this headline">#</a></h1>
 <p>In astronomy, <a class="reference external" href="https://en.wikipedia.org/wiki/Aperture"><strong>aperture</strong></a> can mean various things. Basically, it is a <strong>hole</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -439,7 +439,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-26 19:18:09 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 21:27:58 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -608,10 +608,43 @@ m_a - m_b = -2.5 \lg\frac{I_{0, a}}{I_{0, b}} = -2.5 \lg\frac{57219.06}{50000} =
 <span class="n">finder</span> <span class="o">=</span> <span class="n">DAOStarFinder</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">5.</span><span class="o">*</span><span class="n">std</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">exclude_border</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
 <span class="n">sources</span> <span class="o">=</span> <span class="n">finder</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span>  
 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Threshold = </span><span class="si">{</span><span class="n">finder</span><span class="o">.</span><span class="n">threshold</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> counts&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span><span class="si">}</span><span class="s2"> sources&quot;</span><span class="p">)</span>
+
 <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">]))</span>
 <span class="n">aps1</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">aps2</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
-<span class="n">phot</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="n">aps1</span><span class="p">,</span> <span class="n">aps2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Threshold = 43.69 counts
+Found 42 sources
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">aps1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">aps2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/df8864b1f20c1c1f3641f31594ddbf98b4bebfdec56255e7658d393996fe9097.png" src="../_images/df8864b1f20c1c1f3641f31594ddbf98b4bebfdec56255e7658d393996fe9097.png" />
+</div>
+</div>
+<p>You can already see that for some cases, the cyan aperture (secondary aperture) includes flux from nearby star, so the sky estimation will not work properly for them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phot</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="n">aps1</span><span class="p">,</span> <span class="n">aps2</span><span class="p">])</span>
 <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;sky&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">phot</span><span class="p">[</span><span class="s1">&#39;aperture_sum_1&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">phot</span><span class="p">[</span><span class="s1">&#39;aperture_sum_0&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">aps2</span><span class="o">.</span><span class="n">area</span> <span class="o">-</span> <span class="n">aps1</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
 <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot</span><span class="p">[</span><span class="s1">&#39;aperture_sum_0&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;sky&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">aps1</span><span class="o">.</span><span class="n">area</span>
 <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">phot</span><span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">])</span>
