@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -155,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -427,7 +429,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="querying-from-the-catalog">
-<span id="ch-query"></span><h1><span class="section-number">5. </span>Querying from the Catalog<a class="headerlink" href="#querying-from-the-catalog" title="Permalink to this headline">#</a></h1>
+<span id="ch-query"></span><h1><span class="section-number">5. </span>Querying from the Catalog<a class="headerlink" href="#querying-from-the-catalog" title="Permalink to this heading">#</a></h1>
 <p>If WCS(World Coordinate System: converts image XY pixel to, e.g., RA/DEC. See slides 4-7 of <a class="reference external" href="http://www.atnf.csiro.au/people/mcalabre/WCS/Intro/WCS01.html">this</a>, for example) is properly implemented, we should be able to find stars in the image automatically.</p>
 <p><code class="docutils literal notranslate"><span class="pre">astroquery</span></code> is an <a class="reference external" href="https://www.astropy.org/affiliated/">astropy-affiliated python package</a> for such query.</p>
 <p>Here I will demonstrate how to query Pan-STARRS DR2 and Gaia catalog, which are two of the widely used catalogs as of 2023.</p>
@@ -519,14 +521,14 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <section id="the-catalogs">
-<h2><span class="section-number">5.1. </span>The Catalogs<a class="headerlink" href="#the-catalogs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>The Catalogs<a class="headerlink" href="#the-catalogs" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://www.cosmos.esa.int/web/gaia/home">Gaia</a> (<a class="reference external" href="https://en.wikipedia.org/wiki/Gaia_(spacecraft)">Wikipedia</a>) is the ESA space mission that is planned to work from 2013-2025. Its main goal is to perform precise astrometry of 1 billion objects. Since it has two passbands, colorimetry has also been performed.</p>
 <p>As of 2023, Data Realease 3 (DR3) is the most recent available data set for Gaia.</p>
 <p><a class="reference external" href="https://outerspace.stsci.edu/display/PANSTARRS/">Pan-STARRS1</a> (also called PS1; <a class="reference external" href="https://en.wikipedia.org/wiki/Pan-STARRS">Wikipedia</a>) is a ground-based 1.8 m Ritchey-Chredien telescope facility at Hawaii.</p>
 <p>As of 2023, Data Realease 2 (DR2) is the most recent available data set for PS1.</p>
 </section>
 <section id="archives">
-<h2><span class="section-number">5.2. </span>Archives<a class="headerlink" href="#archives" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span>Archives<a class="headerlink" href="#archives" title="Permalink to this heading">#</a></h2>
 <p>There are multiple archive services for large-scale astronomical datasets:</p>
 <dl class="simple myst">
 <dt><a class="reference external" href="https://vizier.unistra.fr/"><strong>VizieR</strong></a> (<a class="reference external" href="https://en.wikipedia.org/wiki/VizieR">Wikipedia</a>)</dt><dd><p>A catalog service run by Université de Strasbourg/CNRS. I feel many people archive their observational results (e.g., galaxy redshift catalog, asteroid polarimetric observation results, etc) to VizieR. Sometimes, for some reasons I cannot understand, large-catalog data are not accessible from VizieR for very long time. Also, the column names in VizieR is always very different from other catalog services. You can go to <a class="reference external" href="https://vizier.cfa.harvard.edu/viz-bin/VizieR-2">here</a> and search for <code class="docutils literal notranslate"><span class="pre">gaia</span></code> or <code class="docutils literal notranslate"><span class="pre">ps1</span></code> for instance.</p>
@@ -542,7 +544,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </section>
 <section id="query-stars-in-the-fov">
-<h2><span class="section-number">5.3. </span>Query Stars in the FoV<a class="headerlink" href="#query-stars-in-the-fov" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.3. </span>Query Stars in the FoV<a class="headerlink" href="#query-stars-in-the-fov" title="Permalink to this heading">#</a></h2>
 <p>Now check if our FITS file (<code class="docutils literal notranslate"><span class="pre">CCDData</span></code>) has WCS information. Since in our observation, the pixel scale is roughly 0.39 arcsec per pixel. Thus, let’s query the stars within</p>
 <ul class="simple">
 <li><p>a circular region (so-called the <strong>cone</strong>) centered at the center of our FoV, radius of <code class="docutils literal notranslate"><span class="pre">fov_radius</span> <span class="pre">=</span> <span class="pre">0.4*diagonal_length/2</span></code>. ← This is because MAST only supports cone search.</p></li>
@@ -639,7 +641,7 @@ Number of results: 5907
 </div>
 </div>
 <section id="gaia-dr3">
-<h3><span class="section-number">5.3.1. </span>Gaia DR3<a class="headerlink" href="#gaia-dr3" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.3.1. </span>Gaia DR3<a class="headerlink" href="#gaia-dr3" title="Permalink to this heading">#</a></h3>
 <p>Note that Gaia DR3 GAIA_SOURCES has 153 columns! The detailed explanation of this table (<code class="docutils literal notranslate"><span class="pre">GAIA_SOURCE</span></code> table) in DR3 is available <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR3/Gaia_archive/chap_datamodel/sec_dm_main_source_catalogue/ssec_dm_gaia_source.html">here</a>. What we need are only RA, DEC, and magnitude information. For the magnitudes, the magnitude conversion methods for DR3 are given <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR3/Data_processing/chap_cu5pho/cu5pho_sec_photSystem/cu5pho_ssec_photRelations.html">here</a>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -768,7 +770,7 @@ C = G_\mathrm{BP} - G_\mathrm{RP} = -2.5 \lg \frac{I_\mathrm{BP}}{I_\mathrm{RP}}
 </div>
 </section>
 <section id="pan-starrs1-dr2">
-<h3><span class="section-number">5.3.2. </span>Pan-STARRS1 DR2<a class="headerlink" href="#pan-starrs1-dr2" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.3.2. </span>Pan-STARRS1 DR2<a class="headerlink" href="#pan-starrs1-dr2" title="Permalink to this heading">#</a></h3>
 <p>It seems like there are three tables available from PS1 web query API (e.g., <a class="reference external" href="http://ps1images.stsci.edu/ps1_dr2_api.html">this notebook</a>): “mean”, “stack”, and “detection”. All the metadata can be found based on the url (see <code class="docutils literal notranslate"><span class="pre">ps1metadata</span></code> function), e.g., <a class="reference external" href="https://catalogs.mast.stsci.edu/api/v0.1/panstarrs/dr1/mean/metadata">this link</a> for the metadata of mean table.</p>
 <p>According to <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...750...99T">Tonry+12</a>,</p>
 <div class="math notranslate nohighlight">
@@ -1010,7 +1012,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 <p>Note that <code class="docutils literal notranslate"><span class="pre">q2</span></code> is in <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">q1</span></code> is <code class="docutils literal notranslate"><span class="pre">astropy.Table</span></code>.</p>
 </section>
 <section id="comparing-two-catalogs">
-<h3><span class="section-number">5.3.3. </span>Comparing two catalogs<a class="headerlink" href="#comparing-two-catalogs" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.3.3. </span>Comparing two catalogs<a class="headerlink" href="#comparing-two-catalogs" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aps1</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q1</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">q1</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
@@ -1037,12 +1039,12 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 </div>
 </section>
 <section id="a-short-discussion">
-<h3><span class="section-number">5.3.4. </span>A Short Discussion<a class="headerlink" href="#a-short-discussion" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.3.4. </span>A Short Discussion<a class="headerlink" href="#a-short-discussion" title="Permalink to this heading">#</a></h3>
 <p>Note that there are more objects in PS1 than Gaia. Since Gaia’s main purpose is astrometry, it is not surprising that PS1 is sensing more celestial objects. Also, PS1 has the filter system that is closer to the classical filter systems (it uses grizy). Thus, for ground-based differential photometry, PS1 catalog will be more useful.</p>
 </section>
 </section>
 <section id="jpl-horizons-solar-system">
-<h2><span class="section-number">5.4. </span>JPL HORIZONS (Solar System)<a class="headerlink" href="#jpl-horizons-solar-system" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.4. </span>JPL HORIZONS (Solar System)<a class="headerlink" href="#jpl-horizons-solar-system" title="Permalink to this heading">#</a></h2>
 <p>JPL <a class="reference external" href="https://ssd.jpl.nasa.gov/horizons/app.html#top">HORIZONS</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Ephemeris">ephemeris</a> (plural ephemerides) service operated by NASA JPL. The main purpose of this tool is to perform precise N-body simulation, including the modern computational algorithms, and provide the results to the users. There are many cases you may need it, but the main purpose is to obtain the positional information of the solar system objects or satellite or spacecrafts at certain epoch(s).</p>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>

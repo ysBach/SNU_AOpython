@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -155,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -429,7 +431,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differential-photometry">
-<span id="ch-diffphot"></span><h1><span class="section-number">1. </span>Differential Photometry<a class="headerlink" href="#differential-photometry" title="Permalink to this headline">#</a></h1>
+<span id="ch-diffphot"></span><h1><span class="section-number">1. </span>Differential Photometry<a class="headerlink" href="#differential-photometry" title="Permalink to this heading">#</a></h1>
 <p>As you have learned from theory lecture, <strong>differential photometry</strong> (also called <strong>relative photometry</strong>) is a way to measure the magnitude (or flux) of your target when nearby object’s magnitudes are known.</p>
 <p>Here, we will combine the aperture photometry technique and star/solar system querying technique to perform the differential photometry.</p>
 <ol class="arabic simple">
@@ -454,7 +456,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 21:52:33 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 22:11:36 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -532,7 +534,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <section id="data-description">
-<h2><span class="section-number">1.1. </span>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.1. </span>Data Description<a class="headerlink" href="#data-description" title="Permalink to this heading">#</a></h2>
 <p>Below is the basic information of our observation, logged in the FITS header. For your information, the target we observed is a near-Earth asteroid (4179) Toutatis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -551,7 +553,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="target-photometry">
-<h2><span class="section-number">1.2. </span>Target Photometry<a class="headerlink" href="#target-photometry" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.2. </span>Target Photometry<a class="headerlink" href="#target-photometry" title="Permalink to this heading">#</a></h2>
 <p>As we learned, first query the ephemeris of the target.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -596,11 +598,11 @@ FILTER     V                    Filter Name in the beam
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" src="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
   err = np.sqrt(_arr/gn + (rd/gn)**2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
 </pre></div>
 </div>
 </div>
@@ -611,7 +613,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="star-photometry">
-<h2><span class="section-number">1.3. </span>Star Photometry<a class="headerlink" href="#star-photometry" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.3. </span>Star Photometry<a class="headerlink" href="#star-photometry" title="Permalink to this heading">#</a></h2>
 <p>As we learned, first query the stars in the FoV:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -698,7 +700,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <section id="strategy">
-<h3><span class="section-number">1.3.1. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.1. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this heading">#</a></h3>
 <p>There are multiple ways to match the star you queried above with the object visible in the image. Here, we use the X Y coordinates in <code class="docutils literal notranslate"><span class="pre">q2</span></code>. Use it as the initial guess, crop the small portion (e.g., 7 by 7 pixel) of the image near the initial guess, and do centroiding at each position in the image iteratively until it converges.</p>
 <p>So our strategy will be:</p>
 <ol class="arabic simple">
@@ -727,7 +729,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="drop-closely-located-stars-from-catalog">
-<h3><span class="section-number">1.3.2. </span>Drop Closely Located Stars from Catalog<a class="headerlink" href="#drop-closely-located-stars-from-catalog" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.2. </span>Drop Closely Located Stars from Catalog<a class="headerlink" href="#drop-closely-located-stars-from-catalog" title="Permalink to this heading">#</a></h3>
 <p>Since we have already queired stars, let me drop stars with close distance (20 pixels in this example, using DAOGROUP algorithm):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -831,13 +833,13 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" src="../_images/9e7bdadd2b10aad4c0d4f48fb7e9be6df07452e63fd2f8269d33e321fcff0dfa.png" />
+<img alt="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" src="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" />
 </div>
 </div>
 <p>The stars indicated by red circles are the stars that are <strong>too close to each other</strong>. These are removed in <code class="docutils literal notranslate"><span class="pre">q2_close</span></code> DataFrame. (rigorously speaking, they are close to each other based on the catalog, not based on the observed image)</p>
 </section>
 <section id="drop-closely-located-stars-from-daofind">
-<h3><span class="section-number">1.3.3. </span>Drop Closely Located Stars from DAOFIND<a class="headerlink" href="#drop-closely-located-stars-from-daofind" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.3. </span>Drop Closely Located Stars from DAOFIND<a class="headerlink" href="#drop-closely-located-stars-from-daofind" title="Permalink to this heading">#</a></h3>
 <p>Now drop the stars that has nearby objects (based on DAOFIND result and reuse the previously used <code class="docutils literal notranslate"><span class="pre">group_stars</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -864,7 +866,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" src="../_images/8226c8d454cafcf500c5557daefb9fa160d9f5b89b41cc1c937bd04ce3cb3ab1.png" />
+<img alt="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" src="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -874,7 +876,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="cross-match-catalog-daofind">
-<h3><span class="section-number">1.3.4. </span>Cross-Match Catalog &amp; DAOFIND<a class="headerlink" href="#cross-match-catalog-daofind" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.4. </span>Cross-Match Catalog &amp; DAOFIND<a class="headerlink" href="#cross-match-catalog-daofind" title="Permalink to this heading">#</a></h3>
 <p>Match for each position from the catalog, find if there is any star found by DAOFIND within 10x10 pixel (<em>absolute delta-x and delta-y smaller than 5</em>). If multiple stars in this box, select the closest. Then add the <code class="docutils literal notranslate"><span class="pre">xcentroid</span></code> and <code class="docutils literal notranslate"><span class="pre">ycentroid</span></code> information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -902,7 +904,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="aperture-photometry-of-stars">
-<h3><span class="section-number">1.3.5. </span>Aperture Photometry of Stars<a class="headerlink" href="#aperture-photometry-of-stars" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.5. </span>Aperture Photometry of Stars<a class="headerlink" href="#aperture-photometry-of-stars" title="Permalink to this heading">#</a></h3>
 <p>Do the aperture photometry to the stars, and add this information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>). Identical to our target,</p>
 <ul class="simple">
 <li><p>Circular aperture</p></li>
@@ -929,7 +931,7 @@ FILTER     V                    Filter Name in the beam
 </section>
 </section>
 <section id="find-standardization">
-<h2><span class="section-number">1.4. </span>Find Standardization<a class="headerlink" href="#find-standardization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.4. </span>Find Standardization<a class="headerlink" href="#find-standardization" title="Permalink to this heading">#</a></h2>
 <p>Our observation was made in V-band (check <code class="docutils literal notranslate"><span class="pre">ccd.header[&quot;FILTER&quot;]</span></code>), so we need to use the V-band magnitude.</p>
 <p>Two methods are shown to calculate the image zero point. We learned:</p>
 <div class="math notranslate nohighlight">
@@ -1045,7 +1047,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" src="../_images/dcb6f175244fabce0319bb8cdcbb469cce692a624ca5971b91a83ef5b09abc2c.png" />
+<img alt="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" src="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" />
 </div>
 </div>
 <ol class="arabic simple">
@@ -1063,13 +1065,13 @@ FILTER     V                    Filter Name in the beam
 </ol>
 </section>
 <section id="final-result">
-<h2><span class="section-number">1.5. </span>Final result<a class="headerlink" href="#final-result" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.5. </span>Final result<a class="headerlink" href="#final-result" title="Permalink to this heading">#</a></h2>
 <p>Since we know the zero point value, we can calculate the V-magnitude of our target based on the Z value and the instrumental magnitude value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">zeropt</span>
 <span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;dV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">phot_targ</span><span class="p">[</span><span class="s2">&quot;merr&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dzeropt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">phot_targ</span><span class="p">[[</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">]]</span>
+<span class="n">phot_targ</span><span class="p">[[</span><span class="s2">&quot;xcenter&quot;</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">,</span> <span class="s2">&quot;snr&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;dV&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -1094,6 +1096,7 @@ FILTER     V                    Filter Name in the beam
       <th></th>
       <th>xcenter</th>
       <th>ycenter</th>
+      <th>snr</th>
       <th>V</th>
       <th>dV</th>
     </tr>
@@ -1103,6 +1106,7 @@ FILTER     V                    Filter Name in the beam
       <th>0</th>
       <td>500.582912</td>
       <td>500.435615</td>
+      <td>3.133608</td>
       <td>20.550977</td>
       <td>0.347353</td>
     </tr>

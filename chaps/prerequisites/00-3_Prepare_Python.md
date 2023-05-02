@@ -19,7 +19,7 @@ If you are sick of the slow speed of ``conda`` and adventerous, give [``mamba``]
 Copy and paste the following lines to the terminal (I am assuming you have anaconda installed, following [00-1_Softwares.md](00-1_Softwares.md)):
 
 ```
-conda create -n snuao python=3.10 numpy=1.24 scipy=1.10 astropy=5.2 pandas=1 jupyter=1 sep=1.2 ccdproc=2.4 photutils=1.6 specutils=1.10 -y
+conda create -n snuao python=3.10 numpy=1.24 scipy=1.10 astropy=5.2 pandas=1 jupyter=1 sep=1.2 ccdproc=2.4 photutils=1.6 specutils=1.10 -c conda-forge -y
 conda activate snuao
 conda install -c conda-forge fitsio -y  # Windows will raise error here; ignore this line if it does.
 ```

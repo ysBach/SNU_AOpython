@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -155,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -427,9 +429,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hw-astropy-fits">
-<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#hw-astropy-fits" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#hw-astropy-fits" title="Permalink to this heading">#</a></h1>
 <section id="problem-set-1-6-points">
-<h2>Problem Set 1  [6 points]<a class="headerlink" href="#problem-set-1-6-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 1  [6 points]<a class="headerlink" href="#problem-set-1-6-points" title="Permalink to this heading">#</a></h2>
 <p>Answer the following [2 points each]</p>
 <ol class="arabic simple">
 <li><p>Search for the official documentation of <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code>. What is the URL to this doc?</p></li>
@@ -438,7 +440,7 @@ document.write(`
 </ol>
 </section>
 <section id="problem-set-2-22-points">
-<h2>Problem Set 2 [22 points]<a class="headerlink" href="#problem-set-2-22-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 2 [22 points]<a class="headerlink" href="#problem-set-2-22-points" title="Permalink to this heading">#</a></h2>
 <p>Here we will learn how to <em>use astropy</em>. Start solving the problems after running the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -458,7 +460,7 @@ document.write(`
 <li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
 </ol>
 <section id="problems">
-<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">#</a></h3>
+<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Make a primary HDU object called <code class="docutils literal notranslate"><span class="pre">hdu</span></code> with data is <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
@@ -519,7 +521,7 @@ document.write(`
 </section>
 </section>
 <section id="problem-set-3-28-points">
-<h2>Problem Set 3 [28 points]<a class="headerlink" href="#problem-set-3-28-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 3 [28 points]<a class="headerlink" href="#problem-set-3-28-points" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Prepare the FITS file <code class="docutils literal notranslate"><span class="pre">SNUO_STX16803-kw4-4-4-20190602-135247-R-60.0_bdfw.fits</span></code> from our Tutorial Data link (see README of our lecture note repo). As indicated in <a class="reference external" href="http://astronomy.net">astronomy.net</a> homework, this file has intentionally broken WCS information, but it does not matter for the problems below.</p></li>
 <li><p>Please use python 3.6+ (Never use python 2).</p></li>
@@ -562,7 +564,7 @@ document.write(`
 </pre></div>
 </div>
 <section id="id2">
-<h3>Problems<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<h3>Problems<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p>Answer the following questions. Provide codes. Also provide results if something is printed out or plotted from the code. [2 pts each, unless specified]</p>
 <ol class="arabic simple">
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">fpath</span></code> as the path to the file.</p></li>
@@ -706,7 +708,7 @@ document.write(`
 </section>
 </section>
 <section id="problem-set-4-optional-50-points">
-<h2>Problem Set 4 (optional) [50 points]<a class="headerlink" href="#problem-set-4-optional-50-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 4 (optional) [50 points]<a class="headerlink" href="#problem-set-4-optional-50-points" title="Permalink to this heading">#</a></h2>
 <p><strong>Skip this unless the TA asks you to solve these.</strong> (For undergraduate class, it is a bit too advanced, and the <strong>TA will likely skip this problem set</strong>.)</p>
 <p>Please use python 3.6+ (Never use python 2).</p>
 <p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>

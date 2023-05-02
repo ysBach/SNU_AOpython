@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -152,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -466,7 +468,7 @@ document.write(`
 </ul>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="philosophy">
-<h1><a class="toc-backref" href="#id1">Philosophy</a><a class="headerlink" href="#philosophy" title="Permalink to this headline">#</a></h1>
+<h1><a class="toc-backref" href="#id1">Philosophy</a><a class="headerlink" href="#philosophy" title="Permalink to this heading">#</a></h1>
 <p>All the lecture materials were first made for “<strong>Astronomical Observation</strong>” (AO hereafter) of the Dept. of Astronomy of Seoul National University in 2017. Then gradually updated as time went.</p>
 <ul class="simple">
 <li><p>Lecturer: Prof. Masateru Ishiguro</p></li>
@@ -474,7 +476,7 @@ document.write(`
 </ul>
 <p>This preface contains some comments to explain ground philosophy while making the lecture notes and the reason for transforming from previous IRAF/IDL-based AO system to Python3-based system.</p>
 <section id="a-note">
-<h2><a class="toc-backref" href="#id2">A Note</a><a class="headerlink" href="#a-note" title="Permalink to this headline">#</a></h2>
+<h2><a class="toc-backref" href="#id2">A Note</a><a class="headerlink" href="#a-note" title="Permalink to this heading">#</a></h2>
 <p>I was lucky to have opportunities to serve as a TA at the AO class at SNU for years. In 2016, I found the system in IRAF and IDL prevailing in astronomy will only hinder our development and lead our academic society to a future dependent to commercial companies; later I also noticed a possibility of legal issues*. IRAF is a large blackbox, which indeed does not work as it is described in the manual or we’d expect (from image combination and aperture photometry to the PyRAF problem**). People have been using it just because there was no alternative, and these hidden bugs do not give error much larger than our expected precision; but we’ve got to regret we didn’t have systematic “testing modules” and just assumed it works correctly.</p>
 <p>I have tried my best to discard all pieces of IDL and most of IRAF, and replace all to python. These are the skeletons for photometry/polarimetry tools I developed for my observational research†.</p>
 <p>* See 2.1.3 below. Also P01 in ppt mentions this.</p>
@@ -482,9 +484,9 @@ document.write(`
 <p>† SNUO1Mpy; TRIPOLpy; NICpolpy; Bach, Ishiguro, Jin et al. 2019 (4179 Toutatis, JKAS); Takahashi+2020 (submitted); Pravec et al. (1999 KW4, in prep), Ishiguro, Bach, Jin et al. (2005 UD, in prep); Bach, Ishiguro et al. (Vesta and Ceres, in prep), Craig, McCully, Conseil, Bach (astropy Image-combination in ccdproc); Geem, Ishiguro et al. (1984QY1+, in prep); Heintz and Finbo (<a class="reference external" href="https://keheintz.github.io/PyReduc/">PyReduc</a>)</p>
 </section>
 <section id="choosing-software-and-programming-language">
-<h2><a class="toc-backref" href="#id3">Choosing Software and Programming Language</a><a class="headerlink" href="#choosing-software-and-programming-language" title="Permalink to this headline">#</a></h2>
+<h2><a class="toc-backref" href="#id3">Choosing Software and Programming Language</a><a class="headerlink" href="#choosing-software-and-programming-language" title="Permalink to this heading">#</a></h2>
 <section id="problems-of-iraf">
-<h3><a class="toc-backref" href="#id4">Problems of IRAF</a><a class="headerlink" href="#problems-of-iraf" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id4">Problems of IRAF</a><a class="headerlink" href="#problems-of-iraf" title="Permalink to this heading">#</a></h3>
 <p>For decades, IRAF of NOAO has become a virtual standard of astronomical image reduction process. As any other tools, it also have had some problems, and I want to point out three of them.</p>
 <ol class="arabic simple">
 <li><p>No human power to develop or maintain IRAF</p></li>
@@ -494,14 +496,14 @@ document.write(`
 </ol>
 <p>The last one will be explained later, since it includes IDL too.</p>
 <section id="human-power-issues">
-<h4><a class="toc-backref" href="#id5">Human Power Issues</a><a class="headerlink" href="#human-power-issues" title="Permalink to this headline">#</a></h4>
+<h4><a class="toc-backref" href="#id5">Human Power Issues</a><a class="headerlink" href="#human-power-issues" title="Permalink to this heading">#</a></h4>
 <p>The most important problem is that “required” updates of IRAF may not be there after version 2.16.1, at least officially, and <strong>STScI is now decreasing human power to IRAF development / maintenance</strong>.</p>
 <p>IRAF and its core SPP/CL are designed purely for IRAF society. There is virtually no computer scientists, programmers, and even no astronomers, who have interest in developing new codes using SPP now. You may not even have heard about the name SPP before. In other words, we cannot hope IRAF to be fixed / updated even if there are serious / unexpected bugs or problems. Few such problems are actually there, and some are documented by STScI (go to a doc page of some IRAF task, e.g., <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?imexamine"><code class="docutils literal notranslate"><span class="pre">IMEXAMINE</span></code></a>: you can see section called <code class="docutils literal notranslate"><span class="pre">BUGS</span></code>). Some bugs include inaccurate aperture sum or wrong pixel value display if you use <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code>.</p>
 <p>Even though such serious problems may be alleviated in the future, it is almost hopeless to “optimize” IRAF. There are a plethora of different ideas and algorithms to make computation faster, and are still being studied by frontier computer scientists, yet they may not be implemented to IRAF.</p>
 <p>This is critical, considering one single astronomical image is now becoming size of giga-bytes. My favorite example is <a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/">L.A. Cosmic</a>, which is a tool for removing cosmic-rays from astronomical images. We have both IRAF and Python versions (Python versions from <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> actually uses C++, though it is fully usable on Python), and the Python version is order of magnitude faster than that of IRAF version. It can be up to ~100+ times faster, not only because it works efficiently, but also because IRAF does not support efficient parallel computing by default. One of my colleagues had to spend ~ 0.5 day for doing L.A.Cosmic to all her FITS data. IF there was anything wrong with the results, you have to spend 0.5 day again. The amount of data we have to analyze increases exponentially over time. LSST, which will survey all-sky with a depth of Subaru, or JWST, which is next-generation-HST, decided to use Python 3 and C++ against IRAF/IDL (see below)</p>
 </section>
 <section id="iraf-is-old">
-<h4><a class="toc-backref" href="#id6">IRAF is Old</a><a class="headerlink" href="#iraf-is-old" title="Permalink to this headline">#</a></h4>
+<h4><a class="toc-backref" href="#id6">IRAF is Old</a><a class="headerlink" href="#iraf-is-old" title="Permalink to this heading">#</a></h4>
 <p>Second problem of IRAF is because it is an <strong>old</strong> software, i.e., a problem that any other programs may have if they were developed decades ago, and it include:</p>
 <ul class="simple">
 <li><p>Works only on 32-bit environment</p>
@@ -521,12 +523,12 @@ document.write(`
 </ul>
 </section>
 <section id="license-and-documentation-problems">
-<h4><a class="toc-backref" href="#id7">License and Documentation Problems</a><a class="headerlink" href="#license-and-documentation-problems" title="Permalink to this headline">#</a></h4>
+<h4><a class="toc-backref" href="#id7">License and Documentation Problems</a><a class="headerlink" href="#license-and-documentation-problems" title="Permalink to this heading">#</a></h4>
 <p>IRAF seems to have a copyright problem which can be sensitive to mention; I hesitate to even mentioning it. If you are interested, you may search for <a class="reference external" href="https://iraf-community.github.io/">iraf-community distribution</a> (which became public to open source community thanks to the years of hard work of Dr. Streicher). I heard from third persons that this may have been one of the reasons why NASA and STScI started to hide IRAF from the main pages and tried to erase many traces of it. You may remember STScI’s removal of IRAF documentation hosting in the summer of 2019 (I harshly blamed it as an irresponsible vandalism action in science done by an institution which once urged scientists to use IRAF).</p>
 </section>
 </section>
 <section id="pyraf-and-its-problems">
-<h3><a class="toc-backref" href="#id8">PyRAF and Its Problems</a><a class="headerlink" href="#pyraf-and-its-problems" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id8">PyRAF and Its Problems</a><a class="headerlink" href="#pyraf-and-its-problems" title="Permalink to this heading">#</a></h3>
 <p>PyRAF is an alternative, made of Python, to avoid those problems of IRAF, especially to alleviate the complexity / debugging problem of SPP/CL:</p>
 <blockquote>
 <div><p>Excerpt from <a class="reference external" href="http://www.stsci.edu/institute/software_hardware/pyraf/stsci_python">STScI</a>:</p>
@@ -540,14 +542,14 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="idl-and-its-problems">
-<h3><a class="toc-backref" href="#id9">IDL and Its Problems</a><a class="headerlink" href="#idl-and-its-problems" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id9">IDL and Its Problems</a><a class="headerlink" href="#idl-and-its-problems" title="Permalink to this heading">#</a></h3>
 <p>These are logical reasons why many people seek for IRAF-alternatives. <strong>One of such solutions is IDL</strong>. Easier scripting, OS-independent, and the fact that is maintained by software experts made astronomers relieved and rely on this software. However, IDL also has some problems: The most important one is the <strong>license issue</strong>, and secondly the problem as a programming language (see <a class="reference external" href="https://en.wikipedia.org/wiki/IDL_(programming_language)#Problems">here</a>). Also it is slow in plotting graphs, especially 3-D plotting. Another important issue is that it is used by very minor groups of people, astronomy and bio-imaging, so there is not many structured manuals we can access: same as IRAF!</p>
 <p>License is very critical for users, not only because its price (SNU has spent budget for IDL license comparable to that used for rebuilding telescope at Building 45), but because you have to purchase license at <strong>each time</strong> when there is an update. You cannot use IDL 8.1 even if you have license of IDL 8.0. Institutions will be burdened with this, since many researchers should use the software, and the amount of required budget will go up almost linearly. If the institution does not support lisence fee, the compatibility problem arises: Say you have source code written in IDL 8, but the institution has license of IDL 7 only. Nevertheless, it is widely being used at observatories and institutions, due to its convenience for scripting compared to IRAF.</p>
 <p>In July 2017, there has been a big happening at SNU: IDL License policy changed and thus all the PCs of students and professors could not use IDL for few days (IDL license needs the Internet connection, and the company shutdown the older license without properly noticing it). More seriously, the updated license has a policy that it does not allow more than 100 tabs. I said, tabs, not computers. So if 10 users are using the SNU license and turned on 10 tabs each, no more person can use IDL. This is the weakest point of all commercial softwares. Especially if it is a programming language, it is a disaster.</p>
 <p>Same thing happens almost every 2-3 months since then (added 2018 March).</p>
 </section>
 <section id="examples-of-iraf-and-idl-usage">
-<h3><a class="toc-backref" href="#id10">Examples of IRAF and IDL Usage</a><a class="headerlink" href="#examples-of-iraf-and-idl-usage" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id10">Examples of IRAF and IDL Usage</a><a class="headerlink" href="#examples-of-iraf-and-idl-usage" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>NASA IRTF: You will get IDL source codes to analyze SpeX (spectroscopy observation instrument) from IRTF.</p></li>
 <li><p>Nayoro Pirka, Japan: One of few cases of using IRAF. If you use MSI (multi spectroscopy imager), you will use MSIRED package, which are written fully in IRAF CL.</p></li>
@@ -555,7 +557,7 @@ document.write(`
 </ul>
 </section>
 <section id="new-major-facilities-wants-freedom-from-iraf">
-<h3><a class="toc-backref" href="#id11">New Major Facilities Wants Freedom from IRAF</a><a class="headerlink" href="#new-major-facilities-wants-freedom-from-iraf" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id11">New Major Facilities Wants Freedom from IRAF</a><a class="headerlink" href="#new-major-facilities-wants-freedom-from-iraf" title="Permalink to this heading">#</a></h3>
 <p>By the “New Major Facilities”, it includes HST, JWST, LSST, and future space telescopes and/or large projects.</p>
 <p>STScI, which will be the <a class="reference external" href="https://en.wikipedia.org/wiki/James_Webb_Space_Telescope#Ground_support_and_operations">Science and Operations Center of JWST</a>, as well as HST, selected Python 3 for their data production. They are now developing pipelines for JWST (<a class="reference external" href="https://github.com/STScI-JWST/jwst">github</a>). All the new packages from STScI, e.g., the famous DRIZZLEPAC (now named AstroDrizzle), supports python only (preface and section 5.1 of this <a class="reference external" href="http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/drizzlepac.pdf">handbook</a>). The reason for choosing Python for the new era is described in 2013 JWST Roadmap, e.g., <a class="reference external" href="http://www.stsci.edu/~ferguson/roadmap/html/intro.html#multiple-interfaces">Section 3.5</a> and why we should avoid IRAF in general sense in <a class="reference external" href="http://www.stsci.edu/~ferguson/roadmap/html/intro.html#remove-scientist-dependency-on-iraf">Section 4.2</a>.</p>
 <p>The LSST data management team has chosen to use Python 3 and C++ (<a class="reference external" href="http://dm.lsst.org/">main DM page</a>), although they will support python 2.7 for few years but not long.</p>
@@ -566,7 +568,7 @@ document.write(`
 <p>The programmers working for these large projects are contributing to astropy core packages, too.</p>
 </section>
 <section id="python-an-alternative">
-<h3><a class="toc-backref" href="#id12">Python: An Alternative</a><a class="headerlink" href="#python-an-alternative" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id12">Python: An Alternative</a><a class="headerlink" href="#python-an-alternative" title="Permalink to this heading">#</a></h3>
 <p>If you are a very smart persion, you can of course directly make a binary code (11000101011101000010101101…), and this will be the most efficient way. When I was an undergrad student at KAIST, there was this professor who taughte the Introduction to Programming course, which was mandatory, said “I had a friend who believes it is the best way to make all the programs in binary from the beginning. But the thing is, not everyone is as smart as she does.”</p>
 <p>The second best option might be using some low-level languages, such as C, or make appropriate modifications to pre-existing IRAF and make it more efficient/faster. The thing is that, we have to think about the <strong>vast majority of people who are not</strong> that smart (plus, as mentioned above, there is no one interested in developing IRAF). This is because we do not have much room to lose such people who may serve important roles in the future of astronomy. Quite many scientists are also involved in that <em>vast majority</em>, and they are not (and likely should not) practiced to be a programmer.</p>
 <p>Thus, the next option we may choose, are languages which have the following strong points:</p>
@@ -595,14 +597,14 @@ document.write(`
 <p>Finally, Julia, Jupyter, Markdown (this preface is also made from md), and many future softwares uses Python-like grammar or implement ways to use Python. Python is good for large-data analysis, too, which is the future of astronomy. The strong point of Python with Jupyter can be seen throughout this TA class. Although it is commercial, you can also find Python tools attached to Excel and make neat graphics without errors. We may need a long time to see Python fades out into past.</p>
 </section>
 <section id="so-use-python">
-<h3><a class="toc-backref" href="#id13">So… Use Python</a><a class="headerlink" href="#so-use-python" title="Permalink to this headline">#</a></h3>
+<h3><a class="toc-backref" href="#id13">So… Use Python</a><a class="headerlink" href="#so-use-python" title="Permalink to this heading">#</a></h3>
 <p>Some astronomers dreamt for using Python for these reasons. That is now descending as Astropy Project. Alongside with the “core” package, astropy, there are other packages that are listed under the name of “Astropy Affiliated Packages”. You can easily manage versions of packages and update them using Anaconda, and it is extremely easy to fix bugs compared to IRAF/IDL. Astropy itself also provides neat and clean examples and manuals.</p>
 <p>Additional benefits we may get from using Python is to learn how to be prepared for new future environment. Even if Python becomes deprecated and a new language becomes the new <em>standard</em> on some day, you can easily adopt to that new environment. On top of that, new future language can become easier than Python, but not the other way, your value will get higher in that era as you can cope with more languages.</p>
 <p>However, these do not mean Python has no problem. There are quite many packages which are not stable (no stable release), even though they are considered as “widely used” and “working perfectly”. Core packages of Astropy works fairly well, but there are some <a class="reference external" href="http://docs.astropy.org/en/stable/known_issues.html">known issues</a>. Photometry and spectroscopy tools are still 0.x versions. Only photometry version (photutils) is considered as “stable” from <a class="reference external" href="http://www.astropy.org/affiliated/">Astropy affiliate website</a>. Critically, LSST and JWST are not operating yet, so all the packages are not really completed yet.</p>
 </section>
 </section>
 <section id="transformation-into-a-new-curriculum-and-possible-pitfalls">
-<h2><a class="toc-backref" href="#id14">Transformation into a New Curriculum and Possible Pitfalls</a><a class="headerlink" href="#transformation-into-a-new-curriculum-and-possible-pitfalls" title="Permalink to this headline">#</a></h2>
+<h2><a class="toc-backref" href="#id14">Transformation into a New Curriculum and Possible Pitfalls</a><a class="headerlink" href="#transformation-into-a-new-curriculum-and-possible-pitfalls" title="Permalink to this heading">#</a></h2>
 <p>I have briefly introduced why astronomers started using Python. You may have understood that it is at least worth considering the reformation of the structure of AO practice sessions, which had been using IRAF or IDL. The basic philosophy I am trying this new transformation is simple: The belief that education should let educatee to be prepared for their future, and this should be one of the primary goals of it.</p>
 <p><strong>I know that it may be comfortable and easy to teach IRAF as the TA.</strong> But I wonder whether it really is an efficacious curriculum if students realize the existence/importance of Astropy <em>after</em> they become pre-researchers while school teaches IRAF only. Now that Computational Astronomy course of SNU changed its main programming language to Python from IDL, and I guess this will be a great opportunity to make flexible Python environment at SNU for future.</p>
 <p>One thing that scares me is the <strong>possibility of a big gap between the generations who’ve learnt IRAF and AstroPy</strong>. I cannot say it is like using photoplate after implementation of CCD, but it feels like. As an example, the terms used in Ginga is slightly different from that of ds9, so it’s quite confusing if you are used to SAO ds9. Now my role, as a TA who’s earning money from this work, is clear: While contributing to construct a new educational curricula which fits better to prepare for the future, yet I have to amalgamate the gap between generations to avoid excessive inefficiency and lose of humanpower in communications between those generations. It might be tough for young studnets because they should take the redundant burden with older generation in communication; but this kind of pain has been there when we transformed from cgs to SI unit system. The reason for the widely used cgs values in astronomical field seems to be due to the low weighting to the “efficient communication with other fields of sciences” factor, but I worry that this might have become a giant wall which isolates astronomical society. Some other critiques to this Python trial may be that this astropy, and even Python, will have become a <em>legacy of the past</em> somewhere in the near future. I do, however, worry much more about the severance between our generations and much younger generations in the future, if we choose not to give enough opportunity to experience the frontier of modern (computational/observational) astronomy, just because IRAF has been the “historical standard”.</p>

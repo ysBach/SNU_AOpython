@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -155,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../index.html">
-                    SNU AO Class
+                    SNU AO Class Python Notes
                 </a>
             </li>
         </ul>
@@ -423,9 +425,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hw-numpy">
-<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#hw-numpy" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#hw-numpy" title="Permalink to this heading">#</a></h1>
 <section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
 <p>Please use python 3.6+ (Never use python 2).</p>
 <p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
 <p>Here we will learn how to code in <em>pythonic</em> way. Start solving the problems after running the code below:</p>
@@ -444,7 +446,7 @@ document.write(`
 <li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
 </ol>
 <section id="problem-set-1-30-points">
-<h3>Problem Set 1 [30 points]<a class="headerlink" href="#problem-set-1-30-points" title="Permalink to this headline">#</a></h3>
+<h3>Problem Set 1 [30 points]<a class="headerlink" href="#problem-set-1-30-points" title="Permalink to this heading">#</a></h3>
 <p>2 points for each problem.
 (You can fill in the <code class="docutils literal notranslate"><span class="pre">?</span></code> parts in the Hints and use that to answer the questions. Or, you can just make your own answer, ignoring the Hints.)</p>
 <ol class="arabic simple">
@@ -531,7 +533,7 @@ document.write(`
 </section>
 </section>
 <section id="problem-set-2-30-points">
-<h2>Problem Set 2 [30 points]<a class="headerlink" href="#problem-set-2-30-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 2 [30 points]<a class="headerlink" href="#problem-set-2-30-points" title="Permalink to this heading">#</a></h2>
 <p>2 points for each problem:</p>
 <ol class="arabic simple">
 <li><p>Setup numpy random seed as 1234.</p>
@@ -621,7 +623,7 @@ Fill in the code below for the it to correctly run.</p></li>
 </ol>
 </section>
 <section id="problem-set-3-optional-10-points">
-<h2>Problem Set 3 (optional) [10 points]<a class="headerlink" href="#problem-set-3-optional-10-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 3 (optional) [10 points]<a class="headerlink" href="#problem-set-3-optional-10-points" title="Permalink to this heading">#</a></h2>
 <p>This problem set is about statistics, which is not essential for undergraduate courses. <strong>TA will likely skip this problem set</strong>.</p>
 <ol class="arabic" start="9">
 <li><p>[5 points] The CLT says the distribution of the sample means follow normal distribution, regardless of the original distribution. Let’s check this. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts below to generate the histogram of sample means for 100000 sampling procedures (each case you draw 10 samples) from a Poisson distribution of parameter lambda = 2, and the mathematically expected gaussian function (mu = true mean = lambda, sigma = true standard deviation = sqrt(lambda)).</p>
