@@ -24,11 +24,15 @@ conda activate snuao
 conda install -c conda-forge fitsio -y  # Windows will raise error here; ignore this line if it does.
 ```
 
+While it is going on, clone the AOclass repo (Download ZIP or ``gh repo clone ysBach/SNU_AOclass``).
+
 **This may take several minutes.** Be patient, grab a cup of coffee and read the "Reading Materials" section below.
+
 
 ***AFTER the above is finished***, install the submodules:
 
 ```
+# Go to the SNU_AOclass directory.
 cd submodules/
 cd version_information && pip install -e . && cd ..
 cd astroquery && pip install -e . && cd ..
