@@ -24,7 +24,15 @@ conda activate snuao
 conda install -c conda-forge fitsio -y  # Windows will raise error here; ignore this line if it does.
 ```
 
-While it is going on, clone the AOclass repo (Download ZIP or ``gh repo clone ysBach/SNU_AOclass``).
+While it is going on, clone the AOclass repo Download ZIP or
+
+```
+git clone --recursive https://github.com/ysBach/SNU_AOclass.git
+# Or gh repo clone ysBach/SNU_AOclass
+
+cd SNU_AOclass # Go to the SNU_AOclass directory.
+git submodule update --init --recursive
+```
 
 **This may take several minutes.** Be patient, grab a cup of coffee and read the "Reading Materials" section below.
 
@@ -34,6 +42,7 @@ While it is going on, clone the AOclass repo (Download ZIP or ``gh repo clone ys
 ```
 # Go to the SNU_AOclass directory.
 cd submodules/
+conda activate snuao
 cd version_information && pip install -e . && cd ..
 cd astroquery && pip install -e . && cd ..
 cd ginga && pip install -e . && cd ..
