@@ -46,9 +46,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -65,6 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/python_prep/99-HW_python_pathlib';</script>
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="HW numpy" href="99-HW_numpy.html" />
@@ -159,7 +158,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -182,6 +185,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="current nav bd-sidenav">
@@ -193,7 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
 </ul>
 
@@ -425,15 +429,15 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hw-python-basic-pathlib">
-<span id="hw-python-prep"></span><h1>HW Python Basic &amp; <code class="docutils literal notranslate"><span class="pre">pathlib</span></code><a class="headerlink" href="#hw-python-basic-pathlib" title="Permalink to this heading">#</a></h1>
+<span id="hw-python-prep"></span><h1>HW Python Basic &amp; <code class="docutils literal notranslate"><span class="pre">pathlib</span></code><a class="headerlink" href="#hw-python-basic-pathlib" title="Permalink to this headline">#</a></h1>
 <section id="problem-set-1-45-points">
-<h2>Problem Set 1 [45 points]<a class="headerlink" href="#problem-set-1-45-points" title="Permalink to this heading">#</a></h2>
+<h2>Problem Set 1 [45 points]<a class="headerlink" href="#problem-set-1-45-points" title="Permalink to this headline">#</a></h2>
 <p>Please use python 3.6+ (Never use python 2).</p>
 <p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).</p>
 <p><strong>If you want, you can increase the number of input parameters, make subfunctions, etc, to realize more general functionalities, unless the “instructions” say not to.</strong></p>
 <p>This is a set to make you familiarize with Python. I had to design this problem set, because we mostly do not look at the references and/or not trying to use google. You may refer to <em>Think Python</em> chapters and if you cannot find the answer, you must use the Internet.</p>
 <section id="problems">
-<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
+<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>Warn</strong>: Be aware not to miss any period (<code class="docutils literal notranslate"><span class="pre">.</span></code>) or quotation marks (<code class="docutils literal notranslate"><span class="pre">'</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>).</p></li>
 </ul>
@@ -489,7 +493,7 @@ document.write(`
 </section>
 </section>
 <section id="problem-set-2-50-points">
-<h2>Problem Set 2 [50 points]<a class="headerlink" href="#problem-set-2-50-points" title="Permalink to this heading">#</a></h2>
+<h2>Problem Set 2 [50 points]<a class="headerlink" href="#problem-set-2-50-points" title="Permalink to this headline">#</a></h2>
 <p>Please use python 3.6+ (Never use python 2).</p>
 <p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
 <p>Here we will learn how to code in <em>pythonic</em> way. <strong>Open your terminal (or Jupyter Notebook) at an <em>empty</em> directory</strong>. Start solving the problems after running the code below:</p>
@@ -498,7 +502,7 @@ document.write(`
 </pre></div>
 </div>
 <section id="id1">
-<h3>Problems<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Problems<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>Answer the following questions with <strong>one line</strong> code. [2 points each]</p>
 <ol class="arabic simple">
 <li><p>Make a directory named <code class="docutils literal notranslate"><span class="pre">class_01</span></code>.</p>

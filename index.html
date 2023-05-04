@@ -46,9 +46,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -65,9 +63,10 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="shortcut icon" href="_static/logo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Software Tools" href="chaps/prerequisites/00-1_Softwares.html" />
+    <link rel="next" title="An Example Syllabus" href="chaps/00-Syllabus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -158,7 +157,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chaps/00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chaps/prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chaps/prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -181,6 +184,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chaps/06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaps/07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaps/08-extended.html">3. Extended Source Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -192,7 +197,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chaps/00-Syllabus.html">An Example Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chaps/00-Philosophy.html">Philosophy</a></li>
 </ul>
 
@@ -417,7 +421,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="snu-ao-class-python-notes">
-<h1>SNU AO Class Python Notes<a class="headerlink" href="#snu-ao-class-python-notes" title="Permalink to this heading">#</a></h1>
+<h1>SNU AO Class Python Notes<a class="headerlink" href="#snu-ao-class-python-notes" title="Permalink to this headline">#</a></h1>
 <p>(SNU = Seoul National University, South Korea; AO = Astronomical Observation class)</p>
 <p>This is the lecture note initially made by Yoonsoo P. Bach, <a class="reference external" href="https://github.com/ysBach">&#64;ysBach</a>. The original contents started to be created in 2016 Fall, when I first took the TA role in the AO class. It used to be maintained until around early 2021, and I left the TA role and it was left as was. At the end of 2022, I was kindly asked to make the material more sustainable and stable. Before I leave SNU after getting the PhD, I felt it was my duty (social responsibility) to finish this work.</p>
 <div class="dropdown admonition">
@@ -432,7 +436,7 @@ document.write(`
 <p>So I decided to make materials that (1) are <strong>USEFUL</strong>, (2) have specific names/titles, so that I do not pre-occupy the “good” names. You must have a great confidence that yours is/are truely “good” to pre-occupy such names. I think the concepts, theories, tools or codes given in this lecture note is useful enough at least for beginner-level observational astronomers. Also, I believe the name of this repo <code class="docutils literal notranslate"><span class="pre">SNU_AOclass</span></code> and packages (e.g., <code class="docutils literal notranslate"><span class="pre">ysfitsutilpy</span></code> and <code class="docutils literal notranslate"><span class="pre">ysphotutilpy</span></code>) are specific enough, not to pre-occupy “good” names. Thus, I am hereby publishing this lecture note.</p>
 </div>
 <section id="how-to-use-this-lecture-note">
-<h2>How to use this lecture note<a class="headerlink" href="#how-to-use-this-lecture-note" title="Permalink to this heading">#</a></h2>
+<h2>How to use this lecture note<a class="headerlink" href="#how-to-use-this-lecture-note" title="Permalink to this headline">#</a></h2>
 <p>This note is composed of three major parts.</p>
 <dl class="simple myst">
 <dt>Theoretical lecture (Books)</dt><dd><p>The theory part (mathematical derivations, verbal explanations, etc) is made with <strong>TeX</strong> as a book-like format.</p>
@@ -452,6 +456,8 @@ In addition to this Jupyter-Book, I will give some lectures using PowerPoint, an
 </dl>
 <p>ver 2023 (2023 spring)</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -496,11 +502,11 @@ In addition to this Jupyter-Book, I will give some lectures using PowerPoint, an
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="chaps/prerequisites/00-1_Softwares.html"
+       href="chaps/00-Syllabus.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Software Tools</p>
+        <p class="prev-next-title">An Example Syllabus</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

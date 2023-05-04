@@ -46,9 +46,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -65,6 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/python_prep/03-FITS_and_astropy';</script>
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1. Basics about FITS" href="../01-fits-basic.html" />
@@ -159,7 +158,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -182,6 +185,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -193,7 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
 </ul>
 
@@ -438,9 +442,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="about-astropy-fits">
-<span id="astropy-fits"></span><h1><span class="section-number">4.6. </span>About <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#about-astropy-fits" title="Permalink to this heading">#</a></h1>
+<span id="astropy-fits"></span><h1><span class="section-number">4.6. </span>About <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#about-astropy-fits" title="Permalink to this headline">#</a></h1>
 <section id="basic-information-about-fits">
-<h2><span class="section-number">4.6.1. </span>Basic Information about FITS<a class="headerlink" href="#basic-information-about-fits" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6.1. </span>Basic Information about FITS<a class="headerlink" href="#basic-information-about-fits" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><strong>FITS</strong> = see <a class="reference external" href="https://fits.gsfc.nasa.gov">this official web</a> and the <a class="reference external" href="https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf">latest FITS standard document</a>.</p>
 <ul>
@@ -456,7 +460,7 @@ document.write(`
 </ul>
 </section>
 <section id="prerequisites">
-<h2><span class="section-number">4.6.2. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6.2. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>Before you start this notebook,</p>
 <p><strong>MUST READ</strong>:</p>
 <ul class="simple">
@@ -487,12 +491,12 @@ document.write(`
 </div>
 </section>
 <section id="fits-from-astropy">
-<h2><span class="section-number">4.6.3. </span>FITS from <code class="docutils literal notranslate"><span class="pre">Astropy</span></code><a class="headerlink" href="#fits-from-astropy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6.3. </span>FITS from <code class="docutils literal notranslate"><span class="pre">Astropy</span></code><a class="headerlink" href="#fits-from-astropy" title="Permalink to this headline">#</a></h2>
 <section id="making-fits-from-ndarray">
-<h3>Making FITS  from ndarray<a class="headerlink" href="#making-fits-from-ndarray" title="Permalink to this heading">#</a></h3>
+<h3>Making FITS  from ndarray<a class="headerlink" href="#making-fits-from-ndarray" title="Permalink to this headline">#</a></h3>
 <p>If you only have ndarray (e.g., numpy array), how can we convert it to FITS?</p>
 <section id="making-and-saving-with-ccddata">
-<h4>Making and Saving with <code class="docutils literal notranslate"><span class="pre">CCDData</span></code><a class="headerlink" href="#making-and-saving-with-ccddata" title="Permalink to this heading">#</a></h4>
+<h4>Making and Saving with <code class="docutils literal notranslate"><span class="pre">CCDData</span></code><a class="headerlink" href="#making-and-saving-with-ccddata" title="Permalink to this headline">#</a></h4>
 <p>The simplest way is to use <code class="docutils literal notranslate"><span class="pre">CCDData</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -544,7 +548,7 @@ document.write(`
 <p>There is a specifically dedicated writer <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.nddata.fits_ccddata_writer.html#astropy.nddata.fits_ccddata_writer"><code class="docutils literal notranslate"><span class="pre">fits_ccddata_writer</span></code></a> which is used to write a <code class="docutils literal notranslate"><span class="pre">CCDData</span></code> object to FITS file. Look at the doc for detailed saving options.</p>
 </section>
 <section id="making-and-saving-fits-data-with-astropy-fits">
-<h4>Making and Saving FITS data with <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#making-and-saving-fits-data-with-astropy-fits" title="Permalink to this heading">#</a></h4>
+<h4>Making and Saving FITS data with <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code><a class="headerlink" href="#making-and-saving-fits-data-with-astropy-fits" title="Permalink to this headline">#</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">fits</span></code> is more general than <code class="docutils literal notranslate"><span class="pre">CCDData</span></code>, because, by principle, FITS should be able to contain virtually anything (including CCD image, star catalog, simulation data, etc). Thus, it’s more complicated if you are only interested in the data from CCD (now you understand why <code class="docutils literal notranslate"><span class="pre">CCDData</span></code> is named so).</p>
 <p>There are, thus, at least two ways to save our 2-D CCD-like data:</p>
 <ol class="arabic simple">
@@ -589,9 +593,9 @@ document.write(`
 </section>
 </section>
 <section id="reading-fits">
-<h3>Reading FITS<a class="headerlink" href="#reading-fits" title="Permalink to this heading">#</a></h3>
+<h3>Reading FITS<a class="headerlink" href="#reading-fits" title="Permalink to this headline">#</a></h3>
 <section id="reading-with-ccddata-read">
-<h4>Reading with <code class="docutils literal notranslate"><span class="pre">CCDData.read()</span></code><a class="headerlink" href="#reading-with-ccddata-read" title="Permalink to this heading">#</a></h4>
+<h4>Reading with <code class="docutils literal notranslate"><span class="pre">CCDData.read()</span></code><a class="headerlink" href="#reading-with-ccddata-read" title="Permalink to this headline">#</a></h4>
 <p>Let’s read this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -652,7 +656,7 @@ EXTEND  =                    T
 </div>
 </section>
 <section id="reading-with-fits-open">
-<h4>Reading with <code class="docutils literal notranslate"><span class="pre">fits.open()</span></code><a class="headerlink" href="#reading-with-fits-open" title="Permalink to this heading">#</a></h4>
+<h4>Reading with <code class="docutils literal notranslate"><span class="pre">fits.open()</span></code><a class="headerlink" href="#reading-with-fits-open" title="Permalink to this headline">#</a></h4>
 <p>Once it is saved, you can also read the FITS using <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -748,10 +752,10 @@ EXTEND  =                    T
 </section>
 </section>
 <section id="adding-manipulating-header">
-<h3>Adding/Manipulating Header<a class="headerlink" href="#adding-manipulating-header" title="Permalink to this heading">#</a></h3>
+<h3>Adding/Manipulating Header<a class="headerlink" href="#adding-manipulating-header" title="Permalink to this headline">#</a></h3>
 <p>There are several ways to add header using <a class="reference external" href="https://docs.astropy.org/en/stable/io/fits/api/headers.html"><code class="docutils literal notranslate"><span class="pre">Header</span></code></a>.</p>
 <section id="header-fromstring">
-<h4><code class="docutils literal notranslate"><span class="pre">Header.fromstring()</span></code><a class="headerlink" href="#header-fromstring" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">Header.fromstring()</span></code><a class="headerlink" href="#header-fromstring" title="Permalink to this headline">#</a></h4>
 <p>The most primitive way. Likely this is used only if you want to make a fixed example (such as bug report) or tutorial like this notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -812,7 +816,7 @@ BUNIT   = &#39;adu     &#39;
 <p>There are other similar methods, <code class="docutils literal notranslate"><span class="pre">.fromtextfile()</span></code> (when you have header in text file) and <code class="docutils literal notranslate"><span class="pre">fromkeys()</span></code> (when you have header in something like <code class="docutils literal notranslate"><span class="pre">dict</span></code>). See above <code class="docutils literal notranslate"><span class="pre">Header</span></code> doc.</p>
 </section>
 <section id="setting">
-<h4>Setting<a class="headerlink" href="#setting" title="Permalink to this heading">#</a></h4>
+<h4>Setting<a class="headerlink" href="#setting" title="Permalink to this headline">#</a></h4>
 <p>There are many ways to set header keyword, value and comment, once a <code class="docutils literal notranslate"><span class="pre">Header</span></code> object is given.</p>
 <ol class="arabic simple">
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">header[&lt;key&gt;]</span> <span class="pre">=</span> <span class="pre">&lt;value&gt;</span></code>.</p></li>
@@ -925,7 +929,7 @@ HISTORY WCS added 2019-01-01T00:00:06
 </section>
 </section>
 <section id="making-reading-mef-optional">
-<h3>Making/Reading MEF (optional)<a class="headerlink" href="#making-reading-mef-optional" title="Permalink to this heading">#</a></h3>
+<h3>Making/Reading MEF (optional)<a class="headerlink" href="#making-reading-mef-optional" title="Permalink to this headline">#</a></h3>
 <p>If you are not advanced FITS user, it’s generally better <strong>NOT</strong> to think about <strong>making</strong> MEF. It’s better to stick to single-extension FITS format.</p>
 <p>But for many cases, e.g., HST images, may contain MEF, because there are clear reasons. Thus, I add how to deal with MEF here.</p>
 <div class="cell docutils container">

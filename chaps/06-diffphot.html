@@ -46,9 +46,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -67,9 +65,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/06-diffphot';</script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="HW Software &amp; Tools" href="prerequisites/99-HW_swtools.html" />
+    <link rel="next" title="2. 2-D Backgrounds" href="07-bkg2d.html" />
     <link rel="prev" title="5. Querying from the Catalog" href="05-query.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -161,7 +160,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -184,6 +187,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -195,7 +200,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
 </ul>
 
@@ -431,7 +435,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differential-photometry">
-<span id="ch-diffphot"></span><h1><span class="section-number">1. </span>Differential Photometry<a class="headerlink" href="#differential-photometry" title="Permalink to this heading">#</a></h1>
+<span id="ch-diffphot"></span><h1><span class="section-number">1. </span>Differential Photometry<a class="headerlink" href="#differential-photometry" title="Permalink to this headline">#</a></h1>
 <p>As you have learned from theory lecture, <strong>differential photometry</strong> (also called <strong>relative photometry</strong>) is a way to measure the magnitude (or flux) of your target when nearby object’s magnitudes are known.</p>
 <p>Here, we will combine the aperture photometry technique and star/solar system querying technique to perform the differential photometry.</p>
 <ol class="arabic simple">
@@ -456,18 +460,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-27 22:11:36 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:52 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.7.0
+1 IPython    8.13.1
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.2
+4 numpy      1.23.5
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 astroquery 0.4.7.dev8438
-8 photutils  1.6.1.dev103+gad22185f
+7 astroquery 0.4.7.dev8639
+8 photutils  1.7.0
 9 version_information 1.0.4
 </pre></div>
 </div>
@@ -534,7 +538,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <section id="data-description">
-<h2><span class="section-number">1.1. </span>Data Description<a class="headerlink" href="#data-description" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">#</a></h2>
 <p>Below is the basic information of our observation, logged in the FITS header. For your information, the target we observed is a near-Earth asteroid (4179) Toutatis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -553,7 +557,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="target-photometry">
-<h2><span class="section-number">1.2. </span>Target Photometry<a class="headerlink" href="#target-photometry" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Target Photometry<a class="headerlink" href="#target-photometry" title="Permalink to this headline">#</a></h2>
 <p>As we learned, first query the ephemeris of the target.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -613,7 +617,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="star-photometry">
-<h2><span class="section-number">1.3. </span>Star Photometry<a class="headerlink" href="#star-photometry" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Star Photometry<a class="headerlink" href="#star-photometry" title="Permalink to this headline">#</a></h2>
 <p>As we learned, first query the stars in the FoV:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -700,7 +704,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <section id="strategy">
-<h3><span class="section-number">1.3.1. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.3.1. </span>Strategy<a class="headerlink" href="#strategy" title="Permalink to this headline">#</a></h3>
 <p>There are multiple ways to match the star you queried above with the object visible in the image. Here, we use the X Y coordinates in <code class="docutils literal notranslate"><span class="pre">q2</span></code>. Use it as the initial guess, crop the small portion (e.g., 7 by 7 pixel) of the image near the initial guess, and do centroiding at each position in the image iteratively until it converges.</p>
 <p>So our strategy will be:</p>
 <ol class="arabic simple">
@@ -729,7 +733,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="drop-closely-located-stars-from-catalog">
-<h3><span class="section-number">1.3.2. </span>Drop Closely Located Stars from Catalog<a class="headerlink" href="#drop-closely-located-stars-from-catalog" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.3.2. </span>Drop Closely Located Stars from Catalog<a class="headerlink" href="#drop-closely-located-stars-from-catalog" title="Permalink to this headline">#</a></h3>
 <p>Since we have already queired stars, let me drop stars with close distance (20 pixels in this example, using DAOGROUP algorithm):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -833,13 +837,13 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" src="../_images/a166c0426938e5f9987de25403c8a0013efb93e6f9733ce861a62c2136ba67f6.png" />
+<img alt="../_images/d2636bf2a22b22cd52568426f6d79f28a1e61de4c6a7517889c6e8fc904b73ba.png" src="../_images/d2636bf2a22b22cd52568426f6d79f28a1e61de4c6a7517889c6e8fc904b73ba.png" />
 </div>
 </div>
 <p>The stars indicated by red circles are the stars that are <strong>too close to each other</strong>. These are removed in <code class="docutils literal notranslate"><span class="pre">q2_close</span></code> DataFrame. (rigorously speaking, they are close to each other based on the catalog, not based on the observed image)</p>
 </section>
 <section id="drop-closely-located-stars-from-daofind">
-<h3><span class="section-number">1.3.3. </span>Drop Closely Located Stars from DAOFIND<a class="headerlink" href="#drop-closely-located-stars-from-daofind" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.3.3. </span>Drop Closely Located Stars from DAOFIND<a class="headerlink" href="#drop-closely-located-stars-from-daofind" title="Permalink to this headline">#</a></h3>
 <p>Now drop the stars that has nearby objects (based on DAOFIND result and reuse the previously used <code class="docutils literal notranslate"><span class="pre">group_stars</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -866,17 +870,21 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" src="../_images/8933855192162f23e47adc203049d004762c6a10907c0f85c0d48f3962927819.png" />
+<img alt="../_images/9449d7dca5056b45b4e193eb2b1910fbf9c152105540e576c950aaaa6aca427b.png" src="../_images/9449d7dca5056b45b4e193eb2b1910fbf9c152105540e576c950aaaa6aca427b.png" />
 </div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>
 <p>Change <code class="docutils literal notranslate"><span class="pre">roundlo=-1.0,</span> <span class="pre">roundhi=1.0</span></code>, to <code class="docutils literal notranslate"><span class="pre">roundlo=-.5,</span> <span class="pre">roundhi=.5</span></code>, then see our object, at the center of image, is not detected from star finder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This happens <em>partly</em> because the observation was made in non-sidereal tracking mode, i.e., the moving object (our asteroid) become slightly elliptical on the CCD (i.e., its <code class="docutils literal notranslate"><span class="pre">round</span></code> parameter gets larger). Note that some of the stars are undetected too.</p>
+</div>
 <p>Also, change parameters, such as <code class="docutils literal notranslate"><span class="pre">sigma_radius</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>. The red star which is missed in the star finder will now be found.</p>
 </div>
 </section>
 <section id="cross-match-catalog-daofind">
-<h3><span class="section-number">1.3.4. </span>Cross-Match Catalog &amp; DAOFIND<a class="headerlink" href="#cross-match-catalog-daofind" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.3.4. </span>Cross-Match Catalog &amp; DAOFIND<a class="headerlink" href="#cross-match-catalog-daofind" title="Permalink to this headline">#</a></h3>
 <p>Match for each position from the catalog, find if there is any star found by DAOFIND within 10x10 pixel (<em>absolute delta-x and delta-y smaller than 5</em>). If multiple stars in this box, select the closest. Then add the <code class="docutils literal notranslate"><span class="pre">xcentroid</span></code> and <code class="docutils literal notranslate"><span class="pre">ycentroid</span></code> information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,7 +912,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </section>
 <section id="aperture-photometry-of-stars">
-<h3><span class="section-number">1.3.5. </span>Aperture Photometry of Stars<a class="headerlink" href="#aperture-photometry-of-stars" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.3.5. </span>Aperture Photometry of Stars<a class="headerlink" href="#aperture-photometry-of-stars" title="Permalink to this headline">#</a></h3>
 <p>Do the aperture photometry to the stars, and add this information to the queried table (<code class="docutils literal notranslate"><span class="pre">q2</span></code>). Identical to our target,</p>
 <ul class="simple">
 <li><p>Circular aperture</p></li>
@@ -931,7 +939,7 @@ FILTER     V                    Filter Name in the beam
 </section>
 </section>
 <section id="find-standardization">
-<h2><span class="section-number">1.4. </span>Find Standardization<a class="headerlink" href="#find-standardization" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>Find Standardization<a class="headerlink" href="#find-standardization" title="Permalink to this headline">#</a></h2>
 <p>Our observation was made in V-band (check <code class="docutils literal notranslate"><span class="pre">ccd.header[&quot;FILTER&quot;]</span></code>), so we need to use the V-band magnitude.</p>
 <p>Two methods are shown to calculate the image zero point. We learned:</p>
 <div class="math notranslate nohighlight">
@@ -1047,7 +1055,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" src="../_images/e5e13dfd8901e6b435139462ce2aef0c3d5d9cf3041db5ffe03718fed07b3c72.png" />
+<img alt="../_images/96d624dde0d58c6e6277f689cbcc7b4e5be345014559a63f26345850926195bb.png" src="../_images/96d624dde0d58c6e6277f689cbcc7b4e5be345014559a63f26345850926195bb.png" />
 </div>
 </div>
 <ol class="arabic simple">
@@ -1065,7 +1073,7 @@ FILTER     V                    Filter Name in the beam
 </ol>
 </section>
 <section id="final-result">
-<h2><span class="section-number">1.5. </span>Final result<a class="headerlink" href="#final-result" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Final result<a class="headerlink" href="#final-result" title="Permalink to this headline">#</a></h2>
 <p>Since we know the zero point value, we can calculate the V-magnitude of our target based on the Z value and the instrumental magnitude value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1162,11 +1170,11 @@ FILTER     V                    Filter Name in the beam
       </div>
     </a>
     <a class="right-next"
-       href="prerequisites/99-HW_swtools.html"
+       href="07-bkg2d.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">HW Software &amp; Tools</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>2-D Backgrounds</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
