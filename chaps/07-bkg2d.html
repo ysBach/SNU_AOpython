@@ -570,7 +570,7 @@ photutils version: 0.7.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 18:45:54 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-05 12:50:43 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -600,6 +600,18 @@ photutils version: 0.7.1
 
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;latin modern math&#39;</span><span class="p">,</span> <span class="s1">&#39;font.size&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">:</span><span class="s1">&#39;stix&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;axes.formatter.use_mathtext&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;axes.formatter.limits&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;axes.grid&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;grid.color&#39;</span><span class="p">:</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;grid.linewidth&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> 
+    <span class="s1">&#39;xtick.top&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;ytick.right&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> 
+    <span class="s1">&#39;xtick.direction&#39;</span><span class="p">:</span> <span class="s1">&#39;inout&#39;</span><span class="p">,</span> <span class="s1">&#39;ytick.direction&#39;</span><span class="p">:</span> <span class="s1">&#39;inout&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;xtick.minor.size&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;ytick.minor.size&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># default 2.0</span>
+    <span class="s1">&#39;xtick.major.size&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;ytick.major.size&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>  <span class="c1"># default 3.5</span>
+    <span class="s1">&#39;xtick.minor.visible&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;ytick.minor.visible&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">})</span>
 
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 <span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clipped_stats</span><span class="p">,</span> <span class="n">SigmaClip</span>
@@ -639,15 +651,16 @@ photutils version: 0.7.1
 </section>
 <section id="sky-estimation-by-photutils-background2d">
 <h2><span class="section-number">2.3. </span>Sky Estimation by <code class="docutils literal notranslate"><span class="pre">photutils.Background2D</span></code><a class="headerlink" href="#sky-estimation-by-photutils-background2d" title="Permalink to this headline">#</a></h2>
+<p>Basically the <code class="docutils literal notranslate"><span class="pre">sigma_clip</span></code> parameter below has almost no effect, because we already have masked all high-valued pixels using <code class="docutils literal notranslate"><span class="pre">mask</span></code>. I put it here just for your future convenience.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bkg_sex</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span>
     <span class="n">box_size</span><span class="o">=</span><span class="n">box</span><span class="p">,</span>
-    <span class="c1"># mask=mask,</span>
+    <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
     <span class="n">filter_size</span><span class="o">=</span><span class="n">filt</span><span class="p">,</span>
     <span class="n">exclude_percentile</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-    <span class="n">sigma_clip</span><span class="o">=</span><span class="n">SigmaClip</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cenfunc</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="n">stdfunc</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">)</span>
+    <span class="c1"># sigma_clip=SigmaClip(sigma=3, maxiters=5, cenfunc=&#39;median&#39;, stdfunc=&#39;std&#39;)</span>
 <span class="p">)</span>
 <span class="n">bkgsub_sex</span> <span class="o">=</span> <span class="n">data</span> <span class="o">-</span> <span class="n">bkg_sex</span><span class="o">.</span><span class="n">background</span>
 
@@ -680,7 +693,7 @@ photutils version: 0.7.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0b81e110077ac2be7048a526d991b7b635e8abba45f4c1fd876ba2cff9b6d932.png" src="../_images/0b81e110077ac2be7048a526d991b7b635e8abba45f4c1fd876ba2cff9b6d932.png" />
+<img alt="../_images/06229d2c3a438eec0c05a4108bd6889503b7ef80a087040c0beff4552e8acdf2.png" src="../_images/06229d2c3a438eec0c05a4108bd6889503b7ef80a087040c0beff4552e8acdf2.png" />
 </div>
 </div>
 <p>Figure:</p>
@@ -700,11 +713,11 @@ photutils version: 0.7.1
 </section>
 <section id="sky-estimation-from-sep">
 <h2><span class="section-number">2.4. </span>Sky Estimation from <code class="docutils literal notranslate"><span class="pre">sep</span></code><a class="headerlink" href="#sky-estimation-from-sep" title="Permalink to this headline">#</a></h2>
-<p>There are some caveats which may help you when you start doing research using <code class="docutils literal notranslate"><span class="pre">sep</span></code>: <code class="docutils literal notranslate"><span class="pre">sep</span></code> is <em>picky</em> when it comes to the input data types. I recommend you to use a short code snippet such as</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="c1"># The data you want to use (e.g., ccd.data)</span>
+<p>There are some caveats which may help you when you start doing research using <code class="docutils literal notranslate"><span class="pre">sep</span></code>: <code class="docutils literal notranslate"><span class="pre">sep</span></code> is <em>picky</em> when it comes to the input data types. Read the note in the <a class="reference external" href="https://sep.readthedocs.io/en/v1.1.x/tutorial.html#Finally-a-brief-word-on-byte-order">sep documentation</a>. I recommend you to use a short code snippet such as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># data = # The data you want to use (e.g., ccd.data)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="c1"># OR</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>(excerpt from <code class="docutils literal notranslate"><span class="pre">ysphotutilpy</span></code>). Below we have the non-native byte order error, so I used ``.byteswap().newbyteorder()`.</p>
@@ -739,7 +752,7 @@ photutils version: 0.7.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4a426d816791fa80893ebde765fdc7a3acc190b8ca68163da96a12b3b248fbf1.png" src="../_images/4a426d816791fa80893ebde765fdc7a3acc190b8ca68163da96a12b3b248fbf1.png" />
+<img alt="../_images/5eb5391230cc0051a25078c9234851370a7d0f9d39316de62442e7562fe986fd.png" src="../_images/5eb5391230cc0051a25078c9234851370a7d0f9d39316de62442e7562fe986fd.png" />
 </div>
 </div>
 <p>Note the bottom center plot is not plotted, because the mesh information is not provided in <code class="docutils literal notranslate"><span class="pre">sep</span></code>. The difference in background values from the two methods:</p>
@@ -774,19 +787,19 @@ photutils version: 0.7.1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistics of the difference
            num: 1048576
            min: -6.857295142906423
-           max: 3.0729636589937854
-           avg: -0.09737039578292524
-           med: 0.002698499453686054
-           std: 0.548953472282874
-        madstd: 0.07000123627751685
+           max: 3.0729636590508562
+           avg: -0.09737848032452191
+           med: 0.0026730014051281614
+           std: 0.5489521792690334
+        madstd: 0.07000631371216799
    percentiles: [1, 99]
            pct: [-2.93927157  0.69085835]
         slices: None
-          zmin: -0.47008319912709745
-          zmax: 0.4798792569616264
+          zmin: -0.47009813126558825
+          zmax: 0.4798942741889543
 </pre></div>
 </div>
-<img alt="../_images/c73b768aa2def0be9a8e983c4199a96a2ef3d1d10ddf321ce4b1987bfc4872a6.png" src="../_images/c73b768aa2def0be9a8e983c4199a96a2ef3d1d10ddf321ce4b1987bfc4872a6.png" />
+<img alt="../_images/f7e707a43ccd8a8c4e74db6dda6abf5177cda95ed88e29bab225f4cfb9745647.png" src="../_images/f7e707a43ccd8a8c4e74db6dda6abf5177cda95ed88e29bab225f4cfb9745647.png" />
 </div>
 </div>
 <div class="admonition note">
