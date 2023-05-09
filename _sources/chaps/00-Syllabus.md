@@ -5,7 +5,7 @@
 This is an example case of syllabus.
 
 ````{warning}
-* The **lecturer** should prepare PCs (i.e., **install python and necessary packages**) before the class.
+The **lecturer** should prepare PCs (i.e., **install python and necessary packages**) before the class.
 
 ```{note}
 :class: dropdown
@@ -14,9 +14,9 @@ There are multiple explanations about installation in the prerequisites notes, b
 ````
 
 ```{warning}
-My intention is to give lectures using this website.
+My intention is to give lectures using this website. Some blocks may not be displayed properly in Jupyter Notebook.
 
-I did **NOT** intend to let students git pull this repo!
+I did **NOT** intend to let students git pull this repo! (the lecturer has to)
 ```
 
 * This lecture note is ignoring anything about preprocessing. If preprocessing-related lecture is required, I recommend using [Matthew Craig's CCD Data Reduction Guide](https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html).
