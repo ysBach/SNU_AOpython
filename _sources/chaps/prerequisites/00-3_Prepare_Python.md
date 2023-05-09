@@ -58,11 +58,13 @@ cd astroscrappy && pip install -e . && cd ..
 
 (basically any version of these may not break any part of the notebooks, hopefully...)
 
-Finally
-
+Next,
 ```
 pip install astro-ndslice==0.2 ysfitsutilpy==0.2 ysphotutilpy==0.1.1 --no-deps
 ```
+
+Finally, download [_tool_visualization.py](https://github.com/ysBach/SNU_AOpython/blob/main/chaps/_tool_visualization.py) and put it to **the directory where you will run your python files/notebooks**.
+
 
 ### Reading Materials
 
