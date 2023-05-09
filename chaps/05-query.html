@@ -46,9 +46,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -191,6 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -436,7 +436,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="querying-from-the-catalog">
-<span id="ch-query"></span><h1><span class="section-number">5. </span>Querying from the Catalog<a class="headerlink" href="#querying-from-the-catalog" title="Permalink to this heading">#</a></h1>
+<span id="ch-query"></span><h1><span class="section-number">5. </span>Querying from the Catalog<a class="headerlink" href="#querying-from-the-catalog" title="Permalink to this headline">#</a></h1>
 <p>If WCS(World Coordinate System: converts image XY pixel to, e.g., RA/DEC. See slides 4-7 of <a class="reference external" href="http://www.atnf.csiro.au/people/mcalabre/WCS/Intro/WCS01.html">this</a>, for example) is properly implemented, we should be able to find stars in the image automatically.</p>
 <p><code class="docutils literal notranslate"><span class="pre">astroquery</span></code> is an <a class="reference external" href="https://www.astropy.org/affiliated/">astropy-affiliated python package</a> for such query.</p>
 <p>Here I will demonstrate how to query Pan-STARRS DR2 and Gaia catalog, which are two of the widely used catalogs as of 2023.</p>
@@ -455,18 +455,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:37 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:36:36 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 astroquery 0.4.7.dev8639
-8 photutils  1.7.0
+7 astroquery 0.4.7.dev8597
+8 photutils  1.6.0
 9 version_information 1.0.4
 </pre></div>
 </div>
@@ -528,14 +528,14 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <section id="the-catalogs">
-<h2><span class="section-number">5.1. </span>The Catalogs<a class="headerlink" href="#the-catalogs" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>The Catalogs<a class="headerlink" href="#the-catalogs" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://www.cosmos.esa.int/web/gaia/home">Gaia</a> (<a class="reference external" href="https://en.wikipedia.org/wiki/Gaia_(spacecraft)">Wikipedia</a>) is the ESA space mission that is planned to work from 2013-2025. Its main goal is to perform precise astrometry of 1 billion objects. Since it has two passbands, colorimetry has also been performed.</p>
 <p>As of 2023, Data Realease 3 (DR3) is the most recent available data set for Gaia.</p>
 <p><a class="reference external" href="https://outerspace.stsci.edu/display/PANSTARRS/">Pan-STARRS1</a> (also called PS1; <a class="reference external" href="https://en.wikipedia.org/wiki/Pan-STARRS">Wikipedia</a>) is a ground-based 1.8 m Ritchey-Chredien telescope facility at Hawaii.</p>
 <p>As of 2023, Data Realease 2 (DR2) is the most recent available data set for PS1.</p>
 </section>
 <section id="archives">
-<h2><span class="section-number">5.2. </span>Archives<a class="headerlink" href="#archives" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Archives<a class="headerlink" href="#archives" title="Permalink to this headline">#</a></h2>
 <p>There are multiple archive services for large-scale astronomical datasets:</p>
 <dl class="simple myst">
 <dt><a class="reference external" href="https://vizier.unistra.fr/"><strong>VizieR</strong></a> (<a class="reference external" href="https://en.wikipedia.org/wiki/VizieR">Wikipedia</a>)</dt><dd><p>A catalog service run by Université de Strasbourg/CNRS. I feel many people archive their observational results (e.g., galaxy redshift catalog, asteroid polarimetric observation results, etc) to VizieR. Sometimes, for some reasons I cannot understand, large-catalog data are not accessible from VizieR for very long time. Also, the column names in VizieR is always very different from other catalog services. You can go to <a class="reference external" href="https://vizier.cfa.harvard.edu/viz-bin/VizieR-2">here</a> and search for <code class="docutils literal notranslate"><span class="pre">gaia</span></code> or <code class="docutils literal notranslate"><span class="pre">ps1</span></code> for instance.</p>
@@ -551,7 +551,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </section>
 <section id="query-stars-in-the-fov">
-<h2><span class="section-number">5.3. </span>Query Stars in the FoV<a class="headerlink" href="#query-stars-in-the-fov" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Query Stars in the FoV<a class="headerlink" href="#query-stars-in-the-fov" title="Permalink to this headline">#</a></h2>
 <p>Now check if our FITS file (<code class="docutils literal notranslate"><span class="pre">CCDData</span></code>) has WCS information. Since in our observation, the pixel scale is roughly 0.39 arcsec per pixel. Thus, let’s query the stars within</p>
 <ul class="simple">
 <li><p>a circular region (so-called the <strong>cone</strong>) centered at the center of our FoV, radius of <code class="docutils literal notranslate"><span class="pre">fov_radius</span> <span class="pre">=</span> <span class="pre">0.4*diagonal_length/2</span></code>. ← This is because MAST only supports cone search.</p></li>
@@ -592,12 +592,14 @@ Coordinate of the center of the image:
     (204.36178211, -9.49675272)&gt;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/lib/python3.10/site-packages/astropy/wcs/wcs.py:3064: RuntimeWarning: cdelt will be ignored since cd is present
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/envs/snuao/lib/python3.10/site-packages/astropy/wcs/wcs.py:3064: RuntimeWarning: cdelt will be ignored since cd is present
   description.append(s.format(*self.wcs.cdelt))
 </pre></div>
 </div>
 </div>
 </div>
+<p>The meaning of <code class="docutils literal notranslate"><span class="pre">CRVAL</span></code>, <code class="docutils literal notranslate"><span class="pre">CRVAL</span></code>, <code class="docutils literal notranslate"><span class="pre">CRPIX</span></code>, and <code class="docutils literal notranslate"><span class="pre">PC</span></code> (you can just assume <code class="docutils literal notranslate"><span class="pre">CD</span></code> is identical to <code class="docutils literal notranslate"><span class="pre">PC</span></code>) matrices:
+<img alt="" src="../_images/WCS.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =====</span>
@@ -648,7 +650,7 @@ Number of results: 5907
 </div>
 </div>
 <section id="gaia-dr3">
-<h3><span class="section-number">5.3.1. </span>Gaia DR3<a class="headerlink" href="#gaia-dr3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.3.1. </span>Gaia DR3<a class="headerlink" href="#gaia-dr3" title="Permalink to this headline">#</a></h3>
 <p>Note that Gaia DR3 GAIA_SOURCES has 153 columns! The detailed explanation of this table (<code class="docutils literal notranslate"><span class="pre">GAIA_SOURCE</span></code> table) in DR3 is available <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR3/Gaia_archive/chap_datamodel/sec_dm_main_source_catalogue/ssec_dm_gaia_source.html">here</a>. What we need are only RA, DEC, and magnitude information. For the magnitudes, the magnitude conversion methods for DR3 are given <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR3/Data_processing/chap_cu5pho/cu5pho_sec_photSystem/cu5pho_ssec_photRelations.html">here</a>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -729,7 +731,7 @@ C = G_\mathrm{BP} - G_\mathrm{RP} = -2.5 \lg \frac{I_\mathrm{BP}}{I_\mathrm{RP}}
 </pre></div>
 </div>
 <div class="output text_html"><div><i>Table length=65</i>
-<table id="table6010456912" class="table-striped table-bordered table-condensed">
+<table id="table5037093600" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>bp_rp</th><th>g_snr</th><th>bp_snr</th><th>rp_snr</th><th>dC</th><th>V</th><th>dV</th><th>x</th><th>y</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float64</th><th>float64</th></tr></thead>
@@ -777,7 +779,7 @@ C = G_\mathrm{BP} - G_\mathrm{RP} = -2.5 \lg \frac{I_\mathrm{BP}}{I_\mathrm{RP}}
 </div>
 </section>
 <section id="pan-starrs1-dr2">
-<h3><span class="section-number">5.3.2. </span>Pan-STARRS1 DR2<a class="headerlink" href="#pan-starrs1-dr2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.3.2. </span>Pan-STARRS1 DR2<a class="headerlink" href="#pan-starrs1-dr2" title="Permalink to this headline">#</a></h3>
 <p>It seems like there are three tables available from PS1 web query API (e.g., <a class="reference external" href="http://ps1images.stsci.edu/ps1_dr2_api.html">this notebook</a>): “mean”, “stack”, and “detection”. All the metadata can be found based on the url (see <code class="docutils literal notranslate"><span class="pre">ps1metadata</span></code> function), e.g., <a class="reference external" href="https://catalogs.mast.stsci.edu/api/v0.1/panstarrs/dr1/mean/metadata">this link</a> for the metadata of mean table.</p>
 <p>According to <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...750...99T">Tonry+12</a>,</p>
 <div class="math notranslate nohighlight">
@@ -869,69 +871,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>204.330108</td>
-      <td>-9.546630</td>
-      <td>17.793301</td>
-      <td>16.982500</td>
-      <td>17.372820</td>
-      <td>16.738285</td>
-      <td>0.012411</td>
-      <td>0.016003</td>
-      <td>789.148379</td>
-      <td>46.520168</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>204.332430</td>
-      <td>-9.543997</td>
-      <td>18.148701</td>
-      <td>18.095200</td>
-      <td>18.126559</td>
-      <td>17.950191</td>
-      <td>0.013345</td>
-      <td>0.017808</td>
-      <td>768.013028</td>
-      <td>70.452030</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>204.346776</td>
-      <td>-9.545009</td>
-      <td>22.121401</td>
-      <td>21.439699</td>
-      <td>21.768826</td>
-      <td>21.212396</td>
-      <td>0.137581</td>
-      <td>0.230210</td>
-      <td>639.446193</td>
-      <td>61.047576</td>
-    </tr>
-    <tr>
       <th>3</th>
-      <td>204.391725</td>
-      <td>-9.449751</td>
-      <td>21.913401</td>
-      <td>19.827200</td>
-      <td>20.822059</td>
-      <td>19.415908</td>
-      <td>0.114143</td>
-      <td>0.057990</td>
-      <td>226.350935</td>
-      <td>925.358571</td>
+      <td>204.398498</td>
+      <td>-9.549908</td>
+      <td>19.685900</td>
+      <td>19.234800</td>
+      <td>19.454621</td>
+      <td>19.037706</td>
+      <td>0.013322</td>
+      <td>0.017627</td>
+      <td>176.493198</td>
+      <td>15.583189</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>204.391725</td>
-      <td>-9.449731</td>
-      <td>20.910900</td>
-      <td>19.654699</td>
-      <td>20.256139</td>
-      <td>19.352137</td>
-      <td>0.023311</td>
-      <td>0.034164</td>
-      <td>226.344244</td>
-      <td>925.539059</td>
+      <td>204.401293</td>
+      <td>-9.544794</td>
+      <td>17.974100</td>
+      <td>17.651400</td>
+      <td>17.810360</td>
+      <td>17.471126</td>
+      <td>0.012964</td>
+      <td>0.017497</td>
+      <td>150.902974</td>
+      <td>62.031846</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>204.402051</td>
+      <td>-9.542688</td>
+      <td>21.183201</td>
+      <td>21.687500</td>
+      <td>21.454462</td>
+      <td>21.615563</td>
+      <td>0.165217</td>
+      <td>0.265355</td>
+      <td>143.877901</td>
+      <td>81.172085</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>204.404399</td>
+      <td>-9.545665</td>
+      <td>21.825600</td>
+      <td>21.294300</td>
+      <td>21.552136</td>
+      <td>21.086700</td>
+      <td>0.078924</td>
+      <td>0.103779</td>
+      <td>123.186834</td>
+      <td>54.046154</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>204.410444</td>
+      <td>-9.543147</td>
+      <td>19.949100</td>
+      <td>19.042500</td>
+      <td>19.478228</td>
+      <td>18.785735</td>
+      <td>0.021401</td>
+      <td>0.031288</td>
+      <td>68.791659</td>
+      <td>76.814691</td>
     </tr>
     <tr>
       <th>...</th>
@@ -947,69 +949,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
       <td>...</td>
     </tr>
     <tr>
-      <th>192</th>
-      <td>204.377883</td>
-      <td>-9.502093</td>
-      <td>19.466000</td>
-      <td>19.481100</td>
-      <td>19.479942</td>
-      <td>19.345078</td>
-      <td>0.014178</td>
-      <td>0.020384</td>
-      <td>355.844963</td>
-      <td>450.641530</td>
+      <th>187</th>
+      <td>204.324440</td>
+      <td>-9.513110</td>
+      <td>19.802000</td>
+      <td>19.544500</td>
+      <td>19.672555</td>
+      <td>19.372768</td>
+      <td>0.028427</td>
+      <td>0.025100</td>
+      <td>836.145051</td>
+      <td>351.508219</td>
     </tr>
     <tr>
       <th>193</th>
-      <td>204.382055</td>
-      <td>-9.501425</td>
-      <td>22.187300</td>
-      <td>21.251600</td>
-      <td>21.701122</td>
-      <td>20.991024</td>
-      <td>0.055150</td>
-      <td>0.093839</td>
-      <td>318.403844</td>
-      <td>456.622926</td>
+      <td>204.398435</td>
+      <td>-9.494967</td>
+      <td>21.852900</td>
+      <td>21.455200</td>
+      <td>21.649710</td>
+      <td>21.265102</td>
+      <td>0.094912</td>
+      <td>0.174163</td>
+      <td>171.053749</td>
+      <td>514.877474</td>
     </tr>
     <tr>
       <th>194</th>
-      <td>204.387721</td>
-      <td>-9.502643</td>
-      <td>22.124399</td>
-      <td>21.484301</td>
-      <td>21.793707</td>
-      <td>21.262448</td>
-      <td>0.079612</td>
-      <td>0.109307</td>
-      <td>267.797195</td>
-      <td>445.429511</td>
+      <td>204.399843</td>
+      <td>-9.495393</td>
+      <td>21.027300</td>
+      <td>20.572201</td>
+      <td>20.793918</td>
+      <td>20.374583</td>
+      <td>0.026426</td>
+      <td>0.036101</td>
+      <td>158.496791</td>
+      <td>510.969308</td>
     </tr>
     <tr>
       <th>195</th>
-      <td>204.395042</td>
-      <td>-9.466305</td>
-      <td>19.764799</td>
-      <td>18.654699</td>
-      <td>19.186887</td>
-      <td>18.371276</td>
-      <td>0.013668</td>
-      <td>0.016462</td>
-      <td>198.386762</td>
-      <td>775.109923</td>
+      <td>204.410279</td>
+      <td>-9.496189</td>
+      <td>22.013399</td>
+      <td>20.967699</td>
+      <td>21.469361</td>
+      <td>20.692712</td>
+      <td>0.053874</td>
+      <td>0.058962</td>
+      <td>65.182124</td>
+      <td>503.478261</td>
     </tr>
     <tr>
       <th>196</th>
-      <td>204.396484</td>
-      <td>-9.466749</td>
-      <td>21.926901</td>
-      <td>21.039600</td>
-      <td>21.466181</td>
-      <td>20.785364</td>
-      <td>0.060677</td>
-      <td>0.078106</td>
-      <td>185.530933</td>
-      <td>771.038793</td>
+      <td>204.412028</td>
+      <td>-9.498573</td>
+      <td>22.103300</td>
+      <td>21.557199</td>
+      <td>21.822051</td>
+      <td>21.347660</td>
+      <td>0.036635</td>
+      <td>0.020576</td>
+      <td>49.785889</td>
+      <td>481.781735</td>
     </tr>
   </tbody>
 </table>
@@ -1019,7 +1021,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 <p>Note that <code class="docutils literal notranslate"><span class="pre">q2</span></code> is in <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">q1</span></code> is <code class="docutils literal notranslate"><span class="pre">astropy.Table</span></code>.</p>
 </section>
 <section id="comparing-two-catalogs">
-<h3><span class="section-number">5.3.3. </span>Comparing two catalogs<a class="headerlink" href="#comparing-two-catalogs" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.3.3. </span>Comparing two catalogs<a class="headerlink" href="#comparing-two-catalogs" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aps1</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q1</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">q1</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
@@ -1041,17 +1043,17 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0a04732693738a3c3e12b1f432e7170c477c0f98784a93526be0943e3275c7c1.png" src="../_images/0a04732693738a3c3e12b1f432e7170c477c0f98784a93526be0943e3275c7c1.png" />
+<img alt="../_images/854a6424911561cb337b9ac7f68a6e1a355540ef0548a79f48ea24de105fc2be.png" src="../_images/854a6424911561cb337b9ac7f68a6e1a355540ef0548a79f48ea24de105fc2be.png" />
 </div>
 </div>
 </section>
 <section id="a-short-discussion">
-<h3><span class="section-number">5.3.4. </span>A Short Discussion<a class="headerlink" href="#a-short-discussion" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.3.4. </span>A Short Discussion<a class="headerlink" href="#a-short-discussion" title="Permalink to this headline">#</a></h3>
 <p>Note that there are more objects in PS1 than Gaia. Since Gaia’s main purpose is astrometry, it is not surprising that PS1 is sensing more celestial objects. Also, PS1 has the filter system that is closer to the classical filter systems (it uses grizy). Thus, for ground-based differential photometry, PS1 catalog will be more useful.</p>
 </section>
 </section>
 <section id="jpl-horizons-solar-system">
-<h2><span class="section-number">5.4. </span>JPL HORIZONS (Solar System)<a class="headerlink" href="#jpl-horizons-solar-system" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>JPL HORIZONS (Solar System)<a class="headerlink" href="#jpl-horizons-solar-system" title="Permalink to this headline">#</a></h2>
 <p>JPL <a class="reference external" href="https://ssd.jpl.nasa.gov/horizons/app.html#top">HORIZONS</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Ephemeris">ephemeris</a> (plural ephemerides) service operated by NASA JPL. The main purpose of this tool is to perform precise N-body simulation, including the modern computational algorithms, and provide the results to the users. There are many cases you may need it, but the main purpose is to obtain the positional information of the solar system objects or satellite or spacecrafts at certain epoch(s).</p>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>
@@ -1141,7 +1143,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 (array(500.58291238), array(500.43561473))
 </pre></div>
 </div>
-<img alt="../_images/888fdb16e7dd1a3637b35b673be995efff79c3e6784e05baa4c38c151427955f.png" src="../_images/888fdb16e7dd1a3637b35b673be995efff79c3e6784e05baa4c38c151427955f.png" />
+<img alt="../_images/821e0fea80a1aac6d15a2d7c2e4423e5cdda6d6c692fbd33fadff8d46010b80a.png" src="../_images/821e0fea80a1aac6d15a2d7c2e4423e5cdda6d6c692fbd33fadff8d46010b80a.png" />
 </div>
 </div>
 <p>The red circle is the location of our asteoid, (4179) Toutatis.</p>

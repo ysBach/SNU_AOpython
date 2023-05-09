@@ -46,9 +46,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -191,6 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -431,7 +431,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="aperture-daofind">
-<span id="ch-aperture"></span><h1><span class="section-number">3. </span>Aperture &amp; DAOFIND<a class="headerlink" href="#aperture-daofind" title="Permalink to this heading">#</a></h1>
+<span id="ch-aperture"></span><h1><span class="section-number">3. </span>Aperture &amp; DAOFIND<a class="headerlink" href="#aperture-daofind" title="Permalink to this headline">#</a></h1>
 <p>In astronomy, <a class="reference external" href="https://en.wikipedia.org/wiki/Aperture"><strong>aperture</strong></a> can mean various things. Basically, it is a <strong>hole</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -448,17 +448,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:28 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:36:28 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 photutils  1.7.0
+7 photutils  1.6.0
 8 version_information 1.0.4
 </pre></div>
 </div>
@@ -501,10 +501,10 @@ document.write(`
 </div>
 </div>
 <section id="simplest-aperture-photometry">
-<h2><span class="section-number">3.1. </span>Simplest Aperture Photometry<a class="headerlink" href="#simplest-aperture-photometry" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Simplest Aperture Photometry<a class="headerlink" href="#simplest-aperture-photometry" title="Permalink to this headline">#</a></h2>
 <p>Photometry (photo: light, metry: measurement, so 側光) in optical astronomy means 2-D measurements of light from the sky. It basically means the measurement of the flux of an object, but can also include morphological studies. If fluxes are measured in multiple filters, it’s colorimetry, with multiple polarizing filters, it becoms polarimetry. Sometimes the locational information of objects are of interest, which we call astrometry.</p>
 <section id="single-star">
-<h3><span class="section-number">3.1.1. </span>Single-Star<a class="headerlink" href="#single-star" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Single-Star<a class="headerlink" href="#single-star" title="Permalink to this headline">#</a></h3>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>
 <p>Consider you are observing a single star through this circular hole when seeing FWHM is about 1”. You first set this hole to, say, radius 3” and measure the flux. Call it <span class="math notranslate nohighlight">\(I_1\)</span>. We expect 3” contains almost all flux from this star. Then you increase this hole (say, radius 6”) and measure the flux and call it <span class="math notranslate nohighlight">\(I_2\)</span>. We would expect <span class="math notranslate nohighlight">\(I_2 &gt; I_1\)</span> because of the flux from the sky background. The two “holes” are called <strong>“apertures”</strong> in astronomical terms.</p>
@@ -609,7 +609,7 @@ m_a - m_b = -2.5 \lg\frac{I_{0, a}}{I_{0, b}} = -2.5 \lg\frac{57219.06}{50000} =
 </div>
 </section>
 <section id="multiple-stars">
-<h3><span class="section-number">3.1.2. </span>Multiple-Stars<a class="headerlink" href="#multiple-stars" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.1.2. </span>Multiple-Stars<a class="headerlink" href="#multiple-stars" title="Permalink to this headline">#</a></h3>
 <p>You have learnt how to use DAOFIND in photutils. Let’s use it to perform this “simple” photometry to all the field stars.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

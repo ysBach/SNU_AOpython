@@ -46,9 +46,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -191,6 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current nav bd-sidenav">
@@ -475,7 +475,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="iraf-deprecated">
-<span id="ch-iraf"></span><h1>IRAF (DEPRECATED)<a class="headerlink" href="#iraf-deprecated" title="Permalink to this heading">#</a></h1>
+<span id="ch-iraf"></span><h1>IRAF (DEPRECATED)<a class="headerlink" href="#iraf-deprecated" title="Permalink to this headline">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>You will need the tutorial data for HR30 to proceed this example. You can download it from here: <a class="reference external" href="https://doi.org/10.5281/zenodo.7911810"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.7911810.svg" /></a></p>
@@ -530,7 +530,7 @@ document.write(`
 <p>Because of the size of images, I did not include them in this GitHub repo. If you want, please contact me via (<a class="reference external" href="mailto:dbstn95&#37;&#52;&#48;gmail&#46;com">dbstn95<span>&#64;</span>gmail<span>&#46;</span>com</a>)! The HR30 data are actully publicly available via SMOKA and the Vega data are obtained in the class.</p>
 </div></blockquote>
 <section id="run-pyraf">
-<h2>1. Run PyRAF<a class="headerlink" href="#run-pyraf" title="Permalink to this heading">#</a></h2>
+<h2>1. Run PyRAF<a class="headerlink" href="#run-pyraf" title="Permalink to this headline">#</a></h2>
 <p>You can start IRAF environment (<em>not</em> IRAF itself!) by typing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ source activate iraf
 </pre></div>
@@ -568,11 +568,11 @@ $ cl</p>
 </ul>
 </section>
 <section id="display-image">
-<h2>2. Display Image<a class="headerlink" href="#display-image" title="Permalink to this heading">#</a></h2>
+<h2>2. Display Image<a class="headerlink" href="#display-image" title="Permalink to this headline">#</a></h2>
 <p>PyRAF supports few LINUX commands, such as <code class="docutils literal notranslate"><span class="pre">ls</span></code> or <code class="docutils literal notranslate"><span class="pre">cd</span></code> without an exclamation mark (<code class="docutils literal notranslate"><span class="pre">!</span></code>). But to display image, you must use <code class="docutils literal notranslate"><span class="pre">!ds9</span></code> or <code class="docutils literal notranslate"><span class="pre">!ginga</span></code>. You should also use (<code class="docutils literal notranslate"><span class="pre">!</span></code>) when delete files using <code class="docutils literal notranslate"><span class="pre">rm</span></code>.</p>
 <p>Since IRAF is extremely comfortable when used with <code class="docutils literal notranslate"><span class="pre">SAO</span> <span class="pre">ds9</span></code>, I will use <code class="docutils literal notranslate"><span class="pre">ds9</span></code> throughout this note.</p>
 <section id="sao-ds9">
-<h3>SAO DS9<a class="headerlink" href="#sao-ds9" title="Permalink to this heading">#</a></h3>
+<h3>SAO DS9<a class="headerlink" href="#sao-ds9" title="Permalink to this headline">#</a></h3>
 <p>Display the image:</p>
 <ul class="simple">
 <li><p><strong>TIP</strong>: It’s better to append the ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) at the end of <code class="docutils literal notranslate"><span class="pre">ds9</span></code>. Try without it and see what happens.</p></li>
@@ -582,7 +582,7 @@ $ cl</p>
 <p>In the <code class="docutils literal notranslate"><span class="pre">HR30/</span></code> directory, you have four images and <code class="docutils literal notranslate"><span class="pre">bias/</span></code> and <code class="docutils literal notranslate"><span class="pre">flat/</span></code> directories. The four images are the real images. I first will make master bias and flat.</p>
 </section>
 <section id="iraf-implot">
-<h3>IRAF <code class="docutils literal notranslate"><span class="pre">IMPLOT</span></code><a class="headerlink" href="#iraf-implot" title="Permalink to this heading">#</a></h3>
+<h3>IRAF <code class="docutils literal notranslate"><span class="pre">IMPLOT</span></code><a class="headerlink" href="#iraf-implot" title="Permalink to this headline">#</a></h3>
 <p>There are many plotting packages in IRAF too, e.g., <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?implot"><code class="docutils literal notranslate"><span class="pre">IMPLOT</span></code></a>, for image display, and <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?splot"><code class="docutils literal notranslate"><span class="pre">SPLOT</span></code></a>, for spectrum display:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">implot</span> <span class="n">vega_7s</span><span class="o">.</span><span class="n">fits</span>
 </pre></div>
@@ -592,7 +592,7 @@ $ cl</p>
 </section>
 </section>
 <section id="bias-combine">
-<h2>3. Bias Combine<a class="headerlink" href="#bias-combine" title="Permalink to this heading">#</a></h2>
+<h2>3. Bias Combine<a class="headerlink" href="#bias-combine" title="Permalink to this headline">#</a></h2>
 <p>First, make the list of bias files. Go to the bias directory by “<code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">cd</span> <span class="pre">bias</span></code>” and type</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; ls *.fits &gt; bias.list
 </pre></div>
@@ -620,7 +620,7 @@ $ cl</p>
 <p>In this tutorial, we will neglect the dark, because it is extremely small compared to that of bias and almost constant over the image in modern CCDs. <strong>So regard this master bias as “bias+dark”.</strong> If you have dark frames and want to make master dark frame, you can just do the same procedure for the dark frame images with identical exposure times (e.g., make <code class="docutils literal notranslate"><span class="pre">dark10s.list</span></code>, <code class="docutils literal notranslate"><span class="pre">dark100s.list</span></code>, etc).</p>
 </section>
 <section id="flat-combine">
-<h2>4. Flat Combine<a class="headerlink" href="#flat-combine" title="Permalink to this heading">#</a></h2>
+<h2>4. Flat Combine<a class="headerlink" href="#flat-combine" title="Permalink to this headline">#</a></h2>
 <p>To make master flat, you have to subtract master bias from combined flat image. All are identical as that of bias, but subtract master bias from the final combined flat.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; cd ../flat/
 --&gt; ls *.fits &gt; flat.list
@@ -642,9 +642,9 @@ $ cl</p>
 <p>​</p>
 </section>
 <section id="preprocessing">
-<h2>5. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this heading">#</a></h2>
+<h2>5. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
 <section id="imutil-package">
-<h3><code class="docutils literal notranslate"><span class="pre">IMUTIL</span></code> Package<a class="headerlink" href="#imutil-package" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">IMUTIL</span></code> Package<a class="headerlink" href="#imutil-package" title="Permalink to this headline">#</a></h3>
 <p>Preprocessing is simply “(raw image - master bias)/(master flat)”.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; cd ..
 --&gt; cp bias/bias.fits .
@@ -692,11 +692,11 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </ul>
 </section>
 <section id="ccdred-package">
-<h3><code class="docutils literal notranslate"><span class="pre">CCDRED</span></code> package<a class="headerlink" href="#ccdred-package" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">CCDRED</span></code> package<a class="headerlink" href="#ccdred-package" title="Permalink to this headline">#</a></h3>
 <p>There are some tasks which are made especially for bias, dark, and flat combine processes. They are called <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>, and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>, which are subtasks of <code class="docutils literal notranslate"><span class="pre">CCDRED</span></code>. They are all small variants of <code class="docutils literal notranslate"><span class="pre">COMBINE</span></code> (different from <code class="docutils literal notranslate"><span class="pre">IMCOIMBINE</span></code>), and run through <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code> task.</p>
 <p>I usually avoid teaching these because it veils what’s happening in IRAF, and thus not very good for educational purpose. But I am showing you how to use these tasks, since it may be necessary for your future work. Manuals are kindly available from STScI: Just google with keywords such as “iraf zerocombine” and you will find the STScI website manuals like <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?zerocombine">this</a>.</p>
 <section id="zerocombine">
-<h4><code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code><a class="headerlink" href="#zerocombine" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code><a class="headerlink" href="#zerocombine" title="Permalink to this headline">#</a></h4>
 <p>For bias (zero) combine, use the following settings:</p>
 <p><img alt="IRAF_zerocombine" src="../../_images/IRAF_zerocombine.png" /></p>
 <ul class="simple">
@@ -705,7 +705,7 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </ul>
 </section>
 <section id="darkcombine">
-<h4><code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code><a class="headerlink" href="#darkcombine" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code><a class="headerlink" href="#darkcombine" title="Permalink to this headline">#</a></h4>
 <p>For dark combine, use the following settings:</p>
 <p><img alt="IRAF_darkcombine" src="../../_images/IRAF_darkcombine.png" /></p>
 <ul class="simple">
@@ -728,7 +728,7 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </div></blockquote>
 </section>
 <section id="flatcombine">
-<h4><code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code><a class="headerlink" href="#flatcombine" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code><a class="headerlink" href="#flatcombine" title="Permalink to this headline">#</a></h4>
 <p>For dark combine, use the following settings:</p>
 <p><img alt="IRAF_flatcombine" src="../../_images/IRAF_flatcombine.png" /></p>
 <ul class="simple">
@@ -744,10 +744,10 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </section>
 </section>
 <section id="file-information">
-<h2>6. File Information<a class="headerlink" href="#file-information" title="Permalink to this heading">#</a></h2>
+<h2>6. File Information<a class="headerlink" href="#file-information" title="Permalink to this headline">#</a></h2>
 <p>You may want to see the brief information, such as statistics or the so-called “header information”, of images. You can do this via many ways.</p>
 <section id="statistics-from-iraf">
-<h3>Statistics from IRAF<a class="headerlink" href="#statistics-from-iraf" title="Permalink to this heading">#</a></h3>
+<h3>Statistics from IRAF<a class="headerlink" href="#statistics-from-iraf" title="Permalink to this headline">#</a></h3>
 <p>There is a task named <code class="docutils literal notranslate"><span class="pre">IMSTATISTICS</span></code> which gives some statistics for each image:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imstatistics *.fits
 #               IMAGE      NPIX      MEAN    STDDEV       MIN       MAX
@@ -774,11 +774,11 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </ul>
 </section>
 <section id="header-from-ds9">
-<h3>Header from ds9<a class="headerlink" href="#header-from-ds9" title="Permalink to this heading">#</a></h3>
+<h3>Header from ds9<a class="headerlink" href="#header-from-ds9" title="Permalink to this headline">#</a></h3>
 <p>On <code class="docutils literal notranslate"><span class="pre">ds9</span></code>, you can click on <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">-&gt;</span> <span class="pre">header</span></code> to see all the header contents.</p>
 </section>
 <section id="header-from-iraf">
-<h3>Header from IRAF<a class="headerlink" href="#header-from-iraf" title="Permalink to this heading">#</a></h3>
+<h3>Header from IRAF<a class="headerlink" href="#header-from-iraf" title="Permalink to this headline">#</a></h3>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imheader *.fits
 KCD095628.fits[2048,2048][ushort]: P/2006HR30
@@ -838,7 +838,7 @@ flat.fits	10.0	19:27:15
 <p>You may understand what this task gets and gives. <code class="docutils literal notranslate"><span class="pre">I</span></code> is for “inputs”, and it prints the filenames.</p>
 </section>
 <section id="ccdlist">
-<h3><code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code><a class="headerlink" href="#ccdlist" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code><a class="headerlink" href="#ccdlist" title="Permalink to this headline">#</a></h3>
 <p>There is another useful tool similar to <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> If you have used <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>,  and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>. It will show you which preprocesses have been done for each image. But since we used <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> only, this result will be almost identical to that of <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> and no more information will be there. To use <code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code>, you have to activate some packages:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imred
 imred/:
@@ -872,9 +872,9 @@ flat.fits[2048,2048][real][none][]:flat
 </section>
 </section>
 <section id="primitive-photometry">
-<h2>7. Primitive Photometry<a class="headerlink" href="#primitive-photometry" title="Permalink to this heading">#</a></h2>
+<h2>7. Primitive Photometry<a class="headerlink" href="#primitive-photometry" title="Permalink to this headline">#</a></h2>
 <section id="imexamine">
-<h3><code class="docutils literal notranslate"><span class="pre">IMEXAMINE</span></code><a class="headerlink" href="#imexamine" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">IMEXAMINE</span></code><a class="headerlink" href="#imexamine" title="Permalink to this headline">#</a></h3>
 <p>For photometry, let’s use <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code> first. IRAF becomes extremely powerful when you use the interactive mode with the aid of <code class="docutils literal notranslate"><span class="pre">SAO</span> <span class="pre">ds9</span></code>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; !ds9 bf_KCD095628.fits &amp;
 --&gt; imexam
@@ -892,7 +892,7 @@ flat.fits[2048,2048][real][none][]:flat
 <p>In the interactive mode, you can exit by hitting <code class="docutils literal notranslate"><span class="pre">q</span></code> key. Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> key to see the manual or help on the terminal. You can scroll down with <code class="docutils literal notranslate"><span class="pre">enter</span></code> key and escape by hitting the <code class="docutils literal notranslate"><span class="pre">q</span></code> key. The manual here is a short version of the website version.</p>
 </section>
 <section id="daoedit">
-<h3><code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code><a class="headerlink" href="#daoedit" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code><a class="headerlink" href="#daoedit" title="Permalink to this headline">#</a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">DIGIPHOT.DAOPHOT</span></code>, there are many tasks. Quite many people do use the stand alone version (<a class="reference external" href="http://www.astrobetter.com/wiki/DAOphot">see here</a>). Since we will <em>not</em> use IRAF intensively throughout this semester, I will just briefly mention the tasks. First type “<code class="docutils literal notranslate"><span class="pre">daophot</span></code>” and you will see:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; daophot
 daophot/:
@@ -935,11 +935,11 @@ Warning: Graphics overlay not available for display device.
 </section>
 </section>
 <section id="more-on-photometry">
-<h2>8. More on Photometry<a class="headerlink" href="#more-on-photometry" title="Permalink to this heading">#</a></h2>
+<h2>8. More on Photometry<a class="headerlink" href="#more-on-photometry" title="Permalink to this headline">#</a></h2>
 <p>What you have obtained from <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code> and <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> are very primitive results. In theory, the seeing effect should be nearly identical to all the point sources in the image, so we should have same FWHM for each star. What we do is to accept average of the FWHMs of the stars I got above. You may have now realized that we had to choose stars that are quite isolated! If there is another star near it, then its profile may have been polluted, and thus the FWHM is unreliable.</p>
 <p>Let me show you how to get photometry result using <code class="docutils literal notranslate"><span class="pre">FWHM=3</span></code> (pixels).</p>
 <section id="using-iraf-phot">
-<h3>Using IRAF <code class="docutils literal notranslate"><span class="pre">PHOT</span></code><a class="headerlink" href="#using-iraf-phot" title="Permalink to this heading">#</a></h3>
+<h3>Using IRAF <code class="docutils literal notranslate"><span class="pre">PHOT</span></code><a class="headerlink" href="#using-iraf-phot" title="Permalink to this headline">#</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; epar phot
 </pre></div>
 </div>
@@ -1008,7 +1008,7 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 </ul>
 </section>
 <section id="looking-at-the-results-of-phot">
-<h3>Looking at the Results of <code class="docutils literal notranslate"><span class="pre">PHOT</span></code><a class="headerlink" href="#looking-at-the-results-of-phot" title="Permalink to this heading">#</a></h3>
+<h3>Looking at the Results of <code class="docutils literal notranslate"><span class="pre">PHOT</span></code><a class="headerlink" href="#looking-at-the-results-of-phot" title="Permalink to this headline">#</a></h3>
 <p>Now you must have a file named <code class="docutils literal notranslate"><span class="pre">filename+.mag.1</span></code>, and mine is like this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#N IMAGE               XINIT     YINIT     ID    COORDS                 LID    \
 #U imagename           pixels    pixels    ##    filename               ##     \
@@ -1044,7 +1044,7 @@ bf_KCD095628.fits      1067.000  998.000   1     nullfile               0      \
 </ul>
 </section>
 <section id="saving-iraf-files-to-normal-text-txdump">
-<h3>Saving IRAF Files to Normal Text: <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code><a class="headerlink" href="#saving-iraf-files-to-normal-text-txdump" title="Permalink to this heading">#</a></h3>
+<h3>Saving IRAF Files to Normal Text: <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code><a class="headerlink" href="#saving-iraf-files-to-normal-text-txdump" title="Permalink to this headline">#</a></h3>
 <p>Now, it is difficult to read by a human. So IRAF supports a task called <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code>, which dumps texts. For example, let me print <code class="docutils literal notranslate"><span class="pre">XCENTER</span></code> and <code class="docutils literal notranslate"><span class="pre">YCENTER</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; txdump bf_KCD095628.fits.mag.2 &#39;xcenter, ycenter&#39; yes
 1070.161  998.227
@@ -1065,7 +1065,7 @@ bf_KCD095628.fits      1067.000  998.000   1     nullfile               0      \
 </section>
 </section>
 <section id="for-your-future-daofind">
-<h2>9. For Your Future… <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code><a class="headerlink" href="#for-your-future-daofind" title="Permalink to this heading">#</a></h2>
+<h2>9. For Your Future… <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code><a class="headerlink" href="#for-your-future-daofind" title="Permalink to this headline">#</a></h2>
 <p>Although I will not teach more on IRAF than this, you may need to learn using IRAF for photometry (even psf photometry) in the future, because many older generation prefers IRAF due to the <em>legacy</em>. I want to put one more information on <code class="docutils literal notranslate"><span class="pre">PHOT</span></code> task for your future reference and then the <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code>.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>, you may not want to do all the things interactively since you have 100 images with 2 stars of interest in each image (so that you need 100x2 = 200 interactions for the same xy coordinates). Then what you can do is to save the XY coordinate of the two stars in a file called <code class="docutils literal notranslate"><span class="pre">stars.coo.1</span></code> and fill <code class="docutils literal notranslate"><span class="pre">coords</span></code> of “<code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">PHOT</span></code>” with this filename. The file may look like:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1312.3 332.2
@@ -1112,7 +1112,7 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 <p>Here, <code class="docutils literal notranslate"><span class="pre">sharpness</span></code>, <code class="docutils literal notranslate"><span class="pre">sround</span></code>, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are the parameters used to determine whether the source is a star-like one or not. They are defined in the <a class="reference external" href="http://adsabs.harvard.edu/abs/1987PASP...99..191S">Stetson 1987</a> paper for the first time. <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> is a measure of “how sharp the target is”, and is kind of “peak value / sky value”, roughly speaking. <code class="docutils literal notranslate"><span class="pre">sround</span></code> and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are roundness parameters: <code class="docutils literal notranslate"><span class="pre">sround</span></code> is to measure the roundness based on the symmetric property of the source, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> is based on the marginalized Gaussian fit to the object.</p>
 </section>
 <section id="spectroscopic-preprocessing">
-<h2>10. Spectroscopic Preprocessing<a class="headerlink" href="#spectroscopic-preprocessing" title="Permalink to this heading">#</a></h2>
+<h2>10. Spectroscopic Preprocessing<a class="headerlink" href="#spectroscopic-preprocessing" title="Permalink to this headline">#</a></h2>
 <p>The preprocessing procedures are identical to photometry. One thing to be careful is just flat: flats should have identical filter, slit, grating, etc, with the object of interest.</p>
 <p>We then may need one more step, i.e., trimming (cropping the image). Go display the <code class="docutils literal notranslate"><span class="pre">flat.fits</span></code> file by <code class="docutils literal notranslate"><span class="pre">implot</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">implot</span> <span class="n">flat</span><span class="o">.</span><span class="n">fits</span>
@@ -1159,7 +1159,7 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 </div></blockquote>
 </section>
 <section id="apall-and-identify">
-<h2>11. <code class="docutils literal notranslate"><span class="pre">APALL</span></code> and <code class="docutils literal notranslate"><span class="pre">IDENTIFY</span></code><a class="headerlink" href="#apall-and-identify" title="Permalink to this heading">#</a></h2>
+<h2>11. <code class="docutils literal notranslate"><span class="pre">APALL</span></code> and <code class="docutils literal notranslate"><span class="pre">IDENTIFY</span></code><a class="headerlink" href="#apall-and-identify" title="Permalink to this headline">#</a></h2>
 <p>There are two cases for spectroscopic data:</p>
 <ol class="arabic simple">
 <li><p>The object is faint, so the sky lines are clearly visible (due to long exposure)</p></li>
@@ -1187,7 +1187,7 @@ DISPAXIS=                    1
 </div>
 <p>Now the image has the <code class="docutils literal notranslate"><span class="pre">DISPAXIS</span></code> header keyword.</p>
 <section id="aperture-extraction">
-<h3>Aperture Extraction<a class="headerlink" href="#aperture-extraction" title="Permalink to this heading">#</a></h3>
+<h3>Aperture Extraction<a class="headerlink" href="#aperture-extraction" title="Permalink to this headline">#</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">APALL</span></code> task:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">noao</span>
 <span class="o">--&gt;</span> <span class="n">onedspec</span>
@@ -1236,7 +1236,7 @@ Edit apertures for vega? (&#39;yes&#39;):
 <p>What is remaining? We have to change the x value to wavelength.</p>
 </section>
 <section id="wavelength-identification-bright-object">
-<h3>Wavelength Identification (Bright Object)<a class="headerlink" href="#wavelength-identification-bright-object" title="Permalink to this heading">#</a></h3>
+<h3>Wavelength Identification (Bright Object)<a class="headerlink" href="#wavelength-identification-bright-object" title="Permalink to this headline">#</a></h3>
 <p>You may have the trimmed reference (calibration) lamp image.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">epar</span> <span class="n">identify</span>
 </pre></div>
@@ -1306,18 +1306,18 @@ pvega.ms updated
 </section>
 </section>
 <section id="flux-calibration">
-<h2>12. Flux Calibration<a class="headerlink" href="#flux-calibration" title="Permalink to this heading">#</a></h2>
+<h2>12. Flux Calibration<a class="headerlink" href="#flux-calibration" title="Permalink to this headline">#</a></h2>
 <p>We need to have standard star spectrum to do the flux calibration. The standard star data is saved in somewhere like <code class="docutils literal notranslate"><span class="pre">${ANACONDA3}/envs/iraf/iraf/noao/lib/onedstds/</span></code>. I haven’t yet made lecture note for this, but you can easily find simple example from <a class="reference external" href="https://www.subarutelescope.org/Observing/DataReduction/Cookbooks/FOCAS_cookbook_2010jan05.pdf">FOCAS Cookbook</a>. See section 5.7 of the cookbook.</p>
 </section>
 <section id="a-iraf-trouble-shooting">
-<h2>A. IRAF Trouble Shooting<a class="headerlink" href="#a-iraf-trouble-shooting" title="Permalink to this heading">#</a></h2>
+<h2>A. IRAF Trouble Shooting<a class="headerlink" href="#a-iraf-trouble-shooting" title="Permalink to this headline">#</a></h2>
 <section id="errors-messages-that-you-cannot-change-uparm-something">
-<h3>Errors: Messages That You Cannot Change <code class="docutils literal notranslate"><span class="pre">uparm</span></code> something<a class="headerlink" href="#errors-messages-that-you-cannot-change-uparm-something" title="Permalink to this heading">#</a></h3>
+<h3>Errors: Messages That You Cannot Change <code class="docutils literal notranslate"><span class="pre">uparm</span></code> something<a class="headerlink" href="#errors-messages-that-you-cannot-change-uparm-something" title="Permalink to this headline">#</a></h3>
 <p>Check that you ran <code class="docutils literal notranslate"><span class="pre">pyraf</span></code> <strong>at the directory where you have <code class="docutils literal notranslate"><span class="pre">login.cl</span></code>”</strong>!</p>
 <p>Many of the students ran <code class="docutils literal notranslate"><span class="pre">pyraf</span></code> where you didn’t do <code class="docutils literal notranslate"><span class="pre">mkiraf</span></code>. In such case, you can “run” <code class="docutils literal notranslate"><span class="pre">pyraf</span></code>, but nothing will work correctly. Even <code class="docutils literal notranslate"><span class="pre">ls</span></code> will not work. If you had to put <code class="docutils literal notranslate"><span class="pre">!</span></code> in front of <code class="docutils literal notranslate"><span class="pre">ls</span></code>, that means you made some mistake.</p>
 </section>
 <section id="errors-fxf-or-not-an-image-or-a-number">
-<h3>Errors: “FXF” or  “Not an Image or a Number”<a class="headerlink" href="#errors-fxf-or-not-an-image-or-a-number" title="Permalink to this heading">#</a></h3>
+<h3>Errors: “FXF” or  “Not an Image or a Number”<a class="headerlink" href="#errors-fxf-or-not-an-image-or-a-number" title="Permalink to this headline">#</a></h3>
 <p>The following error messages may be popped up if the image reduction had some problem:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FXF: must specify which FITS extenstion
 (filename) is not an image or a number

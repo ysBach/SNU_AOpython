@@ -46,9 +46,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -189,6 +187,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -444,7 +444,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="software-tools">
-<span id="softwares"></span><h1><span class="section-number">1. </span>Software Tools<a class="headerlink" href="#software-tools" title="Permalink to this heading">#</a></h1>
+<span id="softwares"></span><h1><span class="section-number">1. </span>Software Tools<a class="headerlink" href="#software-tools" title="Permalink to this headline">#</a></h1>
 <p>In this chapter, you will <strong>install</strong> the necessary apps/softwares/packages that we will use throughout this course. I also put links to tutorials, if you are interested in advanced usage.</p>
 <div class="admonition-references admonition">
 <p class="admonition-title">References</p>
@@ -501,7 +501,7 @@ document.write(`
 </dl>
 <hr class="docutils" />
 <section id="git-and-github">
-<h2><span class="section-number">1.1. </span>Git and GitHub<a class="headerlink" href="#git-and-github" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Git and GitHub<a class="headerlink" href="#git-and-github" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p>Go to <a class="reference external" href="http://github.com/">GitHub</a> and make your own ID.</p>
 <ul class="simple">
@@ -521,7 +521,7 @@ document.write(`
 </div></blockquote>
 </div>
 <section id="git-tutorials">
-<h3><span class="section-number">1.1.1. </span>Git Tutorials<a class="headerlink" href="#git-tutorials" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.1.1. </span>Git Tutorials<a class="headerlink" href="#git-tutorials" title="Permalink to this headline">#</a></h3>
 <p><strong>Useful Web Tutorials</strong>: <a class="reference external" href="https://36-750.github.io/tools/version-control/">https://36-750.github.io/tools/version-control/</a></p>
 <dl class="simple myst">
 <dt><strong>Nicolas (YouTube)</strong></dt><dd><p><a class="reference external" href="https://youtu.be/YFNQwo7iTNc">Explain Git Like I’m Five</a> in 2019, <a class="reference external" href="https://youtu.be/x_Yw2f161CU">Trying GitHub Copilot</a> in 2021.</p>
@@ -548,7 +548,7 @@ document.write(`
 </section>
 </section>
 <section id="slack">
-<h2><span class="section-number">1.2. </span>Slack<a class="headerlink" href="#slack" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Slack<a class="headerlink" href="#slack" title="Permalink to this headline">#</a></h2>
 <p>Some useful links:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://slack.com/">Official slack</a>: log in and see what workspaces you are in.</p></li>
@@ -556,7 +556,7 @@ document.write(`
 <li><p><a class="reference external" href="http://blog.naver.com/hivearena/220377857149">A random blog explaining Slack</a> (Korean)</p></li>
 </ul>
 <section id="how-to-join-slack-workspace">
-<h3><span class="section-number">1.2.1. </span>How to Join Slack Workspace<a class="headerlink" href="#how-to-join-slack-workspace" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.1. </span>How to Join Slack Workspace<a class="headerlink" href="#how-to-join-slack-workspace" title="Permalink to this headline">#</a></h3>
 <ol class="arabic simple">
 <li><p>TA will announce the “<strong>invitation link</strong>” to you.</p></li>
 <li><p>Type your email and name.</p>
@@ -575,7 +575,7 @@ document.write(`
 </ol>
 </section>
 <section id="terms">
-<h3><span class="section-number">1.2.2. </span>Terms<a class="headerlink" href="#terms" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.2. </span>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">#</a></h3>
 <p>The following analogy works:</p>
 <table class="colwidths-auto table">
 <thead>
@@ -597,7 +597,7 @@ document.write(`
 </table>
 </section>
 <section id="why-we-chose-slack">
-<h3><span class="section-number">1.2.3. </span>Why We Chose Slack<a class="headerlink" href="#why-we-chose-slack" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.3. </span>Why We Chose Slack<a class="headerlink" href="#why-we-chose-slack" title="Permalink to this headline">#</a></h3>
 <p>Slack is a software to make co-work easier; basically a “chatting app”. We chose this for our communication platform because</p>
 <ol class="arabic simple">
 <li><p>It is <strong>OS-independent</strong>: Windows, mac, Linux, iOS, Android, Windows Phone, etc all can use slack without much difference. It works perfectly even on web-browsers.</p></li>
@@ -610,7 +610,7 @@ document.write(`
 <p>Especially, 1, 4 and 5 are the main reasons we dropped Kakao-talk or the likes which we’ve used for years.</p>
 </section>
 <section id="tips-for-slack">
-<h3><span class="section-number">1.2.4. </span>Tips for Slack<a class="headerlink" href="#tips-for-slack" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.4. </span>Tips for Slack<a class="headerlink" href="#tips-for-slack" title="Permalink to this headline">#</a></h3>
 <p><img alt="" src="../../_images/slack.png" /></p>
 <p>In our workspace, <code class="docutils literal notranslate"><span class="pre">2020ao1.slack.com</span></code>, you can see the left side bar:</p>
 <ul class="simple">
@@ -668,7 +668,7 @@ document.write(`
 </section>
 </section>
 <section id="anaconda">
-<h2><span class="section-number">1.3. </span>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">#</a></h2>
 <p>All the IRAF/Astropy packages, as well as usual python packages, will be downloaded via a platform called <a class="reference external" href="https://www.continuum.io/downloads"><strong>Anaconda</strong></a>. When the download is done, install Anaconda following the website’s instruction.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -693,7 +693,7 @@ document.write(`
 </div>
 </section>
 <section id="iraf-pyraf-deprecated">
-<h2><span class="section-number">1.4. </span>IRAF/PyRAF (<em>deprecated</em>)<a class="headerlink" href="#iraf-pyraf-deprecated" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>IRAF/PyRAF (<em>deprecated</em>)<a class="headerlink" href="#iraf-pyraf-deprecated" title="Permalink to this headline">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">IRAF/PyRAF is deprecated</p>
 <p><strong>IRAF/PyRAF works only on UNIX, and you cannot run it correctly on Windows.</strong></p>
@@ -708,16 +708,16 @@ conda create -n iraf python=2.7 iraf-all pyraf-all stsci
 </div>
 </section>
 <section id="editors">
-<h2><span class="section-number">1.5. </span>Editors<a class="headerlink" href="#editors" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Editors<a class="headerlink" href="#editors" title="Permalink to this headline">#</a></h2>
 <p>There are bunch of different editors (including IDEs = Integrated Development Environment) to edit the codes. As of 2023, I guess the simplest choice would be <a class="reference external" href="https://code.visualstudio.com/">Microsoft Visual Studio Code (VS Code)</a>. As VS Code is a bit heavy when all linting options are turned on, you may prefer to use simpler text editors for quick edits.</p>
 <p>Other people may prefer <strong>spyder</strong>, <strong>Sublime Text 3</strong>, <strong>Atom</strong>, <strong>Wing</strong> IDE, <strong>PyDev</strong>, <strong>PyCharm</strong>, and even <strong>VI</strong> (vim) or <strong>Emacs</strong>. (Recently, vast majority of sublime text and atom users have migrated to VS code, AFAIK).</p>
 <p>If you can, I recommend using VI as a sub editor, or at least learn how to use it. I don’t use VI just because for me it is too difficult to use it.</p>
 </section>
 <section id="image-displayer">
-<h2><span class="section-number">1.6. </span>Image Displayer<a class="headerlink" href="#image-displayer" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.6. </span>Image Displayer<a class="headerlink" href="#image-displayer" title="Permalink to this headline">#</a></h2>
 <p>In astronomical image reduction process, you need some tools to display images on computer screen to interactively investigate the images. There is a <em>historical standard</em>, which is kind of an <em>affiliated package of IRAF</em>, <a class="reference external" href="http://ds9.si.edu/site/Download.html">SAO ds9</a>. Some people (especially amateurs) use <a class="reference external" href="http://diffractionlimited.com/product/maxim-dl/">Maxim DL</a> or other programs, but they are mostly commercial. In the future, as Python gets more and more attention, Ginga (see below) will be another powerful option. I am not sure when Ginga will become quite <em>perfect</em>, but until then, I recommend you to use both of them. Their pros and cons will be explained from now.</p>
 <section id="sao-ds9">
-<h3><span class="section-number">1.6.1. </span>SAO ds9<a class="headerlink" href="#sao-ds9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.6.1. </span>SAO ds9<a class="headerlink" href="#sao-ds9" title="Permalink to this headline">#</a></h3>
 <p>Many useful documentations and YouTube videos: <a class="reference external" href="https://sites.google.com/cfa.harvard.edu/saoimageds9/documentation?authuser=0">SAOImageDS9 - Documentation</a> (retrieved 2022-11-30).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -760,7 +760,7 @@ conda create -n iraf python=2.7 iraf-all pyraf-all stsci
 <p>For more command line options, see <a class="reference external" href="http://ds9.si.edu/doc/ref/command.html">this link</a>.</p>
 </section>
 <section id="ginga-astropy-affiliated">
-<h3><span class="section-number">1.6.2. </span>Ginga: Astropy Affiliated<a class="headerlink" href="#ginga-astropy-affiliated" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.6.2. </span>Ginga: Astropy Affiliated<a class="headerlink" href="#ginga-astropy-affiliated" title="Permalink to this headline">#</a></h3>
 <p><a class="reference external" href="https://ginga.readthedocs.io/en/latest/">Ginga</a> (pronounced <em>ging-ga</em>, which means <em>galaxy</em> in Japanese; the reason for the name is explained in the link) is an affiliated package of astropy, and is a FITS image viewer.</p>
 <p>If you want to download it, type</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c astropy ginga
@@ -773,7 +773,7 @@ conda create -n iraf python=2.7 iraf-all pyraf-all stsci
 </section>
 </section>
 <section id="hw">
-<h2><span class="section-number">1.7. </span>HW<a class="headerlink" href="#hw" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>HW<a class="headerlink" href="#hw" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="99-HW_swtools.html#hw-swtools"><span class="std std-ref">HW for SW tools</span></a></p></li>
 </ul>
