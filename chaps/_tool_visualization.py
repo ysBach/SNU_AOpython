@@ -1,12 +1,19 @@
 from warnings import warn
-from astropy.visualization import (
-    ImageNormalize,
-    LinearStretch,
-    ZScaleInterval,
-    simple_norm,
-)
 
-__all__ = ["znorm", "zimshow", "norm_imshow"]
+from astropy.visualization import (ImageNormalize, LinearStretch,
+                                   ZScaleInterval, simple_norm)
+from matplotlib.ticker import FormatStrFormatter
+
+__all__ = ["colorbaring", "znorm", "zimshow", "norm_imshow"]
+
+
+def colorbaring(fig, ax, im, fmt="%.0f", orientation='horizontal',
+                formatter=FormatStrFormatter, tick_kw=None, **kwargs):
+    cb = fig.colorbar(im, ax=ax, orientation=orientation,
+                      format=formatter(fmt), **kwargs)
+    if tick_kw is not None:
+        cb.ax.tick_params(**tick_kw)
+    return cb
 
 
 def znorm(image, stretch=LinearStretch(), **kwargs):

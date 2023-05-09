@@ -65,10 +65,11 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/00-Syllabus';</script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Philosophy" href="00-Philosophy.html" />
-    <link rel="prev" title="HW astropy.fits" href="python_prep/99-HW_astropy-fits.html" />
+    <link rel="next" title="1. Software Tools" href="prerequisites/00-1_Softwares.html" />
+    <link rel="prev" title="SNU AO Class Python Notes" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,7 +160,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -182,6 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -190,11 +202,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -410,9 +417,21 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="an-example-syllabus">
 <span id="syllabus"></span><h1>An Example Syllabus<a class="headerlink" href="#an-example-syllabus" title="Permalink to this heading">#</a></h1>
 <p>This is an example case of syllabus.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <strong>lecturer</strong> should prepare PCs (i.e., <strong>install python and necessary packages</strong>) before the class.</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>There are multiple explanations about installation in the prerequisites notes, but they are mere “help pages” when students have to setup their own env by themselves in the future (e.g., when they become a PhD student). Please do <strong>NOT</strong> attempt to let students go through all the installation processes, unless it is absolutely necessary.</p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>My intention is to give lectures using this website. Some blocks may not be displayed properly in Jupyter Notebook.</p>
+<p>I did <strong>NOT</strong> intend to let students git pull this repo! (the lecturer has to)</p>
+</div>
 <ul class="simple">
-<li><p><strong>TA</strong>s should prepare PCs (i.e., <strong>install python and necessary packages</strong>) before the class. There are multiple explanations about installation in the prerequisites notes, but they are mere “help pages” when students have to setup their own env by themselves in the future (e.g., when they become a PhD student).</p></li>
-<li><p>This lecture note is almost ignoring anything about preprocessing. If preprocessing-related lecture is required, I recommend using <a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html">Matthew Craig’s CCD Data Reduction Guide</a>.</p></li>
+<li><p>This lecture note is ignoring anything about preprocessing. If preprocessing-related lecture is required, I recommend using <a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html">Matthew Craig’s CCD Data Reduction Guide</a>.</p></li>
 </ul>
 <ol class="arabic simple">
 <li><p>Preparation</p>
@@ -424,12 +443,18 @@ document.write(`
 </ul>
 </li>
 <li><p>Give short lectures on the four notebooks in <a class="reference internal" href="python_prep/00-python_prep.html#python-prep"><span class="std std-ref">python prep</span></a>.</p></li>
-<li><p>HW: <a class="reference internal" href="prerequisites/99-HW_swtools.html#hw-swtools"><span class="std std-ref">HW Software &amp; Tools</span></a></p></li>
+<li><p><a class="reference internal" href="prerequisites/99-HW_swtools.html#hw-swtools"><span class="std std-ref">HW</span></a></p>
+<ul>
+<li><p>Slack, GitHub are optional.</p></li>
+<li><p>DS9 and Interactive Analyses parts are likely useful.</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>Week 01:</p>
 <ul class="simple">
 <li><p>Dealing with FITS (astropy)</p></li>
+<li><p>Simple centering algorithm lecture.</p></li>
 </ul>
 </li>
 </ol>
@@ -467,20 +492,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="python_prep/99-HW_astropy-fits.html"
+       href="../index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></p>
+        <p class="prev-next-title">SNU AO Class Python Notes</p>
       </div>
     </a>
     <a class="right-next"
-       href="00-Philosophy.html"
+       href="prerequisites/00-1_Softwares.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Philosophy</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Software Tools</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

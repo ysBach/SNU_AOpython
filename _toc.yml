@@ -13,6 +13,9 @@ defaults:  # The defaults key will be applied to all chapters and sub-sections
 
 
 parts:
+- caption: Front Matter
+  chapters:
+  - file: chaps/00-Syllabus
 - caption: Prerequisite
   numbered: 3  # Only applies to chapters in this part, up to 3 letters.
   chapters:
@@ -36,6 +39,12 @@ parts:
   numbered: 3 # Only applies to chapters in this Part
   chapters:
   - file: chaps/06-diffphot
+  - file: chaps/07-bkg2d
+  - file: chaps/08-extended
+- caption: Appendix
+  chapters:
+  - file: chaps/00-Philosophy
+  - file: chaps/appendix/S01_IRAF
 - caption: Homework Assignments
   numbered: false  # Only applies to chapters in this Part
   chapters:
@@ -44,7 +53,3 @@ parts:
   - file: chaps/python_prep/99-HW_numpy
   - file: chaps/python_prep/99-HW_pandas
   - file: chaps/python_prep/99-HW_astropy-fits
-- caption: Appendix
-  chapters:
-  - file: chaps/00-Syllabus
-  - file: chaps/00-Philosophy

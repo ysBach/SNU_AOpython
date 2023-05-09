@@ -21,7 +21,7 @@ So I decided to make materials that (1) are **USEFUL**, (2) have specific names/
 This note is composed of three major parts.
 
 Theoretical lecture (Books)
-: The theory part (mathematical derivations, verbal explanations, etc) is made with **TeX** as a book-like format.
+: The theory part (mathematical derivations, verbal explanations, etc) is made with **TeX** as a book-like format. It is in the main repo : [SNU_AOclass/Books](https://github.com/ysBach/SNU_AOclass/tree/master/Books).
 ```{admonition} Why not Jupyter-Book?
 :class: dropdown, tip
 I tried to migrate those theoretical parts into Jupyter-Book too, but (1) I was running out of time to do that and (2) as a lazy justification, such kind of documents must be stored in TeX for the ultimate reproducibility. Jupyter-Book is also an evolving package, which means that it may undergo backward-incompatible upgrade in the near future, or even disappear as computational facilities (computers, OS, programming languages, etc) evolve. TeX, on the other hand, will be as is forever by design.

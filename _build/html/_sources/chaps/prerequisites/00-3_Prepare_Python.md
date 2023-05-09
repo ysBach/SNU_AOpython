@@ -4,6 +4,13 @@
 
 For this lecture notes, you need some packages to run the codes.
 
+```{warning}
+The intention of this note is for completeness & reference for students when they become a researcher. **I have not intended** to let students go through all these installation steps during the class time. Please let TA to setup/install everything beforehand.
+
+Depending on your OS and environments, some parts will result in error. **You should take the full responsibility for that**, unless you use the computers setup by the TA.
+```
+
+
 ```{admonition} For Windows users
 If you want to use Windows, you have to sacrifice ``fitsio`` (unfortunately, their installation assumes ``gcc``). Erase the installation of ``fitsio`` from the codes below.
 ```
@@ -24,25 +31,40 @@ conda activate snuao
 conda install -c conda-forge fitsio -y  # Windows will raise error here; ignore this line if it does.
 ```
 
+While it is going on, clone the AOclass repo Download ZIP or
+
+```
+git clone --recursive https://github.com/ysBach/SNU_AOclass.git
+# Or gh repo clone ysBach/SNU_AOclass
+
+cd SNU_AOclass # Go to the SNU_AOclass directory.
+git submodule update --init --recursive
+```
+
 **This may take several minutes.** Be patient, grab a cup of coffee and read the "Reading Materials" section below.
 
 ***AFTER the above is finished***, install the submodules:
 
 ```
+# Go to the SNU_AOclass directory.
 cd submodules/
+conda activate snuao
 cd version_information && pip install -e . && cd ..
 cd astroquery && pip install -e . && cd ..
 cd ginga && pip install -e . && cd ..
 cd astroalign && pip install -e . && cd ..
 cd astroscrappy && pip install -e . && cd ..
 ```
+
 (basically any version of these may not break any part of the notebooks, hopefully...)
 
-Finally
-
+Next,
 ```
 pip install astro-ndslice==0.2 ysfitsutilpy==0.2 ysphotutilpy==0.1.1 --no-deps
 ```
+
+Finally, download [_tool_visualization.py](https://github.com/ysBach/SNU_AOpython/blob/main/chaps/_tool_visualization.py) and put it to **the directory where you will run your python files/notebooks**.
+
 
 ### Reading Materials
 
@@ -86,8 +108,9 @@ Among the Astropy affiliated packages, these will be heavily used:
 
 Some packages has test module. Please run these to check if the installation worked correctly.
 
-<details><summary>click</summary>
-<p>
+````{admonition} testing
+:class: dropdown, tip
+
 You can simply test the installation by tests. Run ipython or Jupyter notebook/lab, and type
 
 ``` python
@@ -120,8 +143,8 @@ Some tests are known to fail when run from the IPython prompt; especially, but n
 
 The astropy will do the tests automatically (takes ~ 10 minutes). There might be some errors, but usually they are not important, so you can ignore them. If "`astropy.test()`" itself does not work, please check whether the installation of Anaconda had been done correctly.
 
-</p>
-</details>
+````
+
 
 ## Troubleshoot
 

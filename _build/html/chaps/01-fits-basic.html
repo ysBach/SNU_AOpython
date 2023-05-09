@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/01-fits-basic';</script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Centering" href="02-center.html" />
@@ -159,7 +160,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -182,6 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -190,11 +202,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -431,6 +438,7 @@ document.write(`
 <li><p>Read/write FITS files.</p></li>
 <li><p>Crop (cutout) a small region of the FITS image.</p></li>
 </ol>
+<p>The data we will use for the next few notes are from the Korean <a class="reference external" href="https://kmtnet.kasi.re.kr/kmtnet-eng/">KMTNet</a>, the observation of an asteorid <a class="reference external" href="https://en.wikipedia.org/wiki/4179_Toutatis">(4179) Toutatis</a>. The results are published as <a class="reference external" href="http://www.koreascience.or.kr/article/JAKO201918440610851.page">Bach, Ishiguro, Jin, et al. (2019) JKAS</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ignore this cell if you encounter errors</span>
@@ -446,12 +454,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-04-26 19:17:59 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:19 (KST = GMT+0900) 
 0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.7.0
+1 IPython    8.13.1
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.2
+4 numpy      1.23.5
 5 scipy      1.10.1
 6 matplotlib 3.7.1
 7 version_information 1.0.4
@@ -846,7 +854,7 @@ The end of the observation time is    : 2018-04-13T21:58:39.000
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 100)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_82159/2916193753.py:3: RuntimeWarning: invalid value encountered in sqrt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38282/2916193753.py:3: RuntimeWarning: invalid value encountered in sqrt
   newdata = np.sqrt(data[300:400, 650:750])
 </pre></div>
 </div>
@@ -926,7 +934,7 @@ The end of the observation time is    : 2018-04-13T21:58:39.000
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
 the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
-/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_82159/2677194592.py:28: RuntimeWarning: invalid value encountered in sqrt
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38282/2677194592.py:28: RuntimeWarning: invalid value encountered in sqrt
   cut.data = np.sqrt(cut.data)
 </pre></div>
 </div>
@@ -982,7 +990,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / Telescope Coordinate System 
 the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
-/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_82159/1339730229.py:4: RuntimeWarning: invalid value encountered in sqrt
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38282/1339730229.py:4: RuntimeWarning: invalid value encountered in sqrt
   cut.data = np.sqrt(cut.data)
 </pre></div>
 </div>
@@ -1004,10 +1012,14 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2],
-       [10, 11, 12],
-       [20, 21, 22],
-       [30, 31, 32]])
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">astro_ndslice</span> <span class="k">as</span> <span class="nn">nds</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">arr2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">a_slice</span> <span class="o">=</span> <span class="n">nds</span><span class="o">.</span><span class="n">slice_from_string</span><span class="p">(</span><span class="s1">&#39;[1:3, 1:4]&#39;</span><span class="p">,</span> <span class="n">fits_convention</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;astro_ndslice&#39;
 </pre></div>
 </div>
 </div>
@@ -1020,10 +1032,13 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  2,  4,  6,  8],
-       [10, 12, 14, 16, 18],
-       [20, 22, 24, 26, 28],
-       [30, 32, 34, 36, 38]])
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">a_slice</span> <span class="o">=</span> <span class="n">nds</span><span class="o">.</span><span class="n">slice_from_string</span><span class="p">(</span><span class="s1">&#39;[1:10:2, 1:4]&#39;</span><span class="p">,</span> <span class="n">fits_convention</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">arr2d</span><span class="p">[</span><span class="n">a_slice</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;nds&#39; is not defined
 </pre></div>
 </div>
 </div>

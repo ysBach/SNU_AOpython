@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/prerequisites/00-3_Prepare_Python';</script>
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Python Preparation Course" href="../python_prep/00-python_prep.html" />
@@ -159,7 +160,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00-1_Softwares.html">1. Software Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00-2_UNIX.html">2. UNIX Shell</a></li>
@@ -182,6 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -190,11 +202,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00-Syllabus.html">An Example Syllabus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
 </ul>
 
     </div>
@@ -425,6 +432,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="important-python-environment">
 <span id="prepare-python"></span><h1><span class="section-number">3. </span>(IMPORTANT) Python Environment<a class="headerlink" href="#important-python-environment" title="Permalink to this heading">#</a></h1>
 <p>For this lecture notes, you need some packages to run the codes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The intention of this note is for completeness &amp; reference for students when they become a researcher. <strong>I have not intended</strong> to let students go through all these installation steps during the class time. Please let TA to setup/install everything beforehand.</p>
+<p>Depending on your OS and environments, some parts will result in error. <strong>You should take the full responsibility for that</strong>, unless you use the computers setup by the TA.</p>
+</div>
 <div class="admonition-for-windows-users admonition">
 <p class="admonition-title">For Windows users</p>
 <p>If you want to use Windows, you have to sacrifice <code class="docutils literal notranslate"><span class="pre">fitsio</span></code> (unfortunately, their installation assumes <code class="docutils literal notranslate"><span class="pre">gcc</span></code>). Erase the installation of <code class="docutils literal notranslate"><span class="pre">fitsio</span></code> from the codes below.</p>
@@ -442,9 +454,19 @@ document.write(`
 <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">fitsio</span> <span class="o">-</span><span class="n">y</span>  <span class="c1"># Windows will raise error here; ignore this line if it does.</span>
 </pre></div>
 </div>
+<p>While it is going on, clone the AOclass repo Download ZIP or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ysBach</span><span class="o">/</span><span class="n">SNU_AOclass</span><span class="o">.</span><span class="n">git</span>
+<span class="c1"># Or gh repo clone ysBach/SNU_AOclass</span>
+
+<span class="n">cd</span> <span class="n">SNU_AOclass</span> <span class="c1"># Go to the SNU_AOclass directory.</span>
+<span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span> <span class="o">--</span><span class="n">recursive</span>
+</pre></div>
+</div>
 <p><strong>This may take several minutes.</strong> Be patient, grab a cup of coffee and read the “Reading Materials” section below.</p>
 <p><em><strong>AFTER the above is finished</strong></em>, install the submodules:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">submodules</span><span class="o">/</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Go to the SNU_AOclass directory.</span>
+<span class="n">cd</span> <span class="n">submodules</span><span class="o">/</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">snuao</span>
 <span class="n">cd</span> <span class="n">version_information</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="o">..</span>
 <span class="n">cd</span> <span class="n">astroquery</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="o">..</span>
 <span class="n">cd</span> <span class="n">ginga</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="o">..</span>
@@ -453,10 +475,11 @@ document.write(`
 </pre></div>
 </div>
 <p>(basically any version of these may not break any part of the notebooks, hopefully…)</p>
-<p>Finally</p>
+<p>Next,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">astro</span><span class="o">-</span><span class="n">ndslice</span><span class="o">==</span><span class="mf">0.2</span> <span class="n">ysfitsutilpy</span><span class="o">==</span><span class="mf">0.2</span> <span class="n">ysphotutilpy</span><span class="o">==</span><span class="mf">0.1.1</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">deps</span>
 </pre></div>
 </div>
+<p>Finally, download <a class="reference external" href="https://github.com/ysBach/SNU_AOpython/blob/main/chaps/_tool_visualization.py">_tool_visualization.py</a> and put it to <strong>the directory where you will run your python files/notebooks</strong>.</p>
 <section id="reading-materials">
 <h3><span class="section-number">3.1.1. </span>Reading Materials<a class="headerlink" href="#reading-materials" title="Permalink to this heading">#</a></h3>
 <p>Somethings to read during the installation:</p>
@@ -494,9 +517,9 @@ document.write(`
 <section id="check-if-installed-correctly">
 <h2><span class="section-number">3.2. </span>Check if Installed Correctly<a class="headerlink" href="#check-if-installed-correctly" title="Permalink to this heading">#</a></h2>
 <p>Some packages has test module. Please run these to check if the installation worked correctly.</p>
-<details><summary>click</summary>
-<p>
-You can simply test the installation by tests. Run ipython or Jupyter notebook/lab, and type
+<div class="dropdown tip admonition">
+<p class="admonition-title">testing</p>
+<p>You can simply test the installation by tests. Run ipython or Jupyter notebook/lab, and type</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">astropy</span><span class="o">,</span> <span class="nn">photutils</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">photutils</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">astropy</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
@@ -518,8 +541,7 @@ Some<span class="w"> </span>tests<span class="w"> </span>are<span class="w"> </s
 </pre></div>
 </div>
 <p>The astropy will do the tests automatically (takes ~ 10 minutes). There might be some errors, but usually they are not important, so you can ignore them. If “<code class="docutils literal notranslate"><span class="pre">astropy.test()</span></code>” itself does not work, please check whether the installation of Anaconda had been done correctly.</p>
-</p>
-</details>
+</div>
 </section>
 <section id="troubleshoot">
 <h2><span class="section-number">3.3. </span>Troubleshoot<a class="headerlink" href="#troubleshoot" title="Permalink to this heading">#</a></h2>
