@@ -2,7 +2,7 @@
 # IRAF (DEPRECATED)
 
 ```{important}
-You will need the tutorial data for HR30 to proceed this example.
+You will need the tutorial data for HR30 to proceed this example. You can download it from here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7911810.svg)](https://doi.org/10.5281/zenodo.7911810)
 
 ```
 
