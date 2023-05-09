@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -201,6 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 
     </div>
@@ -454,9 +457,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numpy-tutorial">
-<span id="id1"></span><h1><span class="section-number">4.4. </span>Numpy Tutorial<a class="headerlink" href="#numpy-tutorial" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">4.4. </span>Numpy Tutorial<a class="headerlink" href="#numpy-tutorial" title="Permalink to this heading">#</a></h1>
 <section id="numpy-array">
-<h2><span class="section-number">4.4.1. </span>Numpy Array<a class="headerlink" href="#numpy-array" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.4.1. </span>Numpy Array<a class="headerlink" href="#numpy-array" title="Permalink to this heading">#</a></h2>
 <p>Numpy array has its own “axis” system.</p>
 <p><img alt="" src="http://www.johncanessa.com/wp-content/uploads/2019/02/numpy_broadcasting-300x168.png" /></p>
 <div class="cell docutils container">
@@ -469,7 +472,7 @@ document.write(`
 </div>
 </div>
 <section id="array">
-<h3>Array<a class="headerlink" href="#array" title="Permalink to this headline">#</a></h3>
+<h3>Array<a class="headerlink" href="#array" title="Permalink to this heading">#</a></h3>
 <p>Useful attributes:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.dtype</span></code>: The data type</p></li>
@@ -546,9 +549,9 @@ arr2.ndim  = 2
 </div>
 </section>
 <section id="array-generation">
-<h3>Array Generation<a class="headerlink" href="#array-generation" title="Permalink to this headline">#</a></h3>
+<h3>Array Generation<a class="headerlink" href="#array-generation" title="Permalink to this heading">#</a></h3>
 <section id="arange">
-<h4><code class="docutils literal notranslate"><span class="pre">arange</span></code><a class="headerlink" href="#arange" title="Permalink to this headline">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">arange</span></code><a class="headerlink" href="#arange" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html"><code class="docutils literal notranslate"><span class="pre">arange</span></code></a>: <code class="docutils literal notranslate"><span class="pre">np.arange([start,</span> <span class="pre">]stop,</span> <span class="pre">[step,</span> <span class="pre">]dtype=None)</span></code></p></li>
 </ul>
@@ -654,7 +657,7 @@ arr2.ndim  = 2
 </div>
 </section>
 <section id="linspace">
-<h4><code class="docutils literal notranslate"><span class="pre">linspace</span></code><a class="headerlink" href="#linspace" title="Permalink to this headline">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">linspace</span></code><a class="headerlink" href="#linspace" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html"><code class="docutils literal notranslate"><span class="pre">linspace</span></code></a>: <code class="docutils literal notranslate"><span class="pre">np.linspace(start,</span> <span class="pre">stop,</span> <span class="pre">num=50,</span> <span class="pre">endpoint=True,</span> <span class="pre">retstep=False,</span> <span class="pre">dtype=None,</span> <span class="pre">axis=0)</span></code></p></li>
 </ul>
@@ -673,7 +676,7 @@ arr2.ndim  = 2
 </div>
 </section>
 <section id="logspace">
-<h4><code class="docutils literal notranslate"><span class="pre">logspace</span></code><a class="headerlink" href="#logspace" title="Permalink to this headline">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">logspace</span></code><a class="headerlink" href="#logspace" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html"><code class="docutils literal notranslate"><span class="pre">logspace</span></code></a>: <code class="docutils literal notranslate"><span class="pre">np.logspace(start,</span> <span class="pre">stop,</span> <span class="pre">num=50,</span> <span class="pre">endpoint=True,</span> <span class="pre">base=10.0,</span> <span class="pre">dtype=None,</span> <span class="pre">axis=0)</span></code></p></li>
 </ul>
@@ -701,9 +704,9 @@ arr2.ndim  = 2
 </section>
 </section>
 <section id="more-about-array-generation">
-<h3>More About Array Generation<a class="headerlink" href="#more-about-array-generation" title="Permalink to this headline">#</a></h3>
+<h3>More About Array Generation<a class="headerlink" href="#more-about-array-generation" title="Permalink to this heading">#</a></h3>
 <section id="random-number">
-<h4>Random Number<a class="headerlink" href="#random-number" title="Permalink to this headline">#</a></h4>
+<h4>Random Number<a class="headerlink" href="#random-number" title="Permalink to this heading">#</a></h4>
 <p>For random number generation, we need the initial “starting point” to make a series of “random number”.</p>
 <p>If other person used identical seed value, they’ll reproduce your “random number” result. One of my friends said “random number is so fun; it’s random but not random.”</p>
 <div class="cell docutils container">
@@ -765,7 +768,7 @@ arr2.ndim  = 2
 <p>Many other distributions are also available (<a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/routines.random.html">here</a>).</p>
 </section>
 <section id="reshaping">
-<h4>Reshaping<a class="headerlink" href="#reshaping" title="Permalink to this headline">#</a></h4>
+<h4>Reshaping<a class="headerlink" href="#reshaping" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_orig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -792,7 +795,7 @@ reshaped&#39;s shape
 </div>
 </section>
 <section id="one-zero-empty-and-identity">
-<h4>One, Zero, Empty, and Identity<a class="headerlink" href="#one-zero-empty-and-identity" title="Permalink to this headline">#</a></h4>
+<h4>One, Zero, Empty, and Identity<a class="headerlink" href="#one-zero-empty-and-identity" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -870,7 +873,7 @@ Empty_like
 </section>
 </section>
 <section id="array-indexing">
-<h3>Array Indexing<a class="headerlink" href="#array-indexing" title="Permalink to this headline">#</a></h3>
+<h3>Array Indexing<a class="headerlink" href="#array-indexing" title="Permalink to this heading">#</a></h3>
 <p>Similar to usual python</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -988,7 +991,7 @@ a1[:, ::-1]
 </div>
 </section>
 <section id="concatenation">
-<h3>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this headline">#</a></h3>
+<h3>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this heading">#</a></h3>
 <p>Normally, there are not many use cases for concatenation (“merging”) using numpy. This is because any experienced python users would first make <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code> and then convert it to numpy at the last stage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1041,7 +1044,7 @@ vstack
 </section>
 </section>
 <section id="array-arithmetics">
-<h2><span class="section-number">4.4.2. </span>Array Arithmetics<a class="headerlink" href="#array-arithmetics" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.4.2. </span>Array Arithmetics<a class="headerlink" href="#array-arithmetics" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -1073,7 +1076,7 @@ vstack
 </div>
 </div>
 <section id="basic-arithmetics">
-<h3>Basic Arithmetics<a class="headerlink" href="#basic-arithmetics" title="Permalink to this headline">#</a></h3>
+<h3>Basic Arithmetics<a class="headerlink" href="#basic-arithmetics" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">ref1</span><span class="p">)</span>
@@ -1170,7 +1173,7 @@ vstack
 </ul>
 </section>
 <section id="nan-and-inf">
-<h3>NaN and inf<a class="headerlink" href="#nan-and-inf" title="Permalink to this headline">#</a></h3>
+<h3>NaN and inf<a class="headerlink" href="#nan-and-inf" title="Permalink to this heading">#</a></h3>
 <p>NaN (Not a Number) and inf (infinity) are two important and useful concepts in all numpy-related packages. When you do <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">0</span></code>, it should give “Error”, and all your program just break down. In numpy, <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> is raised instead, and <code class="docutils literal notranslate"><span class="pre">nan</span></code> is used, so all the calculations are done correctly except it gives <code class="docutils literal notranslate"><span class="pre">nan</span></code> when there is any of those. This is useful because the code runs as expected (no need to struggle with avoiding Errors) and you can remove any results which contains <code class="docutils literal notranslate"><span class="pre">nan</span></code> at the final stage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1257,7 +1260,7 @@ vstack
 </div>
 </section>
 <section id="axis-operation">
-<h3>Axis Operation<a class="headerlink" href="#axis-operation" title="Permalink to this headline">#</a></h3>
+<h3>Axis Operation<a class="headerlink" href="#axis-operation" title="Permalink to this heading">#</a></h3>
 <p>If you use numpy without utilizing axis, you are doing something wrong.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1309,9 +1312,9 @@ Sample std axis1 [1.29099445 1.29099445 1.29099445 1.29099445 1.29099445]
 </section>
 </section>
 <section id="masking">
-<h2><span class="section-number">4.4.3. </span>Masking<a class="headerlink" href="#masking" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.4.3. </span>Masking<a class="headerlink" href="#masking" title="Permalink to this heading">#</a></h2>
 <section id="basic-masking">
-<h3>Basic Masking<a class="headerlink" href="#basic-masking" title="Permalink to this headline">#</a></h3>
+<h3>Basic Masking<a class="headerlink" href="#basic-masking" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
@@ -1384,7 +1387,7 @@ In 1-sigma ratio
 </div>
 </section>
 <section id="advanced-masking">
-<h3>Advanced Masking<a class="headerlink" href="#advanced-masking" title="Permalink to this headline">#</a></h3>
+<h3>Advanced Masking<a class="headerlink" href="#advanced-masking" title="Permalink to this heading">#</a></h3>
 <p>If you just do <code class="docutils literal notranslate"><span class="pre">b[data_quality]</span></code>, the dimension will be reduced to 1-D, which makes it difficult to operate (e.g., average) with <code class="docutils literal notranslate"><span class="pre">a</span></code>. Then, we replace these with <code class="docutils literal notranslate"><span class="pre">nan</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1458,7 +1461,7 @@ In 1-sigma ratio
 <p>TIP: There’s a package called <a class="reference external" href="https://github.com/pydata/bottleneck"><code class="docutils literal notranslate"><span class="pre">bottleneck</span></code></a> which is much faster than numpy in many cases.</p>
 </section>
 <section id="masked-array">
-<h3>Masked Array<a class="headerlink" href="#masked-array" title="Permalink to this headline">#</a></h3>
+<h3>Masked Array<a class="headerlink" href="#masked-array" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_masked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">m_a</span><span class="p">)</span>
@@ -1595,7 +1598,7 @@ In 1-sigma ratio
 </section>
 </section>
 <section id="file-i-o">
-<h2><span class="section-number">4.4.4. </span>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.4.4. </span>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this heading">#</a></h2>
 <p>Although generally it’s recommended to do file i/o (input/output, which means “saveing/loading”) using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> or other packages, numpy also has file i/o tools.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

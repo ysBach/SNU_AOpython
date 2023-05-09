@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -201,6 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 
     </div>
@@ -430,7 +433,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="annulus-local-sky">
-<span id="ch-annulus"></span><h1><span class="section-number">4. </span>Annulus &amp; Local Sky<a class="headerlink" href="#annulus-local-sky" title="Permalink to this headline">#</a></h1>
+<span id="ch-annulus"></span><h1><span class="section-number">4. </span>Annulus &amp; Local Sky<a class="headerlink" href="#annulus-local-sky" title="Permalink to this heading">#</a></h1>
 <p>An <a class="reference external" href="https://en.wikipedia.org/wiki/Annulus_(mathematics)">annulus</a> (plural can be annuli or annuluses) basically a circular ring. In astronomy, it can also be a random shaped ring-like shape, e.g., the region between two rectangles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -525,7 +528,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <section id="review-of-aperture">
-<h2><span class="section-number">4.1. </span>Review of <code class="docutils literal notranslate"><span class="pre">Aperture</span></code><a class="headerlink" href="#review-of-aperture" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.1. </span>Review of <code class="docutils literal notranslate"><span class="pre">Aperture</span></code><a class="headerlink" href="#review-of-aperture" title="Permalink to this heading">#</a></h2>
 <p>In previous notes, you have learned how to detect objects in the image, and then how to set up apertures. Then you learned how to do photometry. The example I showed in the note, i.e., measuring the star’s flux using the fluxes of two different apertures, are reasonable when a 2-D measurement is impossible. If we know the pixel values around the star (the 2-D information)</p>
 <p>In this note, I will show you the power of 2-D analyses for obtaining better photometry.</p>
 <p>First, result from the previous note as a reference:</p>
@@ -594,7 +597,7 @@ sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 83.53
 </div>
 </section>
 <section id="annulus-object">
-<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">Annulus</span></code> Object<a class="headerlink" href="#annulus-object" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">Annulus</span></code> Object<a class="headerlink" href="#annulus-object" title="Permalink to this heading">#</a></h2>
 <p>Now you have learned how to initialize an annulus (basically it is similar to <code class="docutils literal notranslate"><span class="pre">Aperture</span></code> object) and make a “mask” to extract the pixels in it. I will extract only the pixels with center is inside an annulus of inner/outer radii of 20 and 28:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,11 +643,11 @@ sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 83.53
 </div>
 </section>
 <section id="robust-sky">
-<h2><span class="section-number">4.3. </span>Robust Sky<a class="headerlink" href="#robust-sky" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.3. </span>Robust Sky<a class="headerlink" href="#robust-sky" title="Permalink to this heading">#</a></h2>
 <p>Now let me ask you. The flux within the red aperture will contain both the star’s flux and the sky flux. And although I didn’t mention explicitly, you can easily understand the sky annulus (cyan) is set to estimate this sky value. From the right panel, how would you calculate the sky value?</p>
 <p>The histogram includes the distribution of the sky values. However, you can see some bright cosmic-ray spots at the left and right and a nearby star at the bottom-right part in the annulus (that I artifically added when I loaded it for visualization purpose). Because of this, the histogram is skewed to the right. Therefore, average and median are quite diffent, and you can see simple average value of the pixels is not a good option. Even median might have been affected.</p>
 <section id="sigma-clipping">
-<h3><span class="section-number">4.3.1. </span>Sigma-Clipping<a class="headerlink" href="#sigma-clipping" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">4.3.1. </span>Sigma-Clipping<a class="headerlink" href="#sigma-clipping" title="Permalink to this heading">#</a></h3>
 <p>One suggestion: How about use sigma-clipping?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -693,7 +696,7 @@ sky flux flux_s = (flux2 - flux1) / (π(24**2 - 12**2)) = 83.53
 <p>For elementary photometry, this is ehough. Even for publication level, if we are sure there are no nearby objects, this is a reasonable guess.</p>
 </section>
 <section id="mode-estimation">
-<h3><span class="section-number">4.3.2. </span>Mode Estimation<a class="headerlink" href="#mode-estimation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">4.3.2. </span>Mode Estimation<a class="headerlink" href="#mode-estimation" title="Permalink to this heading">#</a></h3>
 <p>However, you may still feel uncomfortable because some pixels that could have been affected by the nearby star (lower right corner) are remaining. Long story short, the mode or the modeal value (the most frequent value of sky) is a more robust statistic than median. However, it is difficult to find the mode, because if you set the histogram bin to, e.g., 0.0000001 ADU, any bin will have height 1. Thus, it is bin-size dependent. <a class="reference external" href="https://academic.oup.com/biomet/article/11/4/425/192665">Doodon A. T. 1917</a> first proved that the mode of a unimodal distribution should be approximately related to mean and median by</p>
 <div class="math notranslate nohighlight">
 \[

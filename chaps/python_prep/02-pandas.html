@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -199,6 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 
     </div>
@@ -431,7 +434,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pandas">
-<span id="pandas-tutorial"></span><h1><span class="section-number">4.5. </span>Pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">#</a></h1>
+<span id="pandas-tutorial"></span><h1><span class="section-number">4.5. </span>Pandas<a class="headerlink" href="#pandas" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
@@ -449,7 +452,7 @@ document.write(`
 </div>
 </div>
 <section id="basic-usage">
-<h2><span class="section-number">4.5.1. </span>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.1. </span>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">#</a></h2>
 <p>Iris data is one of the typical statistical sample used by statisticians. See <a class="reference external" href="https://en.wikipedia.org/wiki/Iris_flower_data_set">this wikipedia</a>
 <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Mature_flower_diagram.svg/1920px-Mature_flower_diagram.svg.png" /></p>
 <div class="cell docutils container">
@@ -731,7 +734,7 @@ document.write(`
 </div>
 </section>
 <section id="selection-of-columns-and-rows">
-<h2><span class="section-number">4.5.2. </span>Selection of Columns and Rows<a class="headerlink" href="#selection-of-columns-and-rows" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.2. </span>Selection of Columns and Rows<a class="headerlink" href="#selection-of-columns-and-rows" title="Permalink to this heading">#</a></h2>
 <p>If you select a column or a row, it now becomes <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>, not <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -783,7 +786,7 @@ Name: sepal_length, dtype: float64
 </div>
 </section>
 <section id="selecting-elements-loc-and-iloc">
-<h2><span class="section-number">4.5.3. </span>Selecting Elements (<code class="docutils literal notranslate"><span class="pre">.loc</span></code> and <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>)<a class="headerlink" href="#selecting-elements-loc-and-iloc" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.3. </span>Selecting Elements (<code class="docutils literal notranslate"><span class="pre">.loc</span></code> and <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>)<a class="headerlink" href="#selecting-elements-loc-and-iloc" title="Permalink to this heading">#</a></h2>
 <p>Two major ways to select elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">loc</span></code> is used when you want to use column name and row index</p>
@@ -897,7 +900,7 @@ Name: 0, dtype: object
 </div>
 </section>
 <section id="selecting-by-conditions">
-<h2><span class="section-number">4.5.4. </span>Selecting by Conditions<a class="headerlink" href="#selecting-by-conditions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.4. </span>Selecting by Conditions<a class="headerlink" href="#selecting-by-conditions" title="Permalink to this heading">#</a></h2>
 <p>When making a new DataFrame using a subset of the columns of an existing DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1028,7 +1031,7 @@ Name: 0, dtype: object
 <p>Note that you have to use parentheses like <code class="docutils literal notranslate"><span class="pre">.loc[(condition1)</span> <span class="pre">&amp;</span> <span class="pre">(condition2)]</span></code>.</p>
 </section>
 <section id="iterate-through-the-dataframe">
-<h2><span class="section-number">4.5.5. </span>Iterate through the DataFrame<a class="headerlink" href="#iterate-through-the-dataframe" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.5. </span>Iterate through the DataFrame<a class="headerlink" href="#iterate-through-the-dataframe" title="Permalink to this heading">#</a></h2>
 <p>In the example below, I tried to add a column named “test” while iterating through the rows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1272,7 +1275,7 @@ Name: 0, dtype: object
 </div>
 </section>
 <section id="drop">
-<h2><span class="section-number">4.5.6. </span>Drop<a class="headerlink" href="#drop" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.6. </span>Drop<a class="headerlink" href="#drop" title="Permalink to this heading">#</a></h2>
 <p>pandas usually generate annoying index (<code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">...,</span> <span class="pre">N</span></code>) columns etc. You can drop them by</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1648,7 +1651,7 @@ Name: 0, dtype: object
 </div>
 </section>
 <section id="sorting">
-<h2><span class="section-number">4.5.7. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.7. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_length&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -1811,7 +1814,7 @@ Name: 0, dtype: object
 <p>See what happens if <code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">=</span> <span class="pre">False</span></code>.</p>
 </section>
 <section id="grouping">
-<h2><span class="section-number">4.5.8. </span>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.8. </span>Grouping<a class="headerlink" href="#grouping" title="Permalink to this heading">#</a></h2>
 <p>Grouping is one of the most useful functionality of pandas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1925,7 +1928,7 @@ max         7.90000     3.800000      6.900000      2.50000
 </div>
 </section>
 <section id="masking-and-special-operations">
-<h2><span class="section-number">4.5.9. </span>Masking and Special Operations<a class="headerlink" href="#masking-and-special-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.9. </span>Masking and Special Operations<a class="headerlink" href="#masking-and-special-operations" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">3.3</span>
@@ -2103,7 +2106,7 @@ Name: species, dtype: object
 </div>
 </section>
 <section id="a-simple-plotting">
-<h2><span class="section-number">4.5.10. </span>A Simple Plotting<a class="headerlink" href="#a-simple-plotting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5.10. </span>A Simple Plotting<a class="headerlink" href="#a-simple-plotting" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>

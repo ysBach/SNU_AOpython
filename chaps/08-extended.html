@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -201,6 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
 </ul>
 
     </div>
@@ -413,9 +416,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulty-of-photometry-near-galaxies">3.1. Difficulty of Photometry Near Galaxies</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-photometry-of-the-galaxy">3.1.1. Simple Photometry of the Galaxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile">3.1.2. Radial Profile</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile-of-galaxies">3.2. Radial Profile of Galaxies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipse-stsdas-isophot-ellipse">3.3. Ellipse (STSDAS.ISOPHOT.ELLIPSE)</a></li>
 </ul>
             </nav>
         </div>
@@ -428,7 +432,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="extended-source-photometry">
-<span id="ch-extended"></span><h1><span class="section-number">3. </span>Extended Source Photometry<a class="headerlink" href="#extended-source-photometry" title="Permalink to this headline">#</a></h1>
+<span id="ch-extended"></span><h1><span class="section-number">3. </span>Extended Source Photometry<a class="headerlink" href="#extended-source-photometry" title="Permalink to this heading">#</a></h1>
 <p>We learned 2-D background estimations using <code class="docutils literal notranslate"><span class="pre">photutils</span></code> and <code class="docutils literal notranslate"><span class="pre">sep</span></code>, which are mere pyhonically ported SExtractor. The goal of SExtractor is, as explained earlier, to extract arbitrary source (star, galaxy, …) in the image.</p>
 <p>Here we will explore this <strong>source extraction</strong> part of them.</p>
 <div class="admonition important">
@@ -457,6 +461,7 @@ document.write(`
 <li><p>You may also refer to all the remaining parts of <a class="reference external" href="https://sep.readthedocs.io/en/v1.1.x/tutorial.html#Object-detection">sep documentations</a>.</p></li>
 </ol>
 </div>
+<p>This lecture note is built on top of them (i.e., I expect you to have at least brief knowledge of all of them, and will not explain further details).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> version_information
@@ -471,7 +476,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-05 14:57:50 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 13:53:19 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
@@ -544,9 +549,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_80104/2330366930.py:37: DeprecationWarning: `photutils.Background2D` is a deprecated alias for `photutils.background.Background2D` and will be removed in the future. Instead, please use `from photutils.background import Background2D` to silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_4261/2330366930.py:37: DeprecationWarning: `photutils.Background2D` is a deprecated alias for `photutils.background.Background2D` and will be removed in the future. Instead, please use `from photutils.background import Background2D` to silence this warning.
   from photutils import Background2D, EllipticalAperture
-/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_80104/2330366930.py:37: DeprecationWarning: `photutils.EllipticalAperture` is a deprecated alias for `photutils.aperture.EllipticalAperture` and will be removed in the future. Instead, please use `from photutils.aperture import EllipticalAperture` to silence this warning.
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_4261/2330366930.py:37: DeprecationWarning: `photutils.EllipticalAperture` is a deprecated alias for `photutils.aperture.EllipticalAperture` and will be removed in the future. Instead, please use `from photutils.aperture import EllipticalAperture` to silence this warning.
   from photutils import Background2D, EllipticalAperture
 WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / International Celestial Ref. System 
 the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
@@ -609,11 +614,11 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
 <p>The unit nanomaggy is thus in linear unit (not in logarithmic scale as the usual “magnitude” units).</p>
 </div>
 <section id="difficulty-of-photometry-near-galaxies">
-<h2><span class="section-number">3.1. </span>Difficulty of Photometry Near Galaxies<a class="headerlink" href="#difficulty-of-photometry-near-galaxies" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.1. </span>Difficulty of Photometry Near Galaxies<a class="headerlink" href="#difficulty-of-photometry-near-galaxies" title="Permalink to this heading">#</a></h2>
 <p>If you want to study the galaxy’s total flux, how would you do the photometry?</p>
 <p>What if you want to do the photometry of the star nearby this galaxy (e.g., you found a supernova inside this galaxy and want to do the photometry of this star, contaminated by the flux of the galaxy)?</p>
 <section id="simple-photometry-of-the-galaxy">
-<h3><span class="section-number">3.1.1. </span>Simple Photometry of the Galaxy<a class="headerlink" href="#simple-photometry-of-the-galaxy" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Simple Photometry of the Galaxy<a class="headerlink" href="#simple-photometry-of-the-galaxy" title="Permalink to this heading">#</a></h3>
 <p>A possible way is to set an elliptical aperture, and a large annulus to remove sky:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -639,7 +644,8 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_data</span> <span class="o">=</span> <span class="n">data_orig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">_data</span><span class="p">[</span><span class="n">_data</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">ccd_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_data</span><span class="o">*</span><span class="n">ccd_orig</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NMGY&quot;</span><span class="p">])</span>
+<span class="n">NMGY</span> <span class="o">=</span> <span class="n">ccd_orig</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NMGY&quot;</span><span class="p">]</span>
+<span class="n">ccd_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_data</span><span class="o">*</span><span class="n">NMGY</span><span class="p">)</span>
 <span class="n">phot</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">ap</span><span class="p">,</span> <span class="n">an</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">ccd_error</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -678,7 +684,6 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>id</th>
       <th>xcenter</th>
       <th>ycenter</th>
       <th>aperture_sum</th>
@@ -700,7 +705,6 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
       <td>1260.0</td>
       <td>485.0</td>
       <td>12544.034143</td>
@@ -741,8 +745,9 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
 </li>
 </ol>
 </section>
-<section id="radial-profile">
-<h3><span class="section-number">3.1.2. </span>Radial Profile<a class="headerlink" href="#radial-profile" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="radial-profile-of-galaxies">
+<h2><span class="section-number">3.2. </span>Radial Profile of Galaxies<a class="headerlink" href="#radial-profile-of-galaxies" title="Permalink to this heading">#</a></h2>
 <p>One possibility is to find the galaxy’s radial profile. If the star’s flux is so important, at certain radius, the profile will show a bump. Otherwise, it will be smoothed out. If we could fit a profile to the data, we can estimate the expected “integral” of flux (<span class="math notranslate nohighlight">\(\int_{0}^{\infty} I(r) 2\pi r dr\)</span>), and use it as the aperture photometry result.</p>
 <p>Elliptical galaxies will roughly follow <a class="reference external" href="https://en.wikipedia.org/wiki/De_Vaucouleurs%27s_law">De Vaucouleurs profile</a>, which is a special case of <a class="reference external" href="https://en.wikipedia.org/wiki/S%C3%A9rsic_profile">Sérsic profile</a>. We can test it by doing photometry for <strong>concentric circular apertures</strong> (I will ignore ellipticity; you may refer to <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2004MNRAS.347..824F/abstract">Ferrari+2004</a> if you want to know more).</p>
 <ul class="simple">
@@ -766,39 +771,45 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
 
 
 <span class="n">radii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">an</span><span class="o">.</span><span class="n">a_in</span><span class="p">),</span> <span class="mi">70</span><span class="p">)</span>
+<span class="n">radii_plot</span> <span class="o">=</span> <span class="n">radii</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">radii</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
 <span class="n">aps1</span> <span class="o">=</span> <span class="p">[</span><span class="n">CircularAperture</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">center_original</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">radii</span><span class="p">]</span>
-<span class="n">phots1</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">aps1</span><span class="p">,</span> <span class="n">annulus</span><span class="o">=</span><span class="n">an</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_data</span><span class="p">))</span>
+<span class="n">phots1</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">aps1</span><span class="p">,</span> <span class="n">annulus</span><span class="o">=</span><span class="n">an</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">ccd_error</span><span class="p">)</span>
 <span class="c1"># Do the photometry using the annulus defined above</span>
 
 <span class="n">phots2</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">phots2_err</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">radii</span><span class="p">):</span>
-    <span class="n">_an</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">center_original</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">radii</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">_an</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">cut</span><span class="o">.</span><span class="n">center_original</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="n">radii</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">_phot</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">sky_fit</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">_an</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">to_table</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">phots2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;msky&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">phot</span><span class="p">[</span><span class="s2">&quot;msky&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
     <span class="c1"># Subtract the sky value found above</span>
-    <span class="n">phots2_err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;ssky&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;nsky&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;msky&quot;</span><span class="p">]))</span>
+    <span class="n">phots2_err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;ssky&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;nsky&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">_phot</span><span class="p">[</span><span class="s2">&quot;msky&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">NMGY</span><span class="p">))</span>
+    <span class="c1"># first term = sky estimation error, second term = Poisson error from the estimated sky</span>
 <span class="n">phots2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phots2</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height_ratios&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)})</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height_ratios&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)})</span>
 
-<span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">sersic</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="n">radii</span><span class="p">,</span> <span class="n">ydata</span><span class="o">=</span><span class="n">phots2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">radii</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">radii</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
-         <span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">phots1</span><span class="p">[</span><span class="s1">&#39;source_sum&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">phots1</span><span class="p">[</span><span class="s2">&quot;aparea&quot;</span><span class="p">]),</span>
-         <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Algorithm 1&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">phots2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-             <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Algorithm 2&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Radius [pix]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Flux/pixel [nanomaggy]&quot;</span><span class="p">,</span>
-        <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">an</span><span class="o">.</span><span class="n">a_in</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mf">1.e-3</span><span class="p">,</span> <span class="mf">1.e+1</span><span class="p">))</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">sersic</span><span class="p">,</span> <span class="n">xdata</span><span class="o">=</span><span class="n">radii_plot</span><span class="p">,</span> <span class="n">ydata</span><span class="o">=</span><span class="n">phots2</span><span class="p">,</span> 
+                    <span class="n">sigma</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">radii_plot</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">phots1</span><span class="p">[</span><span class="s1">&#39;source_sum&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">phots1</span><span class="p">[</span><span class="s2">&quot;aparea&quot;</span><span class="p">]),</span>
+            <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Algorithm 1&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">radii_plot</span><span class="p">,</span> <span class="n">phots2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Algorithm 2&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Flux/pixel [nanomaggy]&quot;</span><span class="p">,</span>
+           <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">an</span><span class="o">.</span><span class="n">a_in</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mf">1.e-3</span><span class="p">,</span> <span class="mf">1.e+1</span><span class="p">))</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">sersic</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Sersic fit: n=</span><span class="si">{</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">sersic</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Sersic with n=4.00&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$R_e$= </span><span class="si">{</span><span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> pix&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$I_e$= </span><span class="si">{</span><span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> nmgy/pix&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="n">phots2</span><span class="o">-</span><span class="n">sersic</span><span class="p">(</span><span class="n">radii</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">),</span> <span class="n">yerr</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Radius [pix]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Residuals [nanomaggy]&quot;</span><span class="p">,</span>
-           <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">an</span><span class="o">.</span><span class="n">a_in</span><span class="p">))</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">radii_plot</span><span class="p">,</span> <span class="p">(</span><span class="n">phots2</span><span class="o">-</span><span class="n">sersic</span><span class="p">(</span><span class="n">radii_plot</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ediff1d</span><span class="p">(</span><span class="n">phots1</span><span class="p">[</span><span class="s2">&quot;aparea&quot;</span><span class="p">]),</span> 
+                <span class="n">yerr</span><span class="o">=</span><span class="n">phots2_err</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Radius [pix]&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;[nanomaggy]&quot;</span><span class="p">,</span> 
+           <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error: (data - fitted model)*annulus_area&quot;</span><span class="p">,</span>
+        <span class="c1">#    ylim=(-0.1, 0.1), </span>
+           <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">an</span><span class="o">.</span><span class="n">a_in</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -809,14 +820,15 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20d9a49cac0e6fc821b4006ba28dda84ca60d2df8646e2782b565a14b449349c.png" src="../_images/20d9a49cac0e6fc821b4006ba28dda84ca60d2df8646e2782b565a14b449349c.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total source_sum from Sersic profile fitting  : 19453.30
+<img alt="../_images/95a5834e4c1ed838a2c5e66084ed310b54670fc407872ec93c1709997ea339d5.png" src="../_images/95a5834e4c1ed838a2c5e66084ed310b54670fc407872ec93c1709997ea339d5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total source_sum from Sersic profile fitting  : 19567.21
 Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that the</p>
+<p>Note that the total flux from elliptical aperture is indeed <strong>smaller</strong> than that estimated from the Sersic profile integration, because we could not take flux outside our aperture into account. However, as you can see from the fitting residual, Sersic profile greatly overestimate the flux of our galaxy especially because it <strong>overestimates</strong> flux at outskirt of the galaxy.</p>
+<p>I emphasize again that the code used here is extremely crude one. If you are conducting serious research, it is your responsibility to use proper code, dealing with uncertainties (the <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> I used here is only the most crude approximation of good fitting), discuss mathematically and scientifically about the results, etc.</p>
 <div class="tip admonition">
 <p class="admonition-title">Practice</p>
 <ul class="simple">
@@ -825,19 +837,22 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 <li><p>What happens if you remove <code class="docutils literal notranslate"><span class="pre">/np.sqrt(_phot[&quot;nsky&quot;])</span></code> in the error calculation line? Do you think the resulting error-bars are reasonable? Why or why not?</p></li>
 </ul>
 </div>
+</section>
+<section id="ellipse-stsdas-isophot-ellipse">
+<h2><span class="section-number">3.3. </span>Ellipse (STSDAS.ISOPHOT.ELLIPSE)<a class="headerlink" href="#ellipse-stsdas-isophot-ellipse" title="Permalink to this heading">#</a></h2>
+<p>You learned</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phots1dd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## 2-D Background and Segmentation</span>
+<span class="n">Now</span><span class="p">,</span> <span class="n">what</span> <span class="k">if</span> <span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">do</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">rese</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">phots1dd</span>
-
-<span class="ne">NameError</span>: name &#39;phots1dd&#39; is not defined
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+    <span class="n">Now</span><span class="p">,</span> <span class="n">what</span> <span class="k">if</span> <span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">do</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">rese</span>
+         <span class="o">^</span>
+<span class="ne">SyntaxError</span>: expected &#39;else&#39; after &#39;if&#39; expression
 </pre></div>
 </div>
 </div>
@@ -849,12 +864,12 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 
 <span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">data_orig</span>  <span class="o">&gt;</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">std</span>
-<span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">data_all</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="n">box_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="o">=</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">exclude_percentile</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="n">box_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="o">=</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">exclude_percentile</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1">#axs[0].</span>
-<span class="c1"># vis.norm_imshow(axs, data_all - bkg.background, zscale=True)</span>
-<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_all</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># vis.norm_imshow(axs, data_orig - bkg.background, zscale=True)</span>
+<span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_orig</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mask</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bkg</span><span class="o">.</span><span class="n">background</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">vis</span><span class="o">.</span><span class="n">colorbaring</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">im</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;nanomaggy [3.631e-6 Jy]&quot;</span><span class="p">)</span>
@@ -866,19 +881,7 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">data_orig</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">data_orig</span>  <span class="o">&gt;</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">std</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">data_all</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="n">box_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="o">=</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">exclude_percentile</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#axs[0].</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># vis.norm_imshow(axs, data_all - bkg.background, zscale=True)</span>
-
-<span class="ne">NameError</span>: name &#39;data_all&#39; is not defined
-</pre></div>
-</div>
+<img alt="../_images/be6de918918ac5f54ee4952cffca6cd27ea8d765cc24db03642cf3da3922ee60.png" src="../_images/be6de918918ac5f54ee4952cffca6cd27ea8d765cc24db03642cf3da3922ee60.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -922,7 +925,6 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -995,9 +997,10 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulty-of-photometry-near-galaxies">3.1. Difficulty of Photometry Near Galaxies</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-photometry-of-the-galaxy">3.1.1. Simple Photometry of the Galaxy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile">3.1.2. Radial Profile</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile-of-galaxies">3.2. Radial Profile of Galaxies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipse-stsdas-isophot-ellipse">3.3. Ellipse (STSDAS.ISOPHOT.ELLIPSE)</a></li>
 </ul>
   </nav></div>
 
