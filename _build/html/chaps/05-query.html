@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Querying from the Catalog &#8212; SNU AO Class Python</title>
   
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -455,18 +457,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:37 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:36:36 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 astroquery 0.4.7.dev8639
-8 photutils  1.7.0
+7 astroquery 0.4.7.dev8597
+8 photutils  1.6.0
 9 version_information 1.0.4
 </pre></div>
 </div>
@@ -592,12 +594,14 @@ Coordinate of the center of the image:
     (204.36178211, -9.49675272)&gt;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/lib/python3.10/site-packages/astropy/wcs/wcs.py:3064: RuntimeWarning: cdelt will be ignored since cd is present
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/envs/snuao/lib/python3.10/site-packages/astropy/wcs/wcs.py:3064: RuntimeWarning: cdelt will be ignored since cd is present
   description.append(s.format(*self.wcs.cdelt))
 </pre></div>
 </div>
 </div>
 </div>
+<p>The meaning of <code class="docutils literal notranslate"><span class="pre">CRVAL</span></code>, <code class="docutils literal notranslate"><span class="pre">CRVAL</span></code>, <code class="docutils literal notranslate"><span class="pre">CRPIX</span></code>, and <code class="docutils literal notranslate"><span class="pre">PC</span></code> (you can just assume <code class="docutils literal notranslate"><span class="pre">CD</span></code> is identical to <code class="docutils literal notranslate"><span class="pre">PC</span></code>) matrices:
+<img alt="" src="../_images/WCS.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># =====</span>
@@ -729,7 +733,7 @@ C = G_\mathrm{BP} - G_\mathrm{RP} = -2.5 \lg \frac{I_\mathrm{BP}}{I_\mathrm{RP}}
 </pre></div>
 </div>
 <div class="output text_html"><div><i>Table length=65</i>
-<table id="table6010456912" class="table-striped table-bordered table-condensed">
+<table id="table5037093600" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>bp_rp</th><th>g_snr</th><th>bp_snr</th><th>rp_snr</th><th>dC</th><th>V</th><th>dV</th><th>x</th><th>y</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float64</th><th>float64</th></tr></thead>
@@ -869,69 +873,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>204.330108</td>
-      <td>-9.546630</td>
-      <td>17.793301</td>
-      <td>16.982500</td>
-      <td>17.372820</td>
-      <td>16.738285</td>
-      <td>0.012411</td>
-      <td>0.016003</td>
-      <td>789.148379</td>
-      <td>46.520168</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>204.332430</td>
-      <td>-9.543997</td>
-      <td>18.148701</td>
-      <td>18.095200</td>
-      <td>18.126559</td>
-      <td>17.950191</td>
-      <td>0.013345</td>
-      <td>0.017808</td>
-      <td>768.013028</td>
-      <td>70.452030</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>204.346776</td>
-      <td>-9.545009</td>
-      <td>22.121401</td>
-      <td>21.439699</td>
-      <td>21.768826</td>
-      <td>21.212396</td>
-      <td>0.137581</td>
-      <td>0.230210</td>
-      <td>639.446193</td>
-      <td>61.047576</td>
-    </tr>
-    <tr>
       <th>3</th>
-      <td>204.391725</td>
-      <td>-9.449751</td>
-      <td>21.913401</td>
-      <td>19.827200</td>
-      <td>20.822059</td>
-      <td>19.415908</td>
-      <td>0.114143</td>
-      <td>0.057990</td>
-      <td>226.350935</td>
-      <td>925.358571</td>
+      <td>204.398498</td>
+      <td>-9.549908</td>
+      <td>19.685900</td>
+      <td>19.234800</td>
+      <td>19.454621</td>
+      <td>19.037706</td>
+      <td>0.013322</td>
+      <td>0.017627</td>
+      <td>176.493198</td>
+      <td>15.583189</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>204.391725</td>
-      <td>-9.449731</td>
-      <td>20.910900</td>
-      <td>19.654699</td>
-      <td>20.256139</td>
-      <td>19.352137</td>
-      <td>0.023311</td>
-      <td>0.034164</td>
-      <td>226.344244</td>
-      <td>925.539059</td>
+      <td>204.401293</td>
+      <td>-9.544794</td>
+      <td>17.974100</td>
+      <td>17.651400</td>
+      <td>17.810360</td>
+      <td>17.471126</td>
+      <td>0.012964</td>
+      <td>0.017497</td>
+      <td>150.902974</td>
+      <td>62.031846</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>204.402051</td>
+      <td>-9.542688</td>
+      <td>21.183201</td>
+      <td>21.687500</td>
+      <td>21.454462</td>
+      <td>21.615563</td>
+      <td>0.165217</td>
+      <td>0.265355</td>
+      <td>143.877901</td>
+      <td>81.172085</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>204.404399</td>
+      <td>-9.545665</td>
+      <td>21.825600</td>
+      <td>21.294300</td>
+      <td>21.552136</td>
+      <td>21.086700</td>
+      <td>0.078924</td>
+      <td>0.103779</td>
+      <td>123.186834</td>
+      <td>54.046154</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>204.410444</td>
+      <td>-9.543147</td>
+      <td>19.949100</td>
+      <td>19.042500</td>
+      <td>19.478228</td>
+      <td>18.785735</td>
+      <td>0.021401</td>
+      <td>0.031288</td>
+      <td>68.791659</td>
+      <td>76.814691</td>
     </tr>
     <tr>
       <th>...</th>
@@ -947,69 +951,69 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
       <td>...</td>
     </tr>
     <tr>
-      <th>192</th>
-      <td>204.377883</td>
-      <td>-9.502093</td>
-      <td>19.466000</td>
-      <td>19.481100</td>
-      <td>19.479942</td>
-      <td>19.345078</td>
-      <td>0.014178</td>
-      <td>0.020384</td>
-      <td>355.844963</td>
-      <td>450.641530</td>
+      <th>187</th>
+      <td>204.324440</td>
+      <td>-9.513110</td>
+      <td>19.802000</td>
+      <td>19.544500</td>
+      <td>19.672555</td>
+      <td>19.372768</td>
+      <td>0.028427</td>
+      <td>0.025100</td>
+      <td>836.145051</td>
+      <td>351.508219</td>
     </tr>
     <tr>
       <th>193</th>
-      <td>204.382055</td>
-      <td>-9.501425</td>
-      <td>22.187300</td>
-      <td>21.251600</td>
-      <td>21.701122</td>
-      <td>20.991024</td>
-      <td>0.055150</td>
-      <td>0.093839</td>
-      <td>318.403844</td>
-      <td>456.622926</td>
+      <td>204.398435</td>
+      <td>-9.494967</td>
+      <td>21.852900</td>
+      <td>21.455200</td>
+      <td>21.649710</td>
+      <td>21.265102</td>
+      <td>0.094912</td>
+      <td>0.174163</td>
+      <td>171.053749</td>
+      <td>514.877474</td>
     </tr>
     <tr>
       <th>194</th>
-      <td>204.387721</td>
-      <td>-9.502643</td>
-      <td>22.124399</td>
-      <td>21.484301</td>
-      <td>21.793707</td>
-      <td>21.262448</td>
-      <td>0.079612</td>
-      <td>0.109307</td>
-      <td>267.797195</td>
-      <td>445.429511</td>
+      <td>204.399843</td>
+      <td>-9.495393</td>
+      <td>21.027300</td>
+      <td>20.572201</td>
+      <td>20.793918</td>
+      <td>20.374583</td>
+      <td>0.026426</td>
+      <td>0.036101</td>
+      <td>158.496791</td>
+      <td>510.969308</td>
     </tr>
     <tr>
       <th>195</th>
-      <td>204.395042</td>
-      <td>-9.466305</td>
-      <td>19.764799</td>
-      <td>18.654699</td>
-      <td>19.186887</td>
-      <td>18.371276</td>
-      <td>0.013668</td>
-      <td>0.016462</td>
-      <td>198.386762</td>
-      <td>775.109923</td>
+      <td>204.410279</td>
+      <td>-9.496189</td>
+      <td>22.013399</td>
+      <td>20.967699</td>
+      <td>21.469361</td>
+      <td>20.692712</td>
+      <td>0.053874</td>
+      <td>0.058962</td>
+      <td>65.182124</td>
+      <td>503.478261</td>
     </tr>
     <tr>
       <th>196</th>
-      <td>204.396484</td>
-      <td>-9.466749</td>
-      <td>21.926901</td>
-      <td>21.039600</td>
-      <td>21.466181</td>
-      <td>20.785364</td>
-      <td>0.060677</td>
-      <td>0.078106</td>
-      <td>185.530933</td>
-      <td>771.038793</td>
+      <td>204.412028</td>
+      <td>-9.498573</td>
+      <td>22.103300</td>
+      <td>21.557199</td>
+      <td>21.822051</td>
+      <td>21.347660</td>
+      <td>0.036635</td>
+      <td>0.020576</td>
+      <td>49.785889</td>
+      <td>481.781735</td>
     </tr>
   </tbody>
 </table>
@@ -1041,7 +1045,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0a04732693738a3c3e12b1f432e7170c477c0f98784a93526be0943e3275c7c1.png" src="../_images/0a04732693738a3c3e12b1f432e7170c477c0f98784a93526be0943e3275c7c1.png" />
+<img alt="../_images/854a6424911561cb337b9ac7f68a6e1a355540ef0548a79f48ea24de105fc2be.png" src="../_images/854a6424911561cb337b9ac7f68a6e1a355540ef0548a79f48ea24de105fc2be.png" />
 </div>
 </div>
 </section>
@@ -1141,7 +1145,7 @@ R - r = -0.138 - 0.131(g-r) \quad\rightarrow\quad R = -0.138 -0.131g + 1.131 r \
 (array(500.58291238), array(500.43561473))
 </pre></div>
 </div>
-<img alt="../_images/888fdb16e7dd1a3637b35b673be995efff79c3e6784e05baa4c38c151427955f.png" src="../_images/888fdb16e7dd1a3637b35b673be995efff79c3e6784e05baa4c38c151427955f.png" />
+<img alt="../_images/821e0fea80a1aac6d15a2d7c2e4423e5cdda6d6c692fbd33fadff8d46010b80a.png" src="../_images/821e0fea80a1aac6d15a2d7c2e4423e5cdda6d6c692fbd33fadff8d46010b80a.png" />
 </div>
 </div>
 <p>The red circle is the location of our asteoid, (4179) Toutatis.</p>

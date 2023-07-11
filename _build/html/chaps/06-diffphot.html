@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1. Differential Photometry &#8212; SNU AO Class Python</title>
   
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -463,18 +465,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:52 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:36:50 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 astroquery 0.4.7.dev8639
-8 photutils  1.7.0
+7 astroquery 0.4.7.dev8597
+8 photutils  1.6.0
 9 version_information 1.0.4
 </pre></div>
 </div>
@@ -605,11 +607,11 @@ FILTER     V                    Filter Name in the beam
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" src="../_images/05e300c580caf9afa98a2b87d0d614755631edd98150002d8c62dbb0d955dd70.png" />
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
-  err = np.sqrt(_arr/gn + (rd/gn)**2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instrumental magntiude = -3.060 ± 0.346
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/envs/snuao/lib/python3.10/site-packages/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
+  err = np.sqrt(_arr/gn + (rd/gn)**2)
 </pre></div>
 </div>
 </div>
@@ -840,7 +842,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d2636bf2a22b22cd52568426f6d79f28a1e61de4c6a7517889c6e8fc904b73ba.png" src="../_images/d2636bf2a22b22cd52568426f6d79f28a1e61de4c6a7517889c6e8fc904b73ba.png" />
+<img alt="../_images/74f545a9a64e1bd373c726c5f44874af36bb3f7ae657a9b11ab4b31b64028586.png" src="../_images/74f545a9a64e1bd373c726c5f44874af36bb3f7ae657a9b11ab4b31b64028586.png" />
 </div>
 </div>
 <p>The stars indicated by red circles are the stars that are <strong>too close to each other</strong>. These are removed in <code class="docutils literal notranslate"><span class="pre">q2_close</span></code> DataFrame. (rigorously speaking, they are close to each other based on the catalog, not based on the observed image)</p>
@@ -873,7 +875,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9449d7dca5056b45b4e193eb2b1910fbf9c152105540e576c950aaaa6aca427b.png" src="../_images/9449d7dca5056b45b4e193eb2b1910fbf9c152105540e576c950aaaa6aca427b.png" />
+<img alt="../_images/0ac0105429c84d9f624ee10f432bc174a20355e8f7468d659e8f8138bd52e18e.png" src="../_images/0ac0105429c84d9f624ee10f432bc174a20355e8f7468d659e8f8138bd52e18e.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -933,7 +935,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/mambaforge/envs/snuao/lib/python3.10/site-packages/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
   err = np.sqrt(_arr/gn + (rd/gn)**2)
 </pre></div>
 </div>
@@ -1058,7 +1060,7 @@ FILTER     V                    Filter Name in the beam
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/96d624dde0d58c6e6277f689cbcc7b4e5be345014559a63f26345850926195bb.png" src="../_images/96d624dde0d58c6e6277f689cbcc7b4e5be345014559a63f26345850926195bb.png" />
+<img alt="../_images/7b3247627f55db966d2b776f51a7d784fe432d05e92b6d0dd6bf5cf42b5b7635.png" src="../_images/7b3247627f55db966d2b776f51a7d784fe432d05e92b6d0dd6bf5cf42b5b7635.png" />
 </div>
 </div>
 <ol class="arabic simple">

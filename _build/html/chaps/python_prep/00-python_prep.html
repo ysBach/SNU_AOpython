@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4. Python Preparation Course &#8212; SNU AO Class Python</title>
   
@@ -189,6 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -460,27 +462,27 @@ document.write(`
 <li><p>Matt Craig’s <a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html">ccd as book</a></p>
 <ul class="simple">
 <li><p><strong>HIGHLY RECOMMENDED!</strong></p></li>
-<li><p>Explains details about the astrnomical images, with worked examples. If you’re not familiar with astrnomical data reduction, this is a good reference to start with.</p></li>
+<li><p>Explains details about the astronomical images, with worked examples. If you’re not familiar with astronomical data reduction, this is a good reference to start with.</p></li>
 </ul>
 </li>
 <li><p>Matt Craig’s <a class="reference external" href="https://reducer.readthedocs.io/en/latest/">reducer</a></p>
 <ul class="simple">
 <li><p>A simple Jupyter Notebook to reduce data, which the author used for his classes.</p></li>
-<li><p>If you want, you may get ideas from this and use it in your own code.</p></li>
+<li><p>If you want, you may get ideas from this and use them in your own code.</p></li>
 </ul>
 </li>
 <li><p>Lecture note for <a class="reference external" href="https://guaix.fis.ucm.es/~jaz/master_TEA/tea_book/intro.html">Técnicas Experimentales en Astrofísica</a></p>
 <ul class="simple">
-<li><p>Unfortunately, this is now unaccessible (retrieved 2022-04-05)..</p></li>
-<li><p>I was recommended by one of my friend at MPI, and this looks very well structured for beginners. It can be a good complementary material to this lecture note.</p></li>
+<li><p>Unfortunately, this is now inaccessible (retrieved 2022-04-05)..</p></li>
+<li><p>I was recommended by one of my friends at MPI, and this looks very well-structured for beginners. It can be a good complement to this lecture note.</p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="http://learn.astropy.org/">astropy tutorial</a></p>
 <ul class="simple">
-<li><p>I personally think the web is too laggy but some tutorials seem informative, e.g., <a class="reference external" href="http://learn.astropy.org/rst-tutorials/UVES.html?highlight=filtertutorials">UVES spectrum analysis</a>.</p></li>
+<li><p>I personally think the web is too laggy, but some tutorials seem informative, e.g., <a class="reference external" href="http://learn.astropy.org/rst-tutorials/UVES.html?highlight=filtertutorials">UVES spectrum analysis</a>.</p></li>
 </ul>
 </li>
-<li><p>The latest or stable official websites for each package, e.g., <a class="reference external" href="http://docs.astropy.org/en/stable/">astropy</a>, <a class="reference external" href="https://photutils.readthedocs.io/en/latest/">photutils</a> and <a class="reference external" href="https://ccdproc.readthedocs.io/en/latest/">ccdproc</a> themselves are good references.</p></li>
+<li><p>The latest or stable official websites for each package, e.g., <a class="reference external" href="http://docs.astropy.org/en/stable/">astropy</a>, <a class="reference external" href="https://photutils.readthedocs.io/en/latest/">photutils</a> and <a class="reference external" href="https://ccdproc.readthedocs.io/en/latest/">ccdproc</a> themselves, are good references.</p></li>
 </ol>
 </section>
 <section id="general-python">
@@ -495,7 +497,7 @@ document.write(`
 <li><p>Ivezić et al.’s book (<a class="reference external" href="https://www.amazon.com/Statistics-Mining-Machine-Learning-Astronomy/dp/0691198306/">Amazon</a>)</p>
 <ul>
 <li><p>The first author is the creator of AstroML available on <a class="reference external" href="https://github.com/astroML/astroML">GitHub</a>.</p></li>
-<li><p>Recommended if you want to use python in astronomical research.</p></li>
+<li><p>Recommended if you want to use Python in astronomical research.</p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://scipy-lectures.org/">scipy lecture notes</a></p>
@@ -513,7 +515,7 @@ document.write(`
 <li><p>Python visualization: <a class="reference external" href="https://pyviz.org/">pyviz.org</a>, <a class="reference external" href="https://datavizpyr.com/">datavizpyr</a> (python and R)</p></li>
 <li><p>List of python-based Monte Carlo packages: <a class="reference external" href="https://gabriel-p.github.io/pythonMCMC/">https://gabriel-p.github.io/pythonMCMC/</a></p></li>
 </ul>
-<p>The materials below are from <a class="reference external" href="https://eng.snu.ac.kr/reserve/split-program">SPLIT Program of SNU</a> (retrieved 2019 Sep)</p>
+<p>The materials below are from the <a class="reference external" href="https://eng.snu.ac.kr/reserve/split-program">SPLIT Program of SNU</a> (retrieved 2019 Sep)</p>
 <ul class="simple">
 <li><p>Codecademy Learn <a class="reference external" href="https://www.codecademy.com/learn/learn-python">Python</a></p></li>
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=tKTZoB2Vjuk&amp;t=2626s">Google Python Class</a></p></li>

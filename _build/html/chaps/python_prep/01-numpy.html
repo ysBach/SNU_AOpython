@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4.4. Numpy Tutorial &#8212; SNU AO Class Python</title>
   
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -415,7 +417,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-array">4.4.1. Numpy Array</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-generation">Array Generation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#arange"><code class="docutils literal notranslate"><span class="pre">arange</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace"><code class="docutils literal notranslate"><span class="pre">linspace</span></code></a></li>
@@ -471,12 +473,12 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="array">
-<h3>Array<a class="headerlink" href="#array" title="Permalink to this heading">#</a></h3>
-<p>Useful attributes:</p>
+<section id="arrays">
+<h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading">#</a></h3>
+<p>Here are some useful attributes related to arrays in Python:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.dtype</span></code>: The data type</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.shape</span></code>: The shape of the array in <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (order is <code class="docutils literal notranslate"><span class="pre">(axis0,</span> <span class="pre">axis1,</span> <span class="pre">...)</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.shape</span></code>: The shape of the array in a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> (order is <code class="docutils literal notranslate"><span class="pre">(axis0,</span> <span class="pre">axis1,</span> <span class="pre">...)</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.ndim</span></code>: The dimensionality of the array (equal to <code class="docutils literal notranslate"><span class="pre">len(arr.shape)</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.size</span></code>: The total size of the array (<span class="math notranslate nohighlight">\(\prod_{i=0}^{\mathtt{array.ndim - 1}} \mathtt{array.shape[i]}\)</span>)</p></li>
 </ul>
@@ -616,11 +618,11 @@ arr2.ndim  = 2
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float128</span><span class="p">))</span>
 
-<span class="nn">File ~/mambaforge/lib/python3.10/site-packages/numpy/__init__.py:311,</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>     <span class="kn">from</span> <span class="nn">.testing</span> <span class="kn">import</span> <span class="n">Tester</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>     <span class="k">return</span> <span class="n">Tester</span>
-<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;module </span><span class="si">{!r}</span><span class="s2"> has no attribute &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span>                      <span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+<span class="nn">File ~/mambaforge/envs/snuao/lib/python3.10/site-packages/numpy/__init__.py:320,</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span>     <span class="kn">from</span> <span class="nn">.testing</span> <span class="kn">import</span> <span class="n">Tester</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span>     <span class="k">return</span> <span class="n">Tester</span>
+<span class="ne">--&gt; </span><span class="mi">320</span> <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;module </span><span class="si">{!r}</span><span class="s2"> has no attribute &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">321</span>                      <span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
 
 <span class="ne">AttributeError</span>: module &#39;numpy&#39; has no attribute &#39;float128&#39;
 </pre></div>
@@ -640,7 +642,7 @@ arr2.ndim  = 2
 </div>
 </div>
 <p><strong>CAVEAT for <code class="docutils literal notranslate"><span class="pre">arange</span></code></strong></p>
-<p>Numerical precision issue gives this problem (see <a class="reference external" href="https://github.com/numpy/numpy/issues/11913">this issue</a>):</p>
+<p>A potential issue related to numerical precision arises with the <code class="docutils literal notranslate"><span class="pre">arange</span></code> function in certain cases. This problem is discussed in detail in <a class="reference external" href="https://github.com/numpy/numpy/issues/11913">this issue</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
@@ -707,8 +709,8 @@ arr2.ndim  = 2
 <h3>More About Array Generation<a class="headerlink" href="#more-about-array-generation" title="Permalink to this heading">#</a></h3>
 <section id="random-number">
 <h4>Random Number<a class="headerlink" href="#random-number" title="Permalink to this heading">#</a></h4>
-<p>For random number generation, we need the initial “starting point” to make a series of “random number”.</p>
-<p>If other person used identical seed value, they’ll reproduce your “random number” result. One of my friends said “random number is so fun; it’s random but not random.”</p>
+<p>For generating random numbers, an initial “starting point” is required to establish a series of random numbers.</p>
+<p>If another person uses the same seed value, they can reproduce the exact sequence of random numbers that you generated. This observation highlights the interesting nature of random numbers—they are random yet reproducible.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -725,6 +727,9 @@ arr2.ndim  = 2
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.20470766  0.47894334 -0.51943872 -0.5557303   1.96578057]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -759,7 +764,7 @@ arr2.ndim  = 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10f331ff0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1174a6110&gt;
 </pre></div>
 </div>
 <img alt="../../_images/428b586becbc857285cbfdbbb9a5823565cec4a0c91c8c60840d8f26aefd3efc.png" src="../../_images/428b586becbc857285cbfdbbb9a5823565cec4a0c91c8c60840d8f26aefd3efc.png" />
@@ -835,8 +840,8 @@ Identity
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">np.empty</span></code> is not recommended (I couldn’t have found when it’s really necessary to use against zeros or ones), because it sometimes fills all element with <strong>garbage</strong> values like <code class="docutils literal notranslate"><span class="pre">1.5e-323</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<p>Another usage is <code class="docutils literal notranslate"><span class="pre">xxxx_like</span></code>:</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">np.empty</span></code> is generally not recommended due to the possibility of filling the array with “garbage” values like <code class="docutils literal notranslate"><span class="pre">1.5e-323</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>. I personally do not know when it is necessary to use <code class="docutils literal notranslate"><span class="pre">np.empty</span></code> instead of <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code> or <code class="docutils literal notranslate"><span class="pre">np.ones</span></code> to initialize an array.</p>
+<p>Another useful function is <code class="docutils literal notranslate"><span class="pre">xxxx_like</span></code>, where <code class="docutils literal notranslate"><span class="pre">xxxx</span></code> can be replaced with <code class="docutils literal notranslate"><span class="pre">zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">ones</span></code>, or any other desired function. This function creates a new array with the same shape and data type as the provided input array. It can be particularly helpful when you want to create a new array based on the characteristics of an existing one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -966,8 +971,9 @@ a1[:, ::-1]
 </div>
 </div>
 <p><strong>When to use <code class="docutils literal notranslate"><span class="pre">flatten()</span></code>?</strong></p>
-<p>An example is, when you have a lot of N-D data (e.g., 1000 x 1000 = 1,000,000 pixel image) but want just one single histogram (pixel value histogram).</p>
-<p>If you do not use <code class="docutils literal notranslate"><span class="pre">flatten()</span></code>, it will take a lot of time and give strange results.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">flatten()</span></code> function in NumPy is useful when you have multi-dimensional data and you want to convert it into a one-dimensional array.</p>
+<p>For example, consider a scenario where you have a large N-dimensional dataset, such as a 1000 x 1000 = 1,000,000 pixel image. If you want to compute a histogram of pixel values from this image, using <code class="docutils literal notranslate"><span class="pre">flatten()</span></code> can be beneficial.</p>
+<p>If you don’t use <code class="docutils literal notranslate"><span class="pre">flatten()</span></code> in this case, it can take a considerable amount of time and may even yield unexpected results. By flattening the multi-dimensional array into a one-dimensional representation, you can efficiently compute the desired histogram without unnecessary processing or unexpected outcomes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -992,7 +998,7 @@ a1[:, ::-1]
 </section>
 <section id="concatenation">
 <h3>Concatenation<a class="headerlink" href="#concatenation" title="Permalink to this heading">#</a></h3>
-<p>Normally, there are not many use cases for concatenation (“merging”) using numpy. This is because any experienced python users would first make <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code> and then convert it to numpy at the last stage.</p>
+<p>In general, there are not many specific use cases for directly concatenating or merging arrays using NumPy. Experienced Python users typically prefer using Python’s built-in data structures like <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code> for intermediate concatenation and conversion to NumPy arrays at a later stage. This approach offers more flexibility and simplicity during concatenation operations. NumPy’s concatenation functions, such as <code class="docutils literal notranslate"><span class="pre">np.concatenate()</span></code> or <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code>, are usually used when working specifically with NumPy arrays or during the final stages of data preparation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1145,7 +1151,7 @@ vstack
  [ -5.33333333  -8.5        -18.                  inf]]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38340/2058048057.py:1: RuntimeWarning: divide by zero encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_12883/2058048057.py:1: RuntimeWarning: divide by zero encountered in divide
   print(ref1/ref2)
 </pre></div>
 </div>
@@ -1174,7 +1180,8 @@ vstack
 </section>
 <section id="nan-and-inf">
 <h3>NaN and inf<a class="headerlink" href="#nan-and-inf" title="Permalink to this heading">#</a></h3>
-<p>NaN (Not a Number) and inf (infinity) are two important and useful concepts in all numpy-related packages. When you do <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">0</span></code>, it should give “Error”, and all your program just break down. In numpy, <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> is raised instead, and <code class="docutils literal notranslate"><span class="pre">nan</span></code> is used, so all the calculations are done correctly except it gives <code class="docutils literal notranslate"><span class="pre">nan</span></code> when there is any of those. This is useful because the code runs as expected (no need to struggle with avoiding Errors) and you can remove any results which contains <code class="docutils literal notranslate"><span class="pre">nan</span></code> at the final stage.</p>
+<p>NaN (Not a Number) and inf (infinity) are essential concepts in NumPy-related packages and have practical applications. In regular Python, performing an operation like <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">0</span></code> would result in an error and disrupt the program’s execution. However, in NumPy, a <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> is raised instead, and the result is assigned as <code class="docutils literal notranslate"><span class="pre">nan</span></code> (not a number). This behavior allows the rest of the calculations to proceed correctly, except when encountering invalid operations.</p>
+<p>This approach is advantageous because it enables your code to run as expected without encountering <em>errors</em>, eliminating the need to handle exceptions explicitly. Later, during the final stages of computation, you can easily identify and remove any results containing <code class="docutils literal notranslate"><span class="pre">nan</span></code> values. This allows for cleaner and more efficient code execution, as you can focus on processing valid results while discarding invalid or incomplete calculations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref1_ref2</span> <span class="o">=</span> <span class="n">ref1</span><span class="o">/</span><span class="n">ref2</span>
@@ -1183,7 +1190,7 @@ vstack
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38340/4165815205.py:1: RuntimeWarning: divide by zero encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_12883/4165815205.py:1: RuntimeWarning: divide by zero encountered in divide
   ref1_ref2 = ref1/ref2
 </pre></div>
 </div>
@@ -1212,7 +1219,7 @@ vstack
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_38340/916304143.py:1: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_12883/916304143.py:1: RuntimeWarning: invalid value encountered in log
   np.isnan(np.log(-1))
 </pre></div>
 </div>
@@ -1449,10 +1456,10 @@ In 1-sigma ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.1 µs ± 18.5 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.26 µs ± 78.9 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.8 µs ± 400 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.8 µs ± 376 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1763,7 +1770,7 @@ In 1-sigma ratio
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-array">4.4.1. Numpy Array</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-generation">Array Generation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#arange"><code class="docutils literal notranslate"><span class="pre">arange</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace"><code class="docutils literal notranslate"><span class="pre">linspace</span></code></a></li>

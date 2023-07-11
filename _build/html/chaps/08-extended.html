@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>3. Extended Source Photometry &#8212; SNU AO Class Python</title>
   
@@ -70,7 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Philosophy" href="00-Philosophy.html" />
+    <link rel="next" title="4. PSF Extraction" href="09-psf01.html" />
     <link rel="prev" title="2. 2-D Backgrounds" href="07-bkg2d.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -420,6 +422,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile-of-galaxies">3.2. Radial Profile of Galaxies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipse-stsdas-isophot-ellipse">3.3. Ellipse (STSDAS.ISOPHOT.ELLIPSE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-background-and-segmentation">3.4. 2-D Background and Segmentation</a></li>
 </ul>
             </nav>
         </div>
@@ -476,18 +479,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 13:53:19 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:37:10 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 astroquery 0.4.7.dev8639
-8 photutils  1.7.0
+7 astroquery 0.4.7.dev8597
+8 photutils  1.6.0
 9 version_information 1.0.4
 </pre></div>
 </div>
@@ -549,9 +552,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_4261/2330366930.py:37: DeprecationWarning: `photutils.Background2D` is a deprecated alias for `photutils.background.Background2D` and will be removed in the future. Instead, please use `from photutils.background import Background2D` to silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_12860/2330366930.py:37: DeprecationWarning: `photutils.Background2D` is a deprecated alias for `photutils.background.Background2D` and will be removed in the future. Instead, please use `from photutils.background import Background2D` to silence this warning.
   from photutils import Background2D, EllipticalAperture
-/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_4261/2330366930.py:37: DeprecationWarning: `photutils.EllipticalAperture` is a deprecated alias for `photutils.aperture.EllipticalAperture` and will be removed in the future. Instead, please use `from photutils.aperture import EllipticalAperture` to silence this warning.
+/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_12860/2330366930.py:37: DeprecationWarning: `photutils.EllipticalAperture` is a deprecated alias for `photutils.aperture.EllipticalAperture` and will be removed in the future. Instead, please use `from photutils.aperture import EllipticalAperture` to silence this warning.
   from photutils import Background2D, EllipticalAperture
 WARNING: FITSFixedWarning: RADECSYS= &#39;ICRS &#39; / International Celestial Ref. System 
 the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
@@ -684,6 +687,7 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>id</th>
       <th>xcenter</th>
       <th>ycenter</th>
       <th>aperture_sum</th>
@@ -705,6 +709,7 @@ WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 
   <tbody>
     <tr>
       <th>0</th>
+      <td>1</td>
       <td>1260.0</td>
       <td>485.0</td>
       <td>12544.034143</td>
@@ -840,23 +845,11 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 </section>
 <section id="ellipse-stsdas-isophot-ellipse">
 <h2><span class="section-number">3.3. </span>Ellipse (STSDAS.ISOPHOT.ELLIPSE)<a class="headerlink" href="#ellipse-stsdas-isophot-ellipse" title="Permalink to this heading">#</a></h2>
-<p>You learned</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## 2-D Background and Segmentation</span>
-<span class="n">Now</span><span class="p">,</span> <span class="n">what</span> <span class="k">if</span> <span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">do</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">rese</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-    <span class="n">Now</span><span class="p">,</span> <span class="n">what</span> <span class="k">if</span> <span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">do</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">rese</span>
-         <span class="o">^</span>
-<span class="ne">SyntaxError</span>: expected &#39;else&#39; after &#39;if&#39; expression
-</pre></div>
-</div>
-</div>
-</div>
+<p>You learned the</p>
+</section>
+<section id="d-background-and-segmentation">
+<h2><span class="section-number">3.4. </span>2-D Background and Segmentation<a class="headerlink" href="#d-background-and-segmentation" title="Permalink to this heading">#</a></h2>
+<p>Now, what if I want to do a simple rese</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">box_size</span> <span class="o">=</span> <span class="mi">50</span>
@@ -908,14 +901,14 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">std_ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">med</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span>
 <span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">segm</span> <span class="o">=</span> <span class="n">detect_sources</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">npixels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">filter_kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">segm</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">segm</span><span class="o">.</span><span class="n">make_cmap</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">12345</span><span class="p">))</span>
 
-<span class="nn">File ~/mambaforge/lib/python3.10/site-packages/astropy/utils/decorators.py:607,</span> in <span class="ni">deprecated_renamed_argument.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="nn">File ~/mambaforge/envs/snuao/lib/python3.10/site-packages/astropy/utils/decorators.py:607,</span> in <span class="ni">deprecated_renamed_argument.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">604</span>             <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">        Use </span><span class="si">{</span><span class="n">alternative</span><span class="si">}</span><span class="s2"> instead.&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">605</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">warning_type</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">607</span> <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -969,11 +962,11 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
       </div>
     </a>
     <a class="right-next"
-       href="00-Philosophy.html"
+       href="09-psf01.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Philosophy</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>PSF Extraction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1001,6 +994,7 @@ Total source_sum from elliptical aperture phot: 11939.10 (radius = (200.0 100.0)
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-profile-of-galaxies">3.2. Radial Profile of Galaxies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipse-stsdas-isophot-ellipse">3.3. Ellipse (STSDAS.ISOPHOT.ELLIPSE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-background-and-segmentation">3.4. 2-D Background and Segmentation</a></li>
 </ul>
   </nav></div>
 

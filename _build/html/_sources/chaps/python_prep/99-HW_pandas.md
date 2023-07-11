@@ -3,11 +3,11 @@
 
 ## Instructions
 
-Please use python 3.6+ (Never use python 2).
+Please use Python 3.6+ (never Python 2).
 
-For other packages: Although I didn't run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
+For other packages: Although I didn't run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
 
-Here we will learn how to code in _pythonic_ way. Start solving the problems after running the code below:
+Here, we will learn how to code in _pythonic_ way. Start solving the problems after running the code below:
 
 ```python
 import numpy as np
@@ -45,12 +45,12 @@ data_str = '''jd_target,m_red,dm_red,serious
 While answering the problems, follow these rules:
 
 1. You **should not import any other packages**.
-2. For each problem, I gave hints. **It is also homework for you to search for those on google**.
+2. For each problem, I gave hints. **It is also homework for you to search for those on Google**.
 
 
 ## Problems [40 points]
 
-The ``data_str`` is the photometry results of an asteroid (155140) 2005 UD taken at the SNU Astronomical Observatory (SNUO or SAO) 1-m telescope. I selected only 22 data points out of 811 data points. ``jd_target`` is roughly the observation time in JD, ``m_red`` is the reduced magnitude (please regard it as the magnitude of the asteroid), ``dm_red`` is the error of it, and ``serious`` is 1 if the image had serious problem, so should not be used.
+The ``data_str`` is the photometry result of an asteroid (155140) 2005 UD taken at the SNU Astronomical Observatory (SNUO or SAO) 1-m telescope. I selected only 22 data points out of 811 data points. ``jd_target`` is roughly the observation time in JD, ``m_red`` is the reduced magnitude (please regard it as the magnitude of the asteroid), ``dm_red`` is the error of it, and ``serious`` is 1 if the image had a serious problem, so it should not be used.
 
 ```{admonition} Reference
 :class: dropdown
@@ -65,9 +65,8 @@ The results from this observation are published as **Ishiguro, Bach, Geem et al.
 
 You can fill in the ``>>FILLHERE<<`` parts in the Hints and use that to answer the questions. Or, you can just make your own answer, ignoring the Hints.
 
-1. Make a DataFrame from ``data_str``. Give it a name ``df``.
+1. Make a DataFrame from ``data_str``. Give it the name ``df``.
    * Hint: ``pd.read_csv(pd.compat.StringIO(?))``
-
 2. Print the first 3 rows of the ``df``.
    * Hint: use ``.head()``
 3. Print the last 3 rows of the ``df``.
@@ -78,38 +77,35 @@ You can fill in the ``>>FILLHERE<<`` parts in the Hints and use that to answer t
    * There are other conversions, to HTML, numpy, etc.
 6. Check whether the unique elements of the column ``serious`` are 0 and 1.
    - Hint: use ``.unique()`` to the column.
-7. To get an idea how the data looks like, plot the error-bar of the ``m_red`` as a function of JD.
+7. To get an idea of how the data looks, plot the error-bar of ``m_red`` as a function of JD.
    * Hint: ``plt.errorbar(df["jd_target"], df["?"], df["dm_red"])``
-8. The error-bar of magnitude is not Gaussian, but the error-bar of flux is nearly Gaussian. In usual photometry, what we get is the flux error but we only present the magnitude error which is calculated (estimated) from the flux error. From the ``dm_red``, recover the error-bar of the flux.
-   * Hint: The flux error and magnitude errors are related by ``dm = 2.5 / np.log(10) * dflux``.
+8. The error-bar of magnitude is not Gaussian, but the error-bar of flux is nearly Gaussian. In usual photometry, what we get is the flux error, but we only present the magnitude error, which is calculated (estimated) from the flux error. From ``dm_red``, recover the error-bar of the flux.
+   * Hint: The flux error and magnitude error are related by ``dm = 2.5 / np.log(10) * dflux``.
    * Hint: The inversion of the equation may give ``df["dflux"] = ? * df["dm_red"]``
 9. Actually, ``"dflux"`` column is useless. Remove this column.
    * Hint: Use ``.drop(columns=["dflux"], inplace=?)``.
-   * The ``inplace`` option can either be ``True`` or ``False``, depending on how you do (if you can't understand it, Google it!)
+   * The ``inplace`` option can either be ``True`` or ``False``, depending on how you do it (if you can't understand it, Google it!)
 10. Make a mask to mask rows with ``serious==1``. Name it ``mask_serious``.
     * Hint: ``df["serious"]==1``
-
-11. Replace the ``dm_red`` of the masked row as ``NaN``.
+11. Replace the ``dm_red`` of the masked row with ``NaN``.
     * Hint: Use ``df.loc[mask, "dm_red"]``
-12. You found that, for some reason, the 3th row is problematic. Replace ``"m_red"`` of this row to ``NaN``.
+12. You found that, for some reason, the 3-th row is problematic. Replace ``"m_red"`` in this row with ``NaN``.
     * Hint: Use ``df.loc[3, "m_red"]`` or ``df.iloc[3, 1]``.
-13. Drop any row which contains any NaN values.
+13. Drop any row that contains any NaN values.
     * Hint: Use ``df.dropna(inplace=?)``
 14. If you see ``df``, the index (leftmost column) is missing ``3`` and ``20``. Reset this such that it is consecutive integers of separation 1.
     * Hint: ``df.reset_index(inplace=?, drop=True)``
-15. From Ishiguro et al. 2019, it is found the period of the asteroid is 0.218282 +/- 0.000092 day. Add a column called ``"phase"``.
+15. From Ishiguro et al. 2019, it is found that the period of the asteroid is 0.218282 +/- 0.000092 days. Add a column called ``"phase"``.
     * Hint: Use ``df["jd_target"]%0.218282 / 0.218282``
-16. Make a column ``"first_half"``, and assign ``True`` if phase is smaller than 0.5, and ``False`` otherwise.
+16. Make a column ``"first_half"``, and assign ``True`` if the phase is smaller than 0.5 and ``False`` otherwise.
     * Hint: ``df["first_half"] = df["phase"] < 0.5``
-17. Make a column ``"faint"``, and assign ``True`` if ``m_red`` is larger(fainter) than the mean calue, and ``False`` otherwise.
+17. Make a column ``"faint"``, and assign ``True`` if ``m_red`` is larger (fainter) than the mean calue, and ``False`` otherwise.
     * Hint: ``df["faint"] = df["m_red"] > df["m_red"].mean()``
 18. Make ``DataFrameGroupBy`` object based on the columns ``["first_half", "faint"]``.
-
-
 19. [4 points] Fill in the following code to plot a graph such that the marker is
     1. red when ``first_half==True`` and blue otherwise,
     2. empty inverse triangle (``"v"``) when ``faint=True`` and filled triangle (``"^"``) otherwise
-    and the y-axis decreases as go upward (lower 17.5, upper 17.0), because it's magnitude.
+    and the y-axis decreases as you go upward (lower 17.5, upper 17.0) because of it's the magnitude.
     ```python
     #        first  faint
     props = {(True, True): dict(marker="v", color="r", mfc="none"),
@@ -135,7 +131,7 @@ You can fill in the ``>>FILLHERE<<`` parts in the Hints and use that to answer t
 
 **TIP**
 
-There are some occasions when it's better to use ``for`` than simple ``df["blahblah"] = df["col1"] * df["col2"]``, especially when complicated calculation is needed. In such cases, you can use
+There are some occasions when it's better to use ``for`` than the simple ``df["blahblah"] = df["col1"] * df["col2"]``, especially when complicated calculations are needed. In such cases, you can use
 
 ```python
 for i, row in df.iterrows():
@@ -144,14 +140,13 @@ for i, row in df.iterrows():
 ```
 
 Things go well in this case with ``loc``, but I used ``at``.
-* ``loc`` is slower, but you can access to multiple locations
-* ``at`` is quicker, but you can access to only one single location
+* ``loc`` is slower, but you can access multiple locations.
+* ``at`` is quicker, but you can access only one single location.
 
 See [here](https://stackoverflow.com/questions/37216485/pandas-at-versus-loc)
 
 
 
-The full light curve of this asteroid, from the 2-night observation at SNU is like this:
+The full light curve of this asteroid, from the 2-night observation at SNU, is like this:
 
 <img src="../figs/asteroid_light_curve.png" style="zoom:25%;" />
-

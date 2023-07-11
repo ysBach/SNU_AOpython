@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>IRAF (DEPRECATED) &#8212; SNU AO Class Python</title>
   
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current nav bd-sidenav">
@@ -478,12 +480,12 @@ document.write(`
 <span id="ch-iraf"></span><h1>IRAF (DEPRECATED)<a class="headerlink" href="#iraf-deprecated" title="Permalink to this heading">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>You will need the tutorial data for HR30 to proceed this example. You can download it from here: <a class="reference external" href="https://doi.org/10.5281/zenodo.7911810"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.7911810.svg" /></a></p>
+<p>You will need the tutorial data for HR30 to proceed with this example. You can download it from here: <a class="reference external" href="https://doi.org/10.5281/zenodo.7911810"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.7911810.svg" /></a></p>
 </div>
-<p>This short lecture note is used as a material for the “legacy session” which uses IRAF. For basic concepts and ideas (e.g., reason for flat division, etc), please refer to the other lecture note sections.</p>
-<p>This time, you will learn very basic tasks of IRAF. This includes</p>
+<p>This short lecture note is used as material for the “legacy session,” which uses IRAF. For basic concepts and ideas (e.g., the reason for flat division, etc.), please refer to the other lecture note sections.</p>
+<p>This time, you will learn the very basic tasks of IRAF. This includes</p>
 <ul class="simple">
-<li><p>Print information of images (<code class="docutils literal notranslate"><span class="pre">IMSTAT</span></code>, <code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code>, <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code>,<code class="docutils literal notranslate"><span class="pre">HSELECT</span></code>)</p></li>
+<li><p>Print information about images (<code class="docutils literal notranslate"><span class="pre">IMSTAT</span></code>, <code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code>, <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code>,<code class="docutils literal notranslate"><span class="pre">HSELECT</span></code>)</p></li>
 <li><p>Arithmetics on images: copying an image and adding, subtracting, multiplying, and dividing an image with others (<code class="docutils literal notranslate"><span class="pre">IMCOPY</span></code>,<code class="docutils literal notranslate"><span class="pre">IMARITH</span></code>)</p></li>
 <li><p>Combining: make master bias, dark, and flat (<code class="docutils literal notranslate"><span class="pre">IMCOMBINE</span></code>)</p></li>
 <li><p>Preprocessing</p></li>
@@ -494,7 +496,7 @@ document.write(`
 <li><p>Aperture photometry (<code class="docutils literal notranslate"><span class="pre">PHOT</span></code>)</p></li>
 <li><p>Spectroscopic data reduction (<code class="docutils literal notranslate"><span class="pre">APALL</span></code>, <code class="docutils literal notranslate"><span class="pre">IDENTIFY</span></code>, <code class="docutils literal notranslate"><span class="pre">REIDENTIFY</span></code>, <code class="docutils literal notranslate"><span class="pre">FITCOORDS</span></code>, <code class="docutils literal notranslate"><span class="pre">SENSFUNC</span></code>, <code class="docutils literal notranslate"><span class="pre">FLUXCALIB</span></code>)</p></li>
 </ul>
-<p>I will explain the usage of IRAF/PyRAF in conda environment, so it may slightly differ from normal IRAF, but basically the same.</p>
+<p>I will explain the usage of IRAF/PyRAF in a conda environment, so it may slightly differ from normal IRAF, but is basically the same.</p>
 <p>[TOC]</p>
 <blockquote>
 <div><p><strong>Data files</strong></p>
@@ -527,19 +529,19 @@ document.write(`
 <span class="n">ne_30</span><span class="o">.</span><span class="n">fits</span>  <span class="n">ne_60</span><span class="o">.</span><span class="n">fits</span>
 </pre></div>
 </div>
-<p>Because of the size of images, I did not include them in this GitHub repo. If you want, please contact me via (<a class="reference external" href="mailto:dbstn95&#37;&#52;&#48;gmail&#46;com">dbstn95<span>&#64;</span>gmail<span>&#46;</span>com</a>)! The HR30 data are actully publicly available via SMOKA and the Vega data are obtained in the class.</p>
+<p>Because of the size of the images, I did not include them in this GitHub repo. If you want, please contact me at (<a class="reference external" href="mailto:ysbach93&#37;&#52;&#48;gmail&#46;com">ysbach93<span>&#64;</span>gmail<span>&#46;</span>com</a>)! The HR30 data are actually publicly available via SMOKA and the Vega data are obtained in the class.</p>
 </div></blockquote>
 <section id="run-pyraf">
 <h2>1. Run PyRAF<a class="headerlink" href="#run-pyraf" title="Permalink to this heading">#</a></h2>
-<p>You can start IRAF environment (<em>not</em> IRAF itself!) by typing</p>
+<p>You can start the IRAF environment (<em>not</em> IRAF itself!) by typing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ source activate iraf
 </pre></div>
 </div>
-<p>on the terminal. <code class="docutils literal notranslate"><span class="pre">iraf</span></code> is the name of conda environment you set when creating the environment, and you may have used <code class="docutils literal notranslate"><span class="pre">iraf27</span></code>, etc. Then you are now in the IRAF environment run on Python 2.7. At a suitable directory, type</p>
+<p>on the terminal. <code class="docutils literal notranslate"><span class="pre">iraf</span></code> is the name of the conda environment you set when creating the environment, and you may have used <code class="docutils literal notranslate"><span class="pre">iraf27</span></code>, etc. Then you are now in the IRAF environment running on Python 2.7. In a suitable directory, type</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ mkiraf
 </pre></div>
 </div>
-<p>and answer the question with <code class="docutils literal notranslate"><span class="pre">xgterm</span></code>. Typing <code class="docutils literal notranslate"><span class="pre">ls</span></code> will show you <code class="docutils literal notranslate"><span class="pre">login.cl</span></code> and <code class="docutils literal notranslate"><span class="pre">uparms</span></code> directory. <code class="docutils literal notranslate"><span class="pre">login.cl</span></code> is the file which saves basic properties: It’s a <em>settings</em> file in short. It will be used when you run IRAF <strong>in this directory only</strong>. You have to run the IRAF in the directory where you have <code class="docutils literal notranslate"><span class="pre">login.cl</span></code>. <code class="docutils literal notranslate"><span class="pre">uparms</span></code> is a directory which will save the changes you make to the default settings of IRAF.</p>
+<p>and answer the question with <code class="docutils literal notranslate"><span class="pre">xgterm</span></code>. Typing <code class="docutils literal notranslate"><span class="pre">ls</span></code> will show you <code class="docutils literal notranslate"><span class="pre">login.cl</span></code> and <code class="docutils literal notranslate"><span class="pre">uparms</span></code> directory. <code class="docutils literal notranslate"><span class="pre">login.cl</span></code> is the file that saves basic properties; it’s a <em>settings</em> file, in short. It will be used only when you run IRAF <strong>in this directory</strong>. You have to run the IRAF in the directory where you have <code class="docutils literal notranslate"><span class="pre">login.cl</span></code>. <code class="docutils literal notranslate"><span class="pre">uparms</span></code> is a directory that will save the changes you make to the default settings of IRAF.</p>
 <p>Now, you can run IRAF by typing
 ​
 $ cl</p>
@@ -547,13 +549,13 @@ $ cl</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ pyraf
 </pre></div>
 </div>
-<p>I recommend to use PyRAF, since AstroConda does not fully guarantee the stability of IRAF CL. The <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code>, for example, does not correctly work if you use <code class="docutils literal notranslate"><span class="pre">cl</span></code>. You will see the following on terminal with the prompt “<code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>”:</p>
+<p>I used PyRAF since AstroConda does not fully guarantee the stability of IRAF CL. The <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code>, for example, does not correctly work if you use <code class="docutils literal notranslate"><span class="pre">cl</span></code>. You will see the following on the terminal with the prompt “<code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>”:</p>
 <p><img alt="IRAF_01" src="../../_images/IRAF_01.png" /></p>
 <ul>
 <li><p><strong>NOTE</strong>:</p>
 <ol class="arabic">
 <li><p>Change all the names to “.fits”, NOT “.fit”</p></li>
-<li><p>All the images should have header <code class="docutils literal notranslate"><span class="pre">BZERO</span></code> and <code class="docutils literal notranslate"><span class="pre">BSCALE</span></code>. <em>If they don’t</em>, type the following on the cl terminal:</p>
+<li><p>All the images should have the header keys <code class="docutils literal notranslate"><span class="pre">BZERO</span></code> and <code class="docutils literal notranslate"><span class="pre">BSCALE</span></code>. <em>If they don’t</em>, type the following on the CL terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">noao</span>
 <span class="o">--&gt;</span> <span class="n">imred</span>
 <span class="o">--&gt;</span> <span class="n">ccdred</span>
@@ -561,7 +563,7 @@ $ cl</p>
 <span class="o">--&gt;</span> <span class="n">ccdhedit</span> <span class="o">*.</span><span class="n">fits</span> <span class="n">BSCALE</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>This might be necessary for images obtained from some personal ccds. The real pixel value should be <code class="docutils literal notranslate"><span class="pre">real_value</span> <span class="pre">=</span> <span class="pre">pixel</span> <span class="pre">*</span> <span class="pre">BSCALE</span> <span class="pre">+</span> <span class="pre">BZERO</span></code>. People sacrificed the 15th bit of 16-bit system, and used it as a “sign” bit. Usually, <code class="docutils literal notranslate"><span class="pre">BZERO</span> <span class="pre">=</span> <span class="pre">2**15</span> <span class="pre">=</span> <span class="pre">32768</span></code>, and <code class="docutils literal notranslate"><span class="pre">BSCALE=1.0</span></code>. If you do not add these header keywords to the image header, you will result in many negative values from bias/dark/flat raw images, which eventually lead you to a wrong result. For more information, please see the <a class="reference external" href="http://docs.astropy.org/en/stable/io/fits/#unsigned-integers">astropy documentation</a>.</p>
+<p>This might be necessary for images obtained from some personal CCDs. The real pixel value should be <code class="docutils literal notranslate"><span class="pre">real_value</span> <span class="pre">=</span> <span class="pre">pixel</span> <span class="pre">*</span> <span class="pre">BSCALE</span> <span class="pre">+</span> <span class="pre">BZERO</span></code>. People sacrificed the 15th bit of a 16-bit system and used it as a “sign” bit. Usually, <code class="docutils literal notranslate"><span class="pre">BZERO</span> <span class="pre">=</span> <span class="pre">2**15</span> <span class="pre">=</span> <span class="pre">32768</span></code>, and <code class="docutils literal notranslate"><span class="pre">BSCALE=1.0</span></code>. If you do not add these header keywords to the image header, you will result in many negative values from bias/dark/flat raw images, which eventually lead to the wrong result. For more information, please see the <a class="reference external" href="http://docs.astropy.org/en/stable/io/fits/#unsigned-integers">astropy documentation</a>.</p>
 </li>
 </ol>
 </li>
@@ -569,13 +571,13 @@ $ cl</p>
 </section>
 <section id="display-image">
 <h2>2. Display Image<a class="headerlink" href="#display-image" title="Permalink to this heading">#</a></h2>
-<p>PyRAF supports few LINUX commands, such as <code class="docutils literal notranslate"><span class="pre">ls</span></code> or <code class="docutils literal notranslate"><span class="pre">cd</span></code> without an exclamation mark (<code class="docutils literal notranslate"><span class="pre">!</span></code>). But to display image, you must use <code class="docutils literal notranslate"><span class="pre">!ds9</span></code> or <code class="docutils literal notranslate"><span class="pre">!ginga</span></code>. You should also use (<code class="docutils literal notranslate"><span class="pre">!</span></code>) when delete files using <code class="docutils literal notranslate"><span class="pre">rm</span></code>.</p>
-<p>Since IRAF is extremely comfortable when used with <code class="docutils literal notranslate"><span class="pre">SAO</span> <span class="pre">ds9</span></code>, I will use <code class="docutils literal notranslate"><span class="pre">ds9</span></code> throughout this note.</p>
+<p>PyRAF supports a few Linux commands, such as <code class="docutils literal notranslate"><span class="pre">ls</span></code> or <code class="docutils literal notranslate"><span class="pre">cd</span></code> without an exclamation mark (<code class="docutils literal notranslate"><span class="pre">!</span></code>). But to display an image, you must use <code class="docutils literal notranslate"><span class="pre">!ds9</span></code> or <code class="docutils literal notranslate"><span class="pre">!ginga</span></code>. You should also use (<code class="docutils literal notranslate"><span class="pre">!</span></code>) when deleting files using <code class="docutils literal notranslate"><span class="pre">rm</span></code>.</p>
+<p>Since IRAF is extremely comfortable when used with <code class="docutils literal notranslate"><span class="pre">SAO</span> <span class="pre">DS9</span></code>, I will use <code class="docutils literal notranslate"><span class="pre">ds9</span></code> throughout this note.</p>
 <section id="sao-ds9">
 <h3>SAO DS9<a class="headerlink" href="#sao-ds9" title="Permalink to this heading">#</a></h3>
 <p>Display the image:</p>
 <ul class="simple">
-<li><p><strong>TIP</strong>: It’s better to append the ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) at the end of <code class="docutils literal notranslate"><span class="pre">ds9</span></code>. Try without it and see what happens.</p></li>
+<li><p><strong>TIP</strong>: It’s better to append the ampersand (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) at the end of <code class="docutils literal notranslate"><span class="pre">ds9</span></code>. Try it without it and see what happens.</p></li>
 <li><p><strong>TIP</strong>: Always try to use <code class="docutils literal notranslate"><span class="pre">tab</span></code> key on your keyboard to “autocomplete”!</p></li>
 </ul>
 <p><img alt="IRAF_02" src="../../_images/IRAF_02.png" /></p>
@@ -588,12 +590,12 @@ $ cl</p>
 </pre></div>
 </div>
 <p><img alt="IRAF_implot" src="../../_images/IRAF_implot.png" /></p>
-<p>Click on the <code class="docutils literal notranslate"><span class="pre">Graphics</span></code> window, and hit <code class="docutils literal notranslate"><span class="pre">:</span></code> key, then you will see small box at the bottom of the window. The left image is obtained by typing <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:l</span> <span class="pre">700</span></code> (average over 30 pixels around line (row) 700), and the right image is obtained by <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:c</span> <span class="pre">500</span></code>. On the images, there will be a small T-shaped tick on the right y-axis (red arrows). This indicates which line/column you are looking at.</p>
+<p>Click on the <code class="docutils literal notranslate"><span class="pre">Graphics</span></code> window and hit <code class="docutils literal notranslate"><span class="pre">:</span></code> key; then you will see a small box at the bottom of the window. The left image is obtained by typing <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:l</span> <span class="pre">700</span></code> (average over 30 pixels around line (row) 700), and the right image is obtained by typing <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:c</span> <span class="pre">500</span></code>. On the images, there will be a small T-shaped tick on the right y-axis (red arrows). This indicates which line/column you are looking at.</p>
 </section>
 </section>
 <section id="bias-combine">
 <h2>3. Bias Combine<a class="headerlink" href="#bias-combine" title="Permalink to this heading">#</a></h2>
-<p>First, make the list of bias files. Go to the bias directory by “<code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">cd</span> <span class="pre">bias</span></code>” and type</p>
+<p>First, make a list of bias files. Go to the bias directory by typing “<code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">cd</span> <span class="pre">bias</span></code>” and typing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; ls *.fits &gt; bias.list
 </pre></div>
 </div>
@@ -606,22 +608,22 @@ $ cl</p>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">epar</span></code> means “edit parameters. The task <code class="docutils literal notranslate"><span class="pre">IMCOMBINE</span></code> will do task of combining images using many options.</p>
-<p>We will combine all 12 images in the <code class="docutils literal notranslate"><span class="pre">bias/</span></code> directory, and make one output named <code class="docutils literal notranslate"><span class="pre">bias.fits</span></code> using so-called <strong>median combine</strong>, while all other options left as default:</p>
+<p>We will combine all 12 images in the <code class="docutils literal notranslate"><span class="pre">bias/</span></code> directory and make one output named <code class="docutils literal notranslate"><span class="pre">bias.fits</span></code> using the so-called <strong>median combine</strong>, while all other options are left as default:</p>
 <p><img alt="IRAF_bias_combine" src="../../_images/IRAF_bias_combine.png" /></p>
-<p>In IRAF commands, <code class="docutils literal notranslate"><span class="pre">&#64;filename</span></code> means “open the file named <code class="docutils literal notranslate"><span class="pre">filename</span></code>, and put the contents here”. Since <code class="docutils literal notranslate"><span class="pre">bias.list</span></code> contains the list of file names of bias images,</p>
+<p>In IRAF commands, <code class="docutils literal notranslate"><span class="pre">&#64;filename</span></code> means “open the file named <code class="docutils literal notranslate"><span class="pre">filename</span></code>, and put the contents here”. Since <code class="docutils literal notranslate"><span class="pre">bias.list</span></code> contains the list of file names for bias images,</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@bias.list == KCD095601.fits, KCD095602.fits, ....... , KCD095627.fits
 </pre></div>
 </div>
 <p>See how efficient it is?</p>
-<p>Clicking <code class="docutils literal notranslate"><span class="pre">Execute</span></code>, you will see that a new file appeared. Check it by</p>
+<p>By clicking <code class="docutils literal notranslate"><span class="pre">Execute</span></code>, you will see that a new file has appeared. Check it out by</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; !ds9 -zscale bias.fits &amp;
 </pre></div>
 </div>
-<p>In this tutorial, we will neglect the dark, because it is extremely small compared to that of bias and almost constant over the image in modern CCDs. <strong>So regard this master bias as “bias+dark”.</strong> If you have dark frames and want to make master dark frame, you can just do the same procedure for the dark frame images with identical exposure times (e.g., make <code class="docutils literal notranslate"><span class="pre">dark10s.list</span></code>, <code class="docutils literal notranslate"><span class="pre">dark100s.list</span></code>, etc).</p>
+<p>In this tutorial, we will neglect the dark because it is extremely small compared to that of bias and almost constant over the image in modern CCDs. <strong>So regard this master bias as “bias+dark”.</strong> If you have dark frames and want to make a master dark frame, you can just do the same procedure for the dark frame images with identical exposure times (e.g., make <code class="docutils literal notranslate"><span class="pre">dark10s.list</span></code>, <code class="docutils literal notranslate"><span class="pre">dark100s.list</span></code>, etc.).</p>
 </section>
 <section id="flat-combine">
 <h2>4. Flat Combine<a class="headerlink" href="#flat-combine" title="Permalink to this heading">#</a></h2>
-<p>To make master flat, you have to subtract master bias from combined flat image. All are identical as that of bias, but subtract master bias from the final combined flat.</p>
+<p>To make the master flat, you have to subtract the master bias from the combined flat image. All the processes are identical to those of bias, but subtract master bias from the final combined flat.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; cd ../flat/
 --&gt; ls *.fits &gt; flat.list
 --&gt; epar imcombine
@@ -635,11 +637,12 @@ $ cl</p>
 --&gt; !ds9 -zscale flat.fits &amp;
 </pre></div>
 </div>
-<p>It’s very intuitive: “<code class="docutils literal notranslate"><span class="pre">IMARITH</span> <span class="pre">image1</span> <span class="pre">operator</span> <span class="pre">image2</span> <span class="pre">output</span></code>” means do the operation (<code class="docutils literal notranslate"><span class="pre">operator</span></code> can be <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code>) to images (<code class="docutils literal notranslate"><span class="pre">image1</span></code>, <code class="docutils literal notranslate"><span class="pre">image2</span></code>) and save the result as “<code class="docutils literal notranslate"><span class="pre">output</span></code>”. <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> of course means image arithmetics. You can open the full options window as you did for <code class="docutils literal notranslate"><span class="pre">IMCOMBINE</span></code> by typing</p>
+<p>It’s very intuitive: “<code class="docutils literal notranslate"><span class="pre">IMARITH</span> <span class="pre">image1</span> <span class="pre">operator</span> <span class="pre">image2</span> <span class="pre">output</span></code>” means do the operation (<code class="docutils literal notranslate"><span class="pre">operator</span></code> can be <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code>) on images (<code class="docutils literal notranslate"><span class="pre">image1</span></code>, <code class="docutils literal notranslate"><span class="pre">image2</span></code>) and save the result as “<code class="docutils literal notranslate"><span class="pre">output</span></code>”. <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> of course, means image arithmetics. You can open the full options’ window as you did for <code class="docutils literal notranslate"><span class="pre">IMCOMBINE</span></code> by typing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; epar imarith
 </pre></div>
 </div>
-<p>​</p>
+<p>​
+​</p>
 </section>
 <section id="preprocessing">
 <h2>5. Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this heading">#</a></h2>
@@ -653,7 +656,7 @@ $ cl</p>
 bias  bias.fits  flat  flat.fits  KCD095628.fits  KCD095629.fits  KCD095630.fits  KCD095631.fits
 </pre></div>
 </div>
-<p>Conceptually what we have to do is first</p>
+<p>Conceptually, what we have to do is first</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imarith object_image - bias.fits output1
 </pre></div>
 </div>
@@ -661,7 +664,7 @@ bias  bias.fits  flat  flat.fits  KCD095628.fits  KCD095629.fits  KCD095630.fits
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imarith output1 / flat.fits output2
 </pre></div>
 </div>
-<p>Because we have 4 images, which is few, you can do this for each of image. However, there is cleverer way to do it.</p>
+<p>Because we have 4 images, which is few, you can do this for each image. However, there is a cleverer way to do it.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; ls KCD*.fits &gt; obj.list
 --&gt; cp obj.list output1.list
 --&gt; cp obj.list output2.list
@@ -681,41 +684,41 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
              ^ ^       ^          ^
 </pre></div>
 </div>
-<p>First <code class="docutils literal notranslate"><span class="pre">s</span></code> means we will change the strings, <strong>from “<code class="docutils literal notranslate"><span class="pre">string1</span></code>” to “<code class="docutils literal notranslate"><span class="pre">string2</span></code>”</strong>, within the file <code class="docutils literal notranslate"><span class="pre">filename</span></code>. I used <code class="docutils literal notranslate"><span class="pre">b</span></code> for bias corrected, and <code class="docutils literal notranslate"><span class="pre">bf</span></code> for bias and flat corrected. You can display all the images</p>
+<p>First <code class="docutils literal notranslate"><span class="pre">s</span></code> means we will change the strings <strong>from “<code class="docutils literal notranslate"><span class="pre">string1</span></code>” to “<code class="docutils literal notranslate"><span class="pre">string2</span></code>”</strong>, within the file <code class="docutils literal notranslate"><span class="pre">filename</span></code>. I used <code class="docutils literal notranslate"><span class="pre">b</span></code> for bias corrected and <code class="docutils literal notranslate"><span class="pre">bf</span></code> for bias and flat corrected. You can display all the images:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; !ds9 -zscale bf_*.fits -single &amp;
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>TIP</strong>: Hit <code class="docutils literal notranslate"><span class="pre">tab</span></code> key and the next image will be displayed.</p></li>
-<li><p><strong>TIP</strong>: When do the flat fielding, I did not normalized it to have average value = 1. See the next section’s <strong>Question</strong>.</p></li>
-<li><p><strong>Question</strong>: Hit <code class="docutils literal notranslate"><span class="pre">tab</span></code> key several times. Can you find something? What do you think it is?</p></li>
+<li><p><strong>TIP</strong>: Hit the <code class="docutils literal notranslate"><span class="pre">tab</span></code> key, and the next image will be displayed.</p></li>
+<li><p><strong>TIP</strong>: When I did the flat fielding, I did not normalize (normalization: scaling the image so that its average value = 1). See the next section’s <strong>Question</strong>.</p></li>
+<li><p><strong>Question</strong>: Hit the <code class="docutils literal notranslate"><span class="pre">tab</span></code> key several times. Can you find something? What do you think it is?</p></li>
 </ul>
 </section>
 <section id="ccdred-package">
 <h3><code class="docutils literal notranslate"><span class="pre">CCDRED</span></code> package<a class="headerlink" href="#ccdred-package" title="Permalink to this heading">#</a></h3>
-<p>There are some tasks which are made especially for bias, dark, and flat combine processes. They are called <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>, and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>, which are subtasks of <code class="docutils literal notranslate"><span class="pre">CCDRED</span></code>. They are all small variants of <code class="docutils literal notranslate"><span class="pre">COMBINE</span></code> (different from <code class="docutils literal notranslate"><span class="pre">IMCOIMBINE</span></code>), and run through <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code> task.</p>
-<p>I usually avoid teaching these because it veils what’s happening in IRAF, and thus not very good for educational purpose. But I am showing you how to use these tasks, since it may be necessary for your future work. Manuals are kindly available from STScI: Just google with keywords such as “iraf zerocombine” and you will find the STScI website manuals like <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?zerocombine">this</a>.</p>
+<p>There are some tasks that are made especially for bias, dark, and flat combine processes. They are called <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>, and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>, which are subtasks of <code class="docutils literal notranslate"><span class="pre">CCDRED</span></code>. They are all small variants of <code class="docutils literal notranslate"><span class="pre">COMBINE</span></code> (different from <code class="docutils literal notranslate"><span class="pre">IMCOIMBINE</span></code>), and run through <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code> task.</p>
+<p>I usually avoid teaching these because they obscure what’s happening in IRAF and are thus not very good for educational purposes. But I am showing you how to use these tasks since they may be necessary for your future work. Manuals are kindly available from STScI: Just google with keywords such as “iraf zerocombine” and you will find the STScI website manuals like <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?zerocombine">this</a>.</p>
 <section id="zerocombine">
 <h4><code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code><a class="headerlink" href="#zerocombine" title="Permalink to this heading">#</a></h4>
 <p>For bias (zero) combine, use the following settings:</p>
 <p><img alt="IRAF_zerocombine" src="../../_images/IRAF_zerocombine.png" /></p>
 <ul class="simple">
-<li><p>Many students fails to do it because they put something in <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code>. Let it be blank unless header information is correctly set!</p></li>
-<li><p>Don’t bother to much for <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?zerocombine">Zerocombine Manual</a>.</p></li>
+<li><p>Many students fail to do it because they put something in <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code>. Let it be blank unless the header information is correctly set!</p></li>
+<li><p>Don’t bother too much with <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?zerocombine">Zerocombine Manual</a>.</p></li>
 </ul>
 </section>
 <section id="darkcombine">
 <h4><code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code><a class="headerlink" href="#darkcombine" title="Permalink to this heading">#</a></h4>
-<p>For dark combine, use the following settings:</p>
+<p>For dark combinations, use the following settings:</p>
 <p><img alt="IRAF_darkcombine" src="../../_images/IRAF_darkcombine.png" /></p>
 <ul class="simple">
-<li><p>Please let <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code> blank as before.</p></li>
-<li><p>Don’t bother to much for <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?darkcombine">Darkcombine Manual</a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">process</span></code> means it will do the bias subtraction (<code class="docutils literal notranslate"><span class="pre">zerocor</span></code> of <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code> task). <code class="docutils literal notranslate"><span class="pre">scale</span></code> means it will scale the dark images to the exposure time, and combine all darks appropriately.</p></li>
-<li><p>The zero-corrected dark may have negative values and the mean is around 0.</p></li>
+<li><p>Please leave <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code> blank as before.</p></li>
+<li><p>Don’t bother too much with <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?darkcombine">Darkcombine Manual</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process</span></code> means it will do the bias subtraction (<code class="docutils literal notranslate"><span class="pre">zerocor</span></code> or <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code> task). <code class="docutils literal notranslate"><span class="pre">scale</span></code> means it will scale the dark images to the exposure time and combine all darks appropriately.</p></li>
+<li><p>The zero-corrected dark may have negative values, and the mean is around 0.</p></li>
 </ul>
 <blockquote>
-<div><p>If you do <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>, the input dark files may be changed (automatically zero subtracted). If you type <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">ccdlist</span></code>, you can see [Z] to each dark files, which means the zero correction has already been done. This can be avoided by using <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code>:</p>
+<div><p>If you do <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>, the input dark files may be changed (automatically zero subtracted). If you type <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">ccdlist</span></code>, you can see [Z] to each dark file, which means the zero correction has already been done. This can be avoided by using <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">epar</span> <span class="n">ccdproc</span>
 </pre></div>
 </div>
@@ -724,17 +727,17 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 <p>Or <code class="docutils literal notranslate"><span class="pre">COMBINE</span></code> or <code class="docutils literal notranslate"><span class="pre">IMCOMBINE</span></code> to get the median-combined dark, and then subtract <code class="docutils literal notranslate"><span class="pre">bias.fits</span></code> by I<code class="docutils literal notranslate"><span class="pre">MARITH</span></code>:</p>
 <p>–&gt; combine dark*.fits tmp.fits combine=median
 –&gt; imarith tmp.fits – Zero.fits Dark.fits</p>
-<p>Of course <code class="docutils literal notranslate"><span class="pre">(IM)COMBINE</span></code> and <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> all can be controlled by using <code class="docutils literal notranslate"><span class="pre">epar</span></code> (<code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">combine</span></code>, etc) as before. If you have better ways to do this, please let the TA know T__T</p>
+<p>Of course, <code class="docutils literal notranslate"><span class="pre">(IM)COMBINE</span></code> and <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> all can be controlled by using <code class="docutils literal notranslate"><span class="pre">epar</span></code> (<code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">combine</span></code>, etc) as before. If you have better ways to do this, please let the TA know T__T</p>
 </div></blockquote>
 </section>
 <section id="flatcombine">
 <h4><code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code><a class="headerlink" href="#flatcombine" title="Permalink to this heading">#</a></h4>
-<p>For dark combine, use the following settings:</p>
+<p>For flat combine, use the following settings:</p>
 <p><img alt="IRAF_flatcombine" src="../../_images/IRAF_flatcombine.png" /></p>
 <ul class="simple">
-<li><p>Please let <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code> blank as before.</p></li>
-<li><p>Don’t bother to much for <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?flatcombine">Flatcombine Manual</a>.</p></li>
-<li><p>Now we have to think about <code class="docutils literal notranslate"><span class="pre">subset</span></code> option. Since flat should be differentiated by filters, slits (spectroscopy), etc, IRAF scans the headers and automatically subdivide the flats into several groups. Sometimes it does not work properly.</p></li>
+<li><p>Please leave <code class="docutils literal notranslate"><span class="pre">ccdtype</span></code> blank as before.</p></li>
+<li><p>Don’t bother too much with <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code> and <code class="docutils literal notranslate"><span class="pre">gain</span></code>, since they are used only for <code class="docutils literal notranslate"><span class="pre">reject==ccdclip</span></code> or <code class="docutils literal notranslate"><span class="pre">reject==crreject</span></code>. See the <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/imred/ccdred/flatcombine.html">Flatcombine Manual</a>.</p></li>
+<li><p>Now we have to think about <code class="docutils literal notranslate"><span class="pre">subset</span></code> option. Since flats should be differentiated by filters, slits (spectroscopy), etc., IRAF scans the headers and automatically subdivides the flats into several groups. Sometimes it does not work properly.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scale</span></code> means it will normalize the flat image by its mode, average, etc.</p></li>
 </ul>
 <blockquote>
@@ -745,7 +748,7 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </section>
 <section id="file-information">
 <h2>6. File Information<a class="headerlink" href="#file-information" title="Permalink to this heading">#</a></h2>
-<p>You may want to see the brief information, such as statistics or the so-called “header information”, of images. You can do this via many ways.</p>
+<p>You may want to see the brief information, such as statistics or the so-called “header information”, of images. You can do this in many ways.</p>
 <section id="statistics-from-iraf">
 <h3>Statistics from IRAF<a class="headerlink" href="#statistics-from-iraf" title="Permalink to this heading">#</a></h3>
 <p>There is a task named <code class="docutils literal notranslate"><span class="pre">IMSTATISTICS</span></code> which gives some statistics for each image:</p>
@@ -768,9 +771,9 @@ bf_KCD095631.fits  b_KCD095629.fits  flat.fits         KCD095631.fits
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>Question</strong>: Why do you think the results <code class="docutils literal notranslate"><span class="pre">bf_*.fits</span></code> have such low min/max values? Do you have better idea to cope with this issue? This becomes bothersome for IRAF sometimes: see <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> section below.</p></li>
-<li><p><strong>Question</strong>: From file explorer, you can see the sizes of each image. The original <code class="docutils literal notranslate"><span class="pre">KCD*.fits</span></code> images are about 8.4 MB while the newly generated images are about twice larger. Why do you think this is so?</p></li>
-<li><p><strong>TIP</strong>: If you do the flat fielding, etc, by using some tasks for several times, you may see the file size increases. If this happened, you are now not even be able to do basic arithmetics for the images (error message will contain something like <code class="docutils literal notranslate"><span class="pre">FXF~~~</span></code>). This is because IRAF automatically makes a new “extention” on top of the original file, not overwriting it. You must delete the original file and do the reduction again.</p></li>
+<li><p><strong>Question</strong>: Why do you think the results <code class="docutils literal notranslate"><span class="pre">bf_*.fits</span></code> have such low min/max values? Do you have a better idea of how to cope with this issue? This becomes bothersome for IRAF sometimes; see <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> section below.</p></li>
+<li><p><strong>Question</strong>: From File Explorer, you can see the sizes of each image. The original <code class="docutils literal notranslate"><span class="pre">KCD*.fits</span></code> images are about 8.4 MB while the newly generated images are about twice as large. Why do you think this is so?</p></li>
+<li><p><strong>TIP</strong>: If you do the flat fielding, etc., by using some tasks several times, you may see the file size increase. If this happens, you are now not even able to do basic arithmetics for the images (the error message will contain something like <code class="docutils literal notranslate"><span class="pre">FXF~~~</span></code>). This is because IRAF automatically makes a new “extension” on top of the original file, not overwriting it. You must delete the original file and do the reduction again.</p></li>
 </ul>
 </section>
 <section id="header-from-ds9">
@@ -797,11 +800,11 @@ bias.fits[2048,2048][real]: bias
 flat.fits[2048,2048][real]: flat
 </pre></div>
 </div>
-<p>The result is slightly different from IRAF, because of the Python nature. If you want to see the full header, you can do:</p>
+<p>The result is slightly different from IRAF because of Python’s nature. If you want to see the full header, you can do the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imheader KCD095628.fits lo+
 </pre></div>
 </div>
-<p>which means “long+”. If you want to see only the exposure time, for example, which is <code class="docutils literal notranslate"><span class="pre">EXPTIME</span></code> in header keyword, you can use “<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">grep</span></code>”:
+<p>which means “long+”. If you want to see only the exposure time, for example, which is <code class="docutils literal notranslate"><span class="pre">EXPTIME</span></code> in the header keyword, you can use “<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">grep</span></code>”:
 –&gt; imheader *.fits lo+ | grep ‘EXPTIME’
 EXPTIME =                120.0 / [sec] Total integration time
 EXPTIME =                120.0 / [sec] Total integration time
@@ -839,20 +842,20 @@ flat.fits	10.0	19:27:15
 </section>
 <section id="ccdlist">
 <h3><code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code><a class="headerlink" href="#ccdlist" title="Permalink to this heading">#</a></h3>
-<p>There is another useful tool similar to <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> If you have used <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>,  and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>. It will show you which preprocesses have been done for each image. But since we used <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> only, this result will be almost identical to that of <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> and no more information will be there. To use <code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code>, you have to activate some packages:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; imred
+<p>There is another useful tool similar to <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> if you have used <code class="docutils literal notranslate"><span class="pre">ZEROCOMBINE</span></code>, <code class="docutils literal notranslate"><span class="pre">DARKCOMBINE</span></code>,  and <code class="docutils literal notranslate"><span class="pre">FLATCOMBINE</span></code>. It will show you which preprocessing has been done for each image. But since we used <code class="docutils literal notranslate"><span class="pre">IMARITH</span></code> only, this result will be almost identical to that of <code class="docutils literal notranslate"><span class="pre">IMHEADER</span></code> and no more information will be there. To use <code class="docutils literal notranslate"><span class="pre">CCDLIST</span></code>, you have to activate some packages:
+–&gt; imred
 imred/:
- argus/         ctioslit/       hydra/          kpnocoude/      vtel/
- bias/          dtoi/           iids/           kpnoslit/
- ccdred/        echelle/        irred/          quadred/
- crutil/        generic/        irs/            specred/
---&gt; ccdred
+argus/         ctioslit/       hydra/          kpnocoude/      vtel/
+bias/          dtoi/           iids/           kpnoslit/
+ccdred/        echelle/        irred/          quadred/
+crutil/        generic/        irs/            specred/
+–&gt; ccdred
 ccdred/:
- badpiximage    ccdlist         combine         mkillumcor      setinstrument
- ccdgroups      ccdmask         darkcombine     mkillumflat     zerocombine
- ccdhedit       ccdproc         flatcombine     mkskycor
- ccdinstrument  ccdtest         mkfringecor     mkskyflat
---&gt; ccdlist *.fits
+badpiximage    ccdlist         combine         mkillumcor      setinstrument
+ccdgroups      ccdmask         darkcombine     mkillumflat     zerocombine
+ccdhedit       ccdproc         flatcombine     mkskycor
+ccdinstrument  ccdtest         mkfringecor     mkskyflat
+–&gt; ccdlist *.fits
 KCD095628.fits[2048,2048][ushort][none][]:P/2006HR30
 KCD095629.fits[2048,2048][ushort][none][]:P/2006HR30
 KCD095630.fits[2048,2048][ushort][none][]:P/2006HR30
@@ -866,9 +869,7 @@ bf_KCD095629.fits[2048,2048][real][none][]:P/2006HR30
 bf_KCD095630.fits[2048,2048][real][none][]:P/2006HR30
 bf_KCD095631.fits[2048,2048][real][none][]:P/2006HR30
 bias.fits[2048,2048][real][none][]:bias
-flat.fits[2048,2048][real][none][]:flat
-</pre></div>
-</div>
+flat.fits[2048,2048][real][none][]:flat</p>
 </section>
 </section>
 <section id="primitive-photometry">
@@ -880,20 +881,20 @@ flat.fits[2048,2048][real][none][]:flat
 --&gt; imexam
 </pre></div>
 </div>
-<p>If you type <code class="docutils literal notranslate"><span class="pre">imexam</span></code>, your mouse cursor will blink. Put cursor on a star you are interested in, and hit <code class="docutils literal notranslate"><span class="pre">a</span></code> key. On terminal, you will see the information:</p>
+<p>If you type <code class="docutils literal notranslate"><span class="pre">imexam</span></code>, your mouse cursor will blink. Put your cursor on a star you are interested in and hit the <code class="docutils literal notranslate"><span class="pre">a</span></code> key. On the terminal, you will see the following information:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#   COL    LINE     COORDINATES
 #     R    MAG    FLUX     SKY    PEAK    E   PA BETA ENCLOSED   MOFFAT DIRECT
 1034.81 1036.09 1034.81 1036.09
    8.36  23.77   3.093 0.06386  0.3435 0.21  -80 4.83     2.34     2.94   2.79
 </pre></div>
 </div>
-<p>The meaning of the result is explained at STScI manual website (<a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?imexamine">here</a>). The lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> are comment lines, and they correspond to the next lines composed of numbers, which indicate the corresponding parameter. In the above, for example, the sky is estimated to be 0.05386 and the star flux is 3.093, with Moffat-fitted FWHM 2.94.</p>
-<p>Hitting <code class="docutils literal notranslate"><span class="pre">r</span></code> will show you the radial profile of the star from the photocenter. <code class="docutils literal notranslate"><span class="pre">s</span></code> shows the surface plot. These may be useful if you do the psf photometry in the future using IRAF.</p>
-<p>In the interactive mode, you can exit by hitting <code class="docutils literal notranslate"><span class="pre">q</span></code> key. Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> key to see the manual or help on the terminal. You can scroll down with <code class="docutils literal notranslate"><span class="pre">enter</span></code> key and escape by hitting the <code class="docutils literal notranslate"><span class="pre">q</span></code> key. The manual here is a short version of the website version.</p>
+<p>The meaning of the result is explained <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/images/tv/imexamine.html">here</a>. The lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> are comment lines, and they correspond to the next lines composed of numbers, which indicate the corresponding parameter. In the above example, the sky is estimated to be 0.05386 and the star flux is 3.093, with a Moffat-fitted FWHM of 2.94.</p>
+<p>Hitting <code class="docutils literal notranslate"><span class="pre">r</span></code> will show you the radial profile of the star from the photo center. <code class="docutils literal notranslate"><span class="pre">s</span></code> shows the surface plot. These may be useful if you do PSF photometry in the future using IRAF.</p>
+<p>In interactive mode, you can exit by hitting <code class="docutils literal notranslate"><span class="pre">q</span></code> key. Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> key to see the manual or help on the terminal. You can scroll down with <code class="docutils literal notranslate"><span class="pre">enter</span></code> key and escape by hitting the <code class="docutils literal notranslate"><span class="pre">q</span></code> key. The manual here is a short version of the website version.</p>
 </section>
 <section id="daoedit">
 <h3><code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code><a class="headerlink" href="#daoedit" title="Permalink to this heading">#</a></h3>
-<p>In <code class="docutils literal notranslate"><span class="pre">DIGIPHOT.DAOPHOT</span></code>, there are many tasks. Quite many people do use the stand alone version (<a class="reference external" href="http://www.astrobetter.com/wiki/DAOphot">see here</a>). Since we will <em>not</em> use IRAF intensively throughout this semester, I will just briefly mention the tasks. First type “<code class="docutils literal notranslate"><span class="pre">daophot</span></code>” and you will see:</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">DIGIPHOT.DAOPHOT</span></code>, there are many tasks. Quite a few people do use the stand-alone version (<a class="reference external" href="http://www.astrobetter.com/wiki/DAOphot">see here</a>). Since we will <em>not</em> use IRAF intensively throughout this semester, I will just briefly mention the tasks. First, type “<code class="docutils literal notranslate"><span class="pre">daophot</span></code>” and you will see:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; daophot
 daophot/:
  addstar        daotest         nstar           pexamine        psf
@@ -904,7 +905,7 @@ daophot/:
  daopars@       grpselect       peak            pselect         substar
 </pre></div>
 </div>
-<p>As an example, I measured few of the stars in the image by hitting <code class="docutils literal notranslate"><span class="pre">a</span></code> key on the image:</p>
+<p>As an example, I measured a few of the stars in the image by hitting <code class="docutils literal notranslate"><span class="pre">a</span></code> key on the image:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; !ds9 bf_KCD095628.fits &amp;
 --&gt; daoedit bf_KCD095628.fits
 Warning: Graphics overlay not available for display device.
@@ -919,7 +920,7 @@ Warning: Graphics overlay not available for display device.
 </pre></div>
 </div>
 <p>Hit <code class="docutils literal notranslate"><span class="pre">r</span></code> to check whether the star is saturated. Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> to see help, as usual.</p>
-<p>In the previous <strong>Question</strong>, I asked you what will happen if the min/max values of the image is too small. Now you see the problem: Due to the default decimal point print of <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code>, <code class="docutils literal notranslate"><span class="pre">SKY</span></code> and <code class="docutils literal notranslate"><span class="pre">SKYSIGMA</span></code> (representative sky value and its error) are unrealistic. In reality, this should be something like 0.064 and 0.0011, i.e., roughly about 2% of fluctuation level. <strong>So I will <em>assume</em> that we’ve obtained the following results</strong>:</p>
+<p>In the previous <strong>Question</strong>, I asked you what would happen if the min/max values of the image were too small. Now you see the problem: Due to the default decimal point print of <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code>, <code class="docutils literal notranslate"><span class="pre">SKY</span></code> and <code class="docutils literal notranslate"><span class="pre">SKYSIGMA</span></code> (representative sky value and its error) are unrealistic. In reality, this should be something like 0.064 and 0.0011, i.e., roughly about 2% of the fluctuation level. <strong>So I will <em>assume</em> that we’ve obtained the following results</strong>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># XCENTER YCENTER       SKY    SKYSIGMA    FWHM   COUNTS     MAG
   1034.76 1036.13       0.064     0.0011    2.99      2.9  -1.138
   1007.33  990.14       0.064     0.0011    3.01      0.8   0.199
@@ -930,21 +931,21 @@ Warning: Graphics overlay not available for display device.
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>Question</strong>: When doing photometry (which we’ll do in next section), people prefer <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> over <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code>. Why do you think so? Can you see what is the major difference between the outputs of these two?</p></li>
+<li><p><strong>Question</strong>: When doing photometry (which we’ll do in the next section), people prefer <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> over <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code>. Why do you think so? Can you see what the major difference is between the outputs of these two?</p></li>
 </ul>
 </section>
 </section>
 <section id="more-on-photometry">
 <h2>8. More on Photometry<a class="headerlink" href="#more-on-photometry" title="Permalink to this heading">#</a></h2>
-<p>What you have obtained from <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code> and <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> are very primitive results. In theory, the seeing effect should be nearly identical to all the point sources in the image, so we should have same FWHM for each star. What we do is to accept average of the FWHMs of the stars I got above. You may have now realized that we had to choose stars that are quite isolated! If there is another star near it, then its profile may have been polluted, and thus the FWHM is unreliable.</p>
-<p>Let me show you how to get photometry result using <code class="docutils literal notranslate"><span class="pre">FWHM=3</span></code> (pixels).</p>
+<p>What you have obtained from <code class="docutils literal notranslate"><span class="pre">IMEXAM</span></code> and <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> are very primitive results. In theory, the seeing effect should be nearly identical for all the point sources in the image, so we should have the same FWHM for each star. What we do is accept the average of the FWHMs of the stars I gave above. You may have now realized that we had to choose stars that are quite isolated! If there is another star near it, then its profile may have been polluted, and thus the FWHM is unreliable.</p>
+<p>Let me show you how to get photometry results using <code class="docutils literal notranslate"><span class="pre">FWHM=3</span></code> (pixels).</p>
 <section id="using-iraf-phot">
 <h3>Using IRAF <code class="docutils literal notranslate"><span class="pre">PHOT</span></code><a class="headerlink" href="#using-iraf-phot" title="Permalink to this heading">#</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; epar phot
 </pre></div>
 </div>
-<p>Then set the parameters as in the figure below.</p>
-<p>(You can open up the parameter editor of DATAPARS, etc, by clicking on the <code class="docutils literal notranslate"><span class="pre">PSET</span> <span class="pre">datapars</span></code> OR typing <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">epar</span> <span class="pre">datapars</span></code>.)</p>
+<p>Then set the parameters as shown in the figure below.</p>
+<p>(You can open up the parameter editor of DATAPARS, etc., by clicking on the <code class="docutils literal notranslate"><span class="pre">PSET</span> <span class="pre">datapars</span></code> OR typing <code class="docutils literal notranslate"><span class="pre">--&gt;</span> <span class="pre">epar</span> <span class="pre">datapars</span></code>.)</p>
 <p><img alt="IRAF_PHOT_1" src="../../_images/IRAF_PHOT_1.png" /></p>
 <p>You can hit <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">&amp;</span> <span class="pre">Quit</span></code> after setting all the values. They are explained below:</p>
 <p>Parameters in <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?phot.hlp"><code class="docutils literal notranslate"><span class="pre">PHOT</span></code></a> will be used for the aperture photometry:</p>
@@ -952,31 +953,31 @@ Warning: Graphics overlay not available for display device.
 <li><p><code class="docutils literal notranslate"><span class="pre">image</span></code>: The input image name</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">interactive</span></code>, <code class="docutils literal notranslate"><span class="pre">radplot</span></code>: You will see what we can do if you choose <code class="docutils literal notranslate"><span class="pre">interactive</span></code> mode. It is recommended to check “yes” to both of these.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verify</span></code>: You can easily see what will be shown or hidden if you check <code class="docutils literal notranslate"><span class="pre">yes/no</span></code>. If <code class="docutils literal notranslate"><span class="pre">yes</span></code>, it <strong>re-asks</strong> about the parameters.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: The word <strong>verbose</strong> means “display the results so that I can see what you are doing!” in computer world.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: The word <strong>verbose</strong> means “display the results so that I can see what you are doing!” in the computer world.</p></li>
 </ul>
-<p>Parameters in <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?datapars.hlp"><code class="docutils literal notranslate"><span class="pre">DATAPARS</span></code></a> will be used for the flux calculation:</p>
+<p>Parameters in <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/digiphot/daophot/datapars.html"><code class="docutils literal notranslate"><span class="pre">DATAPARS</span></code></a> will be used for the flux calculation:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fwhmpsf</span></code>: The FWHM we obtained from above (3.0)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sigma</span></code>: The uncertainty in sky estimation (0.0011). This will not be used depending on <code class="docutils literal notranslate"><span class="pre">salgorithm</span></code> of <code class="docutils literal notranslate"><span class="pre">FITSKYPARS</span></code>. See below.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ccdread</span></code>, <code class="docutils literal notranslate"><span class="pre">gain</span></code>, <code class="docutils literal notranslate"><span class="pre">exptime</span></code>: Put the header keywords, not the actual values.</p></li>
-<li><p>In our case, the image does not contain the header for readout noise, so you may encounter warning from PyRAF when you run the task, but it does not halt the process.</p></li>
+<li><p>In our case, the image does not contain the header for readout noise, so you may encounter a warning from PyRAF when you run the task, but it does not halt the process.</p></li>
 <li><p>If you do not have the value in the header but still want to put, say, <code class="docutils literal notranslate"><span class="pre">ccdgain=5.0</span></code>, then you can use the parameter <code class="docutils literal notranslate"><span class="pre">readnoise</span></code>. Same goes true for gain, exposure time, etc.</p></li>
 </ul>
-<p>Parameters in <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?fitskypars.hlp"><code class="docutils literal notranslate"><span class="pre">FITSKYPARS</span></code></a> will be used for the sky estimation:</p>
+<p>Parameters in <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/digiphot/daophot/fitskypars.html"><code class="docutils literal notranslate"><span class="pre">FITSKYPARS</span></code></a> will be used for the sky estimation:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">salgorithm</span></code>: Quite many IRAF users are unaware of the sky estimation algorithm. You will learn it while using Python, but you can refer to the manual website linked above.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">annulus</span></code>, <code class="docutils literal notranslate"><span class="pre">dannulus</span></code>: To estimate the sky value, IRAF can only use method called “annulus”. It means you are going to calculate the sky value and its uncertainty using the ring shaped region around the target (annulus with inner radius of <code class="docutils literal notranslate"><span class="pre">annulus</span></code> and outer radius of <code class="docutils literal notranslate"><span class="pre">annulus</span> <span class="pre">+</span> <span class="pre">dannulus</span></code>).</p></li>
-<li><p>Rule Of Thumb: <code class="docutils literal notranslate"><span class="pre">annulus</span> <span class="pre">=</span> <span class="pre">4*FWHM</span></code>, <code class="docutils literal notranslate"><span class="pre">dannulus</span> <span class="pre">=</span> <span class="pre">2*FWHM</span></code> generally works well.</p></li>
-<li><p>More on sky estimation: IRAF does sigma clipping method to reject unrealistic sky values from the annulus defined by <code class="docutils literal notranslate"><span class="pre">annulus</span></code> and <code class="docutils literal notranslate"><span class="pre">dannulus</span></code>, centered at the target. To tune this rejection, you can change other parameters such as <code class="docutils literal notranslate"><span class="pre">sloclip</span></code>, <code class="docutils literal notranslate"><span class="pre">khist</span></code>, <code class="docutils literal notranslate"><span class="pre">binsize</span></code>, etc. You will learn what these do in the near future, and will make your own code to do the same thing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">annulus</span></code>, <code class="docutils literal notranslate"><span class="pre">dannulus</span></code>: To estimate the sky value, IRAF can only use a method called “annulus”. It means you are going to calculate the sky value and its uncertainty using the ring shaped region around the target (annulus with an inner radius of <code class="docutils literal notranslate"><span class="pre">annulus</span></code> and an outer radius of <code class="docutils literal notranslate"><span class="pre">annulus</span> <span class="pre">+</span> <span class="pre">dannulus</span></code>).</p></li>
+<li><p>Rule of Thumb: <code class="docutils literal notranslate"><span class="pre">annulus</span> <span class="pre">=</span> <span class="pre">4*FWHM</span></code>, <code class="docutils literal notranslate"><span class="pre">dannulus</span> <span class="pre">=</span> <span class="pre">2*FWHM</span></code> generally works well.</p></li>
+<li><p>More on sky estimation: IRAF uses the sigma clipping method to reject unrealistic sky values from the annulus defined by <code class="docutils literal notranslate"><span class="pre">annulus</span></code> and <code class="docutils literal notranslate"><span class="pre">dannulus</span></code>, centered at the target. To tune this rejection, you can change other parameters such as <code class="docutils literal notranslate"><span class="pre">sloclip</span></code>, <code class="docutils literal notranslate"><span class="pre">khist</span></code>, <code class="docutils literal notranslate"><span class="pre">binsize</span></code>, etc. You will learn what these do in the near future and make your own code to do the same thing.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">skyvalue</span></code>: This will be used only when <code class="docutils literal notranslate"><span class="pre">salgorithm=const</span></code>.</p></li>
 </ul>
-<p>Parameters in <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?photpars.hlp"><code class="docutils literal notranslate"><span class="pre">PHOTPARS</span></code></a> will be used for the photometric magnitude calculation with <code class="docutils literal notranslate"><span class="pre">DATAPARS</span></code>:</p>
+<p>Parameters in <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/digiphot/daophot/photpars.html"><code class="docutils literal notranslate"><span class="pre">PHOTPARS</span></code></a> will be used for the photometric magnitude calculation with <code class="docutils literal notranslate"><span class="pre">DATAPARS</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">apertures</span></code>: You have to sum the photon number within the aperture to get the stellar flux and thus magnitude. To do so, you have to set the aperture.</p></li>
-<li><p>Rule Of Thumb: <code class="docutils literal notranslate"><span class="pre">apertures</span> <span class="pre">=</span> <span class="pre">1.5</span> <span class="pre">*</span> <span class="pre">FWHM</span></code> works well.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">zmag</span></code>: The zero-point magnitude. You can set it to any value in theory, but 25 is used in general in practice.</p></li>
+<li><p>Rule of Thumb: <code class="docutils literal notranslate"><span class="pre">apertures</span> <span class="pre">=</span> <span class="pre">1.5</span> <span class="pre">*</span> <span class="pre">FWHM</span></code> works well.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zmag</span></code>: The zero-point magnitude. You can set it to any value in theory, but 25 is used in general practice.</p></li>
 </ul>
-<p>After saving these, you MUST display the image by yourself.</p>
+<p>After saving these, you MUST display the image yourself.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; !ds9 bf_KCD095628.fits &amp;
 --&gt; phot
 The input image(s) (&#39;bf_KCD095628.fits&#39;):
@@ -984,27 +985,27 @@ Warning: Graphics overlay not available for display device.
 Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 </pre></div>
 </div>
-<p>Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> to see the help. Usually you will use <code class="docutils literal notranslate"><span class="pre">f</span></code> (of <code class="docutils literal notranslate"><span class="pre">space</span> <span class="pre">bar</span></code> if you want to save the result immediately). Some other things, such as <code class="docutils literal notranslate"><span class="pre">c</span></code> or <code class="docutils literal notranslate"><span class="pre">t</span></code> may be used.</p>
+<p>Hit <code class="docutils literal notranslate"><span class="pre">?</span></code> to see the help. Usually you will use <code class="docutils literal notranslate"><span class="pre">f</span></code> (or <code class="docutils literal notranslate"><span class="pre">space</span> <span class="pre">bar</span></code> if you want to save the result immediately). Some other things, such as <code class="docutils literal notranslate"><span class="pre">c</span></code> or <code class="docutils literal notranslate"><span class="pre">t</span></code> may be used.</p>
 <ul class="simple">
 <li><p><strong>TIP</strong>: You MUST open the image on <code class="docutils literal notranslate"><span class="pre">ds9</span></code> which is the same as the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> in the <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>. It is a known bug and may not be fixed in the future.</p></li>
 </ul>
 <p>If you hit <code class="docutils literal notranslate"><span class="pre">f</span></code> on a certain star, some kind of radial plot will appear with three vertical lines:</p>
 <p><img alt="IRAF_PHOT_2" src="../../_images/IRAF_PHOT_2.png" /></p>
-<p>The image shows the plot of pixel values (<code class="docutils literal notranslate"><span class="pre">Intensity</span></code>) with respect to the radial distance from the calculated photocenter of the star near the cursor. In the lower axis, radial distance is shown in pixel units, and upper axis shows the scale units.</p>
+<p>The image shows the plot of pixel values (<code class="docutils literal notranslate"><span class="pre">Intensity</span></code>) with respect to the radial distance from the calculated photo center of the star near the cursor. In the lower axis, radial distance is shown in pixel units, and the upper axis shows scale units.</p>
 <ul class="simple">
 <li><p><strong>Question</strong>: Why do you think I used aperture <code class="docutils literal notranslate"><span class="pre">~1.5</span> <span class="pre">FWHM</span></code> ?</p></li>
-<li><p><strong>Question</strong>: Why do you think I used such annulus? Why can’t we use annulus from 4.50 to 12.00, for example in our case?</p></li>
+<li><p><strong>Question</strong>: Why do you think I used such an annulus? Why can’t we use the annulus from 4.50 to 12.00, for example, in our case?</p></li>
 <li><p><strong>TIP</strong>: You may want to see the x-axis in arcsecond unit. Then, if you knew 1 pixel corresponds to 0.5 arcsec, for example, you could have set <code class="docutils literal notranslate"><span class="pre">scale</span> <span class="pre">=</span> <span class="pre">0.5</span></code> in <code class="docutils literal notranslate"><span class="pre">DATAPARS</span></code>.</p></li>
 </ul>
-<p>The vertical lines show the aperture and inner/outer edge of the annulus to measure the sky. From the messages shown in the top of the image, you can read centroid result and the sky (depends on <code class="docutils literal notranslate"><span class="pre">salgorithm</span></code> you selected) statistics:</p>
+<p>The vertical lines show the aperture and inner/outer edge of the annulus to measure the sky. From the messages shown at the top of the image, you can read the centroid result and the sky (depending on <code class="docutils literal notranslate"><span class="pre">salgorithm</span></code> you selected) statistics:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">xc,</span> <span class="pre">yc</span></code>: The result from marginalized centroiding</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xerr,</span> <span class="pre">yerr</span></code>: The error of <code class="docutils literal notranslate"><span class="pre">xc,</span> <span class="pre">yc</span></code> after marginalized centroiding. <em>I just guess these are calculated from Gaussian fitting to the marginalized fluxes (projection onto x and y axes)</em></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: The representatice sky value, such as mode, median, mean, etc, depending on <code class="docutils literal notranslate"><span class="pre">salgorithm</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sigma</span></code>: The sky uncertainty (centered second moment)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">skew</span></code>: The centered third moment (so called skewness)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xerr,</span> <span class="pre">yerr</span></code>: The error of <code class="docutils literal notranslate"><span class="pre">xc,</span> <span class="pre">yc</span></code> after marginalized centroiding. <em>I just guess these are calculated from Gaussian fitting to the marginalized fluxes (projection onto the x and y axes)</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: The representatice sky value, such as mode, median, mean, etc., depending on <code class="docutils literal notranslate"><span class="pre">salgorithm</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sigma</span></code>: The sky’s uncertainty (centered second moment)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skew</span></code>: The centered third moment (so-called skewness)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nsky</span></code>: The number of sky pixels used to get <code class="docutils literal notranslate"><span class="pre">value,</span> <span class="pre">sigma,</span> <span class="pre">skew</span></code> after sigma clipping</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nrej</span></code>: The numver of sky pixels rejected after sigma clipping</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nrej</span></code>: The number of sky pixels rejected after the sigma-clipping</p></li>
 </ul>
 </section>
 <section id="looking-at-the-results-of-phot">
@@ -1037,20 +1038,20 @@ bf_KCD095628.fits      1067.000  998.000   1     nullfile               0      \
    4.50     58.87154      63.82666   54.77209      25.852 0.080 0    NoError
 </pre></div>
 </div>
-<p>Because it is too long, I extracted only the last part. The commented lines explains the name of the parameters (<code class="docutils literal notranslate"><span class="pre">N</span></code>), unit (<code class="docutils literal notranslate"><span class="pre">U</span></code>), and the format (<code class="docutils literal notranslate"><span class="pre">F</span></code>). What you will use most frequently are <code class="docutils literal notranslate"><span class="pre">XCENTER</span></code>, <code class="docutils literal notranslate"><span class="pre">YCENTER</span></code>, <code class="docutils literal notranslate"><span class="pre">RAPERT</span></code> (aperture radius), <code class="docutils literal notranslate"><span class="pre">MAG</span></code> (instrumental magnitude), and <code class="docutils literal notranslate"><span class="pre">MERR</span></code> (uncertainty in instrumental magnitude).</p>
+<p>Because it is too long, I extracted only the last part. The commented lines explain the names of the parameters (<code class="docutils literal notranslate"><span class="pre">N</span></code>), unit (<code class="docutils literal notranslate"><span class="pre">U</span></code>), and format (<code class="docutils literal notranslate"><span class="pre">F</span></code>). What you will use most frequently are <code class="docutils literal notranslate"><span class="pre">XCENTER</span></code>, <code class="docutils literal notranslate"><span class="pre">YCENTER</span></code>, <code class="docutils literal notranslate"><span class="pre">RAPERT</span></code> (aperture radius), <code class="docutils literal notranslate"><span class="pre">MAG</span></code> (instrumental magnitude), and <code class="docutils literal notranslate"><span class="pre">MERR</span></code> (uncertainty in instrumental magnitude).</p>
 <p>I have obtained <span class="math notranslate nohighlight">\( m_{\rm inst} = 25.852 \pm 0.080\)</span>!</p>
 <ul class="simple">
-<li><p><strong>TIP</strong>: Although I have said that the small min/max of preprocessed image caused problem for <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code>, you can see that actually they are saved internally and has proper values in the <code class="docutils literal notranslate"><span class="pre">.mag.1</span></code> file.</p></li>
+<li><p><strong>TIP</strong>: Although I have said that the small min/max of the preprocessed image caused problems for <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code>, you can see that they are saved internally and have proper values in the <code class="docutils literal notranslate"><span class="pre">.mag.1</span></code> file.</p></li>
 </ul>
 </section>
 <section id="saving-iraf-files-to-normal-text-txdump">
 <h3>Saving IRAF Files to Normal Text: <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code><a class="headerlink" href="#saving-iraf-files-to-normal-text-txdump" title="Permalink to this heading">#</a></h3>
-<p>Now, it is difficult to read by a human. So IRAF supports a task called <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code>, which dumps texts. For example, let me print <code class="docutils literal notranslate"><span class="pre">XCENTER</span></code> and <code class="docutils literal notranslate"><span class="pre">YCENTER</span></code>:</p>
+<p>Now, it is difficult for a human to read. So IRAF supports a task called <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code>, which dumps texts. For example, let me print <code class="docutils literal notranslate"><span class="pre">XCENTER</span></code> and <code class="docutils literal notranslate"><span class="pre">YCENTER</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; txdump bf_KCD095628.fits.mag.2 &#39;xcenter, ycenter&#39; yes
 1070.161  998.227
 </pre></div>
 </div>
-<p>You don’t <em>have to</em> use capital letters as you can see. <code class="docutils literal notranslate"><span class="pre">yes</span></code> is actually the answer to verbose option. You can open up the parameter setting by <code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">txdump</span></code>. You can save the output as a file as you did in LINUX:</p>
+<p>You don’t <em>have to</em> use capital letters, as you can see. <code class="docutils literal notranslate"><span class="pre">yes</span></code> is actually the answer to the verbose option. You can open up the parameter setting by <code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">txdump</span></code>. You can save the output as a file, as you did in LINUX:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; txdump bf_KCD095628.fits.mag.2 &#39;xcenter, ycenter, mag, merr&#39; yes &gt; output.txt
 </pre></div>
 </div>
@@ -1060,23 +1061,23 @@ bf_KCD095628.fits      1067.000  998.000   1     nullfile               0      \
 </div>
 <p>​</p>
 <ul class="simple">
-<li><p><strong>TIP</strong>: You may worry that this kind of IRAF-specific format of output file cannot be read properly from Python. But <code class="docutils literal notranslate"><span class="pre">astropy</span></code> has built-in function called <code class="docutils literal notranslate"><span class="pre">ascii</span></code>, which properly reads these output files even faster, more readible, useful, and fancier than <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code>.</p></li>
+<li><p><strong>TIP</strong>: You may worry that this kind of IRAF-specific format of output file cannot be read properly from Python. But <code class="docutils literal notranslate"><span class="pre">astropy</span></code> has a built-in function called <code class="docutils literal notranslate"><span class="pre">ascii</span></code>, which properly reads these output files even faster, more readable, useful, and fancier than <code class="docutils literal notranslate"><span class="pre">TXDUMP</span></code>.</p></li>
 </ul>
 </section>
 </section>
 <section id="for-your-future-daofind">
 <h2>9. For Your Future… <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code><a class="headerlink" href="#for-your-future-daofind" title="Permalink to this heading">#</a></h2>
-<p>Although I will not teach more on IRAF than this, you may need to learn using IRAF for photometry (even psf photometry) in the future, because many older generation prefers IRAF due to the <em>legacy</em>. I want to put one more information on <code class="docutils literal notranslate"><span class="pre">PHOT</span></code> task for your future reference and then the <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code>.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>, you may not want to do all the things interactively since you have 100 images with 2 stars of interest in each image (so that you need 100x2 = 200 interactions for the same xy coordinates). Then what you can do is to save the XY coordinate of the two stars in a file called <code class="docutils literal notranslate"><span class="pre">stars.coo.1</span></code> and fill <code class="docutils literal notranslate"><span class="pre">coords</span></code> of “<code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">PHOT</span></code>” with this filename. The file may look like:</p>
+<p>Although I will not teach more on IRAF than this, you may need to learn to use IRAF for photometry (even PSF photometry) in the future because many older generations prefer IRAF due to the <em>legacy</em>. I want to put one more item of information on <code class="docutils literal notranslate"><span class="pre">PHOT</span></code> task for your future reference, and then the <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>, you may not want to do all the things interactively, since you have 100 images with 2 stars of interest in each image (so that you need 100x2 = 200 interactions for the same XY coordinates). Then what you can do is saving the XY coordinates of the two stars in a file called <code class="docutils literal notranslate"><span class="pre">stars.coo.1</span></code> and fill <code class="docutils literal notranslate"><span class="pre">coords</span></code> of “<code class="docutils literal notranslate"><span class="pre">epar</span> <span class="pre">PHOT</span></code>” with this filename. The file may look like this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1312.3 332.2
 132.6 423.6
 </pre></div>
 </div>
-<p>First and second columns are X, Y coordinate of the stars found from <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> or <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>.</p>
-<p>What this will do is similar to a mouse-keyboard macro program: load the image, put cursor at the given position, hit certain keys to measure and save magnitudes.</p>
-<p>Now, what if you have 100 images but 100 stars in each image!? Doing <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> to 100 stars itself is exhausting. Then you can do <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?daofind"><code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code></a> or IRAF’s own starfinder algorithm, which is not used widely. FYI: Same algorithms are also implemented in Astropy-Photutils, too.</p>
+<p>The first and second columns are the X, Y coordinates of the stars found from <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> or <code class="docutils literal notranslate"><span class="pre">PHOT</span></code>.</p>
+<p>What this will do is similar to a mouse-keyboard macro program: load the image, put the cursor at the given position, and hit certain keys to measure and save magnitudes.</p>
+<p>Now, what if you have 100 images with 100 stars in each image!? Doing <code class="docutils literal notranslate"><span class="pre">DAOEDIT</span></code> to 100 stars itself is exhausting. Then you can do <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?daofind"><code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code></a> or IRAF’s own starfinder algorithm, which is not widely used. FYI: The same algorithms are also implemented in Astropy/Photutils, too.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--&gt; epar daofind
-(settings is a simplified version of PHOT, so you can easily understand)
+(Settings is a simplified version of PHOT, so you can easily understand it.)
 
 --&gt; daofind
 Task daofind is running...
@@ -1096,8 +1097,8 @@ Maximum good data value (INDEF) (CR or value):
 Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 </pre></div>
 </div>
-<p>Here, detection threshold is the most important one. If the peak intensity of the fitted star (NOT the peak pixel value, but the peak value of the <strong>fitted</strong> function!) is below the <code class="docutils literal notranslate"><span class="pre">|threshold</span> <span class="pre">*</span> <span class="pre">skysigma|</span></code>, they are neglected and not considered as stars.</p>
-<p>After a while, a file with <code class="docutils literal notranslate"><span class="pre">filename.coo.1</span></code> will be generated with following contents:</p>
+<p>HHere, the detection threshold is the most important one. If the peak intensity of the fitted star (NOT the peak pixel value, but the peak value of the <strong>fitted</strong> function!) is below the <code class="docutils literal notranslate"><span class="pre">|threshold</span> <span class="pre">*</span> <span class="pre">skysigma|</span></code>, they are neglected and not considered stars.</p>
+<p>After a while, a file with <code class="docutils literal notranslate"><span class="pre">filename.coo.1</span></code> will be generated with the following contents:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#N XCENTER   YCENTER   MAG      SHARPNESS   SROUND      GROUND      ID         \
 #U pixels    pixels    #        #           #           #           #          \
 #F %-13.3f   %-10.3f   %-9.3f   %-12.3f     %-12.3f     %-12.3f     %-6d       \
@@ -1109,12 +1110,12 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 </pre></div>
 </div>
 <p>About 20,000 stars are detected in my case.</p>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">sharpness</span></code>, <code class="docutils literal notranslate"><span class="pre">sround</span></code>, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are the parameters used to determine whether the source is a star-like one or not. They are defined in the <a class="reference external" href="http://adsabs.harvard.edu/abs/1987PASP...99..191S">Stetson 1987</a> paper for the first time. <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> is a measure of “how sharp the target is”, and is kind of “peak value / sky value”, roughly speaking. <code class="docutils literal notranslate"><span class="pre">sround</span></code> and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are roundness parameters: <code class="docutils literal notranslate"><span class="pre">sround</span></code> is to measure the roundness based on the symmetric property of the source, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> is based on the marginalized Gaussian fit to the object.</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">sharpness</span></code>, <code class="docutils literal notranslate"><span class="pre">sround</span></code>, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are the parameters used to determine whether the source is a star-like one or not. They are defined in the <a class="reference external" href="http://adsabs.harvard.edu/abs/1987PASP...99..191S">Stetson 1987</a> paper for the first time. <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> is a measure of “how sharp the target is”, and is kind of a “peak value” or “sky value”, roughly speaking. <code class="docutils literal notranslate"><span class="pre">sround</span></code> and <code class="docutils literal notranslate"><span class="pre">ground</span></code> are roundness parameters: <code class="docutils literal notranslate"><span class="pre">sround</span></code> is to measure the roundness based on the symmetric property of the source, and <code class="docutils literal notranslate"><span class="pre">ground</span></code> is based on the marginalized Gaussian fit to the object.</p>
 </section>
 <section id="spectroscopic-preprocessing">
 <h2>10. Spectroscopic Preprocessing<a class="headerlink" href="#spectroscopic-preprocessing" title="Permalink to this heading">#</a></h2>
-<p>The preprocessing procedures are identical to photometry. One thing to be careful is just flat: flats should have identical filter, slit, grating, etc, with the object of interest.</p>
-<p>We then may need one more step, i.e., trimming (cropping the image). Go display the <code class="docutils literal notranslate"><span class="pre">flat.fits</span></code> file by <code class="docutils literal notranslate"><span class="pre">implot</span></code></p>
+<p>The preprocessing procedures are identical to photometry. One thing to be careful of is flats: flats should have an identical filter, slit, grating, etc., with the object of interest.</p>
+<p>We may then need one more step, i.e., trimming (cropping the image). Go display the <code class="docutils literal notranslate"><span class="pre">flat.fits</span></code> file by <code class="docutils literal notranslate"><span class="pre">implot</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">implot</span> <span class="n">flat</span><span class="o">.</span><span class="n">fits</span>
 </pre></div>
 </div>
@@ -1123,12 +1124,12 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 <li><p>Left image: typing <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:l</span> <span class="pre">700</span></code> (average over 30 pixels around line (row) 700)</p></li>
 <li><p>Right image: typing <code class="docutils literal notranslate"><span class="pre">:a</span> <span class="pre">30</span></code> and then <code class="docutils literal notranslate"><span class="pre">:c</span> <span class="pre">500</span></code> (average over 30 pixels around column 500).</p></li>
 </ul>
-<p>We may say that <code class="docutils literal notranslate"><span class="pre">x</span></code> (column): 500~2100 and <code class="docutils literal notranslate"><span class="pre">y</span></code> (line): 550~850 is reliable, and other pixels are useless. For smaller x values, there seems to be signal, but it is due to the higher order dispersion and/or due to the order sorting filter.</p>
+<p>We may say that <code class="docutils literal notranslate"><span class="pre">x</span></code> (column): 500~2100 and <code class="docutils literal notranslate"><span class="pre">y</span></code> (line): 550~850 are reliable, and other pixels are useless. For smaller x values, there seems to be a signal, but it is due to the higher order dispersion and/or the order sorting filter.</p>
 <p>We can trim all the images (including the object) using the <code class="docutils literal notranslate"><span class="pre">trimcor</span></code> option in <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code>. The trim region can be specified at (trim) by <code class="docutils literal notranslate"><span class="pre">[x1:x2,y1:y2]</span></code>, i.e., <code class="docutils literal notranslate"><span class="pre">[500:2100,550:850]</span></code>, in our case. You can do it by</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">imcopy</span> <span class="n">image</span><span class="p">[</span><span class="mi">500</span><span class="p">:</span><span class="mi">2100</span><span class="p">,</span><span class="mi">550</span><span class="p">:</span><span class="mi">850</span><span class="p">]</span> <span class="n">image</span>
 </pre></div>
 </div>
-<p>to overwrite the original image by the trimmed image.</p>
+<p>to overwrite the original image with the trimmed image.</p>
 <blockquote>
 <div><p>You can do preprocessing identical to the above sections. If you want to use <code class="docutils literal notranslate"><span class="pre">CCDPROC</span></code>:</p>
 <p>Now we turn on <code class="docutils literal notranslate"><span class="pre">zerocor</span></code>, <code class="docutils literal notranslate"><span class="pre">darkcor</span></code>, and <code class="docutils literal notranslate"><span class="pre">flatcor</span></code> with <code class="docutils literal notranslate"><span class="pre">bias.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">dark.fits</span></code>, and <code class="docutils literal notranslate"><span class="pre">flat.fits</span></code> as follows:</p>
@@ -1162,21 +1163,21 @@ Warning: Image bf_KCD095628.fits  Keyword RONOISE not found.
 <h2>11. <code class="docutils literal notranslate"><span class="pre">APALL</span></code> and <code class="docutils literal notranslate"><span class="pre">IDENTIFY</span></code><a class="headerlink" href="#apall-and-identify" title="Permalink to this heading">#</a></h2>
 <p>There are two cases for spectroscopic data:</p>
 <ol class="arabic simple">
-<li><p>The object is faint, so the sky lines are clearly visible (due to long exposure)</p></li>
-<li><p>The object is bright, so the sky lines are not visible (due to short exposure)</p></li>
+<li><p>The object is faint, so the sky lines are clearly visible (due to the long exposure).</p></li>
+<li><p>The object is bright, so the sky lines are not visible (due to the short exposure).</p></li>
 </ol>
-<p>For the first case, we can do the wavelength identification by sky line, and the second cases requires some reference (calibration) lamp images.</p>
+<p>For the first case, we can do the wavelength identification by sky line, and the second case requires some reference (calibration) lamp images.</p>
 <p>For convenience,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--&gt; !mkdir after_prep
 --&gt; cd after_prep/
 --&gt; !mv ../pvega.fits .
 </pre></div>
 </div>
-<p>The dispersion axis should be saved in the header for the IRAF to work properly. We can manually correct this information. First check whether the header containing the information:</p>
+<p>The dispersion axis should be saved in the header for the IRAF to work properly. We can manually correct this information. First, check whether the header contains the information:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">imhead</span> <span class="n">pvega</span><span class="o">.</span><span class="n">fits</span> <span class="n">long</span><span class="o">+</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">DISPAXIS</span>
 </pre></div>
 </div>
-<p>You can edit header:</p>
+<p>You can edit headers:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--&gt; hedit pvega.fits DISPAXIS 1 add+
 add vega.fits,DISPAXIS = 1
 update vega.fits ? (yes):
@@ -1185,7 +1186,7 @@ vega.fits updated
 DISPAXIS=                    1
 </pre></div>
 </div>
-<p>Now the image has the <code class="docutils literal notranslate"><span class="pre">DISPAXIS</span></code> header keyword.</p>
+<p>Now, the image has the <code class="docutils literal notranslate"><span class="pre">DISPAXIS</span></code> header keyword.</p>
 <section id="aperture-extraction">
 <h3>Aperture Extraction<a class="headerlink" href="#aperture-extraction" title="Permalink to this heading">#</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">APALL</span></code> task:</p>
@@ -1202,7 +1203,7 @@ DISPAXIS=                    1
 <span class="o">--&gt;</span> <span class="n">epar</span> <span class="n">apall</span>
 </pre></div>
 </div>
-<p>Set parameters as in the figure. If you want the IRAF to automatically find aperture (you can modify it later by yourself, but you can get an idea how it finds the aperture), you can just set everything as default with turning the background subtraction on.</p>
+<p>Set parameters as in the figure. If you want the IRAF to automatically find the aperture (you can modify it later by yourself, but you can get an idea of how it finds the aperture), you can just set everything as default by turning the background subtraction on.</p>
 <p>​	<img alt="IRAF_apall" src="../../_images/IRAF_apall.png" /></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--&gt; epar apextract
 (Set dispaxis = 1)
@@ -1213,24 +1214,24 @@ Edit apertures for vega? (&#39;yes&#39;):
 </div>
 <p>If you hit <code class="docutils literal notranslate"><span class="pre">?</span></code>, the command will show you the help page. Hit <code class="docutils literal notranslate"><span class="pre">q</span></code>, and you may be able to get out of the help page. The following images show four basic steps you have to do first:</p>
 <p><img alt="IRAF_apall_2" src="../../_images/IRAF_apall_2.png" /></p>
-<p>The screens of yours can be very different from this!</p>
+<p>Your screens can be very different from this!</p>
 <ol class="arabic simple">
-<li><p>Top left: You will see the plot “original”. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> for zoom, and <code class="docutils literal notranslate"><span class="pre">e</span></code> for the lower left and upper right corner to zoom in. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to get to the default zoom.</p>
+<li><p>Top left: You will see the plot as “original”. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> for zoom and <code class="docutils literal notranslate"><span class="pre">e</span></code> for the lower left and upper right corners to zoom in. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to get to the default zoom.</p>
 <ul class="simple">
 <li><p><strong>QUESTION</strong> <code class="docutils literal notranslate"><span class="pre">e</span></code> for lower left and then upper right. How would you then obtain the x-inverted zoomed image?</p></li>
 </ul>
 </li>
-<li><p>Top right: Hit <code class="docutils literal notranslate"><span class="pre">m</span></code> or <code class="docutils literal notranslate"><span class="pre">n</span></code> after you put the cursor near the peak, and IRAF will automatically find aperture for the profile. Hit <code class="docutils literal notranslate"><span class="pre">d</span></code> to delete some misplaced ones. Hit <code class="docutils literal notranslate"><span class="pre">y</span></code> key so that you can define the aperture size as the width at the cursor. Hit <code class="docutils literal notranslate"><span class="pre">l</span></code> and <code class="docutils literal notranslate"><span class="pre">u</span></code> to set the aperture lower/upper limit manually.</p></li>
-<li><p>Bottom left: Hit <code class="docutils literal notranslate"><span class="pre">b</span></code> to get into the background mode. We now will fit the background. This is needed to subtract background from the source. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to go to the original zoom. Then do <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> to zoom. It is better to zoom small y range to see the background fluctuation as indicated in the figure (red marks).</p></li>
-<li><p>Bottom right: The dashed line is the fitted sky (background). Sometimes the sky fit is very unrealistic, and you need to change the sky sampling region. Delete the original one by hitting <code class="docutils literal notranslate"><span class="pre">z</span></code> near the ticks (I-beam shaped ones). Hit <code class="docutils literal notranslate"><span class="pre">s</span></code> at the lower/upper for both sides (usually more than total 4 hits). Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to fit the sky. Type <code class="docutils literal notranslate"><span class="pre">:func</span> <span class="pre">cheb</span></code>, and <code class="docutils literal notranslate"><span class="pre">:ord</span> <span class="pre">3</span></code>, and then <code class="docutils literal notranslate"><span class="pre">f</span></code> again to see the 3rd order Chebyshev fit.</p></li>
-<li><p>Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to get out from the background mode. Hit q again. On the terminal, you will see some questions. Type “yes” to the <strong>GRAPHICS, NOT THE TERMINAL!</strong></p></li>
+<li><p>Top right: Hit <code class="docutils literal notranslate"><span class="pre">m</span></code> or <code class="docutils literal notranslate"><span class="pre">n</span></code> after you put the cursor near the peak, and IRAF will automatically find the aperture for the profile. Hit <code class="docutils literal notranslate"><span class="pre">d</span></code> to delete some misplaced ones. Hit <code class="docutils literal notranslate"><span class="pre">y</span></code> key so that you can define the aperture size as the width of the cursor. Hit <code class="docutils literal notranslate"><span class="pre">l</span></code> and <code class="docutils literal notranslate"><span class="pre">u</span></code> to set the aperture’s lower and upper limits manually.</p></li>
+<li><p>Bottom left: Hit <code class="docutils literal notranslate"><span class="pre">b</span></code> to get into the background mode. We will now fit the background. This is needed to subtract the background from the source. Hit <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to go to the original zoom. Then do <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> to zoom. It is better to zoom in on the small y range to see the background fluctuation, as indicated in the figure (red marks).</p></li>
+<li><p>Bottom right: The dashed line is the fitted sky (background). Sometimes the sky fit is very unrealistic, and you need to change the sky sampling region. Delete the original one by hitting <code class="docutils literal notranslate"><span class="pre">z</span></code> near the ticks (the I-beam-shaped ones). Hit <code class="docutils literal notranslate"><span class="pre">s</span></code> at the lower/upper for both sides (usually more than a total of 4 hits). Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to fit the sky. Type <code class="docutils literal notranslate"><span class="pre">:func</span> <span class="pre">cheb</span></code>, and <code class="docutils literal notranslate"><span class="pre">:ord</span> <span class="pre">3</span></code>, and then <code class="docutils literal notranslate"><span class="pre">f</span></code> again to see the 3rd order Chebyshev fit.</p></li>
+<li><p>Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to get out of the background mode. Hit q again. On the terminal, you will see some questions. Type “yes” to the <strong>GRAPHICS, NOT THE TERMINAL!</strong></p></li>
 </ol>
-<p>You may have to answer for few times, depending on the <code class="docutils literal notranslate"><span class="pre">APALL</span></code> epar setting. Type return again and again until you see the following left figure:</p>
+<p>You may have to answer a few times, depending on the <code class="docutils literal notranslate"><span class="pre">APALL</span></code> epar setting. Type return again and again until you see the following left figure:</p>
 <p><img alt="IRAF_aptrace" src="../../_images/IRAF_aptrace.png" /></p>
-<p>This is the aperture trace. The fitting does not look good, but if you see closely, the error is only few pixels order. But you may still want better fit.</p>
-<p>Type <code class="docutils literal notranslate"><span class="pre">:order</span> <span class="pre">n</span></code> to fit the n-th order fitting line to the <code class="docutils literal notranslate"><span class="pre">+</span></code> signs. <code class="docutils literal notranslate"><span class="pre">:order</span> <span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">5</span></code> will be enough for most of the cases. Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to see newly fitted dashed line. You can delete some points by <code class="docutils literal notranslate"><span class="pre">d</span></code> and redo it by <code class="docutils literal notranslate"><span class="pre">u</span></code>.</p>
+<p>This is the aperture trace. The fitting does not look good, but if you look closely, the error is only a few pixels off. But you may still want a better fit.</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">:order</span> <span class="pre">n</span></code> to fit the nth order fitting line to the <code class="docutils literal notranslate"><span class="pre">+</span></code> signs. <code class="docutils literal notranslate"><span class="pre">:order</span> <span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">5</span></code> will be enough for most of the cases. Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to see the newly fitted dashed line. You can delete some points with <code class="docutils literal notranslate"><span class="pre">d</span></code> and redo them with <code class="docutils literal notranslate"><span class="pre">u</span></code>.</p>
 <ul class="simple">
-<li><p>Moving along columns, the center of the aperture should move, due to the imperfection of instruments. This “shift” is called the trace. The above image shows this “trace” value along the columns(x-axis).</p></li>
+<li><p>Moving along columns, the center of the aperture should move due to the imperfection of instruments. This “shift” is called the trace. The above image shows this “trace” value along the columns (x-axis).</p></li>
 </ul>
 <p>On the right, the extracted Vega spectrum is shown.</p>
 <p>What is remaining? We have to change the x value to wavelength.</p>
@@ -1243,37 +1244,37 @@ Edit apertures for vega? (&#39;yes&#39;):
 </div>
 <p><img alt="IRAF_identify" src="../../_images/IRAF_identify.png" /></p>
 <ul class="simple">
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">coordlist</span></code> to appropriate line profile text files. If you are not provided any files such as <code class="docutils literal notranslate"><span class="pre">ne.dat</span></code>, leave it as default.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">section</span></code> is usually set as <code class="docutils literal notranslate"><span class="pre">middle</span> <span class="pre">column</span></code> or <code class="docutils literal notranslate"><span class="pre">middle</span> <span class="pre">line</span></code>. It will show you the middle column/line cut (1-D plot).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nsum</span></code> is to sum certain number of pixels (lines or columns) to eliminate unwanted features (cosmic ray, etc). Just use ~ 10.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fwidth</span></code> is the initial guess of the full width of the lines. If it is very different from the real line width, the interactive line finding may not work properly.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code> is to fit the pixel-wavelength relation. Usually it is safe to use Chebyshev polynomial.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">coordlist</span></code> to the appropriate line profile text files. If you are not provided any files such as <code class="docutils literal notranslate"><span class="pre">ne.dat</span></code>, leave it as default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">section</span></code> is usually set as <code class="docutils literal notranslate"><span class="pre">middle</span> <span class="pre">column</span></code> or <code class="docutils literal notranslate"><span class="pre">middle</span> <span class="pre">line</span></code>. It will show you the middle column or line cut (1-D plot).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nsum</span></code> is to sum a certain number of pixels (lines or columns) to eliminate unwanted features (cosmic ray, etc.). Just use ~ 10.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fwidth</span></code> is the initial guess of the full width of the lines. If it is very different from the real line width, the interactive line finder may not work properly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code> is to fit the pixel-wavelength relation. Usually, it is safe to use the Chebyshev polynomial.</p></li>
 </ul>
-<p>The “desired” line spectrum of the lamp should be provided by the observatory. Since our observations does not, let me draw one figure from a public website:</p>
+<p>The “desired” line spectrum of the lamp should be provided by the observatory. Since our observations do not, let me draw one figure from a public website:</p>
 <p><img alt="" src="http://www.astrosurf.com/buil/us/spe2/calib2/neon1.gif" /></p>
 <p>(If the image is low resolution, you may find “low resolution lamp spectrum” more similar to your image, such as that in <a class="reference external" href="http://www.astrosurf.com/buil/us/spectro8/spaude5_us.htm">this link</a>)</p>
-<p>Now we have to let IRAF know what the wavelengths of about some peaks in the graphics. IRAF then automatically use the “peaks” data file to find all other peaks. Let’s see how it works:</p>
+<p>Now we have to let IRAF know the wavelengths of some peaks in the graphics. IRAF then automatically uses the “peaks” data file to find all other peaks. Let’s see how it works:</p>
 <p><img alt="IRAF_identify_2" src="../../_images/IRAF_identify_2.png" /></p>
 <ol class="arabic">
-<li><p>Left: Use <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to zoom the spectrum. Put the cursor near one of the peaks (e.g., the largest peak at 5852.49 Angstrom). Then type <code class="docutils literal notranslate"><span class="pre">m</span></code> (for mark). At the bottom of the graphics, type the rough wavelength value (e.g., “5852”). Hit return. At the bottom, there will be the found wavelength value. It is found from the Ne.dat file, using your input value.</p>
-<p>Do the same thing few times more. We will let IRAF’s AID (Auto Identification) algorithm to find all other peaks based on the pre-defined database.</p>
+<li><p>Left: Use <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">a</span></code> to zoom the spectrum. Put the cursor near one of the peaks (e.g., the largest peak at 5852.49 Angstrom). Then type <code class="docutils literal notranslate"><span class="pre">m</span></code> (for mark). At the bottom of the graphics, type the rough wavelength value (e.g., “5852”). Hit return. At the bottom, there will be the found wavelength value. It is found in the Ne.dat file, using your input value.</p>
+<p>Do the same thing a few more times. We will let IRAF’s AID (Auto Identification) algorithm find all other peaks based on the pre-defined database.</p>
 <ul class="simple">
-<li><p>In some cases when you are not provided with line profiles (<code class="docutils literal notranslate"><span class="pre">.dat</span></code> file) and it contains lines from un-cataloged data, you cann]ot use AID.</p></li>
-<li><p>Hit <code class="docutils literal notranslate"><span class="pre">l</span></code> if you have provided line profiles. IRAF will automatically read appropriate .dat file (containing all possible line centers) and find all peak values.</p></li>
+<li><p>In some cases, when you are not provided with line profiles (<code class="docutils literal notranslate"><span class="pre">.dat</span></code> file) and it contains lines from uncatalogued data, you cannot use AID.</p></li>
+<li><p>Hit <code class="docutils literal notranslate"><span class="pre">l</span></code> if you have provided line profiles. IRAF will automatically read an appropriate .dat file (containing all possible line centers) and find all peak values.</p></li>
 </ul>
 </li>
-<li><p>Right: After hitting <code class="docutils literal notranslate"><span class="pre">l</span></code>, you may see a lot of identified lines as in the figure. The lines, however, are not always the real ones, since very small emission peaks may be in the line data file, too. <strong>So this process is not always accurate, so you have to edit them.</strong></p></li>
+<li><p>Right: After hitting <code class="docutils literal notranslate"><span class="pre">l</span></code>, you may see a lot of identified lines, as in the figure. The lines, however, are not always the real ones, since very small emission peaks may be in the line data file, too. <strong>So this process is not always accurate, so you have to edit them.</strong></p></li>
 <li><p>Delete some marks by <code class="docutils literal notranslate"><span class="pre">d</span></code> where no peak is visible.</p></li>
-<li><p>If you feel satisfied, hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to see the residual plot. If there is any point with significant residual, hit <code class="docutils literal notranslate"><span class="pre">d</span></code> near it to delete it (X mark will appear). Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> again and you will fit again. Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> twice to quit identify.</p></li>
+<li><p>If you feel satisfied, hit <code class="docutils literal notranslate"><span class="pre">f</span></code> to see the residual plot. If there is any point with a significant residual, hit <code class="docutils literal notranslate"><span class="pre">d</span></code> near it to delete it (an X mark will appear). Hit <code class="docutils literal notranslate"><span class="pre">f</span></code> again, and you will fit again. Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> twice to quit identifying.</p></li>
 </ol>
-<p>Some shortcuts are summarized below (from <a class="reference external" href="http://stsdas.stsci.edu/cgi-bin/gethelp.cgi?identify">Documentation</a>):</p>
+<p>Some shortcuts are summarized below (from <a class="reference external" href="https://iraf.readthedocs.io/en/latest/tasks/noao/twodspec/longslit/identify.html">Documentation</a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span>    <span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="n">elete</span> <span class="n">the</span> <span class="n">feature</span> <span class="n">nearest</span> <span class="n">the</span> <span class="n">cursor</span><span class="o">.</span>
 <span class="n">n</span>    <span class="n">Move</span> <span class="n">the</span> <span class="n">cursor</span> <span class="ow">or</span> <span class="n">zoom</span> <span class="n">window</span> <span class="n">to</span> <span class="n">the</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="n">ext</span> <span class="n">feature</span> <span class="p">(</span><span class="n">same</span> <span class="k">as</span> <span class="o">+</span><span class="p">)</span><span class="o">.</span>
 <span class="n">p</span>    <span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="n">an</span> <span class="n">to</span> <span class="n">the</span> <span class="n">original</span> <span class="n">window</span> <span class="n">after</span> <span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="n">ooming</span> <span class="n">on</span> <span class="n">a</span> <span class="n">feature</span><span class="o">.</span>
 <span class="n">z</span>    <span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="n">oom</span> <span class="n">on</span> <span class="n">the</span> <span class="n">feature</span> <span class="n">nearest</span> <span class="n">the</span> <span class="n">cursor</span><span class="o">.</span> <span class="n">The</span> <span class="n">width</span> <span class="n">of</span> <span class="n">the</span> <span class="n">zoom</span> <span class="n">window</span> <span class="ow">is</span> <span class="n">determined</span> <span class="n">by</span> <span class="n">the</span> <span class="n">parameter</span> <span class="n">zwidth</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>The ne_30.fits now include the information of our calibration. We now have to implement the object image file that <em>the image fits file has reference spectrum data as this neon fits file!</em> To do so:</p>
+<p>The ne_30.fits now include information about our calibration. We now have to implement the object image file so that <em>the image fits file has the same reference spectrum data as this neon fits file!</em> To do so:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>--&gt; hedit pvega.ms REFSPEC1 &quot;ne_30.fits&quot; add+
 add pvega.ms,REFSPEC1 = ne_30.fits
 update pvega.ms ? (yes):
@@ -1285,7 +1286,7 @@ pvega.ms updated
 <span class="n">REFSPEC1</span><span class="o">=</span> <span class="s1">&#39;ne_30.fits&#39;</span>
 </pre></div>
 </div>
-<p>So the IRAF now will be able to change the x-pixels into wavelengths based on this Ne lamp fits data. This can be done by dispersion correction:</p>
+<p>So the IRAF now be able to change the x-pixels into wavelengths based on this Ne lamp fit data. This can be done by dispersion correction:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--&gt;</span> <span class="n">dispcor</span> <span class="n">pvega</span><span class="o">.</span><span class="n">ms</span> <span class="n">vega_final</span>
 </pre></div>
 </div>
@@ -1295,39 +1296,39 @@ pvega.ms updated
 </div>
 <p><img alt="IRAF_splot" src="../../_images/IRAF_splot.png" /></p>
 <ul class="simple">
-<li><p>Left: Hit <code class="docutils literal notranslate"><span class="pre">space</span></code>. You will see <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code> values. <code class="docutils literal notranslate"><span class="pre">y</span></code> is the cursor’s y-value and <code class="docutils literal notranslate"><span class="pre">z</span></code> is the actual y value (flux) of the plot.</p></li>
+<li><p>Left: Hit the <code class="docutils literal notranslate"><span class="pre">space</span></code>. You will see <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code> values. <code class="docutils literal notranslate"><span class="pre">y</span></code> is the cursor’s y-value, and <code class="docutils literal notranslate"><span class="pre">z</span></code> is the actual y value (flux) of the plot.</p></li>
 <li><p>Right: See below.</p></li>
 </ul>
-<p>To study about a line (absorption, in our case), zoom into a certain region using <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code>. We will fit the continuum, and fit the absorption line. At the left- and right-most positions you want to fit the continuum, hit <code class="docutils literal notranslate"><span class="pre">d</span></code> at each edges.</p>
-<p>At the bottom of the graphics, you will be asked about “Lines”. This means with which profile you want to fit the absorption. I will select Gaussian. Put the cursor near the absorption line, and hit <code class="docutils literal notranslate"><span class="pre">g</span></code>. There will appear a small vertical tick which indicates the center you selected.</p>
-<p>After you selected all the lines you want to calculate within the zoomed window, hit <code class="docutils literal notranslate"><span class="pre">q</span></code>. Another question is Fit positions: just type <code class="docutils literal notranslate"><span class="pre">a</span></code>. The next is Fit Gaussian width question, just type <code class="docutils literal notranslate"><span class="pre">a</span></code>. Fit background? Oh yes: type <code class="docutils literal notranslate"><span class="pre">y</span></code>. Then you will see a green continuum fitting line and red fitting line (absorption fitting line).</p>
-<p>You can see the center, flux, equivalent width, and gaussian FWHM value at the bottom of the graphics. +/- will show you the results at next/previous peaks. r will show you the RMS of the background after fitting.</p>
-<p>Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to exit. The same question will be asked for if you have other things to fit. Just hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit completely. You will see “Deblending Done” message. The process we’ve done is called deblending, since we “deblended” line from the continuum.</p>
+<p>To study a line (absorption, in our case), zoom into a certain region using <code class="docutils literal notranslate"><span class="pre">w</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code> <code class="docutils literal notranslate"><span class="pre">e</span></code>. We will fit the continuum and the absorption line. At the left- and right-most positions you want to fit the continuum, hit <code class="docutils literal notranslate"><span class="pre">d</span></code> at each edge.</p>
+<p>At the bottom of the graphics, you will be asked about “Lines”. This means with which profile you want to fit the absorption. I will select Gaussian. Put the cursor near the absorption line and hit <code class="docutils literal notranslate"><span class="pre">g</span></code>. There will appear a small vertical tick, which indicates the center you selected.</p>
+<p>After you have selected all the lines you want to calculate within the zoomed window, hit <code class="docutils literal notranslate"><span class="pre">q</span></code>. Another question is about fit positions: just type <code class="docutils literal notranslate"><span class="pre">a</span></code>. The next is the Fit Gaussian width question; just type <code class="docutils literal notranslate"><span class="pre">a</span></code>. Fit background? Oh, yes: type <code class="docutils literal notranslate"><span class="pre">y</span></code>. Then you will see a green continuum fitting line and a red fitting line (absorption fitting line).</p>
+<p>You can see the center, flux, equivalent width, and Gaussian FWHM value at the bottom of the graphics. +/- will show you the results at the next/previous peaks. r will show you the RMS of the background after fitting.</p>
+<p>Hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to exit. The same question will be asked if you have other things to fit. Just hit <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit completely. You will see the “Deblending Done” message. The process we’ve done is called deblending, since we “deblended” lines from the continuum.</p>
 </section>
 </section>
 <section id="flux-calibration">
 <h2>12. Flux Calibration<a class="headerlink" href="#flux-calibration" title="Permalink to this heading">#</a></h2>
-<p>We need to have standard star spectrum to do the flux calibration. The standard star data is saved in somewhere like <code class="docutils literal notranslate"><span class="pre">${ANACONDA3}/envs/iraf/iraf/noao/lib/onedstds/</span></code>. I haven’t yet made lecture note for this, but you can easily find simple example from <a class="reference external" href="https://www.subarutelescope.org/Observing/DataReduction/Cookbooks/FOCAS_cookbook_2010jan05.pdf">FOCAS Cookbook</a>. See section 5.7 of the cookbook.</p>
+<p>We need a standard star spectrum to do the flux calibration. The standard star data is saved somewhere like <code class="docutils literal notranslate"><span class="pre">${ANACONDA3}/envs/iraf/iraf/noao/lib/onedstds/</span></code>. I haven’t yet made a lecture note for this, but you can easily find a simple example in the <a class="reference external" href="https://www.subarutelescope.org/Observing/DataReduction/Cookbooks/FOCAS_cookbook_2010jan05.pdf">FOCAS Cookbook</a>. See Section 5.7 of the cookbook.</p>
 </section>
 <section id="a-iraf-trouble-shooting">
 <h2>A. IRAF Trouble Shooting<a class="headerlink" href="#a-iraf-trouble-shooting" title="Permalink to this heading">#</a></h2>
 <section id="errors-messages-that-you-cannot-change-uparm-something">
 <h3>Errors: Messages That You Cannot Change <code class="docutils literal notranslate"><span class="pre">uparm</span></code> something<a class="headerlink" href="#errors-messages-that-you-cannot-change-uparm-something" title="Permalink to this heading">#</a></h3>
 <p>Check that you ran <code class="docutils literal notranslate"><span class="pre">pyraf</span></code> <strong>at the directory where you have <code class="docutils literal notranslate"><span class="pre">login.cl</span></code>”</strong>!</p>
-<p>Many of the students ran <code class="docutils literal notranslate"><span class="pre">pyraf</span></code> where you didn’t do <code class="docutils literal notranslate"><span class="pre">mkiraf</span></code>. In such case, you can “run” <code class="docutils literal notranslate"><span class="pre">pyraf</span></code>, but nothing will work correctly. Even <code class="docutils literal notranslate"><span class="pre">ls</span></code> will not work. If you had to put <code class="docutils literal notranslate"><span class="pre">!</span></code> in front of <code class="docutils literal notranslate"><span class="pre">ls</span></code>, that means you made some mistake.</p>
+<p>Many of the students ran <code class="docutils literal notranslate"><span class="pre">pyraf</span></code> where you didn’t do <code class="docutils literal notranslate"><span class="pre">mkiraf</span></code>. In such a case, you can “run” <code class="docutils literal notranslate"><span class="pre">pyraf</span></code>, but nothing will work correctly. Even <code class="docutils literal notranslate"><span class="pre">ls</span></code> will not work. If you had to put <code class="docutils literal notranslate"><span class="pre">!</span></code> in front of <code class="docutils literal notranslate"><span class="pre">ls</span></code>, that means you made some mistake.</p>
 </section>
 <section id="errors-fxf-or-not-an-image-or-a-number">
 <h3>Errors: “FXF” or  “Not an Image or a Number”<a class="headerlink" href="#errors-fxf-or-not-an-image-or-a-number" title="Permalink to this heading">#</a></h3>
-<p>The following error messages may be popped up if the image reduction had some problem:</p>
+<p>The following error messages may pop up if the image reduction has some problems:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FXF: must specify which FITS extenstion
 (filename) is not an image or a number
 </pre></div>
 </div>
-<p>For check, do <code class="docutils literal notranslate"><span class="pre">imstat</span> <span class="pre">*.fits</span></code> and see whether the results are printed normally.</p>
-<p>Possible reason for <em>wrong image processing</em>:</p>
+<p>For a check, do <code class="docutils literal notranslate"><span class="pre">imstat</span> <span class="pre">*.fits</span></code> and see whether the results are printed normally.</p>
+<p>Possible reasons for <em>wrong image processing</em>:</p>
 <ol class="arabic simple">
 <li><p>I found many students wrongly did <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">*.fits</span> <span class="pre">&gt;</span> <span class="pre">~~~~.list</span></code>. Please open the <code class="docutils literal notranslate"><span class="pre">~~~~.list</span></code> file and check whether it contains only the desired fits files. These <strong>should not</strong> contain <code class="docutils literal notranslate"><span class="pre">bias.fits</span></code> or <code class="docutils literal notranslate"><span class="pre">flat.fits</span></code>, etc.</p></li>
-<li><p>In other cases, students didn’t remove the pre-existing bias or flat files. You <strong>must</strong> remove the pre existing files via <code class="docutils literal notranslate"><span class="pre">!rm</span> <span class="pre">bias.fits</span></code>, etc, before median combining. If not, IRAF automatically adds one more extension on top of the original file, which then doubles, triples, … the size of the image.</p></li>
+<li><p>In other cases, students didn’t remove the pre-existing bias or flat files. You <strong>must</strong> remove the pre-existing files via <code class="docutils literal notranslate"><span class="pre">!rm</span> <span class="pre">bias.fits</span></code>, etc, before median combining. If not, IRAF automatically adds one more extension on top of the original file, which then doubles, triples, … the size of the image.</p></li>
 </ol>
 </section>
 </section>

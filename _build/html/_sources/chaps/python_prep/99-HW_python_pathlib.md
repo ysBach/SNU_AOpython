@@ -3,13 +3,13 @@
 
 ## Problem Set 1 [45 points]
 
-Please use python 3.6+ (Never use python 2).
+Please use Python 3.6+ (never Python 2).
 
-For other packages: Although I didn't run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).
+For other packages: Although I didn't run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).
 
-**If you want, you can increase the number of input parameters, make subfunctions, etc, to realize more general functionalities, unless the "instructions" say not to.**
+**If you want, you can increase the number of input parameters, make subfunctions, etc., to realize more general functionalities, unless the "instructions" say not to.**
 
-This is a set to make you familiarize with Python. I had to design this problem set, because we mostly do not look at the references and/or not trying to use google. You may refer to *Think Python* chapters and if you cannot find the answer, you must use the Internet.
+This is a set to make you familiar with Python. I had to design this problem set because we mostly do not look at the references and/or do not try to use Google. You may refer to *Think Python* chapters, and if you cannot find the answer, you must use the Internet.
 
 ### Problems
 
@@ -63,11 +63,11 @@ This is a set to make you familiarize with Python. I had to design this problem 
 
 ## Problem Set 2 [50 points]
 
-Please use python 3.6+ (Never use python 2).
+Please use Python 3.6+ (never Python 2).
 
-For other packages: Although I didn't run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
+For other packages: Although I didn't run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).
 
-Here we will learn how to code in *pythonic* way. **Open your terminal (or Jupyter Notebook) at an *empty* directory**. Start solving the problems after running the code below:
+Here, we will learn how to code in *pythonic* way. **Open your terminal (or Jupyter Notebook) in an *empty* directory**. Start solving the problems after running the code below:
 
 ```python
 from pathlib import Path
@@ -75,16 +75,16 @@ TOPPATH = Path('.')
 ```
 
 ### Problems
-Answer the following questions with **one line** code. [2 points each]
+Answer the following questions with a **one-line** code. [2 points each]
 
 1. Make a directory named ``class_01``.
    - Hint: ``newdir = TOPPATH/'class_01'`` and ``newdir.mkdir()``
 2. Try to make a directory named ``class_01`` *again*. What error do you see?
 3. How can you avoid this error?
-   - Hint: try using ``.mkdir(exist_ok=True)``.
+   - Hint: Try using ``.mkdir(exist_ok=True)``.
 4. Make a subdirectory ``assignment_01`` inside ``class_01``.
    - Hint: ``hw01 = newdir/'assignment_01'`` and do ``.mkdir()``.
-5. Make the following directory using one line code: ``class_01_appendix/code_snippets``.
+5. Make the following directory using one line of code: ``class_01_appendix/code_snippets``.
    - Hint: Use ``.mkdir(parents=True)``
 6. Make a list of all the files and directories in the current directory.
    - Hint: ``flist = list(TOPPATH.glob('*'))``
@@ -102,10 +102,10 @@ Answer the following problems [2 points each]
 1. Make an empty file named ``test00.txt``.
    - Hint: set ``filepath = TOPPATH/'test00.txt'`` , and use ``filepath.touch()``.
 
-2. Make a simple code which does ``filepath.touch()`` if ``filepath`` does not exist. Use ``if``.
+2. Make a simple code that does ``filepath.touch()`` if ``filepath`` does not exist. Use ``if``.
    - Hint: You can use ``if filepath.exists(): ...``
 
-3. Make a list which contains the path objects for the 10 files: ``test01.txt``, ``test02.txt``, ..., ``test10.txt``.
+3. Make a list that contains the path objects for the 10 files: ``test01.txt``, ``test02.txt``, ..., ``test10.txt``.
    - Hint: Initiate a list ``filelist = []``.
    - Hint: use for loop like this
    - ```python
@@ -121,14 +121,14 @@ Answer the following problems [2 points each]
    - Hint: Do as ``filelist``, but change the ``range`` part.
 
 6. Iterate through the paths in ``filelist2``, and make an empty file of that path if it does not exist.
-   - Hint: Use for loop such as ``for fpath in filelist2``.
+   - Hint: Use a for loop such as ``for fpath in filelist2``.
    - Hint: Use ``if fpath.exists():`` inside the for loop.
 
 7. Make a list ``filelist3``, which is the union set (list) of ``filelist`` and ``filelist2``.
-   - There are several ways to do this. One possibility is to use for loop and ``append`` as you did in ``filelist`` and ``filelist2``.
+   - There are several ways to do this. One possibility is to use a for loop and ``append`` as you did in ``filelist`` and ``filelist2``.
    - Another possiblility is to use ``for fpath in filelist:`` and use ``if fpath in filelist2:`` etc.
    - A simpler pythonic way is to use ``list(set(filelist).union(filelist2))``.
-   - Tip: If you want union of more than 2 lists, you should do ``list(set().union(a, b, c, d))``.
+   - Tip: If you want the union of more than 2 lists, you should do ``list(set().union(a, b, c, d))``.
 
 8. Make a list ``allfiles`` of all the txt file paths in your ``TOPPATH``.
    - Hint: ``allfiles = list(TOPPATH.glob('*.txt'))``
@@ -138,15 +138,14 @@ Answer the following problems [2 points each]
     - Hint: use ``.sort()`` appropriately, and just ``print(allfiles)``
 11. Delete ``allfiles[0]``.
     - Hint: ``allfiles[0].unlink()``
-12. Delete all the files you made.
+12. Delete all the files you created.
     - Hint: Use for loop. Then ``if fpath.exists():`` and ``fpath.unlink()``.
-
 
 **Advanced [6 points]**
 
 Python has a very useful ``try-except-finally`` clause.
 
-Do ``touch`` to all the paths in ``filelist3`` again.
+Do ``touch`` on all the paths in ``filelist3`` again.
 
 Then use
 
@@ -159,6 +158,5 @@ for fpath in filelist3:
 ```
 
 1. Does it run correctly? Are all the files removed?
-2. *Think* about what each line means. (No answer required)
-
+2. *Think* about what each line means. (No answer is required)
 

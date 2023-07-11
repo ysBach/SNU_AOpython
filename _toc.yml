@@ -41,6 +41,8 @@ parts:
   - file: chaps/06-diffphot
   - file: chaps/07-bkg2d
   - file: chaps/08-extended
+  - file: chaps/09-psf01
+  - file: chaps/10-psf02
 - caption: Appendix
   chapters:
   - file: chaps/00-Philosophy

@@ -24,16 +24,16 @@ Here, I will put materials you can study and soem external references for studyi
 
 1. Matt Craig's [ccd as book](https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html)
    * **HIGHLY RECOMMENDED!**
-   * Explains details about the astrnomical images, with worked examples. If you're not familiar with astrnomical data reduction, this is a good reference to start with.
+   * Explains details about the astronomical images, with worked examples. If you're not familiar with astronomical data reduction, this is a good reference to start with.
 2. Matt Craig's [reducer](https://reducer.readthedocs.io/en/latest/)
    * A simple Jupyter Notebook to reduce data, which the author used for his classes.
-   * If you want, you may get ideas from this and use it in your own code.
+   * If you want, you may get ideas from this and use them in your own code.
 3. Lecture note for [Técnicas Experimentales en Astrofísica](https://guaix.fis.ucm.es/~jaz/master_TEA/tea_book/intro.html)
-   * Unfortunately, this is now unaccessible (retrieved 2022-04-05)..
-   * I was recommended by one of my friend at MPI, and this looks very well structured for beginners. It can be a good complementary material to this lecture note.
+   * Unfortunately, this is now inaccessible (retrieved 2022-04-05)..
+   * I was recommended by one of my friends at MPI, and this looks very well-structured for beginners. It can be a good complement to this lecture note.
 4. [astropy tutorial](http://learn.astropy.org/)
-   * I personally think the web is too laggy but some tutorials seem informative, e.g., [UVES spectrum analysis](http://learn.astropy.org/rst-tutorials/UVES.html?highlight=filtertutorials).
-5. The latest or stable official websites for each package, e.g., [astropy](http://docs.astropy.org/en/stable/), [photutils](https://photutils.readthedocs.io/en/latest/) and [ccdproc](https://ccdproc.readthedocs.io/en/latest/) themselves are good references.
+   * I personally think the web is too laggy, but some tutorials seem informative, e.g., [UVES spectrum analysis](http://learn.astropy.org/rst-tutorials/UVES.html?highlight=filtertutorials).
+5. The latest or stable official websites for each package, e.g., [astropy](http://docs.astropy.org/en/stable/), [photutils](https://photutils.readthedocs.io/en/latest/) and [ccdproc](https://ccdproc.readthedocs.io/en/latest/) themselves, are good references.
 
 ### General Python
 
@@ -42,7 +42,7 @@ Here, I will put materials you can study and soem external references for studyi
 * Prof. Jinsoo Park(박진수)'s [lecture notes](https://github.com/jinsooya/lecture-notes)
 * Ivezić et al.'s book ([Amazon](https://www.amazon.com/Statistics-Mining-Machine-Learning-Astronomy/dp/0691198306/))
   * The first author is the creator of AstroML available on [GitHub](https://github.com/astroML/astroML).
-  * Recommended if you want to use python in astronomical research.
+  * Recommended if you want to use Python in astronomical research.
 * [scipy lecture notes](https://scipy-lectures.org/)
   * Only the chapter 1 is enough maybe for this course.
 * [Jake's _Python Data Science Handbook_](https://github.com/jakevdp/PythonDataScienceHandbook/tree/master/)
@@ -52,7 +52,7 @@ Here, I will put materials you can study and soem external references for studyi
 * Python visualization: [pyviz.org](https://pyviz.org/), [datavizpyr](https://datavizpyr.com/) (python and R)
 * List of python-based Monte Carlo packages: <https://gabriel-p.github.io/pythonMCMC/>
 
-The materials below are from [SPLIT Program of SNU](https://eng.snu.ac.kr/reserve/split-program) (retrieved 2019 Sep)
+The materials below are from the [SPLIT Program of SNU](https://eng.snu.ac.kr/reserve/split-program) (retrieved 2019 Sep)
 
 * Codecademy Learn [Python](https://www.codecademy.com/learn/learn-python)
 * [Google Python Class](https://www.youtube.com/watch?v=tKTZoB2Vjuk&t=2626s)

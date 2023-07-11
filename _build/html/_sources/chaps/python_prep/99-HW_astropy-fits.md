@@ -6,13 +6,13 @@
 Answer the following [2 points each]
 
 1. Search for the official documentation of ``astropy.io.fits``. What is the URL to this doc?
-2. Read the doc. You don't have to read all but just skim through it and grasp an idea how ``astropy.io.fits`` is used, how the header is accessed, etc. Click many links in the doc, and familiarize yourself to it.  (Answer: I did|I didn't)
-3. Go to a doc about ["Cutout images"](https://docs.astropy.org/en/stable/nddata/utils.html#cutout-images). You may have to have basic understanding of WCS as well as python. Find references by yourself. Also for WCS, you may have to learn ``astropy.wcs`` by clicking many links provided there. Familiarize yourself with the idea of ``Cutout2D`` and its usage. (Answer: I did|I didn't)
+2. Read the documentation. You don't have to read it all, but just skim through it and grasp an idea of how ``astropy.io.fits`` is used, how the header is accessed, etc. Click on many links in the doc, and familiarize yourself with them.  (Answer: I did|I didn't)
+3. Go to a doc about ["Cutout images"](https://docs.astropy.org/en/stable/nddata/utils.html#cutout-images). You may have to have a basic understanding of WCS as well as Python. Find references for yourself. Also, for WCS, you may have to learn ``astropy.wcs`` by clicking the many links provided there. Familiarize yourself with the idea of ``Cutout2D`` and its usage. (Answer: I did|I didn't)
 
 
 ## Problem Set 2 [22 points]
 
-Here we will learn how to _use astropy_. Start solving the problems after running the code below:
+Here, we will learn how to _use astropy_. Start solving the problems after running the code below:
 
 ```python
 import numpy as np
@@ -29,35 +29,35 @@ While answering the problems, follow these rules:
 
 1. **Never use ``for`` or ``while`` loop**.
 2. You **should not import any other packages**.
-3. Answer to each problem must be a **one-line of python code**.
-4. For each problem, I gave hints. **It is also homework for you to search for those on google**.
+3. The answer to each problem must be a **single line of Python code**.
+4. For each problem, I gave hints. **It is also homework for you to search for those on Google**.
 
 ### Problems
 
-1. Make a primary HDU object called ``hdu`` with data is ``data``.
+1. Make a primary HDU object called ``hdu`` with data called ``data``.
    * Hint: use ``fits.PrimaryHDU``
-2. Change the ``dtype`` of ``hdu.data`` into float 32.
-   * Hint: to change the dtype, you can do ``HDU_object.data = HDU_object.data.astype(dtype)``.
-   * Hint: you can use ``np.float32`` for float 32.
+2. Change the ``dtype`` of ``hdu.data`` to float 32.
+   * Hint: To change the dtype, you can do ``HDU_object.data = HDU_object.data.astype(dtype)``.
+   * Hint: You can use ``np.float32`` for float 32.
 3. Save it as ``SAVEPATH / "test.fits"``.
    * Hint: use ``.writeto()``
 4. Open the fits file in ``HDUList`` type. Let's call this ``hdul``.
    * Hint: use ``fits.open``
-5. Print the information of that ``HDUList``.
+5. Print the information about that ``HDUList``.
    * Hint: use ``.info()``
-6. Check whether the loaded fits data is identical to ``data``.
+6. Check whether the loaded FITS data is identical to ``data``.
    * Hint: use ``np.testing.assert_allclose`` to the 0-th extension of the ``HDUList`` you loaded.
 7. Extract the header of the 0-th extension of ``hdul``. Call it ``hdr_hdu``.
    * Hint: use ``.header``
-   * Note: Even though you didn't specify any header information, the header is automatically generated when you saved ``hdu``.
-8. Open the fits file as ``CCDData``. Call this ``ccd``.
+   * Note: Even though you didn't specify any header information, the header is automatically generated when you save ``hdu``.
+8. Open the FITS file as ``CCDData``. Call this ``ccd``.
    * Hint: use ``CCDData.read``
-   * Hint: you may use any unit you want.
+   * Hint: You may use any unit you want.
 9. Check whether the loaded ccd data is identical to ``data``.
    * Hint: use ``np.testing.assert_allclose`` to the ``ccd.data``.
 10. Extract the header of the ``ccd``. Call it ``hdr_ccd``.
     - Hint: use ``.header``
-    - Note: Even though you didn't specify any header information, the header is automatically generated when you saved ``hdu``.
+    - Note: Even though you didn't specify any header information, the header is automatically generated when you save ``hdu``.
 11. Check whether the two headers (``hdr_hdul``)
 
 
@@ -65,8 +65,8 @@ While answering the problems, follow these rules:
 ## Problem Set 3 [28 points]
 
 * Prepare the FITS file ``SNUO_STX16803-kw4-4-4-20190602-135247-R-60.0_bdfw.fits`` from our Tutorial Data link (see README of our lecture note repo). As indicated in astronomy.net homework, this file has intentionally broken WCS information, but it does not matter for the problems below.
-* Please use python 3.6+ (Never use python 2).
-* For other packages: Although I didn't run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
+* Please use Python 3.6+ (never Python 2).
+* For other packages: Although I didn't run all the tests, it is likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
 
 Please run the following code before you start (**MODIFY APPROPRIATELY**):
 
@@ -111,27 +111,27 @@ Answer the following questions. Provide codes. Also provide results if something
 
 1. Set ``fpath`` as the path to the file.
 * Hint: ``fpath = allfits[<an int>]``
-2. Set ``hdul`` as an HDUList object of that file.
+2. Set ``hdul`` as an HDUList object in that file.
    * Hint: ``hdul = fits.open(?)``
-3. Print out the information of the ``hdul``.
+3. Print out the information for the ``hdul``.
    * Hint: ``hdul.info()``
 4. How many header keywords are there in the 0-th extension of ``hdul``?
-5. Print out the header of the 0th HDU.
+5. Print out the header of the 0-th HDU.
    * Hint: ``hdul[0].?`` or ``hdul["PRIMARY"].?``
 
 6. From the header, what is the header keyword for [1 point each]:
-   1. the start of the exposure
-   2. the filter used
-   3. the object observed
-   4. the longitude of the observatory
-   * Hint: No code is needed. Also, you may ignore all the ``COMMENT`` and ``HISTORY`` in headers.
+   1. The start of the exposure
+   2. The filter used
+   3. The object observed
+   4. The longitude of the observatory
+   * Hint: No code is needed. Also, you may ignore all the ``COMMENT`` and ``HISTORY`` in the headers.
 
 7. Set ``hdr`` as the header of the primary header. What is the pixel scale (arcsecond per pixel)? Provide a code and result to calculate it from ``hdr``.
    * Hint: ``hdr = hdul[0].?``
    * Find the focal length of the telescope and pixel size from ``hdr``.
 8. From ``PROCESS`` and the ``COMMENT`` after it, what "process" has been done to this file?
 
-9. Display the data. You may use the following code (Tune ``>>FILLHERE<<`` values to make y-axis value increase upwards). I intentionally used ``ImageGrid``, which is different from lecture notes so that you can learn different APIs.
+9. Display the data. You may use the following code (Tune ``>>FILLHERE<<`` values to make the y-axis value increase upwards). I intentionally used ``ImageGrid``, which is different from lecture notes, so that you can learn different APIs.
     ```python
     vv = dict(vmin=1900, vmax=2000)
     fig = plt.figure()
@@ -144,12 +144,12 @@ Answer the following questions. Provide codes. Also provide results if something
     plt.show()
     ```
 
-10. Cut a rectangular region centered at ``(555, 505)`` and size of ``(70, 70)`` in x, y directions, respectively.
+10. Cut a rectangular region centered at ``(555, 505)`` and size of ``(70, 70)`` in x and y directions, respectively.
     * Hint: ``cut = Cutout2D(hdul[0].data, position=(?, ?), size=(?, ?), wcs=WCS(hdul[0].header))``
     * **WARNING**: Python indexing is ``(y, x)``, **not** ``(x, y)``. Which one should we use, ``position = (505, 555)`` or ``(555, 505)``? Find and read the documentation for ``Cutout2D`` and write a proper answer. If you're wrong here, all of your answers below will be wrong.
     * ``wcs`` keyword is used to propagate WCS information ([link](https://docs.astropy.org/en/stable/nddata/utils.html#saving-a-2d-cutout-to-a-fits-file-with-an-updated-wcs))
 
-11. Overplot where the rectangular cut is made. You may use the following code. Modify as you wish. Fill in the ``>>FILLHERE<<`` parts by searching appropriate docs.
+11. Overplot where the rectangular cut is made. You may use the following code: Modify as you wish. Fill in the ``>>FILLHERE<<`` parts by searching for appropriate docs.
     ```python
     fig = plt.figure()
     grid = ImageGrid(fig, 111, **imgrid_kw)
@@ -189,7 +189,7 @@ Answer the following questions. Provide codes. Also provide results if something
     new_hdu.writeto("test.fits", overwrite=True, output_verify='fix')
     ```
 
-13. Test whether WCS is correctly implemented.
+13. Test whether the WCS is correctly implemented.
     ```python
     hdu_orig = hdul[0]
     hdu_crop = fits.open("test.fits")[0]
@@ -220,26 +220,26 @@ Answer the following questions. Provide codes. Also provide results if something
 
 ```{admonition} A note on WCS
 :class: dropdown, tip
-In astropy, there are two ways to convert pixel (X/Y) ⟷ world coordinate (RA/DEC) described in [here](https://docs.astropy.org/en/stable/wcs/index.html#getting-started). Simply put:
+In astropy, there are two ways to convert pixel (X/Y) ⟷ world coordinate (RA/DEC) described [here](https://docs.astropy.org/en/stable/wcs/index.html#getting-started). Simply put:
 
-1. ``wcs``: Only simple calculation is done
+1. ``wcs``: Only simple calculations are done
 2. ``all``: Calculates all detailed calculations.
 
 Therefore, calculations using ``all`` (``all_pix2world``) must be more correct than ``wcs`` (``wcs_pix2world``). From the code above, however, it is the opposite. What's wrong here?
 
-First, the fact that our FITS file has an intentionally broken WCS information **does not** matter, because it only scales ``PC`` parameters in the WCS header: If you try with updated WCS, it still gives discrepancy of ~ 0.1 arcsec order in both RA/DEC (``Difference [ΔRA, ΔDEC] (arcsec) = [[0.24009913 0.02912163]]``). It seems like, when using ``Cutout2D``, **not all of the WCS information is transferred correctly** (not clearly stated but you can get some hint from the doc [here](https://docs.astropy.org/en/stable/api/astropy.nddata.utils.Cutout2D.html)). Thus, "details" of the original WCS is not propagated to cutout, and this is the reason why the ``wcs_pix2world`` gives identical result, while ``all_pix2world`` gives slightly different result. If ``Cutout2D`` correctly transfers all WCS information, then we would see the difference = 0 for ``all_pix2world``, and non-zero difference in ``wcs_pix2world``.
+First, the fact that our FITS file has intentionally broken WCS information **does not** matter because it only scales ``PC`` parameters in the WCS header: If you try with updated WCS, it still gives a discrepancy of ~ 0.1 arcsec order in both RA/DEC (``difference [ΔRA, ΔDEC] (arcsec) = [[0.24009913 0.02912163]]``). It seems like, when using ``Cutout2D``, **not all of the WCS information is transferred correctly** (not clearly stated, but you can get some hints from the doc [here](https://docs.astropy.org/en/stable/api/astropy.nddata.utils.Cutout2D.html)). Thus, "details" of the original WCS are not propagated to cutout, and this is the reason why the ``wcs_pix2world`` gives identical result, while ``all_pix2world`` gives a slightly different result. If ``Cutout2D`` correctly transfers all WCS information, then we would see a difference = 0 for ``all_pix2world``, and a non-zero difference in ``wcs_pix2world``.
 ```
 
 
 
 ## Problem Set 4 (optional) [50 points]
-**Skip this unless the TA asks you to solve these.** (For undergraduate class, it is a bit too advanced, and the **TA will likely skip this problem set**.)
+**Skip this unless the TA asks you to solve these.** (For an undergraduate class, it is a bit too advanced, and the **TA will likely skip this problem set**.)
 
-Please use python 3.6+ (Never use python 2).
+Please use Python 3.6+ (never Python 2).
 
-For other packages: Although I didn't run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
+For other packages: Although I didn't run all the tests, there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).
 
-Here we will learn how to use ``astropy.fits``. Please run the following code before you start:
+Here, we will learn how to use ``astropy.fits``. Please run the following code before you start:
 
 ```python
 from pathlib import Path
@@ -297,7 +297,7 @@ While answering the problems, follow these rules:
 
 1. You **should not import any other packages**.
 2. You **should not define any functions.**
-3. For each problem, I gave hints. **It is also homework for you to search for those on google**.
+3. For each problem, I gave hints. **It is also homework for you to search for those on Google**.
 
 
 The final raw image (``final_image``) will have the following header:
@@ -319,7 +319,7 @@ RDNOISE =                  9.0 / [e-] The (Gaussian) read noise.
 Answer the following questions. [2 points each]
 
 1. Make a bias map called ``bias``, assuming the mean bias level is 1000 ADU.
-   - Hint: Pure bias map must be a constant, so ``bias = np.ones_like(?) * bias_adu``
+   - Hint: The pure bias map must be a constant, so ``bias = np.ones_like(?) * bias_adu``
 
 2. Add readnoise to ``bias`` using ``add_rdnoise``.
    * Hint: Just use ``bias = add_rdnoise(image_adu=bias, rdnoise_e=rdnoise_e, gain_epadu=gain_epadu)``.
@@ -339,7 +339,7 @@ Answer the following questions. [2 points each]
      bias_hdu.writeto(top/"bias.fits")
      ```
 
-5. Make a dark frame called ``dark_300s``, from ``exptime`` and ``dark_epsec``, and assuming dark current is Poissonian.
+5. Make a dark frame called ``dark_300s``, from ``exptime`` and ``dark_epsec``, and assuming the dark current is Poissonian.
    * Hint: ``dark_300s = np.random.poisson(dark_epsec * ?, size=final_image.shape)`` .
 
 5. Add readnoise to ``dark_300s`` using ``add_rdnoise`` and overwrite ``dark_300s``.
@@ -359,12 +359,11 @@ Answer the following questions. [2 points each]
      dark_hdu.header["RDNOISE"] = (9.0, '[e-] The (Gaussian) read noise.')
      dark_hdu.writeto(top/>>FILLHERE<<)
      ```
-Consider the vignetting (sensitivity or the "flat") is in the form of a circular Gaussian, centered at ``sens_center_xy`` and standard deviation ``sens_sigma`` pixel. Let's make the flat map based on these.
-
+Consider that the vignetting (sensitivity, or "flat") is in the form of a circular Gaussian, centered at ``sens_center_xy`` and the standard deviation ``sens_sigma`` pixel. Let's make the flat map based on these.
 9. First, make meshgrid ``xx`` and ``yy``, which will contain the x and y values for each of the ``(50, 100)`` pixels. The resulting ``xx`` and ``yy`` will have the same shape as ``(50, 100)``.
 * Hint: Use ``np.mgrid[] ``, i.e., ``yy, xx = np.mgrid[:final_image.shape[?], :final_image.shape[?]]``
 
-10. Check ``xx`` indeed is the x-values of the ``(50, 100)``-shaped image.
+10. Check ``xx`` indeed is the x-value of the ``(50, 100)``-shaped image.
 11. Make the r-square map called ``rsq``, which is of shape ``(50, 100)`` and contains the distance from the position ``sens_center_xy``.
     * Hint: ``rsq = (xx - sens_center_xy[?])**2 + (yy - sens_center_xy[?])**2``
 12. Finally, use the Gaussian function to make the sensitivity map.
@@ -384,11 +383,11 @@ Consider the vignetting (sensitivity or the "flat") is in the form of a circular
       sens_hdu.writeto(top/)
       ```
 
-Let's now add three stars. The seeing FWHM is ``seeing_arcsec`` in arcsecond and the pixel scale is ``pixel_scale`` (arcsec/pixel). Assume circular Gaussian PSF.
+Let's now add three stars. The seeing FWHM is ``seeing_arcsec`` in arcsecond and the pixel scale is ``pixel_scale`` (arcsec/pixel). Assume a circular Gaussian PSF.
 
 14. Prove that the FWHM of a circular Gaussian profile is $\mathrm{FWHM} = 2\sqrt{2\ln 2} \sigma$ for standard deviation $\sigma$.
-    * Hint: Gaussian profile has $f(r|A,\, \sigma) = A e^{-r^2/2\sigma^2}$ and the FWHM is defined as $f(r=\mathrm{FWHM}/2) = A/2$.
-    * **Just answer "I did"**. No need to provide equations.
+    * Hint: The Gaussian profile has $f(r|A,\, \sigma) = A e^{-r^2/2\sigma^2}$ and the FWHM is defined as $f(r=\mathrm{FWHM}/2) = A/2$.
+    * **Just answer "I did"**. There is no need to provide equations.
 
 15. Fill in the blanks to make the image of stars.
     ```python
@@ -404,13 +403,13 @@ Let's now add three stars. The seeing FWHM is ``seeing_arcsec`` in arcsecond and
     * You can check the results by ``plt.imshow(stars, origin='lower')``
 
 16. Make a new bias and dark. Using the previously made flat (``sens``), simulate a raw image (bias, dark added, flat pattern added, and add readnoise).
-    * Hint: The exposure time is 300s as described in the beginning of this homework.
+    * Hint: The exposure time is 300s as described at the beginning of this homework.
     * Hint: Make bias and dark as before, but do not add readnoise yet.
     * Hint: Then ``stars_adu = bias + (dark + sens*stars)/?``.
     * Hint: Add readnoise now by ``stars_adu = add_rdnoise(image_adu=stars_adu, rdnoise_e=rdnoise_e, gain_epadu=gain_epadu)``
 
 17. Save ``stars_adu`` as a FITS file to ``top/'image0001.fits'`` which resembles the ``final_image``'s header above.
-    * Hint: Use the following (This is the ``final_image``, so look at the sample header in the beginning of this homework):
+    * Hint: Use the following (this is the ``final_image``, so look at the sample header at the beginning of this homework):
     * ```python
       stars_hdu = fits.PrimaryHDU(stars_adu.astype('int16'))
       stars_hdu.header["BUNIT"] = (>>FILLHERE<<, "Pixel Unit Value")
@@ -433,7 +432,6 @@ Let's now add three stars. The seeing FWHM is ``seeing_arcsec`` in arcsecond and
 
     rawim = fits.open(top/"image0001.fits")[0]
     ```
-
 19. Do bias, dark, and flat corrections.
     * Hint: Use the following:
     * ```python
@@ -521,7 +519,7 @@ Let's now add three stars. The seeing FWHM is ``seeing_arcsec`` in arcsecond and
 
 [4 points]
 
-In the above, we used ``IntegratedPRF``, which has slightly different meaning than PSF in ``photutils``. Gaussian function will calculate the pixel value as the Gaussain function value at the pixel center ($f(x_i, y_i)$ for the i-th pixel), while ``IntegratedPRF`` is the **integrated** value of the Gaussian function values within the pixel $\left( \int_{x_i - \Delta x/2}^{x_i + \Delta x/2} \int_{y_i - \Delta y/2}^{y_i + \Delta y/2} f(x, y) dx dy \right)$. To see the difference, we need a test.
+In the above, we used ``IntegratedPRF``, which has a slightly different meaning than PSF in ``photutils``. The Gaussian function will calculate the pixel value as the Gaussain function value at the pixel center ($f(x_i, y_i)$ for the i-th pixel), while ``IntegratedPRF`` is the **integrated** value of the Gaussian function values within the pixel $\left( \int_{x_i - \Delta x/2}^{x_i + \Delta x/2} \int_{y_i - \Delta y/2}^{y_i + \Delta y/2} f(x, y) dx dy \right)$. To see the difference, we need a test.
 
 22. Fill in the blanks to see the map of $\frac{\mathrm{IntegratedPRF\ case}-\mathrm{SimpleGaussian\ case}}{\mathrm{\mathrm{IntegratedPRF\ case} + \mathrm{sky}}}$ (there's no sky in the numerator because they cancel out):
     ```python
@@ -551,7 +549,7 @@ In the above, we used ``IntegratedPRF``, which has slightly different meaning th
     print(np.sum(stars_psf), np.sum(stars_int))
     ```
 
-In the code, the resulting image will show the fractional difference, assuming the sky was ``skylevel_e = 500`` electrons. You can see the difference is large near the center and outskirt of the stars, although **each star's total flux is the same** for both cases.
+In the code, the resulting image will show the fractional difference, assuming the sky was ``skylevel_e = 500`` electrons. You can see the difference is large near the center and outskirts of the stars, although **each star's total flux is the same** in both cases.
 
 ![](../figs/IntegratedPRF_VS_SimpleGauss.png)
 
@@ -601,4 +599,4 @@ plt.show()
 
 
 
-The importance of this difference depends on the situation. If you just want a simple rough fitting to the profile, both will give similar results (centroid position, FWHM, etc). But if you want to get accurate PSF, it is better to choose Integrated version.
+The importance of this difference depends on the situation. If you just want a simple rough fitting to the profile, both will give similar results (centroid position, FWHM, etc.). But if you want to get an accurate PSF, it is better to choose the integrated version.

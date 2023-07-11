@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>HW astropy.fits &#8212; SNU AO Class Python</title>
   
@@ -190,6 +190,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -441,13 +443,13 @@ document.write(`
 <p>Answer the following [2 points each]</p>
 <ol class="arabic simple">
 <li><p>Search for the official documentation of <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code>. What is the URL to this doc?</p></li>
-<li><p>Read the doc. You don’t have to read all but just skim through it and grasp an idea how <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> is used, how the header is accessed, etc. Click many links in the doc, and familiarize yourself to it.  (Answer: I did|I didn’t)</p></li>
-<li><p>Go to a doc about <a class="reference external" href="https://docs.astropy.org/en/stable/nddata/utils.html#cutout-images">“Cutout images”</a>. You may have to have basic understanding of WCS as well as python. Find references by yourself. Also for WCS, you may have to learn <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code> by clicking many links provided there. Familiarize yourself with the idea of <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> and its usage. (Answer: I did|I didn’t)</p></li>
+<li><p>Read the documentation. You don’t have to read it all, but just skim through it and grasp an idea of how <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> is used, how the header is accessed, etc. Click on many links in the doc, and familiarize yourself with them.  (Answer: I did|I didn’t)</p></li>
+<li><p>Go to a doc about <a class="reference external" href="https://docs.astropy.org/en/stable/nddata/utils.html#cutout-images">“Cutout images”</a>. You may have to have a basic understanding of WCS as well as Python. Find references for yourself. Also, for WCS, you may have to learn <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code> by clicking the many links provided there. Familiarize yourself with the idea of <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> and its usage. (Answer: I did|I didn’t)</p></li>
 </ol>
 </section>
 <section id="problem-set-2-22-points">
 <h2>Problem Set 2 [22 points]<a class="headerlink" href="#problem-set-2-22-points" title="Permalink to this heading">#</a></h2>
-<p>Here we will learn how to <em>use astropy</em>. Start solving the problems after running the code below:</p>
+<p>Here, we will learn how to <em>use astropy</em>. Start solving the problems after running the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
@@ -462,21 +464,21 @@ document.write(`
 <ol class="arabic simple">
 <li><p><strong>Never use <code class="docutils literal notranslate"><span class="pre">for</span></code> or <code class="docutils literal notranslate"><span class="pre">while</span></code> loop</strong>.</p></li>
 <li><p>You <strong>should not import any other packages</strong>.</p></li>
-<li><p>Answer to each problem must be a <strong>one-line of python code</strong>.</p></li>
-<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
+<li><p>The answer to each problem must be a <strong>single line of Python code</strong>.</p></li>
+<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on Google</strong>.</p></li>
 </ol>
 <section id="problems">
 <h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Make a primary HDU object called <code class="docutils literal notranslate"><span class="pre">hdu</span></code> with data is <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<li><p>Make a primary HDU object called <code class="docutils literal notranslate"><span class="pre">hdu</span></code> with data called <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">fits.PrimaryHDU</span></code></p></li>
 </ul>
 </li>
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of <code class="docutils literal notranslate"><span class="pre">hdu.data</span></code> into float 32.</p>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of <code class="docutils literal notranslate"><span class="pre">hdu.data</span></code> to float 32.</p>
 <ul class="simple">
-<li><p>Hint: to change the dtype, you can do <code class="docutils literal notranslate"><span class="pre">HDU_object.data</span> <span class="pre">=</span> <span class="pre">HDU_object.data.astype(dtype)</span></code>.</p></li>
-<li><p>Hint: you can use <code class="docutils literal notranslate"><span class="pre">np.float32</span></code> for float 32.</p></li>
+<li><p>Hint: To change the dtype, you can do <code class="docutils literal notranslate"><span class="pre">HDU_object.data</span> <span class="pre">=</span> <span class="pre">HDU_object.data.astype(dtype)</span></code>.</p></li>
+<li><p>Hint: You can use <code class="docutils literal notranslate"><span class="pre">np.float32</span></code> for float 32.</p></li>
 </ul>
 </li>
 <li><p>Save it as <code class="docutils literal notranslate"><span class="pre">SAVEPATH</span> <span class="pre">/</span> <span class="pre">&quot;test.fits&quot;</span></code>.</p>
@@ -489,12 +491,12 @@ document.write(`
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">fits.open</span></code></p></li>
 </ul>
 </li>
-<li><p>Print the information of that <code class="docutils literal notranslate"><span class="pre">HDUList</span></code>.</p>
+<li><p>Print the information about that <code class="docutils literal notranslate"><span class="pre">HDUList</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">.info()</span></code></p></li>
 </ul>
 </li>
-<li><p>Check whether the loaded fits data is identical to <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<li><p>Check whether the loaded FITS data is identical to <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.testing.assert_allclose</span></code> to the 0-th extension of the <code class="docutils literal notranslate"><span class="pre">HDUList</span></code> you loaded.</p></li>
 </ul>
@@ -502,13 +504,13 @@ document.write(`
 <li><p>Extract the header of the 0-th extension of <code class="docutils literal notranslate"><span class="pre">hdul</span></code>. Call it <code class="docutils literal notranslate"><span class="pre">hdr_hdu</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">.header</span></code></p></li>
-<li><p>Note: Even though you didn’t specify any header information, the header is automatically generated when you saved <code class="docutils literal notranslate"><span class="pre">hdu</span></code>.</p></li>
+<li><p>Note: Even though you didn’t specify any header information, the header is automatically generated when you save <code class="docutils literal notranslate"><span class="pre">hdu</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Open the fits file as <code class="docutils literal notranslate"><span class="pre">CCDData</span></code>. Call this <code class="docutils literal notranslate"><span class="pre">ccd</span></code>.</p>
+<li><p>Open the FITS file as <code class="docutils literal notranslate"><span class="pre">CCDData</span></code>. Call this <code class="docutils literal notranslate"><span class="pre">ccd</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">CCDData.read</span></code></p></li>
-<li><p>Hint: you may use any unit you want.</p></li>
+<li><p>Hint: You may use any unit you want.</p></li>
 </ul>
 </li>
 <li><p>Check whether the loaded ccd data is identical to <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
@@ -519,7 +521,7 @@ document.write(`
 <li><p>Extract the header of the <code class="docutils literal notranslate"><span class="pre">ccd</span></code>. Call it <code class="docutils literal notranslate"><span class="pre">hdr_ccd</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">.header</span></code></p></li>
-<li><p>Note: Even though you didn’t specify any header information, the header is automatically generated when you saved <code class="docutils literal notranslate"><span class="pre">hdu</span></code>.</p></li>
+<li><p>Note: Even though you didn’t specify any header information, the header is automatically generated when you save <code class="docutils literal notranslate"><span class="pre">hdu</span></code>.</p></li>
 </ul>
 </li>
 <li><p>Check whether the two headers (<code class="docutils literal notranslate"><span class="pre">hdr_hdul</span></code>)</p></li>
@@ -530,8 +532,8 @@ document.write(`
 <h2>Problem Set 3 [28 points]<a class="headerlink" href="#problem-set-3-28-points" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Prepare the FITS file <code class="docutils literal notranslate"><span class="pre">SNUO_STX16803-kw4-4-4-20190602-135247-R-60.0_bdfw.fits</span></code> from our Tutorial Data link (see README of our lecture note repo). As indicated in <a class="reference external" href="http://astronomy.net">astronomy.net</a> homework, this file has intentionally broken WCS information, but it does not matter for the problems below.</p></li>
-<li><p>Please use python 3.6+ (Never use python 2).</p></li>
-<li><p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p></li>
+<li><p>Please use Python 3.6+ (never Python 2).</p></li>
+<li><p>For other packages: Although I didn’t run all the tests, it is likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p></li>
 </ul>
 <p>Please run the following code before you start (<strong>MODIFY APPROPRIATELY</strong>):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you are not using Jupyter, comment the &quot;%&quot; lines below</span>
@@ -579,31 +581,31 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">fpath</span> <span class="pre">=</span> <span class="pre">allfits[&lt;an</span> <span class="pre">int&gt;]</span></code></p></li>
 </ul>
 <ol class="arabic" start="2">
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">hdul</span></code> as an HDUList object of that file.</p>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">hdul</span></code> as an HDUList object in that file.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">hdul</span> <span class="pre">=</span> <span class="pre">fits.open(?)</span></code></p></li>
 </ul>
 </li>
-<li><p>Print out the information of the <code class="docutils literal notranslate"><span class="pre">hdul</span></code>.</p>
+<li><p>Print out the information for the <code class="docutils literal notranslate"><span class="pre">hdul</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">hdul.info()</span></code></p></li>
 </ul>
 </li>
 <li><p>How many header keywords are there in the 0-th extension of <code class="docutils literal notranslate"><span class="pre">hdul</span></code>?</p></li>
-<li><p>Print out the header of the 0th HDU.</p>
+<li><p>Print out the header of the 0-th HDU.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">hdul[0].?</span></code> or <code class="docutils literal notranslate"><span class="pre">hdul[&quot;PRIMARY&quot;].?</span></code></p></li>
 </ul>
 </li>
 <li><p>From the header, what is the header keyword for [1 point each]:</p>
 <ol class="arabic simple">
-<li><p>the start of the exposure</p></li>
-<li><p>the filter used</p></li>
-<li><p>the object observed</p></li>
-<li><p>the longitude of the observatory</p></li>
+<li><p>The start of the exposure</p></li>
+<li><p>The filter used</p></li>
+<li><p>The object observed</p></li>
+<li><p>The longitude of the observatory</p></li>
 </ol>
 <ul class="simple">
-<li><p>Hint: No code is needed. Also, you may ignore all the <code class="docutils literal notranslate"><span class="pre">COMMENT</span></code> and <code class="docutils literal notranslate"><span class="pre">HISTORY</span></code> in headers.</p></li>
+<li><p>Hint: No code is needed. Also, you may ignore all the <code class="docutils literal notranslate"><span class="pre">COMMENT</span></code> and <code class="docutils literal notranslate"><span class="pre">HISTORY</span></code> in the headers.</p></li>
 </ul>
 </li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">hdr</span></code> as the header of the primary header. What is the pixel scale (arcsecond per pixel)? Provide a code and result to calculate it from <code class="docutils literal notranslate"><span class="pre">hdr</span></code>.</p>
@@ -613,7 +615,7 @@ document.write(`
 </ul>
 </li>
 <li><p>From <code class="docutils literal notranslate"><span class="pre">PROCESS</span></code> and the <code class="docutils literal notranslate"><span class="pre">COMMENT</span></code> after it, what “process” has been done to this file?</p></li>
-<li><p>Display the data. You may use the following code (Tune <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> values to make y-axis value increase upwards). I intentionally used <code class="docutils literal notranslate"><span class="pre">ImageGrid</span></code>, which is different from lecture notes so that you can learn different APIs.</p>
+<li><p>Display the data. You may use the following code (Tune <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> values to make the y-axis value increase upwards). I intentionally used <code class="docutils literal notranslate"><span class="pre">ImageGrid</span></code>, which is different from lecture notes, so that you can learn different APIs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vv</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">1900</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">ImageGrid</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="o">**</span><span class="n">imgrid_kw</span><span class="p">)</span>
@@ -626,14 +628,14 @@ document.write(`
 </pre></div>
 </div>
 </li>
-<li><p>Cut a rectangular region centered at <code class="docutils literal notranslate"><span class="pre">(555,</span> <span class="pre">505)</span></code> and size of <code class="docutils literal notranslate"><span class="pre">(70,</span> <span class="pre">70)</span></code> in x, y directions, respectively.</p>
+<li><p>Cut a rectangular region centered at <code class="docutils literal notranslate"><span class="pre">(555,</span> <span class="pre">505)</span></code> and size of <code class="docutils literal notranslate"><span class="pre">(70,</span> <span class="pre">70)</span></code> in x and y directions, respectively.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">cut</span> <span class="pre">=</span> <span class="pre">Cutout2D(hdul[0].data,</span> <span class="pre">position=(?,</span> <span class="pre">?),</span> <span class="pre">size=(?,</span> <span class="pre">?),</span> <span class="pre">wcs=WCS(hdul[0].header))</span></code></p></li>
 <li><p><strong>WARNING</strong>: Python indexing is <code class="docutils literal notranslate"><span class="pre">(y,</span> <span class="pre">x)</span></code>, <strong>not</strong> <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>. Which one should we use, <code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">=</span> <span class="pre">(505,</span> <span class="pre">555)</span></code> or <code class="docutils literal notranslate"><span class="pre">(555,</span> <span class="pre">505)</span></code>? Find and read the documentation for <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> and write a proper answer. If you’re wrong here, all of your answers below will be wrong.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wcs</span></code> keyword is used to propagate WCS information (<a class="reference external" href="https://docs.astropy.org/en/stable/nddata/utils.html#saving-a-2d-cutout-to-a-fits-file-with-an-updated-wcs">link</a>)</p></li>
 </ul>
 </li>
-<li><p>Overplot where the rectangular cut is made. You may use the following code. Modify as you wish. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts by searching appropriate docs.</p>
+<li><p>Overplot where the rectangular cut is made. You may use the following code: Modify as you wish. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts by searching for appropriate docs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">ImageGrid</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="o">**</span><span class="n">imgrid_kw</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">cbar_axes</span><span class="p">):</span>
@@ -673,7 +675,7 @@ document.write(`
 </pre></div>
 </div>
 </li>
-<li><p>Test whether WCS is correctly implemented.</p>
+<li><p>Test whether the WCS is correctly implemented.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_orig</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">hdu_crop</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;test.fits&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">wcs_orig</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu_orig</span><span class="p">)</span>
@@ -703,22 +705,22 @@ document.write(`
 </ol>
 <div class="dropdown tip admonition">
 <p class="admonition-title">A note on WCS</p>
-<p>In astropy, there are two ways to convert pixel (X/Y) ⟷ world coordinate (RA/DEC) described in <a class="reference external" href="https://docs.astropy.org/en/stable/wcs/index.html#getting-started">here</a>. Simply put:</p>
+<p>In astropy, there are two ways to convert pixel (X/Y) ⟷ world coordinate (RA/DEC) described <a class="reference external" href="https://docs.astropy.org/en/stable/wcs/index.html#getting-started">here</a>. Simply put:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">wcs</span></code>: Only simple calculation is done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wcs</span></code>: Only simple calculations are done</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">all</span></code>: Calculates all detailed calculations.</p></li>
 </ol>
 <p>Therefore, calculations using <code class="docutils literal notranslate"><span class="pre">all</span></code> (<code class="docutils literal notranslate"><span class="pre">all_pix2world</span></code>) must be more correct than <code class="docutils literal notranslate"><span class="pre">wcs</span></code> (<code class="docutils literal notranslate"><span class="pre">wcs_pix2world</span></code>). From the code above, however, it is the opposite. What’s wrong here?</p>
-<p>First, the fact that our FITS file has an intentionally broken WCS information <strong>does not</strong> matter, because it only scales <code class="docutils literal notranslate"><span class="pre">PC</span></code> parameters in the WCS header: If you try with updated WCS, it still gives discrepancy of ~ 0.1 arcsec order in both RA/DEC (<code class="docutils literal notranslate"><span class="pre">Difference</span> <span class="pre">[ΔRA,</span> <span class="pre">ΔDEC]</span> <span class="pre">(arcsec)</span> <span class="pre">=</span> <span class="pre">[[0.24009913</span> <span class="pre">0.02912163]]</span></code>). It seems like, when using <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code>, <strong>not all of the WCS information is transferred correctly</strong> (not clearly stated but you can get some hint from the doc <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.nddata.utils.Cutout2D.html">here</a>). Thus, “details” of the original WCS is not propagated to cutout, and this is the reason why the <code class="docutils literal notranslate"><span class="pre">wcs_pix2world</span></code> gives identical result, while <code class="docutils literal notranslate"><span class="pre">all_pix2world</span></code> gives slightly different result. If <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> correctly transfers all WCS information, then we would see the difference = 0 for <code class="docutils literal notranslate"><span class="pre">all_pix2world</span></code>, and non-zero difference in <code class="docutils literal notranslate"><span class="pre">wcs_pix2world</span></code>.</p>
+<p>First, the fact that our FITS file has intentionally broken WCS information <strong>does not</strong> matter because it only scales <code class="docutils literal notranslate"><span class="pre">PC</span></code> parameters in the WCS header: If you try with updated WCS, it still gives a discrepancy of ~ 0.1 arcsec order in both RA/DEC (<code class="docutils literal notranslate"><span class="pre">difference</span> <span class="pre">[ΔRA,</span> <span class="pre">ΔDEC]</span> <span class="pre">(arcsec)</span> <span class="pre">=</span> <span class="pre">[[0.24009913</span> <span class="pre">0.02912163]]</span></code>). It seems like, when using <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code>, <strong>not all of the WCS information is transferred correctly</strong> (not clearly stated, but you can get some hints from the doc <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.nddata.utils.Cutout2D.html">here</a>). Thus, “details” of the original WCS are not propagated to cutout, and this is the reason why the <code class="docutils literal notranslate"><span class="pre">wcs_pix2world</span></code> gives identical result, while <code class="docutils literal notranslate"><span class="pre">all_pix2world</span></code> gives a slightly different result. If <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> correctly transfers all WCS information, then we would see a difference = 0 for <code class="docutils literal notranslate"><span class="pre">all_pix2world</span></code>, and a non-zero difference in <code class="docutils literal notranslate"><span class="pre">wcs_pix2world</span></code>.</p>
 </div>
 </section>
 </section>
 <section id="problem-set-4-optional-50-points">
 <h2>Problem Set 4 (optional) [50 points]<a class="headerlink" href="#problem-set-4-optional-50-points" title="Permalink to this heading">#</a></h2>
-<p><strong>Skip this unless the TA asks you to solve these.</strong> (For undergraduate class, it is a bit too advanced, and the <strong>TA will likely skip this problem set</strong>.)</p>
-<p>Please use python 3.6+ (Never use python 2).</p>
-<p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
-<p>Here we will learn how to use <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code>. Please run the following code before you start:</p>
+<p><strong>Skip this unless the TA asks you to solve these.</strong> (For an undergraduate class, it is a bit too advanced, and the <strong>TA will likely skip this problem set</strong>.)</p>
+<p>Please use Python 3.6+ (never Python 2).</p>
+<p>For other packages: Although I didn’t run all the tests, there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
+<p>Here, we will learn how to use <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code>. Please run the following code before you start:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
@@ -774,7 +776,7 @@ document.write(`
 <ol class="arabic simple">
 <li><p>You <strong>should not import any other packages</strong>.</p></li>
 <li><p>You <strong>should not define any functions.</strong></p></li>
-<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
+<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on Google</strong>.</p></li>
 </ol>
 <p>The final raw image (<code class="docutils literal notranslate"><span class="pre">final_image</span></code>) will have the following header:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SIMPLE</span>  <span class="o">=</span>                    <span class="n">T</span> <span class="o">/</span> <span class="n">conforms</span> <span class="n">to</span> <span class="n">FITS</span> <span class="n">standard</span>
@@ -794,7 +796,7 @@ document.write(`
 <ol class="arabic">
 <li><p>Make a bias map called <code class="docutils literal notranslate"><span class="pre">bias</span></code>, assuming the mean bias level is 1000 ADU.</p>
 <ul class="simple">
-<li><p>Hint: Pure bias map must be a constant, so <code class="docutils literal notranslate"><span class="pre">bias</span> <span class="pre">=</span> <span class="pre">np.ones_like(?)</span> <span class="pre">*</span> <span class="pre">bias_adu</span></code></p></li>
+<li><p>Hint: The pure bias map must be a constant, so <code class="docutils literal notranslate"><span class="pre">bias</span> <span class="pre">=</span> <span class="pre">np.ones_like(?)</span> <span class="pre">*</span> <span class="pre">bias_adu</span></code></p></li>
 </ul>
 </li>
 <li><p>Add readnoise to <code class="docutils literal notranslate"><span class="pre">bias</span></code> using <code class="docutils literal notranslate"><span class="pre">add_rdnoise</span></code>.</p>
@@ -819,7 +821,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li><p>Make a dark frame called <code class="docutils literal notranslate"><span class="pre">dark_300s</span></code>, from <code class="docutils literal notranslate"><span class="pre">exptime</span></code> and <code class="docutils literal notranslate"><span class="pre">dark_epsec</span></code>, and assuming dark current is Poissonian.</p>
+<li><p>Make a dark frame called <code class="docutils literal notranslate"><span class="pre">dark_300s</span></code>, from <code class="docutils literal notranslate"><span class="pre">exptime</span></code> and <code class="docutils literal notranslate"><span class="pre">dark_epsec</span></code>, and assuming the dark current is Poissonian.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">dark_300s</span> <span class="pre">=</span> <span class="pre">np.random.poisson(dark_epsec</span> <span class="pre">*</span> <span class="pre">?,</span> <span class="pre">size=final_image.shape)</span></code> .</p></li>
 </ul>
@@ -847,15 +849,13 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>Consider the vignetting (sensitivity or the “flat”) is in the form of a circular Gaussian, centered at <code class="docutils literal notranslate"><span class="pre">sens_center_xy</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">sens_sigma</span></code> pixel. Let’s make the flat map based on these.</p>
-<ol class="arabic simple" start="9">
-<li><p>First, make meshgrid <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code>, which will contain the x and y values for each of the <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> pixels. The resulting <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code> will have the same shape as <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>.</p></li>
-</ol>
+<p>Consider that the vignetting (sensitivity, or “flat”) is in the form of a circular Gaussian, centered at <code class="docutils literal notranslate"><span class="pre">sens_center_xy</span></code> and the standard deviation <code class="docutils literal notranslate"><span class="pre">sens_sigma</span></code> pixel. Let’s make the flat map based on these.
+9. First, make meshgrid <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code>, which will contain the x and y values for each of the <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> pixels. The resulting <code class="docutils literal notranslate"><span class="pre">xx</span></code> and <code class="docutils literal notranslate"><span class="pre">yy</span></code> will have the same shape as <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">np.mgrid[]</span> </code>, i.e., <code class="docutils literal notranslate"><span class="pre">yy,</span> <span class="pre">xx</span> <span class="pre">=</span> <span class="pre">np.mgrid[:final_image.shape[?],</span> <span class="pre">:final_image.shape[?]]</span></code></p></li>
 </ul>
 <ol class="arabic" start="10">
-<li><p>Check <code class="docutils literal notranslate"><span class="pre">xx</span></code> indeed is the x-values of the <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>-shaped image.</p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">xx</span></code> indeed is the x-value of the <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code>-shaped image.</p></li>
 <li><p>Make the r-square map called <code class="docutils literal notranslate"><span class="pre">rsq</span></code>, which is of shape <code class="docutils literal notranslate"><span class="pre">(50,</span> <span class="pre">100)</span></code> and contains the distance from the position <code class="docutils literal notranslate"><span class="pre">sens_center_xy</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">rsq</span> <span class="pre">=</span> <span class="pre">(xx</span> <span class="pre">-</span> <span class="pre">sens_center_xy[?])**2</span> <span class="pre">+</span> <span class="pre">(yy</span> <span class="pre">-</span> <span class="pre">sens_center_xy[?])**2</span></code></p></li>
@@ -884,12 +884,12 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>Let’s now add three stars. The seeing FWHM is <code class="docutils literal notranslate"><span class="pre">seeing_arcsec</span></code> in arcsecond and the pixel scale is <code class="docutils literal notranslate"><span class="pre">pixel_scale</span></code> (arcsec/pixel). Assume circular Gaussian PSF.</p>
+<p>Let’s now add three stars. The seeing FWHM is <code class="docutils literal notranslate"><span class="pre">seeing_arcsec</span></code> in arcsecond and the pixel scale is <code class="docutils literal notranslate"><span class="pre">pixel_scale</span></code> (arcsec/pixel). Assume a circular Gaussian PSF.</p>
 <ol class="arabic" start="14">
 <li><p>Prove that the FWHM of a circular Gaussian profile is <span class="math notranslate nohighlight">\(\mathrm{FWHM} = 2\sqrt{2\ln 2} \sigma\)</span> for standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <ul class="simple">
-<li><p>Hint: Gaussian profile has <span class="math notranslate nohighlight">\(f(r|A,\, \sigma) = A e^{-r^2/2\sigma^2}\)</span> and the FWHM is defined as <span class="math notranslate nohighlight">\(f(r=\mathrm{FWHM}/2) = A/2\)</span>.</p></li>
-<li><p><strong>Just answer “I did”</strong>. No need to provide equations.</p></li>
+<li><p>Hint: The Gaussian profile has <span class="math notranslate nohighlight">\(f(r|A,\, \sigma) = A e^{-r^2/2\sigma^2}\)</span> and the FWHM is defined as <span class="math notranslate nohighlight">\(f(r=\mathrm{FWHM}/2) = A/2\)</span>.</p></li>
+<li><p><strong>Just answer “I did”</strong>. There is no need to provide equations.</p></li>
 </ul>
 </li>
 <li><p>Fill in the blanks to make the image of stars.</p>
@@ -909,7 +909,7 @@ document.write(`
 </li>
 <li><p>Make a new bias and dark. Using the previously made flat (<code class="docutils literal notranslate"><span class="pre">sens</span></code>), simulate a raw image (bias, dark added, flat pattern added, and add readnoise).</p>
 <ul class="simple">
-<li><p>Hint: The exposure time is 300s as described in the beginning of this homework.</p></li>
+<li><p>Hint: The exposure time is 300s as described at the beginning of this homework.</p></li>
 <li><p>Hint: Make bias and dark as before, but do not add readnoise yet.</p></li>
 <li><p>Hint: Then <code class="docutils literal notranslate"><span class="pre">stars_adu</span> <span class="pre">=</span> <span class="pre">bias</span> <span class="pre">+</span> <span class="pre">(dark</span> <span class="pre">+</span> <span class="pre">sens*stars)/?</span></code>.</p></li>
 <li><p>Hint: Add readnoise now by <code class="docutils literal notranslate"><span class="pre">stars_adu</span> <span class="pre">=</span> <span class="pre">add_rdnoise(image_adu=stars_adu,</span> <span class="pre">rdnoise_e=rdnoise_e,</span> <span class="pre">gain_epadu=gain_epadu)</span></code></p></li>
@@ -917,7 +917,7 @@ document.write(`
 </li>
 <li><p>Save <code class="docutils literal notranslate"><span class="pre">stars_adu</span></code> as a FITS file to <code class="docutils literal notranslate"><span class="pre">top/'image0001.fits'</span></code> which resembles the <code class="docutils literal notranslate"><span class="pre">final_image</span></code>’s header above.</p>
 <ul>
-<li><p>Hint: Use the following (This is the <code class="docutils literal notranslate"><span class="pre">final_image</span></code>, so look at the sample header in the beginning of this homework):</p></li>
+<li><p>Hint: Use the following (this is the <code class="docutils literal notranslate"><span class="pre">final_image</span></code>, so look at the sample header at the beginning of this homework):</p></li>
 <li><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stars_hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">stars_adu</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">))</span>
 <span class="n">stars_hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;BUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&gt;&gt;</span><span class="n">FILLHERE</span><span class="o">&lt;&lt;</span><span class="p">,</span> <span class="s2">&quot;Pixel Unit Value&quot;</span><span class="p">)</span>
 <span class="n">stars_hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;OBJECT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&gt;&gt;</span><span class="n">FILLHERE</span><span class="o">&lt;&lt;</span><span class="p">,</span> <span class="s2">&quot;The observed target&quot;</span><span class="p">)</span>
@@ -1028,7 +1028,7 @@ document.write(`
 <li><p>Delete your files and directory.</p></li>
 </ol>
 <p>[4 points]</p>
-<p>In the above, we used <code class="docutils literal notranslate"><span class="pre">IntegratedPRF</span></code>, which has slightly different meaning than PSF in <code class="docutils literal notranslate"><span class="pre">photutils</span></code>. Gaussian function will calculate the pixel value as the Gaussain function value at the pixel center (<span class="math notranslate nohighlight">\(f(x_i, y_i)\)</span> for the i-th pixel), while <code class="docutils literal notranslate"><span class="pre">IntegratedPRF</span></code> is the <strong>integrated</strong> value of the Gaussian function values within the pixel <span class="math notranslate nohighlight">\(\left( \int_{x_i - \Delta x/2}^{x_i + \Delta x/2} \int_{y_i - \Delta y/2}^{y_i + \Delta y/2} f(x, y) dx dy \right)\)</span>. To see the difference, we need a test.</p>
+<p>In the above, we used <code class="docutils literal notranslate"><span class="pre">IntegratedPRF</span></code>, which has a slightly different meaning than PSF in <code class="docutils literal notranslate"><span class="pre">photutils</span></code>. The Gaussian function will calculate the pixel value as the Gaussain function value at the pixel center (<span class="math notranslate nohighlight">\(f(x_i, y_i)\)</span> for the i-th pixel), while <code class="docutils literal notranslate"><span class="pre">IntegratedPRF</span></code> is the <strong>integrated</strong> value of the Gaussian function values within the pixel <span class="math notranslate nohighlight">\(\left( \int_{x_i - \Delta x/2}^{x_i + \Delta x/2} \int_{y_i - \Delta y/2}^{y_i + \Delta y/2} f(x, y) dx dy \right)\)</span>. To see the difference, we need a test.</p>
 <ol class="arabic" start="22">
 <li><p>Fill in the blanks to see the map of <span class="math notranslate nohighlight">\(\frac{\mathrm{IntegratedPRF\ case}-\mathrm{SimpleGaussian\ case}}{\mathrm{\mathrm{IntegratedPRF\ case} + \mathrm{sky}}}\)</span> (there’s no sky in the numerator because they cancel out):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here, no noise will be added, because the purpose is to see the difference</span>
@@ -1059,7 +1059,7 @@ document.write(`
 </div>
 </li>
 </ol>
-<p>In the code, the resulting image will show the fractional difference, assuming the sky was <code class="docutils literal notranslate"><span class="pre">skylevel_e</span> <span class="pre">=</span> <span class="pre">500</span></code> electrons. You can see the difference is large near the center and outskirt of the stars, although <strong>each star’s total flux is the same</strong> for both cases.</p>
+<p>In the code, the resulting image will show the fractional difference, assuming the sky was <code class="docutils literal notranslate"><span class="pre">skylevel_e</span> <span class="pre">=</span> <span class="pre">500</span></code> electrons. You can see the difference is large near the center and outskirts of the stars, although <strong>each star’s total flux is the same</strong> in both cases.</p>
 <p><img alt="" src="../../_images/IntegratedPRF_VS_SimpleGauss.png" /></p>
 <p>[4 points]</p>
 <p>Now let’s see how it changes for the sky level.</p>
@@ -1103,7 +1103,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The importance of this difference depends on the situation. If you just want a simple rough fitting to the profile, both will give similar results (centroid position, FWHM, etc). But if you want to get accurate PSF, it is better to choose Integrated version.</p>
+<p>The importance of this difference depends on the situation. If you just want a simple rough fitting to the profile, both will give similar results (centroid position, FWHM, etc.). But if you want to get an accurate PSF, it is better to choose the integrated version.</p>
 </section>
 </section>
 

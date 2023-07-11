@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>HW Python Basic &amp; pathlib &#8212; SNU AO Class Python</title>
   
@@ -189,6 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -435,10 +437,10 @@ document.write(`
 <span id="hw-python-prep"></span><h1>HW Python Basic &amp; <code class="docutils literal notranslate"><span class="pre">pathlib</span></code><a class="headerlink" href="#hw-python-basic-pathlib" title="Permalink to this heading">#</a></h1>
 <section id="problem-set-1-45-points">
 <h2>Problem Set 1 [45 points]<a class="headerlink" href="#problem-set-1-45-points" title="Permalink to this heading">#</a></h2>
-<p>Please use python 3.6+ (Never use python 2).</p>
-<p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).</p>
-<p><strong>If you want, you can increase the number of input parameters, make subfunctions, etc, to realize more general functionalities, unless the “instructions” say not to.</strong></p>
-<p>This is a set to make you familiarize with Python. I had to design this problem set, because we mostly do not look at the references and/or not trying to use google. You may refer to <em>Think Python</em> chapters and if you cannot find the answer, you must use the Internet.</p>
+<p>Please use Python 3.6+ (never Python 2).</p>
+<p>For other packages: Although I didn’t run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).</p>
+<p><strong>If you want, you can increase the number of input parameters, make subfunctions, etc., to realize more general functionalities, unless the “instructions” say not to.</strong></p>
+<p>This is a set to make you familiar with Python. I had to design this problem set because we mostly do not look at the references and/or do not try to use Google. You may refer to <em>Think Python</em> chapters, and if you cannot find the answer, you must use the Internet.</p>
 <section id="problems">
 <h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -497,16 +499,16 @@ document.write(`
 </section>
 <section id="problem-set-2-50-points">
 <h2>Problem Set 2 [50 points]<a class="headerlink" href="#problem-set-2-50-points" title="Permalink to this heading">#</a></h2>
-<p>Please use python 3.6+ (Never use python 2).</p>
-<p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
-<p>Here we will learn how to code in <em>pythonic</em> way. <strong>Open your terminal (or Jupyter Notebook) at an <em>empty</em> directory</strong>. Start solving the problems after running the code below:</p>
+<p>Please use Python 3.6+ (never Python 2).</p>
+<p>For other packages: Although I didn’t run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2020).</p>
+<p>Here, we will learn how to code in <em>pythonic</em> way. <strong>Open your terminal (or Jupyter Notebook) in an <em>empty</em> directory</strong>. Start solving the problems after running the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="n">TOPPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="id1">
 <h3>Problems<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p>Answer the following questions with <strong>one line</strong> code. [2 points each]</p>
+<p>Answer the following questions with a <strong>one-line</strong> code. [2 points each]</p>
 <ol class="arabic simple">
 <li><p>Make a directory named <code class="docutils literal notranslate"><span class="pre">class_01</span></code>.</p>
 <ul class="simple">
@@ -516,7 +518,7 @@ document.write(`
 <li><p>Try to make a directory named <code class="docutils literal notranslate"><span class="pre">class_01</span></code> <em>again</em>. What error do you see?</p></li>
 <li><p>How can you avoid this error?</p>
 <ul class="simple">
-<li><p>Hint: try using <code class="docutils literal notranslate"><span class="pre">.mkdir(exist_ok=True)</span></code>.</p></li>
+<li><p>Hint: Try using <code class="docutils literal notranslate"><span class="pre">.mkdir(exist_ok=True)</span></code>.</p></li>
 </ul>
 </li>
 <li><p>Make a subdirectory <code class="docutils literal notranslate"><span class="pre">assignment_01</span></code> inside <code class="docutils literal notranslate"><span class="pre">class_01</span></code>.</p>
@@ -524,7 +526,7 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">hw01</span> <span class="pre">=</span> <span class="pre">newdir/'assignment_01'</span></code> and do <code class="docutils literal notranslate"><span class="pre">.mkdir()</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Make the following directory using one line code: <code class="docutils literal notranslate"><span class="pre">class_01_appendix/code_snippets</span></code>.</p>
+<li><p>Make the following directory using one line of code: <code class="docutils literal notranslate"><span class="pre">class_01_appendix/code_snippets</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">.mkdir(parents=True)</span></code></p></li>
 </ul>
@@ -562,12 +564,12 @@ document.write(`
 <li><p>Hint: set <code class="docutils literal notranslate"><span class="pre">filepath</span> <span class="pre">=</span> <span class="pre">TOPPATH/'test00.txt'</span></code> , and use <code class="docutils literal notranslate"><span class="pre">filepath.touch()</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Make a simple code which does <code class="docutils literal notranslate"><span class="pre">filepath.touch()</span></code> if <code class="docutils literal notranslate"><span class="pre">filepath</span></code> does not exist. Use <code class="docutils literal notranslate"><span class="pre">if</span></code>.</p>
+<li><p>Make a simple code that does <code class="docutils literal notranslate"><span class="pre">filepath.touch()</span></code> if <code class="docutils literal notranslate"><span class="pre">filepath</span></code> does not exist. Use <code class="docutils literal notranslate"><span class="pre">if</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: You can use <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">filepath.exists():</span> <span class="pre">...</span></code></p></li>
 </ul>
 </li>
-<li><p>Make a list which contains the path objects for the 10 files: <code class="docutils literal notranslate"><span class="pre">test01.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">test02.txt</span></code>, …, <code class="docutils literal notranslate"><span class="pre">test10.txt</span></code>.</p>
+<li><p>Make a list that contains the path objects for the 10 files: <code class="docutils literal notranslate"><span class="pre">test01.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">test02.txt</span></code>, …, <code class="docutils literal notranslate"><span class="pre">test10.txt</span></code>.</p>
 <ul>
 <li><p>Hint: Initiate a list <code class="docutils literal notranslate"><span class="pre">filelist</span> <span class="pre">=</span> <span class="pre">[]</span></code>.</p></li>
 <li><p>Hint: use for loop like this</p></li>
@@ -591,16 +593,16 @@ document.write(`
 </li>
 <li><p>Iterate through the paths in <code class="docutils literal notranslate"><span class="pre">filelist2</span></code>, and make an empty file of that path if it does not exist.</p>
 <ul class="simple">
-<li><p>Hint: Use for loop such as <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">fpath</span> <span class="pre">in</span> <span class="pre">filelist2</span></code>.</p></li>
+<li><p>Hint: Use a for loop such as <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">fpath</span> <span class="pre">in</span> <span class="pre">filelist2</span></code>.</p></li>
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">fpath.exists():</span></code> inside the for loop.</p></li>
 </ul>
 </li>
 <li><p>Make a list <code class="docutils literal notranslate"><span class="pre">filelist3</span></code>, which is the union set (list) of <code class="docutils literal notranslate"><span class="pre">filelist</span></code> and <code class="docutils literal notranslate"><span class="pre">filelist2</span></code>.</p>
 <ul class="simple">
-<li><p>There are several ways to do this. One possibility is to use for loop and <code class="docutils literal notranslate"><span class="pre">append</span></code> as you did in <code class="docutils literal notranslate"><span class="pre">filelist</span></code> and <code class="docutils literal notranslate"><span class="pre">filelist2</span></code>.</p></li>
+<li><p>There are several ways to do this. One possibility is to use a for loop and <code class="docutils literal notranslate"><span class="pre">append</span></code> as you did in <code class="docutils literal notranslate"><span class="pre">filelist</span></code> and <code class="docutils literal notranslate"><span class="pre">filelist2</span></code>.</p></li>
 <li><p>Another possiblility is to use <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">fpath</span> <span class="pre">in</span> <span class="pre">filelist:</span></code> and use <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">fpath</span> <span class="pre">in</span> <span class="pre">filelist2:</span></code> etc.</p></li>
 <li><p>A simpler pythonic way is to use <code class="docutils literal notranslate"><span class="pre">list(set(filelist).union(filelist2))</span></code>.</p></li>
-<li><p>Tip: If you want union of more than 2 lists, you should do <code class="docutils literal notranslate"><span class="pre">list(set().union(a,</span> <span class="pre">b,</span> <span class="pre">c,</span> <span class="pre">d))</span></code>.</p></li>
+<li><p>Tip: If you want the union of more than 2 lists, you should do <code class="docutils literal notranslate"><span class="pre">list(set().union(a,</span> <span class="pre">b,</span> <span class="pre">c,</span> <span class="pre">d))</span></code>.</p></li>
 </ul>
 </li>
 <li><p>Make a list <code class="docutils literal notranslate"><span class="pre">allfiles</span></code> of all the txt file paths in your <code class="docutils literal notranslate"><span class="pre">TOPPATH</span></code>.</p>
@@ -623,7 +625,7 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">allfiles[0].unlink()</span></code></p></li>
 </ul>
 </li>
-<li><p>Delete all the files you made.</p>
+<li><p>Delete all the files you created.</p>
 <ul class="simple">
 <li><p>Hint: Use for loop. Then <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">fpath.exists():</span></code> and <code class="docutils literal notranslate"><span class="pre">fpath.unlink()</span></code>.</p></li>
 </ul>
@@ -631,7 +633,7 @@ document.write(`
 </ol>
 <p><strong>Advanced [6 points]</strong></p>
 <p>Python has a very useful <code class="docutils literal notranslate"><span class="pre">try-except-finally</span></code> clause.</p>
-<p>Do <code class="docutils literal notranslate"><span class="pre">touch</span></code> to all the paths in <code class="docutils literal notranslate"><span class="pre">filelist3</span></code> again.</p>
+<p>Do <code class="docutils literal notranslate"><span class="pre">touch</span></code> on all the paths in <code class="docutils literal notranslate"><span class="pre">filelist3</span></code> again.</p>
 <p>Then use</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">filelist3</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
@@ -642,7 +644,7 @@ document.write(`
 </div>
 <ol class="arabic simple">
 <li><p>Does it run correctly? Are all the files removed?</p></li>
-<li><p><em>Think</em> about what each line means. (No answer required)</p></li>
+<li><p><em>Think</em> about what each line means. (No answer is required)</p></li>
 </ol>
 </section>
 </section>

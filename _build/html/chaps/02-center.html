@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. Centering &#8212; SNU AO Class Python</title>
   
@@ -191,6 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -457,17 +459,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-04 16:31:24 (KST = GMT+0900) 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-05-09 15:36:23 (KST = GMT+0900) 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.10 64bit [Clang 14.0.6 ]
-1 IPython    8.13.1
+1 IPython    8.13.2
 2 OS         macOS 13.1 arm64 arm 64bit
 3 astropy    5.2.2
-4 numpy      1.23.5
+4 numpy      1.24.3
 5 scipy      1.10.1
 6 matplotlib 3.7.1
-7 photutils  1.7.0
+7 photutils  1.6.0
 8 version_information 1.0.4
 </pre></div>
 </div>
@@ -584,8 +586,8 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601482 41.04309313]
-(273.0960148219882, 314.0430931254746)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[53.09601666 41.04309455]
+(273.09601666127566, 314.04309454723943)
 </pre></div>
 </div>
 <img alt="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" src="../_images/12781908f5e8153854736378471c94f916ccbb881bca8bf13c7d0664f6d6e611.png" />
@@ -692,7 +694,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><i>Row index=0</i>
-<table id="table5004951856">
+<table id="table4361246160">
 <thead><tr><th>id</th><th>xcentroid</th><th>ycentroid</th><th>sharpness</th><th>roundness1</th><th>roundness2</th><th>npix</th><th>sky</th><th>peak</th><th>flux</th><th>mag</th><th>dist</th></tr></thead>
 <thead><tr><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
 <tr><td>16</td><td>273.13</td><td>314.14</td><td>0.42</td><td>-0.21</td><td>-0.06</td><td>25</td><td>0.00</td><td>1972.81</td><td>32.66</td><td>-3.79</td><td>6.643679381248131</td></tr>
