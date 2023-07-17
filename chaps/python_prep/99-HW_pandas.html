@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>HW pandas &#8212; SNU AO Class Python</title>
   
@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -426,12 +428,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hw-pandas">
-<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code><a class="headerlink" href="#hw-pandas" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code><a class="headerlink" href="#hw-pandas" title="Permalink to this heading">#</a></h1>
 <section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
-<p>Please use python 3.6+ (Never use python 2).</p>
-<p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
-<p>Here we will learn how to code in <em>pythonic</em> way. Start solving the problems after running the code below:</p>
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>Please use Python 3.6+ (never Python 2).</p>
+<p>For other packages: Although I didn’t run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
+<p>Here, we will learn how to code in <em>pythonic</em> way. Start solving the problems after running the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -467,12 +469,12 @@ document.write(`
 <p>While answering the problems, follow these rules:</p>
 <ol class="arabic simple">
 <li><p>You <strong>should not import any other packages</strong>.</p></li>
-<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
+<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on Google</strong>.</p></li>
 </ol>
 </section>
 <section id="problems-40-points">
-<h2>Problems [40 points]<a class="headerlink" href="#problems-40-points" title="Permalink to this headline">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">data_str</span></code> is the photometry results of an asteroid (155140) 2005 UD taken at the SNU Astronomical Observatory (SNUO or SAO) 1-m telescope. I selected only 22 data points out of 811 data points. <code class="docutils literal notranslate"><span class="pre">jd_target</span></code> is roughly the observation time in JD, <code class="docutils literal notranslate"><span class="pre">m_red</span></code> is the reduced magnitude (please regard it as the magnitude of the asteroid), <code class="docutils literal notranslate"><span class="pre">dm_red</span></code> is the error of it, and <code class="docutils literal notranslate"><span class="pre">serious</span></code> is 1 if the image had serious problem, so should not be used.</p>
+<h2>Problems [40 points]<a class="headerlink" href="#problems-40-points" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data_str</span></code> is the photometry result of an asteroid (155140) 2005 UD taken at the SNU Astronomical Observatory (SNUO or SAO) 1-m telescope. I selected only 22 data points out of 811 data points. <code class="docutils literal notranslate"><span class="pre">jd_target</span></code> is roughly the observation time in JD, <code class="docutils literal notranslate"><span class="pre">m_red</span></code> is the reduced magnitude (please regard it as the magnitude of the asteroid), <code class="docutils literal notranslate"><span class="pre">dm_red</span></code> is the error of it, and <code class="docutils literal notranslate"><span class="pre">serious</span></code> is 1 if the image had a serious problem, so it should not be used.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Reference</p>
 <p>The results from this observation are published as <strong>Ishiguro, Bach, Geem et al. 2022</strong>, and the reduction/plotting codes are available via <a class="reference external" href="https://github.com/ysBach/IshiguroM_etal_155140_2005UD">GitHub</a>.</p>
@@ -485,7 +487,7 @@ document.write(`
 <p>[2 points each]</p>
 <p>You can fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts in the Hints and use that to answer the questions. Or, you can just make your own answer, ignoring the Hints.</p>
 <ol class="arabic">
-<li><p>Make a DataFrame from <code class="docutils literal notranslate"><span class="pre">data_str</span></code>. Give it a name <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<li><p>Make a DataFrame from <code class="docutils literal notranslate"><span class="pre">data_str</span></code>. Give it the name <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">pd.read_csv(pd.compat.StringIO(?))</span></code></p></li>
 </ul>
@@ -512,21 +514,21 @@ document.write(`
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> to the column.</p></li>
 </ul>
 </li>
-<li><p>To get an idea how the data looks like, plot the error-bar of the <code class="docutils literal notranslate"><span class="pre">m_red</span></code> as a function of JD.</p>
+<li><p>To get an idea of how the data looks, plot the error-bar of <code class="docutils literal notranslate"><span class="pre">m_red</span></code> as a function of JD.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">plt.errorbar(df[&quot;jd_target&quot;],</span> <span class="pre">df[&quot;?&quot;],</span> <span class="pre">df[&quot;dm_red&quot;])</span></code></p></li>
 </ul>
 </li>
-<li><p>The error-bar of magnitude is not Gaussian, but the error-bar of flux is nearly Gaussian. In usual photometry, what we get is the flux error but we only present the magnitude error which is calculated (estimated) from the flux error. From the <code class="docutils literal notranslate"><span class="pre">dm_red</span></code>, recover the error-bar of the flux.</p>
+<li><p>The error-bar of magnitude is not Gaussian, but the error-bar of flux is nearly Gaussian. In usual photometry, what we get is the flux error, but we only present the magnitude error, which is calculated (estimated) from the flux error. From <code class="docutils literal notranslate"><span class="pre">dm_red</span></code>, recover the error-bar of the flux.</p>
 <ul class="simple">
-<li><p>Hint: The flux error and magnitude errors are related by <code class="docutils literal notranslate"><span class="pre">dm</span> <span class="pre">=</span> <span class="pre">2.5</span> <span class="pre">/</span> <span class="pre">np.log(10)</span> <span class="pre">*</span> <span class="pre">dflux</span></code>.</p></li>
+<li><p>Hint: The flux error and magnitude error are related by <code class="docutils literal notranslate"><span class="pre">dm</span> <span class="pre">=</span> <span class="pre">2.5</span> <span class="pre">/</span> <span class="pre">np.log(10)</span> <span class="pre">*</span> <span class="pre">dflux</span></code>.</p></li>
 <li><p>Hint: The inversion of the equation may give <code class="docutils literal notranslate"><span class="pre">df[&quot;dflux&quot;]</span> <span class="pre">=</span> <span class="pre">?</span> <span class="pre">*</span> <span class="pre">df[&quot;dm_red&quot;]</span></code></p></li>
 </ul>
 </li>
 <li><p>Actually, <code class="docutils literal notranslate"><span class="pre">&quot;dflux&quot;</span></code> column is useless. Remove this column.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">.drop(columns=[&quot;dflux&quot;],</span> <span class="pre">inplace=?)</span></code>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">inplace</span></code> option can either be <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>, depending on how you do (if you can’t understand it, Google it!)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">inplace</span></code> option can either be <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>, depending on how you do it (if you can’t understand it, Google it!)</p></li>
 </ul>
 </li>
 <li><p>Make a mask to mask rows with <code class="docutils literal notranslate"><span class="pre">serious==1</span></code>. Name it <code class="docutils literal notranslate"><span class="pre">mask_serious</span></code>.</p>
@@ -534,17 +536,17 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">df[&quot;serious&quot;]==1</span></code></p></li>
 </ul>
 </li>
-<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">dm_red</span></code> of the masked row as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">dm_red</span></code> of the masked row with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">df.loc[mask,</span> <span class="pre">&quot;dm_red&quot;]</span></code></p></li>
 </ul>
 </li>
-<li><p>You found that, for some reason, the 3th row is problematic. Replace <code class="docutils literal notranslate"><span class="pre">&quot;m_red&quot;</span></code> of this row to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<li><p>You found that, for some reason, the 3-th row is problematic. Replace <code class="docutils literal notranslate"><span class="pre">&quot;m_red&quot;</span></code> in this row with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">df.loc[3,</span> <span class="pre">&quot;m_red&quot;]</span></code> or <code class="docutils literal notranslate"><span class="pre">df.iloc[3,</span> <span class="pre">1]</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Drop any row which contains any NaN values.</p>
+<li><p>Drop any row that contains any NaN values.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">df.dropna(inplace=?)</span></code></p></li>
 </ul>
@@ -554,17 +556,17 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">df.reset_index(inplace=?,</span> <span class="pre">drop=True)</span></code></p></li>
 </ul>
 </li>
-<li><p>From Ishiguro et al. 2019, it is found the period of the asteroid is 0.218282 +/- 0.000092 day. Add a column called <code class="docutils literal notranslate"><span class="pre">&quot;phase&quot;</span></code>.</p>
+<li><p>From Ishiguro et al. 2019, it is found that the period of the asteroid is 0.218282 +/- 0.000092 days. Add a column called <code class="docutils literal notranslate"><span class="pre">&quot;phase&quot;</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: Use <code class="docutils literal notranslate"><span class="pre">df[&quot;jd_target&quot;]%0.218282</span> <span class="pre">/</span> <span class="pre">0.218282</span></code></p></li>
 </ul>
 </li>
-<li><p>Make a column <code class="docutils literal notranslate"><span class="pre">&quot;first_half&quot;</span></code>, and assign <code class="docutils literal notranslate"><span class="pre">True</span></code> if phase is smaller than 0.5, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<li><p>Make a column <code class="docutils literal notranslate"><span class="pre">&quot;first_half&quot;</span></code>, and assign <code class="docutils literal notranslate"><span class="pre">True</span></code> if the phase is smaller than 0.5 and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">df[&quot;first_half&quot;]</span> <span class="pre">=</span> <span class="pre">df[&quot;phase&quot;]</span> <span class="pre">&lt;</span> <span class="pre">0.5</span></code></p></li>
 </ul>
 </li>
-<li><p>Make a column <code class="docutils literal notranslate"><span class="pre">&quot;faint&quot;</span></code>, and assign <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">m_red</span></code> is larger(fainter) than the mean calue, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<li><p>Make a column <code class="docutils literal notranslate"><span class="pre">&quot;faint&quot;</span></code>, and assign <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">m_red</span></code> is larger (fainter) than the mean calue, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">df[&quot;faint&quot;]</span> <span class="pre">=</span> <span class="pre">df[&quot;m_red&quot;]</span> <span class="pre">&gt;</span> <span class="pre">df[&quot;m_red&quot;].mean()</span></code></p></li>
 </ul>
@@ -574,7 +576,7 @@ document.write(`
 <ol class="arabic simple">
 <li><p>red when <code class="docutils literal notranslate"><span class="pre">first_half==True</span></code> and blue otherwise,</p></li>
 <li><p>empty inverse triangle (<code class="docutils literal notranslate"><span class="pre">&quot;v&quot;</span></code>) when <code class="docutils literal notranslate"><span class="pre">faint=True</span></code> and filled triangle (<code class="docutils literal notranslate"><span class="pre">&quot;^&quot;</span></code>) otherwise
-and the y-axis decreases as go upward (lower 17.5, upper 17.0), because it’s magnitude.</p></li>
+and the y-axis decreases as you go upward (lower 17.5, upper 17.0) because of it’s the magnitude.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#        first  faint</span>
 <span class="n">props</span> <span class="o">=</span> <span class="p">{(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span> <span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">),</span>
@@ -599,7 +601,7 @@ and the y-axis decreases as go upward (lower 17.5, upper 17.0), because it’s m
 </li>
 </ol>
 <p><strong>TIP</strong></p>
-<p>There are some occasions when it’s better to use <code class="docutils literal notranslate"><span class="pre">for</span></code> than simple <code class="docutils literal notranslate"><span class="pre">df[&quot;blahblah&quot;]</span> <span class="pre">=</span> <span class="pre">df[&quot;col1&quot;]</span> <span class="pre">*</span> <span class="pre">df[&quot;col2&quot;]</span></code>, especially when complicated calculation is needed. In such cases, you can use</p>
+<p>There are some occasions when it’s better to use <code class="docutils literal notranslate"><span class="pre">for</span></code> than the simple <code class="docutils literal notranslate"><span class="pre">df[&quot;blahblah&quot;]</span> <span class="pre">=</span> <span class="pre">df[&quot;col1&quot;]</span> <span class="pre">*</span> <span class="pre">df[&quot;col2&quot;]</span></code>, especially when complicated calculations are needed. In such cases, you can use</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">first_half</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;phase&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span>
     <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;first_half&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">first_half</span>
@@ -607,11 +609,11 @@ and the y-axis decreases as go upward (lower 17.5, upper 17.0), because it’s m
 </div>
 <p>Things go well in this case with <code class="docutils literal notranslate"><span class="pre">loc</span></code>, but I used <code class="docutils literal notranslate"><span class="pre">at</span></code>.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">loc</span></code> is slower, but you can access to multiple locations</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">at</span></code> is quicker, but you can access to only one single location</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loc</span></code> is slower, but you can access multiple locations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">at</span></code> is quicker, but you can access only one single location.</p></li>
 </ul>
 <p>See <a class="reference external" href="https://stackoverflow.com/questions/37216485/pandas-at-versus-loc">here</a></p>
-<p>The full light curve of this asteroid, from the 2-night observation at SNU is like this:</p>
+<p>The full light curve of this asteroid, from the 2-night observation at SNU, is like this:</p>
 <img alt="../../_images/asteroid_light_curve.png" src="../../_images/asteroid_light_curve.png" />
 </section>
 </section>

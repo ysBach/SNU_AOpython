@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. Centering &#8212; SNU AO Class Python</title>
   
@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -433,7 +435,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="centering">
-<span id="ch-center"></span><h1><span class="section-number">2. </span>Centering<a class="headerlink" href="#centering" title="Permalink to this headline">#</a></h1>
+<span id="ch-center"></span><h1><span class="section-number">2. </span>Centering<a class="headerlink" href="#centering" title="Permalink to this heading">#</a></h1>
 <p>This part will teach you:</p>
 <ol class="arabic simple">
 <li><p>Basic ways to find the centroid (center of mass) position using few methods.</p></li>
@@ -514,7 +516,7 @@ document.write(`
 </div>
 </div>
 <section id="prepare-data">
-<h2><span class="section-number">2.1. </span>Prepare Data<a class="headerlink" href="#prepare-data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>Prepare Data<a class="headerlink" href="#prepare-data" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Cut the image with <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.nddata.utils.Cutout2D.html"><code class="docutils literal notranslate"><span class="pre">astropy.nddata.Cutout2D</span></code></a>.</p></li>
 <li><p>I cut the image centered at <code class="docutils literal notranslate"><span class="pre">position=(270,</span> <span class="pre">320)</span></code> and size of <code class="docutils literal notranslate"><span class="pre">size=(100,</span> <span class="pre">100)</span></code> pixels.</p></li>
@@ -543,7 +545,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </section>
 <section id="finding-centroid">
-<h2><span class="section-number">2.2. </span>Finding Centroid<a class="headerlink" href="#finding-centroid" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Finding Centroid<a class="headerlink" href="#finding-centroid" title="Permalink to this heading">#</a></h2>
 <p>There are multiple practical ways to find the center of an object. Here, I will introduce four simplest ways.</p>
 <ol class="arabic simple">
 <li><p>The center-of-mass of the image.</p></li>
@@ -558,7 +560,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 <p>DAOPHOT’s DAOFIND algorithm is that described in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson 1987</a> and you have already used it in photutils/detection tutorial. This is basically used when you are dealing with <strong>circular stars</strong>.  If you are studying extended sources (nebula, galaxy, non-sidereal objects, etc), it may not work properly or you may undergo hard time fine-tuning the parameters.</p>
 <p>SExtractor-like algorithm is basically used to detect general objects and also has power to calculate proper/useful center information. You will study this later in extended sources lecture note.</p>
 <section id="simple-center-of-mass">
-<h3><span class="section-number">2.2.1. </span>Simple Center-of-Mass<a class="headerlink" href="#simple-center-of-mass" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.2.1. </span>Simple Center-of-Mass<a class="headerlink" href="#simple-center-of-mass" title="Permalink to this heading">#</a></h3>
 <p>Consider you want to find the center of mass of the star in the cropped image above. This is acutally not an easy task, because real data is contaminated by cosmic-rays, defects (dead pixels, hot pixels, …), background objects, uneven sky, etc.</p>
 <p>To improve the robustness of center-of-mass, I here used the most elementary level algorithm I could think of.</p>
 <ul class="simple">
@@ -600,7 +602,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </div>
 </section>
 <section id="daofind">
-<h3><span class="section-number">2.2.2. </span>DAOFIND<a class="headerlink" href="#daofind" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.2.2. </span>DAOFIND<a class="headerlink" href="#daofind" title="Permalink to this heading">#</a></h3>
 <p>As you already have learnt it from the photutils tutorial, I will quickly go through the detection part:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -702,7 +704,7 @@ the RADECSYS keyword is deprecated, use RADESYSa. [astropy.wcs.wcs]
 </section>
 </section>
 <section id="accuracy-of-the-centroid">
-<h2><span class="section-number">2.3. </span>Accuracy of the Centroid<a class="headerlink" href="#accuracy-of-the-centroid" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3. </span>Accuracy of the Centroid<a class="headerlink" href="#accuracy-of-the-centroid" title="Permalink to this heading">#</a></h2>
 <p>In this simple case, the two methods gave very similar center location (differ by &lt; 0.1 pix).</p>
 <p>You have learned how to calculate the uncertainty in the centroid location from mathematics in theory class. However, in reality, the uncertainty due to the sky subtraction, instrumental defects (bad pixels or problematic flat correction, etc), cosmic-rays, etc can be larger than the centroid uncertainty. How accurate this centroid should be?</p>
 <p>This question can be rephrased: “How accurate photometry (or astrometry) do you need?” It is difficult to give a general answer to this question because it really depends on what you are looking for. In case you only seek for 0.1 mag accuracy and aperture radius is about 3 FWHM = 6 pixels, change in centroid of 0.1 pixel order will not affect the final photometry, because (1) vast majority of flux will already have been included in 3 FWHM radius and (2) 0.1 pixel shift is much smaller than 6 pixel radius (or 12 pixel diameter). In this specific case, the partial-pixel summation algorithm would give more error than the centroid error of &lt; 0.1 pixel.</p>

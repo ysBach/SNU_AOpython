@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4. PSF Extraction &#8212; SNU AO Class Python</title>
   
@@ -46,7 +46,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -415,7 +417,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="psf-extraction">
-<span id="ch-psf01"></span><h1><span class="section-number">4. </span>PSF Extraction<a class="headerlink" href="#psf-extraction" title="Permalink to this headline">#</a></h1>
+<span id="ch-psf01"></span><h1><span class="section-number">4. </span>PSF Extraction<a class="headerlink" href="#psf-extraction" title="Permalink to this heading">#</a></h1>
 <p>From the theory lecture, you learned PSF (point spread function) is the shape of the point source in your detector, after passing through all the optics. It includes the diffraction pattern, seeing (natural + telescope), etc. For space telescopes, PSF will be very stable because both the seeing sources will be negligible (if thermal expansion is well suppressed). Only the gradual change due to the degradation of the optics maybe important (or some dramatic changes by dust impact).</p>
 <p>In reality, it is practically impossible to know the PSF a priori for ground-based observations, because both the seeing factors are chaotic and impossible to predict. Also, there is absolutely no guarantee that the PSF will be the same for the consecutive images (although you may include slowly varying term over time, as in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson (1987)</a>) Thus, one must rely on empirical estimation of the PSF of the given image.</p>
 </section>

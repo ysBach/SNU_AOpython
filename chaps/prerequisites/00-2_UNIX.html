@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. UNIX Shell &#8212; SNU AO Class Python</title>
   
@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -431,7 +433,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="unix-shell">
-<span id="unix"></span><h1><span class="section-number">2. </span>UNIX Shell<a class="headerlink" href="#unix-shell" title="Permalink to this headline">#</a></h1>
+<span id="unix"></span><h1><span class="section-number">2. </span>UNIX Shell<a class="headerlink" href="#unix-shell" title="Permalink to this heading">#</a></h1>
 <p>This time, we will learn very basic things on UNIX. You can find good references from anywhere, and I will explain very basic things which are essential to follow the course materials.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">References for this page in our repo</p>
@@ -446,7 +448,7 @@ document.write(`
 </ol>
 </div>
 <section id="some-jargons">
-<h2><span class="section-number">2.1. </span>Some Jargons<a class="headerlink" href="#some-jargons" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>Some Jargons<a class="headerlink" href="#some-jargons" title="Permalink to this heading">#</a></h2>
 <dl class="simple myst">
 <dt><strong>directory</strong></dt><dd><p>For Windows users, the word “directory” may not be familiar. It is similar to “folder”.</p>
 </dd>
@@ -473,7 +475,7 @@ document.write(`
 <p>If you want, you can find manuals from <a class="reference external" href="https://ss64.com/bash/">here</a>.</p>
 </section>
 <section id="tutorial">
-<h2><span class="section-number">2.2. </span>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">#</a></h2>
 <p>Now I will show you how some simple commands work.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>aaa@YPB:~$ ls
 00_Preface-English.ipynb  01_Installation.ipynb  02_Python_Basic.ipynb   html
@@ -499,7 +501,7 @@ drwxr-xr-x 2 aaa aaa  4096  3 15 02:51 .ipynb_checkpoints/
 </div>
 <p>Here, the directory or files start with <code class="docutils literal notranslate"><span class="pre">.</span></code> are the ones which are <em>hidden</em>. The first column means the permissions (see some manual for <code class="docutils literal notranslate"><span class="pre">chmod</span></code>).</p>
 <section id="making-and-editing-a-file">
-<h3><span class="section-number">2.2.1. </span>Making and Editing a File<a class="headerlink" href="#making-and-editing-a-file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.2.1. </span>Making and Editing a File<a class="headerlink" href="#making-and-editing-a-file" title="Permalink to this heading">#</a></h3>
 <p>Let’s make a test file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vi sample.txt
 </pre></div>
@@ -532,7 +534,7 @@ rm: cannot remove &#39;test/&#39;: Is a directory
 </div>
 </section>
 <section id="writing-what-you-see-on-a-file">
-<h3><span class="section-number">2.2.2. </span>Writing What You See on a File<a class="headerlink" href="#writing-what-you-see-on-a-file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.2.2. </span>Writing What You See on a File<a class="headerlink" href="#writing-what-you-see-on-a-file" title="Permalink to this heading">#</a></h3>
 <p>You may frequently need a list of filenames. For example, you want to open FITS files “abc.fits”, “def2.fits”, …, “zer0.fits”, which have no clue on the naming. One way is to make a text file contains the file names, and load it from Python. Then, you can use for loop to open each file sequentially.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ls *.fits &gt;&gt; list.txt
 </pre></div>
@@ -543,7 +545,7 @@ ls *.fits &gt; list.txt
 Test what happens when you use “<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>”.</p>
 </section>
 <section id="making-a-script-file">
-<h3><span class="section-number">2.2.3. </span>Making a Script File<a class="headerlink" href="#making-a-script-file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.2.3. </span>Making a Script File<a class="headerlink" href="#making-a-script-file" title="Permalink to this heading">#</a></h3>
 <p>This is a very simple shell script which gets 2 arguments (example is from <a class="reference external" href="http://www.macs.hw.ac.uk/~hwloidl/Courses/LinuxIntro/x984.html">here</a>). Copy the following and save it as <code class="docutils literal notranslate"><span class="pre">test.sh</span></code> file.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 

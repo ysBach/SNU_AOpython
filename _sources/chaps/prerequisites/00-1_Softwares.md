@@ -2,7 +2,7 @@
 
 # Software Tools
 
-In this chapter, you will **install** the necessary apps/softwares/packages that we will use throughout this course. I also put links to tutorials, if you are interested in advanced usage.
+In this chapter, you will **install** the necessary apps/softwares/packages that we will use throughout this course. I also put links to tutorials if you are interested in advanced usage.
 
 ```{admonition} References
 Some selected references are in this repo ([link](https://github.com/ysBach/AO2019/tree/master/references)): Find files with name starts with ``S01``.
@@ -10,13 +10,13 @@ Some selected references are in this repo ([link](https://github.com/ysBach/AO20
 
 The installation may take some time. If you have nothing to do, read the next section while the installation is going on.
 
-* If I say **terminal**, please understand it as terminal of UNIX/macOS or Git Bash of Windows.
+* If I say **terminal**, please understand it as terminal on UNIX/macOS or Git Bash on Windows.
 
 <!-- ```{contents}
 ``` -->
 
 ---
-I will use these terms without explaining in detail thoughout the practical part of the lecture.
+I will use these terms without explaining them in detail throughout the practical part of the lecture.
 
 [**IRAF**](https://en.wikipedia.org/wiki/IRAF)
 : Image Reduction and Analysis Facility. Conventionally used by many astronomers to analyze CCD data.
@@ -28,27 +28,27 @@ I will use these terms without explaining in detail thoughout the practical part
 : National Optical Astronomy Observatory. Developed and distributed IRAF.
 
 [**STScI**](https://en.wikipedia.org/wiki/Space_Telescope_Science_Institute)
-: Space Telescope Science Institute. Took the role in developing PyRAF, but now (since around early 2010s) the direction is changed to use Python.
+: Space Telescope Science Institute. They took on the role of developing PyRAF, but now (since around the early 2010s), the direction has changed to use Python.
 
 [**PyRAF**](http://www.stsci.edu/institute/software_hardware/pyraf)
-: Basically it is identical to IRAF. Just, it has a bit more mouse-interactive GUI. Now PyRAF is also kind of deprecated, as well as IRAF.
+: It is basically identical to IRAF. It just has a bit more mouse-interactive GUI. Now PyRAF is also kind of deprecated, as is IRAF.
 
 **SPP**
 : Sub-Set Preprocessor. A programming language made solely for IRAF.
 
 ```{admonition} A bit more on SPP
 :class: dropdown
-Throughout your life as an observational astronomer, you may even never hear about SPP at all, depending on what you do. Here, I give a very brief excerpts that explain it.
+Throughout your life as an observational astronomer, you may even never hear about SPP at all, depending on what you do. Here, I give a very brief excerpt that explains it.
 
 [STSDAS User Guide](http://stsdas.stsci.edu/documents/SUG/UG_51.html) says:
 
 > Most IRAF and STSDAS applications are written in **SPP**, or Subset PreProcessor, which is *the native programming language of the IRAF system*. SPP is based on RATFOR--rational Fortran--and combines the familiarity of Fortran with some features of the C programming language.
 
-[SPP Reference Manual](http://stsdas.stsci.edu/documents/SPP/SP_4.html) says:
+[The SPP Reference Manual](http://stsdas.stsci.edu/documents/SPP/SP_4.html) says:
 
 > The SPP language is *based on the Ratfor language*. Ratfor, in turn, is *based on Fortran*, with extensions for structured control flow, etc. The lexical form, operators, and control flow constructs are identical to those provided by Ratfor. The major differences are the data types, the form of a procedure, the addition of inline strings and character constants, the use of square brackets for arrays, and the task statement. In addition, the SPP I/O facilities provided are quite different and are tailored to the IRAF environment. The syntax of the SPP language is fairly straightforward and fundamentally similar to most other high-level languages. While it is based on the Ratfor language, there are elements of C as well as elements of Fortran. SPP is a preprocessed language. That is, there is no SPP compiler per se, but it is translated into another compilable language. In fact, *SPP is first translated into Ratfor, which is processed into Fortran*. The xc compiler performs all preprocessing, compilation, and linkage.
 
-You can see the SPP source codes (which ends with ``.x``) at ``$IRAFHOME``, i.e., ``$ANACONDAHOME/envs/iraf/iraf/``,  e.g., ``$IRAFHOME/noao/twodspec/longslit/transform/fitcoords.x``. The ``.par`` files are the parameter files which is related to ``epar`` of IRAF.
+You can see the SPP source codes (which end with ``.x``) at ``$IRAFHOME``, i.e., ``$ANACONDAHOME/envs/iraf/iraf/``,  e.g., ``$IRAFHOME/noao/twodspec/longslit/transform/fitcoords.x``. The ``.par`` files are the parameter files, which are related to ``epar`` of IRAF.
 
 ```
 
@@ -62,17 +62,17 @@ IRAF itself is made by [SPP](http://stsdas.stsci.edu/documents/SPP/SP_3.html) la
 ```
 
 [**Astropy**](https://en.wikipedia.org/wiki/Astropy)
-: The *name of a project* dreaming for making a single core package that is useful for any astronomical studies. Not only to reproduce all the functionalities of IRAF, but to make it easier to develop original codes for any purpose.
+: The *name of a project* dreaming of making a single core package that is useful for any astronomical studies. Not only to reproduce all the functionalities of IRAF but to make it easier to develop original codes for any purpose.
 
 * [**IDL**](https://en.wikipedia.org/wiki/IDL_(programming_language))
-: Interactive Data Language. A *commercial software* widely used in astronomy and bio-imaging fileds. There is a critical problem in license issue.
+: Interactive Data Language. A *commercial software* widely used in astronomy and bio-imaging fields. There is a critical problem with the license issue.
 
 ---
 
 ## Git and GitHub
 
 1. Go to [GitHub](http://github.com/) and make your own ID.
-   * The ID might be used in your future Resume (CV; 이력서).
+   * The ID might be used in your future resume (CV; 이력서).
 2. Go to [Git website](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to download/install git for your OS.
 
 ```{note}
@@ -92,13 +92,13 @@ Excerpt from [StackOverflow](https://stackoverflow.com/questions/13321556/differ
 **Useful Web Tutorials**: <https://36-750.github.io/tools/version-control/>
 
 **Nicolas (YouTube)**
-: [Explain Git Like I'm Five](https://youtu.be/YFNQwo7iTNc) in 2019, [Trying GitHub Copilot](https://youtu.be/x_Yw2f161CU) in 2021.
+: [Explain Git Like I'm Five](https://youtu.be/YFNQwo7iTNc) in 2019, [Try GitHub Copilot](https://youtu.be/x_Yw2f161CU) in 2021.
 
 **NeuroHackademy 2021 (YouTube)**
 :
 
-1. [2021-07-21](https://youtu.be/Lsmt2rHPJDU): This is ~ 90min, concentrating on the CLI of git, including branching and merging. Somewhat complementary to the video below.
-2. [2021-07-23](https://youtu.be/j3IbFKksJkQ): This is ~ 50min, similar to above, but more practical for beginners, imho (including the usage of ``.gitignore``).
+1. [2021-07-21](https://youtu.be/Lsmt2rHPJDU): This is ~ 90 min, concentrating on the CLI of git, including branching and merging. Somewhat complementary to the video below.
+2. [2021-07-23](https://youtu.be/j3IbFKksJkQ): This is ~ 50 min, similar to above, but more practical for beginners, imho (including the usage of ``.gitignore``).
 
 **얄팍한 코딩사전 (Korean; (YouTube))**
 :
@@ -116,7 +116,7 @@ Excerpt from [StackOverflow](https://stackoverflow.com/questions/13321556/differ
 
 Some useful links:
 
-* [Official slack](https://slack.com/): log in and see what workspaces you are in.
+* [Official Slack](https://slack.com/): log in and see what workspaces you are in.
 * [Wikipedia](https://en.wikipedia.org/wiki/Slack_(software))
 * [A random blog explaining Slack](http://blog.naver.com/hivearena/220377857149) (Korean)
 
@@ -124,15 +124,15 @@ Some useful links:
 
 1. TA will announce the "**invitation link**" to you.
 
-2. Type your email and name.
+2. Type in your email address and name.
 
-   * **Please use your real name in English** (e.g., `Yoonsoo`); name is changable in the future
+   * **Please use your real name in English** (e.g., `Yoonsoo`); name is changeable in the future.
 
-   * You will use that email/pw for your future access to **this** workspace.
-   * I encourage you to **download & install the app** at the [downloads page](https://slack.com/downloads/).
-     * Slack is usable on LINUX, Mac, Windows, Android phone, iPhone, etc.
-     * So I suggest you to **install it both on your PC and phone**.
-     * When login with your second device, put the workspace id (e.g., `2020AO1`) and use the email/pw you enrolled with your first device.
+   * You will use that email/pw for future access to **this** workspace.
+   * I encourage you to **download & install the app** on the [downloads page](https://slack.com/downloads/).
+     * Slack is usable on Linux, Mac, Windows, Android phones, iPhones, etc.
+     * So I suggest you **install it both on your PC and phone**.
+     * When logging in with your second device, put the workspace ID (e.g., `2020AO1`) and use the email/PW you enrolled for your first device.
 
 ### Terms
 
@@ -145,41 +145,41 @@ The following analogy works:
 
 ### Why We Chose Slack
 
-Slack is a software to make co-work easier; basically a "chatting app". We chose this for our communication platform because
+Slack is software to make co-work easier; it's basically a "chatting app". We chose this for our communication platform because
 
-1. It is **OS-independent**: Windows, mac, Linux, iOS, Android, Windows Phone, etc all can use slack without much difference. It works perfectly even on web-browsers.
-2. Supports channels (public, closed, private)
-3. It is widely used among company, labs, researchers, developers, ... . It might be helpful for your future to get used to this widely used software as early as possible when you are allowed to make mistakes.
-4. Codes can be inserted (shown) cleanly than any other platforms (Kakaotalk, Line, Facebook, ...).
-5. Can be integrated with, e.g., github, Dropbox, and Google Drive.
+1. It is **OS-independent**: Windows, Mac, Linux, iOS, Android, Windows Phone, etc. can all use Slack without much difference. It works perfectly, even on web browsers.
+2. Supports channels (public, closed, and private).
+3. It is widely used among companies, labs, researchers, developers, etc. It might be helpful for your future to get used to this widely used software as early as possible, when you are allowed to make mistakes.
+4. Codes can be inserted (shown) more cleanly than on any other platform (Kakaotalk, Line, Facebook, etc.).
+5. It can be integrated with, e.g., GitHub, Dropbox, and Google Drive.
 6. All content inside Slack is searchable, including files, conversations, and people.
 
-Especially, 1, 4 and 5 are the main reasons we dropped Kakao-talk or the likes which we've used for years.
+Especially 1, 4, and 5 are the main reasons we dropped Kakaotalk or the like, which we've used for years.
 
 ### Tips for Slack
 
 ![](../figs/slack.png)
 
-In our workspace, ``2020ao1.slack.com``, you can see the left side bar:
+In our workspace, ``2020ao1.slack.com``, you can see the left sidebar:
 
-* At the top, you can see the workspace name and your ID. Click it and set your profile from the drop down menu.
+* At the top, you can see the workspace name and your ID. Click it and set your profile from the drop-down menu.
 
-* ``All Threads``: to see "threads", which you will learn as time goes.
-* ``Channels``: "boards" or "chatting channel" (게시판; 채팅채널)
+* ``All Threads``: to see "threads", which you will learn as time goes by.
+* ``Channels``: "boards" or "chatting channels" (게시판; 채팅채널)
 * ``Direct Messages``: You may click a person's ID and send private messages.
 * ``Invite People``: You will see what it means after clicking it.
-* ``Apps``: Slack has powerful "integration" with third party apps such as Google Drive and Github. You can add your own github repo and make it to send summary message to your group's channel so that everyone can share information about the updates easily.
+* ``Apps``: Slack has powerful "integration" with third-party apps such as Google Drive and GitHub. You can add your own GitHub repo and make it send a summary message to your group's channel so that everyone can easily share information about the updates.
 
-You will mostly use the channels which will be made based on your group topics (e.g., ``#active_comet``, ``#GRB``, ``#satellites``).
+You will mostly use the channels that will be made based on your group topics (e.g., ``#active_comet``, ``#GRB``, ``#satellites``).
 
-Messaging is similar to Facebook or Instagram system + markdown.
+Messaging is similar to the Facebook or Instagram system with Markdown.
 
 * Use ``@`` to call (tag) a person, such as "@Yoonsoo"
 * Use ``#`` to tag a channel
 * Markdown (slightly different from major markdowns):
-  * **Bold**: Embrace with asterisk (``*bold*``)
+  * **Bold**: Embrace with an asterisk (``*bold*``)
   * *Italic*:  Embrace with underscore (``_italic_``)
-  * ~~Strike~~:  Embrace with tilde (``~strikethru~``)
+  * ~~Strike~~:  Embrace with a tilde (``~strikethru~``)
   * `short code`: Embrace with one single back quote (`)
   * For long codes or [preformatted](https://www.thoughtco.com/preformatted-text-3468275), embrace with three back quotes (```):
 
@@ -192,12 +192,12 @@ Messaging is similar to Facebook or Instagram system + markdown.
     ````
 
 * You may also use Emoji by typing `+:emoji_name:` or `ctrl+shift+\`.
-* You can add file directly (drag and drop). If it's a code or plane text, slack will show a snippet (short excerpt).
-  * If you hover on it, you can see some buttons to "react" like facebook, "comment", "share file", etc.
+* You can add files directly (drag and drop). If it's code or plain text, Slack will show a snippet (a short excerpt).
+  * If you hover on it, you can see some buttons to "react" like Facebook, "comment", "share file", etc.
 
 ## Anaconda
 
-All the IRAF/Astropy packages, as well as usual python packages, will be downloaded via a platform called [**Anaconda**](https://www.continuum.io/downloads). When the download is done, install Anaconda following the website's instruction.
+All the IRAF/Astropy packages, as well as the usual Python packages, will be downloaded via a platform called [**Anaconda**](https://www.continuum.io/downloads). When the download is done, install Anaconda following the website's instructions.
 
 ```{tip}
 If you are running out of space and really want very small essential package, try **miniconda**.
@@ -240,23 +240,24 @@ In terminal, type the followings (This may take **tens of minutes** depending on
 The name of the environment, ``iraf``, is ``iraf27`` in the original official website, but I just prefer ``iraf`` because it's shorter. You can set it as any name you like.
 ```
 
+
 ## Editors
 
-There are bunch of different editors (including IDEs = Integrated Development Environment) to edit the codes. As of 2023, I guess the simplest choice would be [Microsoft Visual Studio Code (VS Code)](https://code.visualstudio.com/). As VS Code is a bit heavy when all linting options are turned on, you may prefer to use simpler text editors for quick edits.
+There are a bunch of different editors (including IDEs = Integrated Development Environments) to edit the codes. As of 2023, I guess the simplest choice would be [Microsoft Visual Studio Code (VS Code)](https://code.visualstudio.com/). As VS Code is a bit heavy when all linting options are turned on, you may prefer to use simpler text editors for quick edits.
 
-Other people may prefer **spyder**, **Sublime Text 3**, **Atom**, **Wing** IDE, **PyDev**, **PyCharm**, and even **VI** (vim) or **Emacs**. (Recently, vast majority of sublime text and atom users have migrated to VS code, AFAIK).
+Other people may prefer **spyder**, **Sublime Text 3**, **Atom**, **Wing** IDE, **PyDev**, **PyCharm**, and even **VI** (Vim) or **Emacs**. (Recently, the vast majority of sublime text and atom users have migrated to VS Code, AFAIK.).
 
-If you can, I recommend using VI as a sub editor, or at least learn how to use it. I don't use VI just because for me it is too difficult to use it.
+If you can, I recommend using VI as a sub-editor, or at least learning how to use it. I don't use VI just because it is too difficult for me to use it.
 
 +++
 
 ## Image Displayer
 
-In astronomical image reduction process, you need some tools to display images on computer screen to interactively investigate the images. There is a *historical standard*, which is kind of an *affiliated package of IRAF*, [SAO ds9](http://ds9.si.edu/site/Download.html). Some people (especially amateurs) use [Maxim DL](http://diffractionlimited.com/product/maxim-dl/) or other programs, but they are mostly commercial. In the future, as Python gets more and more attention, Ginga (see below) will be another powerful option. I am not sure when Ginga will become quite *perfect*, but until then, I recommend you to use both of them. Their pros and cons will be explained from now.
+In the astronomical image reduction process, you need some tools to display images on a computer screen to interactively investigate the images. There is a *historical standard* that is kind of an *affiliated package of IRAF*, [SAO DS9](http://ds9.si.edu/site/Download.html). Some people (especially amateurs) use [Maxim DL](http://diffractionlimited.com/product/maxim-dl/) or other programs, but they are mostly commercial. In the future, as Python gets more and more attention, Ginga (see below) will be another powerful option. I am not sure when Ginga will become quite *perfect*, but until then, I recommend you use both of them. Their pros and cons will be explained now.
 
 ### SAO ds9
 
-Many useful documentations and YouTube videos: [SAOImageDS9 - Documentation](https://sites.google.com/cfa.harvard.edu/saoimageds9/documentation?authuser=0) (retrieved 2022-11-30).
+Many useful documents and YouTube videos: [SAOImageDS9 - Documentation](https://sites.google.com/cfa.harvard.edu/saoimageds9/documentation?authuser=0) (retrieved 2022-11-30).
 
 ```{note}
 Among the materials, I think this [lecture note by George J. Bendo](https://github.com/ysBach/SNU_AOclass/blob/master/references/S01_BendoGJ_2020_DS9.pdf) (or also at http://www.jb.man.ac.uk/~gbendo/Sci/Pict/DS9guide.pdf) is a perfect DS9 tutorial.
@@ -266,18 +267,18 @@ Among the materials, I think this [lecture note by George J. Bendo](https://gith
 For CIAO tutorials, you need to install CIAO environment from conda -- not recommended if you don't understand what it means.
 ```
 
-SAO ds9 was made for Chandra X-ray observation, but became so powerful that it has been used for decades by virtually all astronomers.  It has many powerful features, and for me it's more convenient than ginga. By the system default, you will use ds9 to open any FITS image.
+SAO ds9 was made for Chandra X-ray observation but became so powerful that it has been used for decades by virtually all astronomers.  It has many powerful features, and for me, it's more convenient than ginga. By default, you will use DS9 to open any FITS image.
 
-If you want to run ds9, you can do `ds9 &` on terminal. Once you've got used to ds9, you can do a bit advanced command such as
+If you want to run ds9, you can do `ds9 &` on the terminal. Once you've gotten used to DS9, you can do a bit of advanced commanding, such as
 
 ```{admonition} Example
 :class: dropdown, tip
 
-Do zscale to three images, color map of viridis (matplotlib standard), and show single frame only (hit tab key to change frames):
+Do zscale to three images, color map viridis (Matplotlib standard), and show a single frame only (hit the tab key to change frames):
 
     $ ds9 -zscale -cmap virids image01.fits image02.fits image03.fits -single &
 
-Do zscale to all images, let the computer view of all image synced based on "IMAGE" coordinate, let all frames share the scale and limits for display, and show single frame only (hit tab key to change frames):
+Do zscale to all images, let the computer view all images synced based on the "IMAGE" coordinate, let all frames share the scale and limits for display, and show single frames only (hit the tab key to change frames):
 
     $ ds9 -zscale image*.fits -lock frame image -scale linear -lock scalelimits yes -single &
 
@@ -288,38 +289,37 @@ Same as above, but lock the view with WCS information:
 
 ```{admonition} Using DS9 in IRAF
 :class: dropdown
-If you want to turn ds9 on IRAF console, put exclamation mark (!):
+
+If you want to turn DS9 on the IRAF console, put an exclamation mark (!):
 
     ecl> !ds9 &
 
-and `!ds9 image*.fits -single &`, etc, will work identically. There is another task called `DISPLAY` in IRAF. Type
+and `!ds9 image*.fits -single &`, etc., will work identically. There is another task called `DISPLAY` in IRAF. Type
 
     ecl> epar display
 
 to see the parameters. Some frequently used commands are the zscale command, e.g., `displ image*.fits z1=100 z2=3000`.
 
-Be careful since `DISPLAY` shows different pixel values than actual value: See [here](http://iraf.net/forum/viewtopic.php?showtopic=1469817).
-
+Be careful since `DISPLAY` shows different pixel values than the actual value. See [here](http://iraf.net/forum/viewtopic.php?showtopic=1469817).
 ```
 
 For more command line options, see [this link](http://ds9.si.edu/doc/ref/command.html).
 
 ### Ginga: Astropy Affiliated
 
-[Ginga](https://ginga.readthedocs.io/en/latest/) (pronounced *ging-ga*, which means *galaxy* in Japanese; the reason for the name is explained in the link) is an affiliated package of astropy, and is a FITS image viewer.
+[Ginga](https://ginga.readthedocs.io/en/latest/) (pronounced *ging-ga*, which means *galaxy* in Japanese; the reason for the name is explained in the link) is an affiliated package of astropy and is a FITS image viewer.
 
 If you want to download it, type
 
     conda install -c astropy ginga
 
-It is made to serve the role as SAO ds9, but to perform some useful calculations that ds9 cannot do by default. ds9 has tremendous power when it is used *with* IRAF, but that is not a favorable solution for Python users. So Ginga is made to fully funtional with Python only, as well as to be able to interact with IRAF as ds9 does.
+It is made to serve the same role as SAO DS9, but to perform some useful calculations that DS9 cannot do by default. DS9 has tremendous power when it is used *with* IRAF, but that is not a favorable solution for Python users. So Ginga is made to be fully functional with Python only, as well as to be able to interact with IRAF as DS9 does.
 
-You can use `$ ginga &` on terminal or `ecl> !ginga &` on IRAF console. Although you can do `ginga image.fits &` as you did for ds9, it is usually better to use interactive drag-and-drop way to open image than command line. In `ginga`, you can also use `Operation -> utils -> FBrowser`.
+You can use `$ ginga &` on the terminal or `ecl> !ginga &` on the IRAF console. Although you can do `ginga image.fits &` as you did for DS9, it is usually better to use an interactive drag-and-drop way to open an image than the command line. In `ginga`, you can also use `Operation -> utils -> FBrowser`.
 
-The most important feature of `ginga` is to use it for interactive FWHM estimation and radial profile check, which is done by ``pick``: [documentation](https://ginga.readthedocs.io/en/latest/manual/plugins_local/pick.html?highlight=pick).
+The most important feature of `ginga` is to use it for interactive FWHM estimation and radial profile check, which are done by ``pick``: [documentation](https://ginga.readthedocs.io/en/latest/manual/plugins_local/pick.html?highlight=pick).
 
-I couldn't find how to use Ginga with IRAF yet.... Though [this official site](http://ginga.readthedocs.io/en/latest/manual/plugins_global/iraf.html) says you can, I could not succeeded in using it. I think this is a [known bug](https://trello.com/c/6mt7oBXZ/44-iraf-plugin-implemented) that you actually cannot.
-
+I couldn't find how to use Ginga with IRAF yet. Though [this official site](http://ginga.readthedocs.io/en/latest/manual/plugins_global/iraf.html) says you can, I could not succeed in using it. I think this is a [known bug](https://trello.com/c/6mt7oBXZ/44-iraf-plugin-implemented) that you actually cannot fix.
 ## HW
 
 * [HW for SW tools](HW:swtools)

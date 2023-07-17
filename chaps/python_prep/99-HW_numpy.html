@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>HW numpy &#8212; SNU AO Class Python</title>
   
@@ -46,7 +46,9 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -414,10 +416,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-1-30-points">Problem Set 1 [30 points]</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-1-30-points">Problem Set 1 [30 points]</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-2-30-points">Problem Set 2 [30 points]</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-3-optional-10-points">Problem Set 3 (optional) [10 points]</a></li>
 </ul>
@@ -432,12 +432,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hw-numpy">
-<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#hw-numpy" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1>HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#hw-numpy" title="Permalink to this heading">#</a></h1>
 <section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
-<p>Please use python 3.6+ (Never use python 2).</p>
-<p>For other packages: Although I didn’t run all the tests, likely there will be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
-<p>Here we will learn how to code in <em>pythonic</em> way. Start solving the problems after running the code below:</p>
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>Please use Python 3.6+ (never Python 2).</p>
+<p>For other packages: Although I didn’t run all the tests, there will likely be no problem if you use decently recent versions of any packages used in the homework (any version released after 2017).</p>
+<p>Here, we will learn how to code in <em>pythonic</em> way. Start solving the problems after running the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
@@ -449,11 +449,12 @@ document.write(`
 <ol class="arabic simple">
 <li><p><strong>Never use <code class="docutils literal notranslate"><span class="pre">for</span></code> or <code class="docutils literal notranslate"><span class="pre">while</span></code> loop</strong>.</p></li>
 <li><p>You <strong>should not import any other packages</strong>.</p></li>
-<li><p>Answer to <strong>each problem</strong> must be a <strong>one-line</strong> of python code.</p></li>
-<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on google</strong>.</p></li>
+<li><p>The answer to <strong>each problem</strong> must be a <strong>single line</strong> of Python code.</p></li>
+<li><p>For each problem, I gave hints. <strong>It is also homework for you to search for those on Google</strong>.</p></li>
 </ol>
+</section>
 <section id="problem-set-1-30-points">
-<h3>Problem Set 1 [30 points]<a class="headerlink" href="#problem-set-1-30-points" title="Permalink to this headline">#</a></h3>
+<h2>Problem Set 1 [30 points]<a class="headerlink" href="#problem-set-1-30-points" title="Permalink to this heading">#</a></h2>
 <p>2 points for each problem.
 (You can fill in the <code class="docutils literal notranslate"><span class="pre">?</span></code> parts in the Hints and use that to answer the questions. Or, you can just make your own answer, ignoring the Hints.)</p>
 <ol class="arabic simple">
@@ -462,12 +463,12 @@ document.write(`
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.eye</span></code></p></li>
 </ul>
 </li>
-<li><p>Make a matrix <code class="docutils literal notranslate"><span class="pre">B</span></code> consists of random numbers and shape of <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">3)</span></code>.</p>
+<li><p>Make a matrix <code class="docutils literal notranslate"><span class="pre">B</span></code> consisting of random numbers in the shape of <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">3)</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code></p></li>
 </ul>
 </li>
-<li><p>Using <code class="docutils literal notranslate"><span class="pre">B</span></code>, make an array <code class="docutils literal notranslate"><span class="pre">C</span></code> which has <code class="docutils literal notranslate"><span class="pre">C[i,</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">sqrt(B[i,</span> <span class="pre">j])</span></code>.</p>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">B</span></code>, make an array <code class="docutils literal notranslate"><span class="pre">C</span></code> that has <code class="docutils literal notranslate"><span class="pre">C[i,</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">sqrt(B[i,</span> <span class="pre">j])</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.sqrt</span></code></p></li>
 </ul>
@@ -483,14 +484,14 @@ document.write(`
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">print(B</span> <span class="pre">==</span> <span class="pre">D)</span></code></p></li>
 </ul>
 </li>
-<li><p>Extract diagonal components of <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<li><p>Extract the diagonal components of <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.diag</span></code></p></li>
 </ul>
 </li>
 <li><p>Check whether the diagonal of <code class="docutils literal notranslate"><span class="pre">A</span></code> is always unity.</p>
 <ul class="simple">
-<li><p>Hint: <code class="docutils literal notranslate"><span class="pre">print(A</span> <span class="pre">==</span> <span class="pre">1)</span></code> may work but only for element-wise. How can you convert it to a single <code class="docutils literal notranslate"><span class="pre">True</span></code>?</p></li>
+<li><p>Hint: <code class="docutils literal notranslate"><span class="pre">print(A</span> <span class="pre">==</span> <span class="pre">1)</span></code> may work, but only element-wise. How can you convert it to a single <code class="docutils literal notranslate"><span class="pre">True</span></code>?</p></li>
 </ul>
 </li>
 <li><p>From <code class="docutils literal notranslate"><span class="pre">B</span></code>, extract only the elements larger than 0.5.</p>
@@ -515,7 +516,7 @@ document.write(`
 <li><p>Check <code class="docutils literal notranslate"><span class="pre">v[0]</span> <span class="pre">==</span> <span class="pre">0</span></code></p></li>
 </ul>
 </li>
-<li><p>Select only the odd-index elements of <code class="docutils literal notranslate"><span class="pre">v</span></code>, and reshape it to <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">25)</span></code> array and save it as <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p>
+<li><p>Select only the odd-index elements of <code class="docutils literal notranslate"><span class="pre">v</span></code>, reshape it to a <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">25)</span></code> array, and save it as <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: using <code class="docutils literal notranslate"><span class="pre">array[::2]</span></code> will give even-index elements. How can you get the odd-index elements?</p></li>
 <li><p>Hint: Reshaping is done by <code class="docutils literal notranslate"><span class="pre">array.reshape(n1,</span> <span class="pre">n2)</span></code>.</p></li>
@@ -523,24 +524,23 @@ document.write(`
 </li>
 <li><p>Take the median of <code class="docutils literal notranslate"><span class="pre">w</span></code> along the axis of <code class="docutils literal notranslate"><span class="pre">1</span></code>, i.e., <code class="docutils literal notranslate"><span class="pre">print(w.shape)</span></code> should be <code class="docutils literal notranslate"><span class="pre">(2,)</span></code></p>
 <ul class="simple">
-<li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.median</span></code> with <code class="docutils literal notranslate"><span class="pre">axis</span></code> option.</p></li>
+<li><p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.median</span></code> with the <code class="docutils literal notranslate"><span class="pre">axis</span></code> option.</p></li>
 </ul>
 </li>
-<li><p>For magnitude differences of 0, 1, .., 5 mag, print the flux ratios using Pogson’s formula.</p>
+<li><p>For magnitude differences of 0, 1, .., 5 mags, print the flux ratios using Pogson’s formula.</p>
 <ul class="simple">
-<li><p>Hint: <code class="docutils literal notranslate"><span class="pre">np.arange</span></code> can make numpy array of [0, 1, …, 5]. Then use <code class="docutils literal notranslate"><span class="pre">10**&lt;something&gt;</span></code>.</p></li>
+<li><p>Hint: <code class="docutils literal notranslate"><span class="pre">np.arange</span></code> can make a numpy array of [0, 1, …, 5]. Then use <code class="docutils literal notranslate"><span class="pre">10**&lt;something&gt;</span></code>.</p></li>
 </ul>
 </li>
-<li><p>For flux ratios (say, array <code class="docutils literal notranslate"><span class="pre">r</span></code> = flux1 / flux2) of 0.10, 0.15, 0.20, …, 2.00, calculate the magnitude difference using Pogson’s formula, and save it as <code class="docutils literal notranslate"><span class="pre">dm</span></code>.</p>
+<li><p>For flux ratios (say, array <code class="docutils literal notranslate"><span class="pre">r</span></code> = flux1 / flux2) of 0.10, 0.15, 0.20, …, 2.00, calculate the magnitude difference using Pogson’s formula and save it as <code class="docutils literal notranslate"><span class="pre">dm</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: similar to above, but with <code class="docutils literal notranslate"><span class="pre">np.log10</span></code>.</p></li>
 </ul>
 </li>
 </ol>
 </section>
-</section>
 <section id="problem-set-2-30-points">
-<h2>Problem Set 2 [30 points]<a class="headerlink" href="#problem-set-2-30-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 2 [30 points]<a class="headerlink" href="#problem-set-2-30-points" title="Permalink to this heading">#</a></h2>
 <p>2 points for each problem:</p>
 <ol class="arabic simple">
 <li><p>Setup numpy random seed as 1234.</p>
@@ -548,7 +548,7 @@ document.write(`
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">np.random.seed(?)</span></code></p></li>
 </ul>
 </li>
-<li><p>Make an array of shape 10 by 2, sampled from normal distribution of <span class="math notranslate nohighlight">\(X \sim N(50, 3^2)\)</span>. Give it a name <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<li><p>Make an array of shape 10 by 2, sampled from the normal distribution of <span class="math notranslate nohighlight">\(X \sim N(50, 3^2)\)</span>. Give it a name <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">np.random.normal(loc=?,</span> <span class="pre">scale=?,</span> <span class="pre">size=(10,</span> <span class="pre">2))</span></code></p></li>
 </ul>
@@ -565,7 +565,7 @@ document.write(`
 <li><p>Think why we need <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Calculate the standard errors (s.e.: <span class="math notranslate nohighlight">\(\mathrm{s.e.} := s/\sqrt{N}\)</span> for sample standard deviation s and sample number N) of two sampling processes. Give it a name <code class="docutils literal notranslate"><span class="pre">ses</span></code>.</p>
+<li><p>Calculate the standard errors (s.e.: <span class="math notranslate nohighlight">\(\mathrm{s.e.} := s/\sqrt{N}\)</span> for sample standard deviation s and sample number N) of two sampling processes. Give it a name, <code class="docutils literal notranslate"><span class="pre">ses</span></code>.</p>
 <ul class="simple">
 <li><p>Hint: <code class="docutils literal notranslate"><span class="pre">stds</span> <span class="pre">/</span> <span class="pre">np.sqrt(data.shape[?])</span></code></p></li>
 </ul>
@@ -575,14 +575,14 @@ document.write(`
 </ol>
 <div class="dropdown admonition">
 <p class="admonition-title">A mathematical note</p>
-<p>The standard error here is the 1-sigma confidence interval of the <em>point estimator for the mean</em>, based on the central limit theorem (CLT; refer to the <code class="docutils literal notranslate"><span class="pre">Books/</span></code> of this repo). Simply put, this is the estimated interval of the mean. On the other hand, standard deviation is the scatter of data. Note that even though you have large standard deviation, the standard error can be very small as N increases (think about coin tossing experiments with head=-1 and tail=+1).</p>
+<p>The standard error here is the 1-sigma confidence interval of the <em>point estimator for the mean</em>, based on the central limit theorem (CLT; refer to the <code class="docutils literal notranslate"><span class="pre">Books/</span></code> of this repo). Simply put, this is the estimated interval of the mean. On the other hand, the standard deviation is the scatter of the data. Note that even though you have a large standard deviation, the standard error can be very small as N increases (think about coin tossing experiments with head=-1 and tail=+1).</p>
 </div>
 <ol class="arabic simple" start="8">
-<li><p>[10 points] People normally approximate magnitude difference <code class="docutils literal notranslate"><span class="pre">dm</span></code> as fractional flux difference, 1.086 *(flux1 - flux2) / flux2 = <code class="docutils literal notranslate"><span class="pre">1.086*(r</span> <span class="pre">-</span> <span class="pre">1)</span></code>, because <code class="docutils literal notranslate"><span class="pre">dm</span></code> = 1.086 d(flux) / flux. The <code class="docutils literal notranslate"><span class="pre">r</span></code> values are the true ratio.</p>
+<li><p>[10 points] People normally approximate the magnitude difference <code class="docutils literal notranslate"><span class="pre">dm</span></code> as a fractional flux difference, 1.086 *(flux1 - flux2) / flux2 = <code class="docutils literal notranslate"><span class="pre">1.086*(r</span> <span class="pre">-</span> <span class="pre">1)</span></code>, because <code class="docutils literal notranslate"><span class="pre">dm</span></code> = 1.086 d(flux) / flux. The <code class="docutils literal notranslate"><span class="pre">r</span></code> values are the true ratio.</p>
 <ul class="simple">
 <li><p>Now you want to calculate the absolute error of this approximation (i.e., “approximated fractional difference” - <code class="docutils literal notranslate"><span class="pre">(r</span> <span class="pre">-</span> <span class="pre">1)</span></code> = dm - <code class="docutils literal notranslate"><span class="pre">(r</span> <span class="pre">-</span> <span class="pre">1</span></code>), and plot it as a function of <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
 <li><p>Then you want to specify at which locations the absolute error is within 1 % level.
-Fill in the code below for the it to correctly run.</p></li>
+Fill in the code below for it to correctly run.</p></li>
 </ul>
 </li>
 </ol>
@@ -622,18 +622,18 @@ Fill in the code below for the it to correctly run.</p></li>
 </pre></div>
 </div>
 <ol class="arabic simple" start="9">
-<li><p>[6 points] Consider these two estimates are the measurement of the line width of an AGN emission line in Feb 2000 and Jun 2010. Will you say the emission line width has significantly changed in 10 years? They differ in the standard error sense, but in our simple “simulation” they both came from the identical distribution. That is, the true line widths (which we don’t know in the real observation) were identical but the observations indicated that the estimated means are quite different. What happened? How would you understand this? If you have to write a research paper with these results (you cannot observe again back in 2000 and 2010!), what will be your conclusion?</p>
+<li><p>[6 points] Consider these two estimates are the measurement of the line width of an AGN emission line in Feb 2000 and Jun 2010. Will you say the emission line width has significantly changed in 10 years? They differ in the standard error sense, but in our simple “simulation” they both came from the identical distribution. That is, the true line widths (which we don’t know from the real observation) were identical, but the observations indicated that the estimated means are quite different. What happened? How would you understand this? If you have to write a research paper with these results (you cannot observe them again in 2000 and 2010!), what will be your conclusion?</p>
 <ul class="simple">
-<li><p>Just describe your opinion. I haven’t put any fixed answer for this problem.</p></li>
+<li><p>Just describe your opinion. I have no fixed answer for this problem.</p></li>
 </ul>
 </li>
 </ol>
 </section>
 <section id="problem-set-3-optional-10-points">
-<h2>Problem Set 3 (optional) [10 points]<a class="headerlink" href="#problem-set-3-optional-10-points" title="Permalink to this headline">#</a></h2>
+<h2>Problem Set 3 (optional) [10 points]<a class="headerlink" href="#problem-set-3-optional-10-points" title="Permalink to this heading">#</a></h2>
 <p>This problem set is about statistics, which is not essential for undergraduate courses. <strong>TA will likely skip this problem set</strong>.</p>
 <ol class="arabic" start="9">
-<li><p>[5 points] The CLT says the distribution of the sample means follow normal distribution, regardless of the original distribution. Let’s check this. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts below to generate the histogram of sample means for 100000 sampling procedures (each case you draw 10 samples) from a Poisson distribution of parameter lambda = 2, and the mathematically expected gaussian function (mu = true mean = lambda, sigma = true standard deviation = sqrt(lambda)).</p>
+<li><p>[5 points] The CLT says the distribution of the sample means it follows the normal distribution, regardless of the original distribution. Let’s check this out. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts below to generate the histogram of sample means for 100000 sampling procedures (in each case you draw 10 samples) from a Poisson distribution of parameter lambda = 2 and the mathematically expected Gaussian function (mu = true mean = lambda, sigma = true standard deviation = sqrt(lambda)).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
@@ -656,9 +656,9 @@ Fill in the code below for the it to correctly run.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Does the histogram follows expected Gaussian curve? Note that the original distribution you sampled is <strong>NOT</strong> Gaussian at all (Poisson distribution with mean 2 is far from normal distribution).</p>
+<p>Does the histogram follow the expected Gaussian curve? Note that the original distribution you sampled is <strong>NOT</strong> Gaussian at all (a Poisson distribution with a mean of 2 is far from a normal distribution).</p>
 </li>
-<li><p>[5 points] Consider you created M universes which have identical mean value of X (e.g., Hubble’s constant, dark energy fraction, etc). The 1-sigma confidence interval (CI) of X means that, if you calculated CI from the data obtained from identical observations (or measurements or experiments) from each M universes, 68.27% of the universes will contain the true mean of X within its own CI. Other (31.63%) universes will not contain the true value within their CI. Let’s confirm this using simple simulation below. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts below to print the percentage out of the 100000 universes with 10 samples which their CI actually “hit” the true value.</p>
+<li><p>[5 points] Consider that you created M universes that have identical mean values of X (e.g., Hubble’s constant, dark energy fraction, etc.). The 1-sigma confidence interval (CI) of X means that, if you calculate the CI from the data obtained from identical observations (or measurements or experiments) from each of the M universes, 68.27% of the universes will contain the true mean of X within their own CI. Other (31.63%) universes will not contain the true value within their CI. Let’s confirm this using the simple simulation below. Fill in the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;FILLHERE&lt;&lt;</span></code> parts below to print the percentage out of the 100000 universes with 10 samples where their CI actually “hit” the true value.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12354</span><span class="p">)</span>
 
 <span class="n">true_mu</span> <span class="o">=</span> <span class="mi">50</span>
@@ -680,7 +680,7 @@ Fill in the code below for the it to correctly run.</p></li>
 </ol>
 <div class="dropdown admonition">
 <p class="admonition-title">A mathematical note</p>
-<p>Most likely your value is smaller than 68%. That is because, under the CLT logic, the statistic <span class="math notranslate nohighlight">\((\bar{X}-\mu) / (s/\sqrt{N})\)</span> follows the Student t-distribution with degrees of freedom (N - 1) (in our case, 9), not the standard normal distribution, which is the limiting case of the t-distribution when degrees of freedom is infinity. Therefore, the calculation above which uses <code class="docutils literal notranslate"><span class="pre">avgs_ci</span> <span class="pre">-</span> <span class="pre">ses_ci</span></code> must have multiplied a factor, i.e., <span class="math notranslate nohighlight">\(t_{(n-1),\, \alpha/2}\)</span> (for the signicance level <span class="math notranslate nohighlight">\(\alpha=0.6827\)</span> for the 1-sigma), which is always larger than 1. Thus, we are “underestimating” the CI in the above example, so your calculation is likely smaller than 68%. If you increase <code class="docutils literal notranslate"><span class="pre">n_sample</span></code>, the final result will get larger and converge to 68.27 %.</p>
+<p>Most likely, your value is smaller than 68%. That is because, under the CLT logic, the statistic <span class="math notranslate nohighlight">\((\bar{X}-\mu) / (s/\sqrt{N})\)</span> follows the Student t-distribution with degrees of freedom (N - 1) (in our case, 9), not the standard normal distribution, which is the limiting case of the t-distribution when degrees of freedom are infinity. Therefore, the calculation above, which uses <code class="docutils literal notranslate"><span class="pre">avgs_ci</span> <span class="pre">-</span> <span class="pre">ses_ci</span></code> must have multiplied a factor, i.e., <span class="math notranslate nohighlight">\(t_{(n-1),\, \alpha/2}\)</span> (for the significance level <span class="math notranslate nohighlight">\(\alpha=0.6827\)</span> for the 1-sigma), which is always larger than 1. Thus, we are “underestimating” the CI in the above example, so your calculation is likely smaller than 68%. If you increase <code class="docutils literal notranslate"><span class="pre">n_sample</span></code>, the final result will get larger and converge to 68.27 %.</p>
 </div>
 </section>
 </section>
@@ -752,10 +752,8 @@ Fill in the code below for the it to correctly run.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-1-30-points">Problem Set 1 [30 points]</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-1-30-points">Problem Set 1 [30 points]</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-2-30-points">Problem Set 2 [30 points]</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set-3-optional-10-points">Problem Set 3 (optional) [10 points]</a></li>
 </ul>
