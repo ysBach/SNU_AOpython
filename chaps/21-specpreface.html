@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Python Spectroscopy Preface &#8212; SNU AO Class Python</title>
+    <title>2. Python Spectroscopy Preface &#8212; SNU AO Class Python</title>
   
   
   
@@ -194,8 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Long-Slit Spectroscopy</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="20-specstat.html">1. First Look at Longslit Data</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Python Spectroscopy Preface</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Python Spectroscopy Preface</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Materials</span></p>
 <ul class="nav bd-sidenav">
@@ -423,9 +422,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">3.1. General References</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">3.2. Available Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">3.3. Remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">2.1. General References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">2.2. Available Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">2.3. Remarks</a></li>
 </ul>
             </nav>
         </div>
@@ -438,11 +437,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="python-spectroscopy-preface">
-<span id="ch-specpreface"></span><h1><span class="section-number">3. </span>Python Spectroscopy Preface<a class="headerlink" href="#python-spectroscopy-preface" title="Permalink to this heading">#</a></h1>
+<span id="ch-specpreface"></span><h1><span class="section-number">2. </span>Python Spectroscopy Preface<a class="headerlink" href="#python-spectroscopy-preface" title="Permalink to this heading">#</a></h1>
 <p>This is a short note, originally written in 2016-2018. As of late 2023, the situation did not change much, unfortunately (but importantly, <a class="reference external" href="https://github.com/pypeit/PypeIt">PypeIt</a> appeared after this lecture note).</p>
 <p>In later notes, I will demonstrate how to do the spectroscopic data reduction using python. Since the concepts of the tasks, i.e., the procedures of what you should do, are clear, you must be able to do them in any language you can use.</p>
 <section id="general-references">
-<h2><span class="section-number">3.1. </span>General References<a class="headerlink" href="#general-references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>General References<a class="headerlink" href="#general-references" title="Permalink to this heading">#</a></h2>
 <p>Some useful materials to understand spectroscopic data reduction:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://adsabs.harvard.edu/abs/1992ASPC...23..160W">Wagner’s writing in 1992</a></p>
@@ -460,7 +459,7 @@ document.write(`
 </ul>
 </section>
 <section id="available-packages">
-<h2><span class="section-number">3.2. </span>Available Packages<a class="headerlink" href="#available-packages" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Available Packages<a class="headerlink" href="#available-packages" title="Permalink to this heading">#</a></h2>
 <p>As you can see, all the important materials are made for IRAF, not Python. I could only find a few informative packages, including <a class="reference external" href="https://github.com/jradavenport/pydis">PyDIS</a> by Dr. James Davenport. There is currently an ongoing discussion about making a spectroscopy package in astropy called <a class="reference external" href="https://github.com/astropy/specutils">specutils</a>.</p>
 <p>But currently, there are no useful packages as of 2021 (situation is similar as of 2023 Fall). One of the most recent discussions about this issue among the <em>Python users in Astronomy</em> group was <a class="reference external" href="https://www.facebook.com/groups/astropython/permalink/2473081482936527/">this</a>, with no hope.</p>
 <ul class="simple">
@@ -470,7 +469,7 @@ document.write(`
 </ul>
 </section>
 <section id="remarks">
-<h2><span class="section-number">3.3. </span>Remarks<a class="headerlink" href="#remarks" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Remarks<a class="headerlink" href="#remarks" title="Permalink to this heading">#</a></h2>
 <p>In short, there are currently no perfect python tools or packages to satisfactorily do the spectroscopic data reduction in python (to replace IRAF). Among them, <a class="reference external" href="https://github.com/pypeit/PypeIt">PypeIt</a> has the biggest potential, but still not in a satisfactory stage. So my basic philosophy in producing this material is:</p>
 <ol class="arabic simple">
 <li><p>Make explicit codes step by step so that every process is visible.</p>
@@ -556,9 +555,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">3.1. General References</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">3.2. Available Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">3.3. Remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">2.1. General References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">2.2. Available Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">2.3. Remarks</a></li>
 </ul>
   </nav></div>
 
