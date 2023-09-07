@@ -1,0 +1,1316 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Cosmic-Ray Rejection &#8212; SNU AO Class Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/A0-crrej';</script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Philosophy" href="00-Philosophy.html" />
+    <link rel="prev" title="3. Python Spectroscopy Preface" href="21-specpreface.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    SNU AO Class Python Notes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-3_Prepare_Python.html">3. (IMPORTANT) Python Environment</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python_prep/00-python_prep.html">4. Python Preparation Course</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/01-numpy.html">4.4. Numpy Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/02-pandas.html">4.5. Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/03-FITS_and_astropy.html">4.6. About <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-center.html">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture &amp; DAOFIND</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Long-Slit Spectroscopy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-specstat.html">1. First Look at Longslit Data</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="21-specpreface.html">3. Python Spectroscopy Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Cosmic-Ray Rejection</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">1. Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">2. IRAF (DEPRECATED)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/99-HW_swtools.html">HW Software &amp; Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_python_pathlib.html">HW Python Basic &amp; <code class="docutils literal notranslate"><span class="pre">pathlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/A0-crrej.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/A0-crrej.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chaps/A0-crrej.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cosmic-Ray Rejection</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-astroscrappy">1.2. Download Astroscrappy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-what-images-do-we-use-astroscrappy">1.3. To What Images Do We Use <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astroscrappy-documentation">1.4. <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-we-will-use">1.5. Images We Will Use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-input-parameters">1.6. Proper Input Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-into-the-header">1.6.1. Looking Into the Header</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-results">1.7. Comparing Two Results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cosmic-ray-rejection">
+<span id="ch-crrej"></span><h1><span class="section-number">1. </span>Cosmic-Ray Rejection<a class="headerlink" href="#cosmic-ray-rejection" title="Permalink to this heading">#</a></h1>
+<p>This time we will learn how to reject, i.e., erase, the unwanted signals: Cosmic-rays (CR). CR is a loosely defined term in observational astronomy used to describe high energetic particles (or the resulting radiation) originated from extraterrestrial sources. On CCD image, CR appears as a dot, short streak, as shown in the following image (image credit <a class="reference external" href="http://astronomy.com/magazine/tony-hallas/2010/07/tony-hallas-cosmic-imaging-getting-clean-images">Tony Hallas</a>):</p>
+<p><img alt="" src="../_images/crrej.webp" /></p>
+<section id="introduction">
+<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The most widely used algorithm for CR rejection is the <a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/">L.A.Cosmic</a> by Peter G. van Dokkum (<a class="reference external" href="http://adsabs.harvard.edu/abs/2001PASP..113.1420V">publication link</a>). It uses the fact that CR has sharp edges and high pixel values, so that they appear differently compared to stellar sources after median filtering.</p>
+<p>Unfortunately, however, this is very slow in IRAF, especially for larger file sizes. The previous python version, which is available from the <a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/">L.A.Cosmic</a> website is also slow. Curtis McCully has thus developed a C-based, but can be used in Python as if it is a totally-pythonic code, and it is named as <a class="reference external" href="https://github.com/astropy/astroscrappy"><code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code></a>. It is about 20-40 times faster than pure python codes, and up to about 100 times faster than IRAF implementation. The number can even increase if you use faster algorithms using optional arguments of <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>.</p>
+<p>My experience is that, one of my friend (named X) spent 20+ hours doing the CR rejection using LA Cosmic with IRAF for the data obtained from Subaru. Of course, X could not use the computer for one full day. I didn’t check the time on my computer, but that would have been &lt; 1 hr if I used <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>.</p>
+</section>
+<section id="download-astroscrappy">
+<h2><span class="section-number">1.2. </span>Download Astroscrappy<a class="headerlink" href="#download-astroscrappy" title="Permalink to this heading">#</a></h2>
+<p>You can download it via <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> conda install -c astropy astroscrappy
+</pre></div>
+</div>
+<p>For check, you can turn IPython on and type</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astroscrappy</span>
+<span class="n">astroscrappy</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="to-what-images-do-we-use-astroscrappy">
+<h2><span class="section-number">1.3. </span>To What Images Do We Use <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>?<a class="headerlink" href="#to-what-images-do-we-use-astroscrappy" title="Permalink to this heading">#</a></h2>
+<p>CR can be everywhere. Even on bias image, which should have 0-second exposure, you may see CR, because the instrument cannot have mathematically zero exposure (e.g., 0.001 second). While reading out a bias image, a CR may hit a CCD pixel, and it will appear on the bias image. On dark or flat images, which have exposure time of up to about several minutes, CR becomes extremely common.</p>
+<p>But do we have to do CR rejection for all the FITS files we have?</p>
+<p>No. First, it takes too much time. Secondly, if we do median combine to many of the bias, dark, and flat images, CR-hit pixels (the pixels hit by CR) can be <em>clipped</em> without applying the CR rejection algorithm.</p>
+<p>For science images, however, all object images may not be identical, so we don’t do median combine. That’s why we need CR rejection to object images. According to <a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/notes.html">LA Cosmic website’s Note for Users</a>:</p>
+<blockquote>
+<div><p>The program needs bias-subtracted, flat-fielded, <strong>un</strong>skysubtracted images. Flatfielding is usually not critical, bias subtraction is! If the sky was subtracted from an image, the program will add the sky back in if <code class="docutils literal notranslate"><span class="pre">skyval</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>.</p>
+</div></blockquote>
+<p>It’s very simple to do such rejection: import and use.</p>
+</section>
+<section id="astroscrappy-documentation">
+<h2><span class="section-number">1.4. </span><code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> Documentation<a class="headerlink" href="#astroscrappy-documentation" title="Permalink to this heading">#</a></h2>
+<p>There is no online manual of <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>, but you can print it out in Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> version_information
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S (%Z = GMT%z)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This notebook was generated at </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+<span class="n">vv</span> <span class="o">=</span> <span class="o">%</span><span class="k">version_information</span> numpy, matplotlib, astropy, astroscrappy, version_information
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vv</span><span class="o">.</span><span class="n">packages</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pkg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">10s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pkg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This notebook was generated at 2023-08-20 19:34:25 (KST = GMT+0900) 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 Python     3.10.12 64bit [Clang 15.0.7 ]
+1 IPython    8.14.0
+2 OS         macOS 13.1 arm64 arm 64bit
+3 numpy      1.24.4
+4 matplotlib 3.7.2
+5 astropy    5.3.2
+6 astroscrappy 1.1.1.dev8+g783f217
+7 version_information 1.0.4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">astroscrappy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ysfitsutilpy</span> <span class="k">as</span> <span class="nn">yfu</span>
+<span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.nddata</span> <span class="kn">import</span> <span class="n">CCDData</span>
+<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clipped_stats</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">ImageGrid</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">})</span>
+
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../../Tutorial_Data&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">astroscrappy</span><span class="o">.</span><span class="n">detect_cosmics</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>detect_cosmics(indat, inmask=None, inbkg=None, invar=None, sigclip=4.5,
+                      sigfrac=0.3, objlim=5.0, gain=1.0, readnoise=6.5,
+                      satlevel=65536.0, niter=4, sepmed=True,
+                      cleantype=&#39;meanmask&#39;, fsmode=&#39;median&#39;, psfmodel=&#39;gauss&#39;,
+                      psffwhm=2.5, psfsize=7, psfk=None, psfbeta=4.765,
+                      verbose=False)
+
+    Detect cosmic rays in a numpy array.
+
+    If you use this code, please cite the Zendo DOI: https://zenodo.org/record/1482019
+
+    Please cite the original paper which can be found at:
+    http://www.astro.yale.edu/dokkum/lacosmic/
+
+    van Dokkum 2001, PASP, 113, 789, 1420
+    (article : http://adsabs.harvard.edu/abs/2001PASP..113.1420V)
+
+    Parameters
+    ----------
+    indat : float numpy array
+        Input data array that will be used for cosmic ray detection. This
+        should include the sky background (or a mean background level, added
+        back in after sky subtraction), so that noise can be estimated
+        correctly from the data values. This should be in units of &quot;counts&quot;.
+
+    inmask : boolean numpy array, optional
+        Input bad pixel mask. Values of True will be ignored in the cosmic ray
+        detection/cleaning process. Default: None.
+
+    inbkg : float numpy array, optional
+        A pre-determined background image, to be subtracted from ``indat``
+        before running the main detection algorithm.
+        This is used primarily with spectroscopic data, to remove
+        sky lines and the cross-section of an object continuum during
+        iteration, &quot;protecting&quot; them from spurious rejection (see the above
+        paper). This background is not removed from the final, cleaned output
+        (`cleanarr`). This should be in units of &quot;counts&quot;, the same units of indat.
+        This inbkg should be free from cosmic rays. When estimating the cosmic-ray
+        free noise of the image, we will treat ``inbkg`` as a constant Poisson
+        contribution to the variance.
+
+    invar : float numpy array, optional
+        A pre-determined estimate of the data variance (ie. noise squared) in
+        each pixel, generated by previous processing of ``indat``. If provided,
+        this is used in place of an internal noise model based on ``indat``,
+        ``gain`` and ``readnoise``. This still gets median filtered and cleaned
+        internally, to estimate what the noise in each pixel *would* be in the
+        absence of cosmic rays. This should be in units of &quot;counts&quot; squared.
+
+    sigclip : float, optional
+        Laplacian-to-noise limit for cosmic ray detection. Lower values will
+        flag more pixels as cosmic rays. Default: 4.5.
+
+    sigfrac : float, optional
+        Fractional detection limit for neighboring pixels. For cosmic ray
+        neighbor pixels, a lapacian-to-noise detection limit of
+        sigfrac * sigclip will be used. Default: 0.3.
+
+    objlim : float, optional
+        Minimum contrast between Laplacian image and the fine structure image.
+        Increase this value if cores of bright stars are flagged as cosmic
+        rays. Default: 5.0.
+
+    gain : float, optional
+        Gain of the image (electrons / ADU). We always need to work in
+        electrons for cosmic ray detection. Default: 1.0
+
+    readnoise : float, optional
+        Read noise of the image (electrons). Used to generate the noise model
+        of the image. Default: 6.5.
+
+    satlevel : float, optional
+        Saturation of level of the image (electrons). This value is used to
+        detect saturated stars and pixels at or above this level are added to
+        the mask. Default: 65536.0.
+
+    niter : int, optional
+        Number of iterations of the LA Cosmic algorithm to perform. Default: 4.
+
+    sepmed : boolean, optional
+        Use the separable median filter instead of the full median filter.
+        The separable median is not identical to the full median filter, but
+        they are approximately the same and the separable median filter is
+        significantly faster and still detects cosmic rays well. Default: True
+
+    cleantype : {&#39;median&#39;, &#39;medmask&#39;, &#39;meanmask&#39;, &#39;idw&#39;}, optional
+        Set which clean algorithm is used:
+
+        &#39;median&#39;: An umasked 5x5 median filter
+
+        &#39;medmask&#39;: A masked 5x5 median filter
+
+        &#39;meanmask&#39;: A masked 5x5 mean filter
+
+        &#39;idw&#39;: A masked 5x5 inverse distance weighted interpolation
+
+        Default: &quot;meanmask&quot;.
+
+    fsmode : {&#39;median&#39;, &#39;convolve&#39;}, optional
+        Method to build the fine structure image:
+
+        &#39;median&#39;: Use the median filter in the standard LA Cosmic algorithm
+        &#39;convolve&#39;: Convolve the image with the psf kernel to calculate the
+        fine structure image.
+        Default: &#39;median&#39;.
+
+    psfmodel : {&#39;gauss&#39;, &#39;gaussx&#39;, &#39;gaussy&#39;, &#39;moffat&#39;}, optional
+        Model to use to generate the psf kernel if fsmode == &#39;convolve&#39; and
+        psfk is None. The current choices are Gaussian and Moffat profiles.
+        &#39;gauss&#39; and &#39;moffat&#39; produce circular PSF kernels. The &#39;gaussx&#39; and
+        &#39;gaussy&#39; produce Gaussian kernels in the x and y directions
+        respectively. Default: &quot;gauss&quot;.
+
+    psffwhm : float, optional
+        Full Width Half Maximum of the PSF to use to generate the kernel.
+        Default: 2.5.
+
+    psfsize : int, optional
+        Size of the kernel to calculate. Returned kernel will have size
+        psfsize x psfsize. psfsize should be odd. Default: 7.
+
+    psfk : float numpy array, optional
+        PSF kernel array to use for the fine structure image if
+        fsmode == &#39;convolve&#39;. If None and fsmode == &#39;convolve&#39;, we calculate
+        the psf kernel using &#39;psfmodel&#39;. Default: None.
+
+    psfbeta : float, optional
+        Moffat beta parameter. Only used if fsmode==&#39;convolve&#39; and
+        psfmodel==&#39;moffat&#39;. Default: 4.765.
+
+    verbose : boolean, optional
+        Print to the screen or not. Default: False.
+
+    Returns
+    -------
+    crmask : boolean numpy array
+        The cosmic ray mask (boolean) array with values of True where there are
+        cosmic ray detections.
+
+    cleanarr : float numpy array
+        The cleaned data array.
+
+    Notes
+    -----
+    To reproduce the most similar behavior to the original LA Cosmic
+    (written in IRAF), set  inmask = None, satlevel = np.inf, sepmed=False,
+    cleantype=&#39;medmask&#39;, and fsmode=&#39;median&#39;.
+
+    The original IRAF version distinguishes between spectroscopic and imaging
+    data. This version does not.
+
+    For best results on spectra, we recommend that you include an estimate of the background.
+    One can generally obtain this by fitting columns with a smooth function. To efficiently identify
+    cosmic rays, LA Cosmic and therefore astroscrappy estimates the cosmic ray free noise by smoothing
+    the variance using a median filter. To minimize false positives on bright sky lines, if ``inbkg`` is
+    provided, we do not smooth the variance contribution from the provided background. We only smooth
+    the variance that is in addition to the Poisson contribution from the background so that we do
+    not underestimate the noise (and therefore run the risk of flagging false positives) near narrow, bright
+    sky lines.
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that, the default values of <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> are different from the original L.A.Cosmic IRAF version (as in <code class="docutils literal notranslate"><span class="pre">Notes</span></code> above).</p>
+<p>Also note that the default values differ among many <a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/download.html">different versions of L.A.Cosmic</a>, hence there is no <strong>true default</strong>. You should find the best set of parameters for your data. You may use the following default for instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># I skipped two params in LACOSMIC: gain=2.0, readnoise=6.</span>
+<span class="n">LACOSMIC_KEYS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sigclip</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">sigfrac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">objlim</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                     <span class="n">satlevel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">pssl</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                     <span class="n">cleantype</span><span class="o">=</span><span class="s1">&#39;medmask&#39;</span><span class="p">,</span> <span class="n">fsmode</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="n">psfmodel</span><span class="o">=</span><span class="s1">&#39;gauss&#39;</span><span class="p">,</span>
+                     <span class="n">psffwhm</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">psfsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">psfk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">psfbeta</span><span class="o">=</span><span class="mf">4.765</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Actually, <code class="docutils literal notranslate"><span class="pre">objlim</span></code> is 1 in IRAF version of L.A.Cosmic, but that may not work correctly in some cases. Thus, I use <code class="docutils literal notranslate"><span class="pre">objlim=5</span></code> as default.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="images-we-will-use">
+<h2><span class="section-number">1.5. </span>Images We Will Use<a class="headerlink" href="#images-we-will-use" title="Permalink to this heading">#</a></h2>
+<p>First, following is the image we will use for our purpose (they are already included in our Tutorial_Data folder.):</p>
+<ul class="simple">
+<li><p>The original data can be accessed available <a class="reference external" href="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/cadcbin/ssos/ssosclf.pl?lang=en&amp;object=pluto&amp;search=bynameMPC&amp;epoch1=2011-06-25&amp;epoch2=2011-07-05&amp;eellipse=&amp;eunits=arcseconds&amp;extres=no&amp;xyres=no">here</a>. I used the file <code class="docutils literal notranslate"><span class="pre">IBO821KVQ_FLT.fits</span></code> here.</p></li>
+<li><p>The images are taken on 2011-06-28 to 2011-07-03, which were used for [finding the fourth satellite of Pluto](<a class="reference external" href="https://science.nasa.gov/science-new">https://science.nasa.gov/science-new</a>
+s/science-at-nasa/2011/20jul_p4).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">DATAPATH</span> <span class="o">/</span> <span class="s1">&#39;Pluto1.fits&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hdul</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ../../Tutorial_Data/Pluto1.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     314   ()      
+  1  SCI           1 ImageHDU       175   (513, 512)   float32   
+  2  ERR           1 ImageHDU        51   (513, 512)   float32   
+  3  DQ            1 ImageHDU        43   (513, 512)   int16   
+  4  D2IMARR       1 ImageHDU        15   (64, 32)   float32   
+  5  D2IMARR       2 ImageHDU        15   (64, 32)   float32   
+  6  WCSDVARR      1 ImageHDU        15   (64, 32)   float32   
+  7  WCSDVARR      2 ImageHDU        15   (64, 32)   float32   
+  8  WCSCORR       1 BinTableHDU     59   7R x 24C   [40A, I, A, 24A, 24A, 24A, 24A, D, D, D, D, D, D, D, D, 24A, 24A, D, D, D, D, J, 40A, 128A]   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the results of <code class="docutils literal notranslate"><span class="pre">.info()</span></code>, you can see a total of 9 extensions.</p>
+<ul class="simple">
+<li><p>The 0-th is the Primary HDU without any data (only header shared by all other extensions).</p></li>
+<li><p>The 1-th is the science HDU with 513 by 512 pixels.</p></li>
+<li><p>The 2-th is the error-map.</p></li>
+<li><p>Other extensions are just other auxiliary results.</p></li>
+</ul>
+<p>Because of this multi extension (remember the term <em>MEF</em>? See <a class="reference internal" href="01-fits-basic.html#ch-fits-basic"><span class="std std-ref">FITS basics</span></a>), we need to <strong>combine</strong> the headers of both the extensions 0 and 1 to have all the information about <code class="docutils literal notranslate"><span class="pre">SCI</span></code>, for example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgrid_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">nrows_ncols</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">axes_pad</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">),</span>
+    <span class="n">label_mode</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="c1">#&quot;L&quot;</span>
+    <span class="n">share_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cbar_location</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+    <span class="n">cbar_mode</span><span class="o">=</span><span class="s2">&quot;each&quot;</span><span class="p">,</span> <span class="c1">#&quot;each&quot;,</span>
+    <span class="n">cbar_size</span><span class="o">=</span><span class="s2">&quot;7%&quot;</span><span class="p">,</span>
+    <span class="n">cbar_pad</span><span class="o">=</span><span class="s2">&quot;2%&quot;</span>
+<span class="p">)</span>
+
+<span class="n">kws</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># sub-gridding one of the Axes (see nrows_ncols)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">ImageGrid</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="o">**</span><span class="n">imgrid_kw</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cax</span><span class="p">,</span> <span class="n">kw</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">cbar_axes</span><span class="p">,</span> <span class="n">kws</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c1"># grid.cbar_axes[0].colorbar(im)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ef5d29b992fb208357755faaa8c2454ef768744615792deb4a1a1312484f4ba2.png" src="../_images/ef5d29b992fb208357755faaa8c2454ef768744615792deb4a1a1312484f4ba2.png" />
+</div>
+</div>
+<p>They are the same image; the left is simple linear stretch with zscale option, while the right is log strectch without zscale.</p>
+<p>From the “cross” patterns of bright sources, you can see that there are at least two very bright sources at the center of the image.</p>
+</section>
+<section id="proper-input-parameters">
+<h2><span class="section-number">1.6. </span>Proper Input Parameters<a class="headerlink" href="#proper-input-parameters" title="Permalink to this heading">#</a></h2>
+<p>You may wonder then which parameter values are the best. Although there is no single best value set, there are some rules of thumb:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/pars.html">P. G. van Dokkum</a> suggests <strong>HST WFPC2</strong> (removed from HST on 2009-05-14 UT; re## 5. Proper Input Parameters</p></li>
+</ol>
+</div></blockquote>
+<p>You may wonder then which parameter values are the best. Although there is no single best value set, there are some rules of thumb:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://www.astro.yale.edu/dokkum/lacosmic/pars.html">P. G. van Dokkum</a> suggests <strong>HST WFPC2</strong> (removed from HST on 2009-05-14 UT; replaced with WFC3) gives good results with: <code class="docutils literal notranslate"><span class="pre">gain=7.,</span> <span class="pre">readnoise=5.,</span> <span class="pre">objlim=4</span> <span class="pre">(default),</span> <span class="pre">sigclip=4.5</span> <span class="pre">(default),</span> <span class="pre">sigfrac=0.3</span> <span class="pre">(default),</span> <span class="pre">niter=4</span> <span class="pre">(default)</span></code>. <code class="docutils literal notranslate"><span class="pre">objlim=5</span></code> can be used if you want to be more stringent in discriminating CR hit.</p></li>
+<li><p>Unlike WFPC3, WFC3 has calibrated image in the unit of electrons per second, not in the unit of ADU. So we need gain to be unity.</p></li>
+</ol>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ccdproc</span></code> provides its own ways to do CR rejection: in the classic L.A.Cosmic like way (<a class="reference external" href="http://ccdproc.readthedocs.io/en/stable/api/ccdproc.cosmicray_lacosmic.html#ccdproc.cosmicray_lacosmic"><code class="docutils literal notranslate"><span class="pre">cosmicray_lacosmic</span></code></a>), and the <a class="reference external" href="http://ccdproc.readthedocs.io/en/stable/api/ccdproc.cosmicray_median.html#ccdproc.cosmicray_median"><code class="docutils literal notranslate"><span class="pre">cosmicray_median</span></code></a>. Both are nothing but just <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> with different default input parameters, so you don’t have to use those.</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">CRREJ Parameters summary for detect_cosmics</p>
+<ul class="simple">
+<li><p>Detection related (important ones): <code class="docutils literal notranslate"><span class="pre">sigclip</span></code>, <code class="docutils literal notranslate"><span class="pre">sigfrac</span></code>, <code class="docutils literal notranslate"><span class="pre">objlim</span></code></p></li>
+<li><p>Kernel (fine structure) related: <code class="docutils literal notranslate"><span class="pre">fsmode</span></code></p>
+<ul>
+<li><p>If “median”: median filter of <code class="docutils literal notranslate"><span class="pre">psfsize</span></code> x <code class="docutils literal notranslate"><span class="pre">psfsize</span></code></p></li>
+<li><p>If “convolve”:</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">psfk</span></code> is given, use it as the kernel.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">psfk</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, use <code class="docutils literal notranslate"><span class="pre">psfmodel</span></code> to generate the kernel.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">psffwhm</span></code>: The FWHM for <code class="docutils literal notranslate"><span class="pre">psfmodel</span></code> of “gauss” or “moffat”.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psfk</span></code> is  <code class="docutils literal notranslate"><span class="pre">psfsize</span></code>, <code class="docutils literal notranslate"><span class="pre">psfk</span></code>, <code class="docutils literal notranslate"><span class="pre">psfbeta</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Detector specific parameters: <code class="docutils literal notranslate"><span class="pre">gain</span></code>, <code class="docutils literal notranslate"><span class="pre">rdnoise</span></code></p></li>
+<li><p>Rarely tuned parameters: <code class="docutils literal notranslate"><span class="pre">pssl</span></code>, <code class="docutils literal notranslate"><span class="pre">satlevel</span></code>, <code class="docutils literal notranslate"><span class="pre">niter</span></code></p></li>
+</ul>
+</div>
+<p>You may have noticed there’s no reason to make three parameters (<code class="docutils literal notranslate"><span class="pre">fsmode</span></code>, <code class="docutils literal notranslate"><span class="pre">psfk</span></code>, and <code class="docutils literal notranslate"><span class="pre">psfmodel</span></code>). Instead, you can use one single parameter to replace them. Thus, I have made <code class="docutils literal notranslate"><span class="pre">ysfitsutilpy.crrej</span></code> (Cosmic-Ray REJection), which has two important differences from <code class="docutils literal notranslate"><span class="pre">astroscrappy.detect_cosmics</span></code>:</p>
+<ol class="arabic simple">
+<li><p>It adds <code class="docutils literal notranslate"><span class="pre">CRNFIX</span></code> keyword to the header (number of pixels corrected by crrej), and adds <code class="docutils literal notranslate"><span class="pre">HISTORY</span></code> to log parameters used in the rejection process.</p></li>
+<li><p>Introduce a convenience argument, <code class="docutils literal notranslate"><span class="pre">fs</span></code>, which replaces three arguments (<code class="docutils literal notranslate"><span class="pre">fsmode</span></code>, <code class="docutils literal notranslate"><span class="pre">psfmodel</span></code>, and <code class="docutils literal notranslate"><span class="pre">psfk</span></code>) used in <code class="docutils literal notranslate"><span class="pre">astroscrappy.detect_cosmics</span></code>. For details, see the note below.</p></li>
+</ol>
+<div class="dropdown tip admonition">
+<p class="admonition-title">fs parameter detailed explanation</p>
+<p><code class="docutils literal notranslate"><span class="pre">fs</span></code> can be one of <code class="docutils literal notranslate"><span class="pre">{'median',</span> <span class="pre">'gauss',</span> <span class="pre">'gaussx',</span> <span class="pre">'gaussy',</span> <span class="pre">'moffat'}</span></code>, <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Defines the method to generate the fine structure. This replaces <code class="docutils literal notranslate"><span class="pre">fsmode</span></code>, <code class="docutils literal notranslate"><span class="pre">psfmodel</span></code>, <code class="docutils literal notranslate"><span class="pre">psfk</span></code> of <code class="docutils literal notranslate"><span class="pre">astroscrappy.detect_cosmics</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fs='median'</span></code>: Use the median filter in the standard LA Cosmic algorithm. None of <code class="docutils literal notranslate"><span class="pre">psffwhm</span></code>, <code class="docutils literal notranslate"><span class="pre">psfsize</span></code>, and <code class="docutils literal notranslate"><span class="pre">psfbeta</span></code> are used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fs</span></code> is other <code class="docutils literal notranslate"><span class="pre">str</span></code>: Use a Gaussian/Moffat model to generate the psf kernel. <code class="docutils literal notranslate"><span class="pre">'gauss'|'moffat'</span></code> produce circular PSF kernels. <code class="docutils literal notranslate"><span class="pre">'gaussx'|'gaussy'</span></code> produce Gaussian kernels in the x and y directions respectively. <code class="docutils literal notranslate"><span class="pre">psffwhm</span></code>, <code class="docutils literal notranslate"><span class="pre">psfsize</span></code> (plus <code class="docutils literal notranslate"><span class="pre">psfbeta</span></code> if <code class="docutils literal notranslate"><span class="pre">&quot;moffat&quot;</span></code>) are used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fs</span></code> is an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>: PSF kernel array to use for the fine structure image. None of <code class="docutils literal notranslate"><span class="pre">psffwhm</span></code>, <code class="docutils literal notranslate"><span class="pre">psfsize</span></code>, and <code class="docutils literal notranslate"><span class="pre">psfbeta</span></code> are used.</p></li>
+</ul>
+<p>Summary of <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> VS <code class="docutils literal notranslate"><span class="pre">ysfitsutilpy</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fsmode=&quot;median&quot;</span></code> == <code class="docutils literal notranslate"><span class="pre">fs=&quot;median&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fsmode=&quot;convolve&quot;,</span> <span class="pre">psfmodel=xxx</span></code> == <code class="docutils literal notranslate"><span class="pre">fs=xxx</span></code>, where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> can be any of <code class="docutils literal notranslate"><span class="pre">{'gauss',</span> <span class="pre">'gaussx',</span> <span class="pre">'gaussy',</span> <span class="pre">'moffat'}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fsmode=&quot;convolve&quot;,</span> <span class="pre">psfk=&lt;ndarray&gt;</span></code> == <code class="docutils literal notranslate"><span class="pre">fs=&lt;ndarray&gt;</span></code></p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">fs=None</span></code>, CR rejection will not happen and copy of input <code class="docutils literal notranslate"><span class="pre">ccd</span></code> will be returned.</p>
+</div>
+<p>I will just demonstrate how to use <code class="docutils literal notranslate"><span class="pre">astroscrappy.detect_cosmics</span></code> for CR rejection.</p>
+<p>If you have read the documentation above, you will ask how to get the gain and readnoise value (which are input parameters). Everything is in the header as usual. But because HST image has a very long header, <strong>let me guide you how to find this information</strong>.</p>
+<section id="looking-into-the-header">
+<h3><span class="section-number">1.6.1. </span>Looking Into the Header<a class="headerlink" href="#looking-into-the-header" title="Permalink to this heading">#</a></h3>
+<p>First, open the image with, e.g., ds9, and copy all the primary and SCI headers to notepad. Then find (e.g., ctrl+F) <code class="docutils literal notranslate"><span class="pre">gain</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, and <code class="docutils literal notranslate"><span class="pre">unit</span></code>. Then you will get</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BUNIT</span>   <span class="o">=</span> <span class="s1">&#39;ELECTRONS&#39;</span>          <span class="o">/</span> <span class="n">brightness</span> <span class="n">units</span>                               
+<span class="o">...</span>
+              <span class="o">/</span> <span class="n">CALIBRATED</span> <span class="n">ENGINEERING</span> <span class="n">PARAMETERS</span>                               
+<span class="n">ATODGNA</span> <span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">gain</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">A</span>                
+<span class="n">ATODGNB</span> <span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">gain</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">B</span>                
+<span class="n">ATODGNC</span> <span class="o">=</span>        <span class="mf">1.5599999E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">gain</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">C</span>                
+<span class="n">ATODGND</span> <span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">gain</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">D</span>                
+
+<span class="n">READNSEA</span><span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">read</span> <span class="n">noise</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">A</span>          
+<span class="n">READNSEB</span><span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">read</span> <span class="n">noise</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">B</span>          
+<span class="n">READNSEC</span><span class="o">=</span>        <span class="mf">3.0799999E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">read</span> <span class="n">noise</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">C</span>          
+<span class="n">READNSED</span><span class="o">=</span>        <span class="mf">0.0000000E+00</span> <span class="o">/</span> <span class="n">calibrated</span> <span class="n">read</span> <span class="n">noise</span> <span class="k">for</span> <span class="n">amplifier</span> <span class="n">D</span>          
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Now you see some words like <code class="docutils literal notranslate"><span class="pre">amplifier</span></code>. It seems like the amplifier we are using is important. Intuitively it should be C because in all other cases you have gain and read noise 0. Indeed, you may find</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CCDAMP</span>  <span class="o">=</span> <span class="s1">&#39;C   &#39;</span>               <span class="o">/</span> <span class="n">CCD</span> <span class="n">Amplifier</span> <span class="n">Readout</span> <span class="n">Configuration</span>            
+</pre></div>
+</div>
+<p>Now, you can use</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gain</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;ATODGNC&quot;</span><span class="p">]</span>
+<span class="n">readnoise</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;READNSEC&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>But there is one more thing to care! The image is in <strong>electrons unit, not in ADU</strong>. Therefore, we have to insert the <code class="docutils literal notranslate"><span class="pre">gain</span></code> argument as unity regardless of the header information (because <code class="docutils literal notranslate"><span class="pre">BUNIT</span> <span class="pre">=</span> <span class="pre">'ELECTRONS'</span></code> means that the gain of 1.5599… was <em>already</em> multiplied to all the pixels!).</p>
+<p>Keeping this information, we do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">hdul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span> <span class="o">+</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">electron</span><span class="p">)</span>
+<span class="n">gain</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># not hdr[&quot;ATODGNC&quot;] !!!!</span>
+<span class="n">readnoise</span> <span class="o">=</span> <span class="n">ccd</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;READNSEC&quot;</span><span class="p">]</span>
+
+<span class="c1"># I skipped two params in LACOSMIC: gain=2.0, readnoise=6.</span>
+<span class="n">LACOSMIC_KEYS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sigclip</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">sigfrac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">objlim</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                     <span class="n">satlevel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">inbkg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                     <span class="n">cleantype</span><span class="o">=</span><span class="s1">&#39;medmask&#39;</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">,</span>
+                     <span class="n">psffwhm</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">psfsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">psfbeta</span><span class="o">=</span><span class="mf">4.765</span><span class="p">)</span>
+
+<span class="c1"># Following should give identical result to IRAF L.A.Cosmic,</span>
+<span class="c1"># &quot;m_LA&quot; is the mask image</span>
+<span class="n">ccd_lacosmic</span><span class="p">,</span> <span class="n">m_lacosmic</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">crrej</span><span class="p">(</span>
+    <span class="n">ccd</span><span class="p">,</span>
+    <span class="n">sepmed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># IRAF LACosmic is sepmed=False</span>
+    <span class="n">gain</span><span class="o">=</span><span class="n">gain</span><span class="p">,</span>
+    <span class="n">rdnoise</span><span class="o">=</span><span class="n">readnoise</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">LACOSMIC_KEYS</span>
+<span class="p">)</span>
+<span class="c1"># obj_LA.write(DATAPATH / &#39;Pluto1_LA.fits&#39;, overwrite=True)</span>
+
+
+<span class="c1"># Following is the &quot;fastest&quot; astroscrappy version.</span>
+<span class="n">ccd_sepmed</span><span class="p">,</span> <span class="n">m_sepmed</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">crrej</span><span class="p">(</span>
+    <span class="n">ccd</span><span class="p">,</span>
+    <span class="n">sepmed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">gain</span><span class="o">=</span><span class="n">gain</span><span class="p">,</span>
+    <span class="n">rdnoise</span><span class="o">=</span><span class="n">readnoise</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">LACOSMIC_KEYS</span>
+<span class="p">)</span>
+<span class="c1"># obj_cr.write(DATAPATH / &#39;Pluto1_CR.fits&#39;, overwrite=True)</span>
+
+<span class="n">imgrid_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">nrows_ncols</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">axes_pad</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">),</span>
+    <span class="n">label_mode</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>  <span class="c1"># &quot;L&quot;</span>
+    <span class="n">share_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cbar_location</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+    <span class="n">cbar_mode</span><span class="o">=</span><span class="s2">&quot;each&quot;</span><span class="p">,</span>  <span class="c1"># &quot;each&quot;,</span>
+    <span class="n">cbar_size</span><span class="o">=</span><span class="s2">&quot;7%&quot;</span><span class="p">,</span>
+    <span class="n">cbar_pad</span><span class="o">=</span><span class="s2">&quot;2%&quot;</span>
+<span class="p">)</span>
+
+<span class="n">kws</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># sub-gridding one of the Axes (see nrows_ncols)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">ImageGrid</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="o">**</span><span class="n">imgrid_kw</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cax</span><span class="p">,</span> <span class="n">kw</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">cbar_axes</span><span class="p">,</span> <span class="n">kws</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c1"># grid.cbar_axes[0].colorbar(im)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting 4 L.A.Cosmic iterations
+Iteration 1:
+3216 cosmic pixels this iteration
+Iteration 2:
+1075 cosmic pixels this iteration
+Iteration 3:
+277 cosmic pixels this iteration
+Iteration 4:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>151 cosmic pixels this iteration
+HISTORY  Cosmic-Ray rejection (CRNFIX=4524 pixels fixed) by astroscrappy (v 1.1.1.dev8+g783f217). Parameters: {&#39;gain&#39;: 1.0, &#39;readnoise&#39;: 3.0799999, &#39;sigclip&#39;: 4.5, &#39;sigfrac&#39;: 0.5, &#39;objlim&#39;: 5.0, &#39;satlevel&#39;: inf, &#39;niter&#39;: 4, &#39;sepmed&#39;: False, &#39;cleantype&#39;: &#39;medmask&#39;, &#39;fsmode&#39;: &#39;median&#39;}
+HISTORY  ..................................(dt = 0.263 s) 2023-08-20T10:34:27.598
+Starting 4 L.A.Cosmic iterations
+Iteration 1:
+3760 cosmic pixels this iteration
+Iteration 2:
+1007 cosmic pixels this iteration
+Iteration 3:
+276 cosmic pixels this iteration
+Iteration 4:
+186 cosmic pixels this iteration
+HISTORY  Cosmic-Ray rejection (CRNFIX=4948 pixels fixed) by astroscrappy (v 1.1.1.dev8+g783f217). Parameters: {&#39;gain&#39;: 1.0, &#39;readnoise&#39;: 3.0799999, &#39;sigclip&#39;: 4.5, &#39;sigfrac&#39;: 0.5, &#39;objlim&#39;: 5.0, &#39;satlevel&#39;: inf, &#39;niter&#39;: 4, &#39;sepmed&#39;: True, &#39;cleantype&#39;: &#39;medmask&#39;, &#39;fsmode&#39;: &#39;median&#39;}
+HISTORY  ..................................(dt = 0.108 s) 2023-08-20T10:34:27.711
+</pre></div>
+</div>
+<img alt="../_images/ef5d29b992fb208357755faaa8c2454ef768744615792deb4a1a1312484f4ba2.png" src="../_images/ef5d29b992fb208357755faaa8c2454ef768744615792deb4a1a1312484f4ba2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toplot</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">m_lacosmic</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Detected CR (no sepmed)&quot;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ccd_lacosmic</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CR rejected (no sepmed)&#39;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ccd_lacosmic</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CR rejected (no sepmed)&#39;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">m_sepmed</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Detected CR (using sepmed)&#39;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ccd_sepmed</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CR rejected (using sepmed)&#39;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ccd_sepmed</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;CR rejected (using sepmed)&#39;</span><span class="p">,</span>
+        <span class="n">kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">imgrid_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">nrows_ncols</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">axes_pad</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+    <span class="n">label_mode</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="c1">#&quot;L&quot;</span>
+    <span class="n">share_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cbar_location</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+    <span class="n">cbar_mode</span><span class="o">=</span><span class="s2">&quot;each&quot;</span><span class="p">,</span> <span class="c1">#&quot;each&quot;,</span>
+    <span class="n">cbar_size</span><span class="o">=</span><span class="s2">&quot;7%&quot;</span><span class="p">,</span>
+    <span class="n">cbar_pad</span><span class="o">=</span><span class="s2">&quot;15%&quot;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># sub-gridding one of the Axes (see nrows_ncols)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">ImageGrid</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="o">**</span><span class="n">imgrid_kw</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cax</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">cbar_axes</span><span class="p">,</span> <span class="n">toplot</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;kw&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">cax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">(),</span> <span class="mi">3</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="c1"># grid.cbar_axes[0].colorbar(im)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/b1/mdnx6bfn6_v7p70xc3hpc9vh0000gn/T/ipykernel_57299/3368752971.py:54: UserWarning: FixedFormatter should only be used together with FixedLocator
+  cax.set_xticklabels(np.around(cax.get_xticks(), 3), rotation=30, fontsize=10,
+</pre></div>
+</div>
+<img alt="../_images/5fb26236fd9ff4cd5c21690904ad013aa27377a23a7f769dc79e85287dfa35ec.png" src="../_images/5fb26236fd9ff4cd5c21690904ad013aa27377a23a7f769dc79e85287dfa35ec.png" />
+</div>
+</div>
+<p>Here, I found <code class="docutils literal notranslate"><span class="pre">objlim=5.0</span></code> gives a reasonable result regardless of other parameters. As you can see, the bright part of the target is regarded as cosmic rays. You can tune <code class="docutils literal notranslate"><span class="pre">objlim</span></code> for your purpose:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">objlim</span></code> is small, more cosmic rays will be rejected, but bright stars will also be regarded as part of cosmic rays.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">objlim</span></code> is large, fewer cosmic rays will be rejected, but bright stars will less likely to be regarded as part of cosmic rays.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The biggest difference between L.A.Cosmic and astroscrappy is the <code class="docutils literal notranslate"><span class="pre">sepmed</span></code> option. If you set <code class="docutils literal notranslate"><span class="pre">sepmed=False</span></code>, <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> should give you the identical result as L.A.Cosmic’s IRAF version (I have not checked this).</p>
+</div>
+</section>
+</section>
+<section id="comparing-two-results">
+<h2><span class="section-number">1.7. </span>Comparing Two Results<a class="headerlink" href="#comparing-two-results" title="Permalink to this heading">#</a></h2>
+<p>When conducting research, you may have to spend some time to remove CRs correctly. If not, the pixels of your object is affected in an unwanted way. Here, I will compare the two results we obtained above, just as a demonstration of how you could do the comparison of many combinations of parameter sets:</p>
+<ol class="arabic simple">
+<li><p>lacosmic = Using <code class="docutils literal notranslate"><span class="pre">sepmed=False</span></code> (Original L.A. Cosmic)</p></li>
+<li><p>sepmed = Using <code class="docutils literal notranslate"><span class="pre">sepmed=True</span></code> (only available via <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>)</p></li>
+</ol>
+<p>I analyzed using the <code class="docutils literal notranslate"><span class="pre">diff</span></code> which is defined as <span class="math notranslate nohighlight">\( \mathrm{diff} = \frac{sepmed - lacosmic}{lacosmic} \)</span>. The reason I used lacosmic as the denominator is that I want to assume lacosmic as the “correct” result. Traditionally, people have been using lacosmic (<code class="docutils literal notranslate"><span class="pre">sepmed=False</span></code>) for the CR rejection technique.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">ccd_sepmed</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="n">ccd_lacosmic</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">ccd_lacosmic</span><span class="o">.</span><span class="n">data</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">ccd_sepmed</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">im</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu&quot;</span><span class="p">)</span>
+<span class="n">cax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;(sepmed - lacosmic) / lacosmic&quot;</span><span class="p">)</span>
+
+<span class="n">meaningful_diff</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="n">diff</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">meaningful_diff</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;# of pixels&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;(sepmed - lacosmic) / lacosmic&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All range (N = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">meaningful_diff</span><span class="p">)</span><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">meaningful_diff2</span> <span class="o">=</span> <span class="n">meaningful_diff</span><span class="p">[</span><span class="n">meaningful_diff</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">meaningful_diff2</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;# of pixels&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;(sepmed - lacosmic) / lacosmic&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;diff &lt; 1 (N = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">meaningful_diff2</span><span class="p">)</span><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(55.93879318237305, 54.1514892578125, 12.565288543701172)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;diff &lt; 1 (N = 1540)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/56e680e18d726a9d4339f0cc352c58607e23efdb8afbbbe42ca54adcd77a3a46.png" src="../_images/56e680e18d726a9d4339f0cc352c58607e23efdb8afbbbe42ca54adcd77a3a46.png" />
+</div>
+</div>
+<p>Note that the sigma-clipped value (sky) is ~ 54 ± 12.6. The vast majority of pixel value difference (1540/1662) is within |diff| &lt; 1, i.e., &lt; 10% of the sky fluctuation.</p>
+<ol class="arabic simple">
+<li><p>On the left, I drew the <code class="docutils literal notranslate"><span class="pre">diff</span></code>. You can see that most pixels are unaffected.</p></li>
+<li><p>In the middle is the histogram in log scale.</p></li>
+<li><p>On the right is the histogram but in the range of -1 or higher.</p></li>
+</ol>
+<p>For plotting histogram, I used <code class="docutils literal notranslate"><span class="pre">meaningful_diff</span></code>, which contains pixel values that have been affected by the CR rejection process. So N=1662 in the title means that there are 1662 pixels which have been modified by the CR rejection process. As you can see, most pixels have <code class="docutils literal notranslate"><span class="pre">diff</span></code> nearly 0, which means the difference between the two methods is not significant.
+(Since CR cannot be negative, the <code class="docutils literal notranslate"><span class="pre">diff</span></code> cannot be smaller than -1)</p>
+<p>Note that more than 90% (1540 / 1662) have <code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">&lt;</span> <span class="pre">1</span></code>, and most are concentrated to <code class="docutils literal notranslate"><span class="pre">|diff|</span> <span class="pre">&lt;</span> <span class="pre">0.1</span></code>. Since the difference we are looking at are the pixels contaminated by CR, this amount of difference is not necessarily important, unless you are seeking for higher accuracy.</p>
+<p>To look at the statistics of the results, you may use the convenience function in <code class="docutils literal notranslate"><span class="pre">ysfitsutilpy</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_stats</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">give_stats</span><span class="p">(</span><span class="n">meaningful_diff</span><span class="p">,</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="n">N_extrema</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics of all 1662 pixels:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">diff_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">&gt;16s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics of 1540 (|diff| &lt; 1) pixels:&quot;</span><span class="p">)</span>
+<span class="n">diff_stats2</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">give_stats</span><span class="p">(</span><span class="n">meaningful_diff2</span><span class="p">,</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="n">N_extrema</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">diff_stats2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">&gt;16s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistics of all 1662 pixels:
+             num: 1662
+             min: -0.9977827072143555
+             max: 194.25587463378906
+             avg: 1.1528499126434326
+             med: -0.05993669852614403
+             std: 9.674087524414062
+          madstd: 0.4192733074992082
+     percentiles: [1, 5, 10, 90, 95, 99]
+             pct: [-0.99065375 -0.88183324 -0.6983867   0.6824057   1.98904997 39.84135738]
+          slices: None
+            zmin: -0.9944855570793152
+            zmax: 2.625246304912655
+          ext_lo: [-0.9977827  -0.99448556 -0.99421215 -0.9937287  -0.9936276 ]
+          ext_hi: [ 88.89464 112.83004 145.43611 154.92622 194.25587]
+
+Statistics of 1540 (|diff| &lt; 1) pixels:
+             num: 1540
+             min: -0.9977827072143555
+             max: 0.996606707572937
+             avg: -0.2093142867088318
+             med: -0.08727043867111206
+             std: 0.39265233278274536
+          madstd: 0.31594443452083076
+     percentiles: [1, 5, 10, 90, 95, 99]
+             pct: [-0.99091346 -0.89336469 -0.72192521  0.11380654  0.53229745  0.87375919]
+          slices: None
+            zmin: -0.9944855570793152
+            zmax: 0.996606707572937
+          ext_lo: [-0.9977827  -0.99448556 -0.99421215 -0.9937287  -0.9936276 ]
+          ext_hi: [0.955065   0.96745455 0.9800623  0.98289365 0.9966067 ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to do some advanced reduction for HST data, you may use <code class="docutils literal notranslate"><span class="pre">drizzlepac</span></code>. In Python, you may refer to <a class="reference external" href="http://drizzlepac.readthedocs.io/en/deployment/astrodrizzle.html">this website</a> for using it as <code class="docutils literal notranslate"><span class="pre">drizzlepac.astrodrizzle.Astrodrizzle(input=&quot;Pluto1.fits&quot;,</span> <span class="pre">output=&quot;final&quot;,</span> <span class="pre">editpars=True)</span></code>. Each parameter should be tuned carefully by referring to the <a class="reference external" href="http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/drizzlepac.pdf">Drizzlepac Handbook</a> (v1.0, 2012)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chaps"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="21-specpreface.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Python Spectroscopy Preface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="00-Philosophy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Philosophy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-astroscrappy">1.2. Download Astroscrappy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-what-images-do-we-use-astroscrappy">1.3. To What Images Do We Use <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astroscrappy-documentation">1.4. <code class="docutils literal notranslate"><span class="pre">astroscrappy</span></code> Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-we-will-use">1.5. Images We Will Use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-input-parameters">1.6. Proper Input Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-into-the-header">1.6.1. Looking Into the Header</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-two-results">1.7. Comparing Two Results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoonsoo P. Bach
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

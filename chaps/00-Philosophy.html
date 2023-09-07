@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Philosophy &#8212; SNU AO Class Python</title>
+    <title>1. Philosophy &#8212; SNU AO Class Python</title>
   
   
   
@@ -48,7 +48,6 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -68,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="IRAF (DEPRECATED)" href="appendix/S01_IRAF.html" />
-    <link rel="prev" title="5. PSF Photometry" href="10-psf02.html" />
+    <link rel="next" title="2. IRAF (DEPRECATED)" href="appendix/S01_IRAF.html" />
+    <link rel="prev" title="1. Cosmic-Ray Rejection" href="A0-crrej.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,10 +191,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="09-psf01.html">4. PSF Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Long-Slit Spectroscopy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-specstat.html">1. First Look at Longslit Data</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="21-specpreface.html">3. Python Spectroscopy Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A0-crrej.html">1. Cosmic-Ray Rejection</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Philosophy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">IRAF (DEPRECATED)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">2. IRAF (DEPRECATED)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -414,23 +423,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note">A Note</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-software-and-programming-language">Choosing Software and Programming Language</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-of-iraf">Problems of IRAF</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note">1.1. A Note</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-software-and-programming-language">1.2. Choosing Software and Programming Language</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-of-iraf">1.2.1. Problems of IRAF</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#human-power-issues">Human Power Issues</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#iraf-is-old">IRAF is Old</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#license-and-documentation-problems">License and Documentation Problems</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyraf-and-its-problems">PyRAF and Its Problems</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idl-and-its-problems">IDL and Its Problems</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-iraf-and-idl-usage">Examples of IRAF and IDL Usage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-major-facilities-want-freedom-from-iraf">New Major Facilities Want Freedom from IRAF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-an-alternative">Python: An Alternative</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-use-python">So… Use Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyraf-and-its-problems">1.2.2. PyRAF and Its Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idl-and-its-problems">1.2.3. IDL and Its Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-iraf-and-idl-usage">1.2.4. Examples of IRAF and IDL Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-major-facilities-want-freedom-from-iraf">1.2.5. New Major Facilities Want Freedom from IRAF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-an-alternative">1.2.6. Python: An Alternative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-use-python">1.2.7. So… Use Python</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-into-a-new-curriculum-and-possible-pitfalls">Transformation into a New Curriculum and Possible Pitfalls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-into-a-new-curriculum-and-possible-pitfalls">1.3. Transformation into a New Curriculum and Possible Pitfalls</a></li>
 </ul>
             </nav>
         </div>
@@ -479,7 +488,7 @@ document.write(`
 </ul>
 </nav>
 <section class="tex2jax_ignore mathjax_ignore" id="philosophy">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Philosophy</a><a class="headerlink" href="#philosophy" title="Permalink to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id1" role="doc-backlink"><span class="section-number">1. </span>Philosophy</a><a class="headerlink" href="#philosophy" title="Permalink to this heading">#</a></h1>
 <p>All the lecture materials were first made for “<strong>Astronomical Observation</strong>” (AO hereafter) of the Dept. of Astronomy of Seoul National University in 2017. Then gradually updated as time went on.</p>
 <ul class="simple">
 <li><p>Lecturer: Prof. Masateru Ishiguro</p></li>
@@ -487,7 +496,7 @@ document.write(`
 </ul>
 <p>This preface contains some comments to explain the ground philosophy while making the lecture notes and the reason for transforming from the previous IRAF/IDL-based AO system to a Python3-based system.</p>
 <section id="a-note">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">A Note</a><a class="headerlink" href="#a-note" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink"><span class="section-number">1.1. </span>A Note</a><a class="headerlink" href="#a-note" title="Permalink to this heading">#</a></h2>
 <p>I was lucky to have opportunities to serve as a TA at the AO class at SNU for years. In 2016, I found that the systems of IRAF and IDL prevailing in astronomy will only hinder our development and lead our academic society to a future dependent on commercial companies; later, I also noticed the possibility of legal issues*. IRAF is a large black box, which indeed does not work as it is described in the manual or as we’d expect (from image combination and aperture photometry to the PyRAF problem**). People have been using it just because there was no alternative, and these hidden bugs do not give an error much larger than our expected precision, but we’ve got to regret that we didn’t have systematic “testing modules” and just assumed it worked correctly.</p>
 <p>I have tried my best to discard all pieces of IDL and most of IRAF and replace them all with Python. These are the skeletons for photometry and polarimetry tools I developed for my observational research†.</p>
 <p>* See 2.1.3 below. Also, P01 in ppt mentions this.</p>
@@ -495,9 +504,9 @@ document.write(`
 <p>† SNUO1Mpy; TRIPOLpy; NICpolpy; Bach, Ishiguro, Jin et al. 2019 (4179 Toutatis, JKAS); Takahashi+2020 (submitted); Pravec et al. (1999 KW4, in prep), Ishiguro, Bach, Jin et al. (2005 UD, in prep); Bach, Ishiguro et al. (Vesta and Ceres, in prep), Craig, McCully, Conseil, Bach (astropy Image-combination in ccdproc); Geem, Ishiguro et al. (1984QY1+, in prep); Heintz and Finbo (<a class="reference external" href="https://keheintz.github.io/PyReduc/">PyReduc</a>)</p>
 </section>
 <section id="choosing-software-and-programming-language">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Choosing Software and Programming Language</a><a class="headerlink" href="#choosing-software-and-programming-language" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><span class="section-number">1.2. </span>Choosing Software and Programming Language</a><a class="headerlink" href="#choosing-software-and-programming-language" title="Permalink to this heading">#</a></h2>
 <section id="problems-of-iraf">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Problems of IRAF</a><a class="headerlink" href="#problems-of-iraf" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink"><span class="section-number">1.2.1. </span>Problems of IRAF</a><a class="headerlink" href="#problems-of-iraf" title="Permalink to this heading">#</a></h3>
 <p>For decades, IRAF by NOAO has become a virtual standard for astronomical image reduction processes. As with any other tool, it has also had some problems, and I want to point out three of them.</p>
 <ol class="arabic simple">
 <li><p>No human power exists to develop or maintain IRAF</p></li>
@@ -540,7 +549,7 @@ document.write(`
 </section>
 </section>
 <section id="pyraf-and-its-problems">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">PyRAF and Its Problems</a><a class="headerlink" href="#pyraf-and-its-problems" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">1.2.2. </span>PyRAF and Its Problems</a><a class="headerlink" href="#pyraf-and-its-problems" title="Permalink to this heading">#</a></h3>
 <p>PyRAF is an alternative, made of Python, to avoid those problems of IRAF, especially to alleviate the complexity / debugging problems of SPP/CL:</p>
 <blockquote>
 <div><p>Excerpt from <a class="reference external" href="http://www.stsci.edu/institute/software_hardware/pyraf/stsci_python">STScI</a>:</p>
@@ -554,14 +563,14 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="idl-and-its-problems">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">IDL and Its Problems</a><a class="headerlink" href="#idl-and-its-problems" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">1.2.3. </span>IDL and Its Problems</a><a class="headerlink" href="#idl-and-its-problems" title="Permalink to this heading">#</a></h3>
 <p>These are logical reasons why many people seek IRAF alternatives. <strong>One of such solutions is IDL</strong>. Easier scripting, OS-independent, and the fact that it is maintained by software experts made astronomers relieved and rely on this software. However, IDL also has some problems: The most important one is the <strong>license issue</strong>, and secondly, the problem as a programming language (see <a class="reference external" href="https://en.wikipedia.org/wiki/IDL_(programming_language)#Problems">here</a>). Also, it is slow when plotting graphs, especially 3-D plotting. Another important issue is that it is used by very minor groups of people in astronomy and bio-imaging, so there are not many structured manuals we can access: same as IRAF!</p>
 <p>Licenses are very critical for users, not only because of their price (SNU has spent a budget for IDL licenses comparable to that used for rebuilding the telescope at Building 45), but also because you have to purchase a license <strong>each time</strong> there is an update. You cannot use IDL 8.1 even if you have a license for IDL 8.0. Institutions will be burdened with this since many researchers should use the software, and the amount of required budget will go up almost linearly. If the institution does not support a license fee, the compatibility problem arises: Say you have source code written in IDL 8, but the institution has a license for IDL 7 only. Nevertheless, it is widely used at observatories and institutions, due to its convenience for scripting compared to IRAF.</p>
 <p>In July 2017, there was a big happening at SNU: the IDL license policy changed, and thus all the PCs of students and professors could not use IDL for a few days (IDL license needs an Internet connection, and the company shut down the older license without properly noticing it). More seriously, the updated license has a policy that does not allow more than 100 tabs. I said tabs, not computers. So if 10 users are using the SNU license and turning on 10 tabs each, no more people can use IDL. This is the weakest point of all commercial pieces of software. Especially if it is a programming language, it is a disaster.</p>
 <p>The same thing has happened almost every 2-3 months since then (added 2018 March).</p>
 </section>
 <section id="examples-of-iraf-and-idl-usage">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Examples of IRAF and IDL Usage</a><a class="headerlink" href="#examples-of-iraf-and-idl-usage" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">1.2.4. </span>Examples of IRAF and IDL Usage</a><a class="headerlink" href="#examples-of-iraf-and-idl-usage" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>NASA IRTF: You will get IDL source codes to analyze SpeX (spectroscopy observation instrument) from IRTF.</p></li>
 <li><p>Nayoro Pirka, Japan: One of the few cases of using IRAF. If you use MSI (multi spectroscopy imager), you will use the MSIRED package, which is written fully in IRAF CL.</p></li>
@@ -569,7 +578,7 @@ document.write(`
 </ul>
 </section>
 <section id="new-major-facilities-want-freedom-from-iraf">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">New Major Facilities Want Freedom from IRAF</a><a class="headerlink" href="#new-major-facilities-want-freedom-from-iraf" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">1.2.5. </span>New Major Facilities Want Freedom from IRAF</a><a class="headerlink" href="#new-major-facilities-want-freedom-from-iraf" title="Permalink to this heading">#</a></h3>
 <p>“New Major Facilities” includes HST, JWST, LSST, and future space telescopes and/or large projects.</p>
 <p>STScI, which will be the <a class="reference external" href="https://en.wikipedia.org/wiki/James_Webb_Space_Telescope#Ground_support_and_operations">Science and Operations Center of JWST</a>, as well as HST, selected Python 3 for their data production. They are now developing pipelines for JWST (<a class="reference external" href="https://github.com/STScI-JWST/jwst">github</a>). All the new packages from STScI, e.g., the famous DRIZZLEPAC (now named AstroDrizzle), support Python only (preface and Section 5.1 of this <a class="reference external" href="http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/drizzlepac.pdf">handbook</a>). The reason for choosing Python for the new era is described in the 2013 JWST Roadmap, e.g., <a class="reference external" href="http://www.stsci.edu/~ferguson/roadmap/html/intro.html#multiple-interfaces">Section 3.5</a> and why we should avoid IRAF in general in <a class="reference external" href="http://www.stsci.edu/~ferguson/roadmap/html/intro.html#remove-scientist-dependency-on-iraf">Section 4.2</a>.</p>
 <div class="dropdown admonition">
@@ -581,7 +590,7 @@ document.write(`
 </div>
 </section>
 <section id="python-an-alternative">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Python: An Alternative</a><a class="headerlink" href="#python-an-alternative" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">1.2.6. </span>Python: An Alternative</a><a class="headerlink" href="#python-an-alternative" title="Permalink to this heading">#</a></h3>
 <p>If you are a very smart person, you can, of course, directly make a binary code (11000101011101000010101101…), and this will be the most efficient way. When I was an undergrad student at KAIST, there was this professor who taught the Introduction to Programming course, which was mandatory, who said, “I had a friend who believes it is the best way to make all the programs in binary from the beginning. But the thing is, not everyone is as smart as they are.”</p>
 <p>The second-best option might be using some low-level languages, such as C, or making appropriate modifications to pre-existing IRAF to make it more efficient/faster. The thing is that we have to think about the <strong>vast majority of people who are not</strong> that smart (plus, as mentioned above, there is no one interested in developing IRAF). This is because we do not have much room to lose such people who may serve important roles in the future of astronomy. Quite a few scientists are also involved in that <em>vast majority</em>, and they are not (and likely should not) practicing being programmers.</p>
 <p>Thus, the next option we may choose, are languages which have the following strong points:</p>
@@ -610,14 +619,14 @@ document.write(`
 <p>Finally, Julia, Jupyter, Markdown (this preface is also made from md), and many future pieces of software use Python-like grammar or implement ways to use Python. Python is good for large-data analysis, too, which is the future of astronomy. The strong point of Python with Jupyter can be seen throughout this TA class. Although it is commercial, you can also find Python tools attached to Excel to make neat graphics without errors. We may need a long time to see Python fade into the past.</p>
 </section>
 <section id="so-use-python">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">So… Use Python</a><a class="headerlink" href="#so-use-python" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">1.2.7. </span>So… Use Python</a><a class="headerlink" href="#so-use-python" title="Permalink to this heading">#</a></h3>
 <p>Some astronomers dreamed of using Python for these reasons. That is now known as the Astropy Project. Alongside the “core” package, astropy, there are other packages that are listed under the name “Astropy Affiliated Packages”. You can easily manage versions of packages and update them using Anaconda, and it is extremely easy to fix bugs compared to IRAF/IDL. Astropy itself also provides neat and clean examples and manuals.</p>
 <p>Additional benefits we may get from using Python include learning how to be prepared for future environments. Even if Python becomes deprecated and a new language becomes the new <em>standard</em> someday, you can easily adapt to that new environment. On top of that, a new future language can become easier than Python, but not the other way around; your value will get higher in that era as you can cope with more languages.</p>
 <p>However, this does not mean Python has no problems. There are quite a few packages that are not stable (no stable release), even though they are considered as “widely used” and “working perfectly”. Core packages of Astropy works fairly well, but there are some <a class="reference external" href="http://docs.astropy.org/en/stable/known_issues.html">known issues</a>. Photometry and spectroscopy tools are still 0.x versions. Only photometry version (photutils) is considered as “stable” from <a class="reference external" href="http://www.astropy.org/affiliated/">Astropy affiliate website</a>. Critically, LSST and JWST are not operating yet, so all the packages are not really completed yet.</p>
 </section>
 </section>
 <section id="transformation-into-a-new-curriculum-and-possible-pitfalls">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">Transformation into a New Curriculum and Possible Pitfalls</a><a class="headerlink" href="#transformation-into-a-new-curriculum-and-possible-pitfalls" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><span class="section-number">1.3. </span>Transformation into a New Curriculum and Possible Pitfalls</a><a class="headerlink" href="#transformation-into-a-new-curriculum-and-possible-pitfalls" title="Permalink to this heading">#</a></h2>
 <p>I have briefly introduced why astronomers started using Python. You may have understood that it is at least worth considering the reformation of the structure of AO practice sessions, which had been using IRAF or IDL. The basic philosophy on which I am trying this new transformation is simple: The belief that education should let students be prepared for their future, and this should be one of its primary goals.</p>
 <p><strong>I know that it may be comfortable and easy to teach IRAF as the TA.</strong> But I wonder whether it really is an efficacious curriculum if students realize the existence/importance of Astropy <em>after</em> they graduate, while the school is teaching only IRAF. Now that the Computational Astronomy course at SNU has changed its main programming language to Python from IDL, I guess this will be a great opportunity to create a flexible Python environment at SNU in the future.
 (The note above was written in 2019. As of 2023, I am happy to see virtually all students equipped with Python skills.)</p>
@@ -682,12 +691,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="10-psf02.html"
+       href="A0-crrej.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>PSF Photometry</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Cosmic-Ray Rejection</p>
       </div>
     </a>
     <a class="right-next"
@@ -695,7 +704,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">IRAF (DEPRECATED)</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>IRAF (DEPRECATED)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -717,23 +726,23 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note">A Note</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-software-and-programming-language">Choosing Software and Programming Language</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-of-iraf">Problems of IRAF</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note">1.1. A Note</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-software-and-programming-language">1.2. Choosing Software and Programming Language</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-of-iraf">1.2.1. Problems of IRAF</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#human-power-issues">Human Power Issues</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#iraf-is-old">IRAF is Old</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#license-and-documentation-problems">License and Documentation Problems</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyraf-and-its-problems">PyRAF and Its Problems</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idl-and-its-problems">IDL and Its Problems</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-iraf-and-idl-usage">Examples of IRAF and IDL Usage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-major-facilities-want-freedom-from-iraf">New Major Facilities Want Freedom from IRAF</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-an-alternative">Python: An Alternative</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-use-python">So… Use Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyraf-and-its-problems">1.2.2. PyRAF and Its Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idl-and-its-problems">1.2.3. IDL and Its Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-iraf-and-idl-usage">1.2.4. Examples of IRAF and IDL Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-major-facilities-want-freedom-from-iraf">1.2.5. New Major Facilities Want Freedom from IRAF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-an-alternative">1.2.6. Python: An Alternative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-use-python">1.2.7. So… Use Python</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-into-a-new-curriculum-and-possible-pitfalls">Transformation into a New Curriculum and Possible Pitfalls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-into-a-new-curriculum-and-possible-pitfalls">1.3. Transformation into a New Curriculum and Possible Pitfalls</a></li>
 </ul>
   </nav></div>
 

@@ -1,0 +1,1349 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4. PSF Extraction &#8212; SNU AO Class Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/09-psf01';</script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. PSF Photometry" href="10-psf02.html" />
+    <link rel="prev" title="3. Extended Source Photometry" href="08-extended.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    SNU AO Class Python Notes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Syllabus.html">An Example Syllabus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisite</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-1_Softwares.html">1. Software Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-2_UNIX.html">2. UNIX Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/00-3_Prepare_Python.html">3. (IMPORTANT) Python Environment</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python_prep/00-python_prep.html">4. Python Preparation Course</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/01-numpy.html">4.4. Numpy Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/02-pandas.html">4.5. Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_prep/03-FITS_and_astropy.html">4.6. About <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-fits-basic.html">1. Basics about FITS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-center.html">2. Centering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-aperture.html">3. Aperture &amp; DAOFIND</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-annulus.html">4. Annulus &amp; Local Sky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-query.html">5. Querying from the Catalog</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Photometry</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06-diffphot.html">1. Differential Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-bkg2d.html">2. 2-D Backgrounds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-extended.html">3. Extended Source Photometry</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. PSF Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-psf02.html">5. PSF Photometry</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Long-Slit Spectroscopy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20-specstat.html">1. First Look at Longslit Data</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="21-specpreface.html">3. Python Spectroscopy Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A0-crrej.html">1. Cosmic-Ray Rejection</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00-Philosophy.html">1. Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/S01_IRAF.html">2. IRAF (DEPRECATED)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites/99-HW_swtools.html">HW Software &amp; Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_python_pathlib.html">HW Python Basic &amp; <code class="docutils literal notranslate"><span class="pre">pathlib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_numpy.html">HW <code class="docutils literal notranslate"><span class="pre">numpy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_pandas.html">HW <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_prep/99-HW_astropy-fits.html">HW <code class="docutils literal notranslate"><span class="pre">astropy.fits</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/09-psf01.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/09-psf01.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chaps/09-psf01.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PSF Extraction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">4.1. Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-fwhm">4.2. Initial FWHM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-pick-results">4.3. Load the <code class="docutils literal notranslate"><span class="pre">Pick</span></code> Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapare-cutouts-for-each-star">4.4. Prapare Cutouts for Each Star</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="psf-extraction">
+<span id="ch-psf01"></span><h1><span class="section-number">4. </span>PSF Extraction<a class="headerlink" href="#psf-extraction" title="Permalink to this heading">#</a></h1>
+<p>From the theory lecture, you learned PSF (point spread function) is the shape of the point source in your detector, after passing through all the optics. It includes the diffraction pattern, seeing (natural + telescope), etc. For space telescopes, PSF will be very stable because both the seeing sources will be negligible (if thermal expansion is well suppressed). Only the gradual change due to the degradation of the optics maybe important (or some dramatic changes by dust impact).</p>
+<p>In reality, it is practically impossible to know the PSF a priori for ground-based observations, especially because both the seeing factors are chaotic and impossible to predict. Also, there is absolutely no guarantee that the PSF will be the same for the consecutive images (you may need to include a slowly varying time-variation term, such as that in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1987PASP...99..191S/abstract">Stetson 1987</a>) Thus, one must rely on empirical estimation of the PSF of the given image.</p>
+<p>Students living in the 2020s may want to ask the AI to estimate the PSF in the image. However, as in any other branches of science, the current AI technology is not suitable for most of the quantitative analyses (especially because of the error analysis). Thus, classical approach would be</p>
+<ol class="arabic simple">
+<li><p>Tell the program a rough FWHM value (“initial guess”).</p></li>
+<li><p>Tell the program which shape of PSF you expect (e.g., “use Gaussian fitting”, “use Moffat and spline interpolation”, etc.).</p></li>
+<li><p>Manually check if the PSF is well estimated (check the “residuals”).</p></li>
+<li><p>Manually check if the PSF photometry is done correctly (repeat the processes if necessary).</p></li>
+</ol>
+<section id="preparation">
+<h2><span class="section-number">4.1. </span>Preparation<a class="headerlink" href="#preparation" title="Permalink to this heading">#</a></h2>
+<p>First, load the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">_tool_visualization</span> <span class="k">as</span> <span class="nn">vis</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">ysfitsutilpy</span> <span class="k">as</span> <span class="nn">yfu</span>
+<span class="kn">import</span> <span class="nn">ysphotutilpy</span> <span class="k">as</span> <span class="nn">ypu</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.nddata</span> <span class="kn">import</span> <span class="n">CCDData</span><span class="p">,</span> <span class="n">Cutout2D</span>
+<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clipped_stats</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">photutils.aperture</span> <span class="kn">import</span> <span class="n">CircularAnnulus</span> <span class="k">as</span> <span class="n">CAn</span>
+<span class="kn">from</span> <span class="nn">photutils.aperture</span> <span class="kn">import</span> <span class="n">CircularAperture</span> <span class="k">as</span> <span class="n">CAp</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RectBivariateSpline</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">})</span>
+    
+<span class="n">DATAPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../../Tutorial_Data/&quot;</span><span class="p">)</span>
+<span class="n">LOGPATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./tmp&quot;</span><span class="p">)</span>  <span class="c1"># a temporary output directory</span>
+<span class="n">LOGPATH</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Load our data</span>
+<span class="n">fpath</span> <span class="o">=</span> <span class="n">DATAPATH</span><span class="o">/</span><span class="s2">&quot;SNUO_STX16803-M11-1-1-20190507-171622-V-60.0.fits&quot;</span>
+<span class="n">ccd_raw</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+
+<span class="n">gain</span> <span class="o">=</span> <span class="n">ccd_raw</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GAIN&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rdnoise</span> <span class="o">=</span> <span class="n">ccd_raw</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RDNOISE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 58610.719699 from DATE-OBS&#39;. [astropy.wcs.wcs]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, do the cosmic-ray rejection. (see <a class="reference internal" href="A0-crrej.html#ch-crrej"><span class="std std-ref">CR rejection lecture</span></a>)</p>
+<ul class="simple">
+<li><p><strong>NOTE</strong>: <code class="docutils literal notranslate"><span class="pre">yfu.crrej</span></code> is nothing but <code class="docutils literal notranslate"><span class="pre">astroscrappy.detect_cosmics</span></code>, with some additional tasks to add history in the FITS files.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crpath</span> <span class="o">=</span> <span class="n">LOGPATH</span> <span class="o">/</span> <span class="s2">&quot;SNUO_STX16803-M11-1-1-20190507-171622-V-60.0_CR.fits&quot;</span>
+<span class="k">if</span> <span class="n">crpath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">ccd</span> <span class="o">=</span> <span class="n">CCDData</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">crpath</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ccd</span><span class="p">,</span> <span class="n">crmask</span> <span class="o">=</span> <span class="n">yfu</span><span class="o">.</span><span class="n">crrej</span><span class="p">(</span>
+        <span class="n">ccd</span><span class="o">=</span><span class="n">ccd_raw</span><span class="p">,</span>
+        <span class="n">gain</span><span class="o">=</span><span class="n">gain</span><span class="p">,</span>
+        <span class="n">rdnoise</span><span class="o">=</span><span class="n">rdnoise</span><span class="p">,</span>
+        <span class="n">objlim</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span>
+        <span class="n">sepmed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>   <span class="c1"># IRAF LACosmic is sepmed=False        </span>
+    <span class="p">)</span>
+    <span class="n">ccd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">crpath</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">vis</span><span class="o">.</span><span class="n">norm_imshow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">zscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/125d08510b7d756724a8cd45ee87a22e9694c3975e1701b9385e073dddce3b95.png" src="../_images/125d08510b7d756724a8cd45ee87a22e9694c3975e1701b9385e073dddce3b95.png" />
+</div>
+</div>
+</section>
+<section id="initial-fwhm">
+<h2><span class="section-number">4.2. </span>Initial FWHM<a class="headerlink" href="#initial-fwhm" title="Permalink to this heading">#</a></h2>
+<p>From ginga, you have to find the FWHM of the stars.</p>
+<ol class="arabic simple">
+<li><p>Open ginga</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Operation</span></code> → <code class="docutils literal notranslate"><span class="pre">FBrowser</span></code> → open your FITS file (Here, <code class="docutils literal notranslate"><span class="pre">LOGPATH/SNUO_STX16803-M11-1-1-20190507-171622-V-60.0_CR.fits</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Operation</span></code> → <code class="docutils literal notranslate"><span class="pre">Analysis</span></code> → <code class="docutils literal notranslate"><span class="pre">Pick</span></code></p></li>
+<li><p>Find a star that (1) does not overlap with others, (2) is bright enough but not saturated. They are not at the center of the image.</p></li>
+<li><p>left click and right click to do “pick” (<a class="reference external" href="https://ginga.readthedocs.io/en/stable/manual/plugins_local/pick.html">See official documentation of Pick</a>)</p></li>
+<li><p>Bottom right panel: <code class="docutils literal notranslate"><span class="pre">Settings</span></code> → set <code class="docutils literal notranslate"><span class="pre">Radius</span></code> to 30 pix (since SNUO 1m has too small pixel scale…) &amp;&amp; <code class="docutils literal notranslate"><span class="pre">FWHM</span> <span class="pre">fitting</span></code> to <code class="docutils literal notranslate"><span class="pre">Moffat</span></code></p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Redo</span> <span class="pre">Pick</span></code></p></li>
+<li><p>Top right panel: Select <code class="docutils literal notranslate"><span class="pre">Radial</span></code>.</p></li>
+<li><p>Check if it is good:
+<img alt="" src="../_images/psfpick.png" /></p></li>
+<li><p>If not good, select a different star.</p></li>
+<li><p>Bottom right panel: <code class="docutils literal notranslate"><span class="pre">Report</span></code> → <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Pick</span></code></p></li>
+<li><p>Do this for around 10 stars throughout the image (better if regularly spaced).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">table</span></code> with name <code class="docutils literal notranslate"><span class="pre">pick_log.csv</span></code>.</p></li>
+</ol>
+</section>
+<section id="load-the-pick-results">
+<h2><span class="section-number">4.3. </span>Load the <code class="docutils literal notranslate"><span class="pre">Pick</span></code> Results<a class="headerlink" href="#load-the-pick-results" title="Permalink to this heading">#</a></h2>
+<p>Load the ginga <code class="docutils literal notranslate"><span class="pre">Pick</span></code> results, and find the centers of the stars.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_pick_log_path</span> <span class="o">=</span> <span class="n">LOGPATH</span><span class="o">/</span><span class="s2">&quot;pick_log.csv&quot;</span>
+
+<span class="c1"># get column names</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_pick_log_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pick_colnames</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># First one is just `#`</span>
+    
+<span class="n">pick_log</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">_pick_log_path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">pick_colnames</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+
+<span class="c1"># NOTE: ginga pick has 1-indexing: https://github.com/ejeschke/ginga/issues/769</span>
+<span class="n">pick_log</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="n">pick_log</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># Take sigma-clipped median of FWHM as initial guess</span>
+<span class="n">FWHM_INIT</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">pick_log</span><span class="p">[</span><span class="s2">&quot;fwhm&quot;</span><span class="p">],</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">PSFSIZE</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">FWHM_INIT</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FWHM_INIT = </span><span class="si">{</span><span class="n">FWHM_INIT</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> pixels&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PSFSIZE = </span><span class="si">{</span><span class="n">PSFSIZE</span><span class="si">}</span><span class="s2"> pixels&quot;</span><span class="p">)</span>
+
+<span class="n">pick_log</span><span class="p">[[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;fwhm&quot;</span><span class="p">,</span> <span class="s2">&quot;brightness&quot;</span><span class="p">,</span> <span class="s2">&quot;background&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FWHM_INIT = 12.03 pixels
+PSFSIZE = 49 pixels
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>fwhm</th>
+      <th>brightness</th>
+      <th>background</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3863.020138</td>
+      <td>707.683315</td>
+      <td>11.962709</td>
+      <td>756.294478</td>
+      <td>703.163513</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3514.125040</td>
+      <td>500.461007</td>
+      <td>12.047357</td>
+      <td>3113.724378</td>
+      <td>723.208466</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>791.043571</td>
+      <td>676.635925</td>
+      <td>12.041618</td>
+      <td>1806.826784</td>
+      <td>703.645050</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>238.905269</td>
+      <td>332.319899</td>
+      <td>12.026944</td>
+      <td>3362.454716</td>
+      <td>721.233795</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>880.530746</td>
+      <td>1262.908716</td>
+      <td>11.953833</td>
+      <td>1600.975989</td>
+      <td>708.042664</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>450.723343</td>
+      <td>2016.108091</td>
+      <td>11.974557</td>
+      <td>2423.947034</td>
+      <td>715.987640</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>802.402071</td>
+      <td>2468.025588</td>
+      <td>11.724034</td>
+      <td>2934.561519</td>
+      <td>698.899902</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>776.520519</td>
+      <td>3882.919494</td>
+      <td>11.921826</td>
+      <td>1851.317307</td>
+      <td>699.666199</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1600.434322</td>
+      <td>3353.373197</td>
+      <td>11.943629</td>
+      <td>2051.583265</td>
+      <td>697.423889</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3738.857578</td>
+      <td>2961.212126</td>
+      <td>12.383431</td>
+      <td>8053.690733</td>
+      <td>703.893646</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3591.739585</td>
+      <td>2460.098066</td>
+      <td>12.371278</td>
+      <td>3526.151165</td>
+      <td>698.613129</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3682.802596</td>
+      <td>2106.829978</td>
+      <td>12.307477</td>
+      <td>6108.703287</td>
+      <td>701.417389</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3514.123997</td>
+      <td>500.461282</td>
+      <td>12.089511</td>
+      <td>3149.151973</td>
+      <td>693.987732</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1496.579152</td>
+      <td>637.077055</td>
+      <td>12.137889</td>
+      <td>2415.422264</td>
+      <td>689.493286</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fwhm</span></code> is the FWHM from radial profile (you must have chosen radially symmetric objects, not galaxy-like objects)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">background</span></code> is the local background level (rough estimate)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">brightness</span></code> is the “peak pixel value” - “background”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FWHM_INIT</span></code> is the sigma-clipped median of the FWHM values of the selected point-sources.</p></li>
+</ul>
+<p>From now on, I will set the PSF size to be a box of side length <code class="docutils literal notranslate"><span class="pre">PSFSIZE</span> <span class="pre">=</span> <span class="pre">4*FWHM_INIT+1</span></code> ~ 49 (usage of <code class="docutils literal notranslate"><span class="pre">int</span></code> is a coding trick. Think about the case of FWHM=0.4 and 0.6 pixel case). This means, when estimating PSF, I extract 49x49 pixels around the center of each star. Therefore, ideally, there should be no overlapping stars or background object in the nearby ~ 25 pixels (~ 49/2).</p>
+</section>
+<section id="prapare-cutouts-for-each-star">
+<h2><span class="section-number">4.4. </span>Prapare Cutouts for Each Star<a class="headerlink" href="#prapare-cutouts-for-each-star" title="Permalink to this heading">#</a></h2>
+<p>Now cut the 49x49 pixels around the stars. Because the central location from ginga pick is not the most accurate, I will</p>
+<ol class="arabic simple">
+<li><p>Re-calculate the central pixel using <a class="reference external" href="https://github.com/kbarbary/sep">sep</a>.</p></li>
+<li></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
+<span class="n">pick_fit</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">x0</span><span class="o">=</span><span class="p">[],</span> <span class="n">y0</span><span class="o">=</span><span class="p">[],</span> <span class="n">x</span><span class="o">=</span><span class="p">[],</span> <span class="n">y</span><span class="o">=</span><span class="p">[],</span> <span class="n">shift</span><span class="o">=</span><span class="p">[],</span> <span class="n">fwhm</span><span class="o">=</span><span class="p">[],</span> <span class="n">bkg_ginga</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">msky</span><span class="o">=</span><span class="p">[],</span> <span class="n">ssky</span><span class="o">=</span><span class="p">[],</span> <span class="n">nsky</span><span class="o">=</span><span class="p">[],</span> <span class="n">nrej</span><span class="o">=</span><span class="p">[],</span> <span class="n">aperture_sum</span><span class="o">=</span><span class="p">[],</span> <span class="n">aperture_sum_err</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">source_sum</span><span class="o">=</span><span class="p">[],</span> <span class="n">source_sum_err</span><span class="o">=</span><span class="p">[],</span> <span class="n">mag</span><span class="o">=</span><span class="p">[],</span> <span class="n">merr</span><span class="o">=</span><span class="p">[],</span> <span class="n">snr</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+
+<span class="n">_aps</span><span class="p">,</span> <span class="n">_ans</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">circ_ap_an</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pick_log</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">pick_log</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+    <span class="n">fwhm</span><span class="o">=</span><span class="n">FWHM_INIT</span><span class="p">,</span> <span class="n">f_ap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">f_in</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">f_out</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">)</span>
+<span class="n">_phot</span> <span class="o">=</span> <span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span> <span class="n">_aps</span><span class="p">,</span> <span class="n">_ans</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="n">gain</span><span class="p">,</span> <span class="n">rdnoise</span><span class="o">=</span><span class="n">rdnoise</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">pick_log</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">fwhm</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;fwhm&quot;</span><span class="p">]</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">_phot</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;xcenter&quot;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">_phot</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;ycenter&quot;</span><span class="p">]</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s2">&quot;x0&quot;</span><span class="p">,</span> <span class="s2">&quot;y0&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;shift&quot;</span><span class="p">,</span> <span class="s2">&quot;fwhm&quot;</span><span class="p">,</span> <span class="s2">&quot;bkg_ginga&quot;</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;fwhm&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;background&quot;</span><span class="p">]]):</span>
+        <span class="n">pick_fit</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">pick_fit</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">7</span><span class="p">:]:</span>
+        <span class="n">pick_fit</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_phot</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+    <span class="n">_cut</span> <span class="o">=</span> <span class="n">Cutout2D</span><span class="p">(</span><span class="n">ccd</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]),</span> <span class="n">PSFSIZE</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">PSFSIZE</span><span class="p">)))</span>
+    
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">pick_fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ysbach/Dropbox/github/ysphotutilpy/ysphotutilpy/apphot.py:222: RuntimeWarning: invalid value encountered in sqrt
+  err = np.sqrt(_arr/gn + (rd/gn)**2)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x0</th>
+      <th>y0</th>
+      <th>x</th>
+      <th>y</th>
+      <th>shift</th>
+      <th>fwhm</th>
+      <th>bkg_ginga</th>
+      <th>msky</th>
+      <th>ssky</th>
+      <th>nsky</th>
+      <th>nrej</th>
+      <th>aperture_sum</th>
+      <th>aperture_sum_err</th>
+      <th>source_sum</th>
+      <th>source_sum_err</th>
+      <th>mag</th>
+      <th>merr</th>
+      <th>snr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3863.020138</td>
+      <td>707.683315</td>
+      <td>3863.020138</td>
+      <td>707.683315</td>
+      <td>0.0</td>
+      <td>11.962709</td>
+      <td>703.163513</td>
+      <td>681.910672</td>
+      <td>26.429745</td>
+      <td>9025</td>
+      <td>76</td>
+      <td>1.407565e+06</td>
+      <td>1055.781385</td>
+      <td>1.665485e+05</td>
+      <td>1544.648632</td>
+      <td>-8.608474</td>
+      <td>0.010070</td>
+      <td>107.822922</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3514.125040</td>
+      <td>500.461007</td>
+      <td>3514.125040</td>
+      <td>500.461007</td>
+      <td>0.0</td>
+      <td>12.047357</td>
+      <td>723.208466</td>
+      <td>678.218196</td>
+      <td>25.328658</td>
+      <td>9074</td>
+      <td>27</td>
+      <td>1.892077e+06</td>
+      <td>1212.820253</td>
+      <td>6.577803e+05</td>
+      <td>1624.339993</td>
+      <td>-10.099824</td>
+      <td>0.002681</td>
+      <td>404.952331</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>791.043571</td>
+      <td>676.635925</td>
+      <td>791.043571</td>
+      <td>676.635925</td>
+      <td>0.0</td>
+      <td>12.041618</td>
+      <td>703.645050</td>
+      <td>675.977868</td>
+      <td>24.988556</td>
+      <td>9072</td>
+      <td>36</td>
+      <td>1.602266e+06</td>
+      <td>1121.533295</td>
+      <td>3.720469e+05</td>
+      <td>1547.333258</td>
+      <td>-9.481116</td>
+      <td>0.004516</td>
+      <td>240.443907</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>238.905269</td>
+      <td>332.319899</td>
+      <td>238.905269</td>
+      <td>332.319899</td>
+      <td>0.0</td>
+      <td>12.026944</td>
+      <td>721.233795</td>
+      <td>673.655055</td>
+      <td>24.562914</td>
+      <td>9069</td>
+      <td>27</td>
+      <td>1.924117e+06</td>
+      <td>1222.494174</td>
+      <td>6.981251e+05</td>
+      <td>1610.127700</td>
+      <td>-10.164455</td>
+      <td>0.002504</td>
+      <td>433.583670</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>880.530746</td>
+      <td>1262.908716</td>
+      <td>880.530746</td>
+      <td>1262.908716</td>
+      <td>0.0</td>
+      <td>11.953833</td>
+      <td>708.042664</td>
+      <td>680.939568</td>
+      <td>27.748045</td>
+      <td>8874</td>
+      <td>229</td>
+      <td>1.568629e+06</td>
+      <td>1110.451876</td>
+      <td>3.293793e+05</td>
+      <td>1623.068444</td>
+      <td>-9.348863</td>
+      <td>0.005350</td>
+      <td>202.936203</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>450.723343</td>
+      <td>2016.108091</td>
+      <td>450.723343</td>
+      <td>2016.108091</td>
+      <td>0.0</td>
+      <td>11.974557</td>
+      <td>715.987640</td>
+      <td>684.951502</td>
+      <td>25.975406</td>
+      <td>8867</td>
+      <td>227</td>
+      <td>1.730422e+06</td>
+      <td>1162.784944</td>
+      <td>4.838710e+05</td>
+      <td>1606.238556</td>
+      <td>-9.766446</td>
+      <td>0.003604</td>
+      <td>301.244800</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>802.402071</td>
+      <td>2468.025588</td>
+      <td>802.402071</td>
+      <td>2468.025588</td>
+      <td>0.0</td>
+      <td>11.724034</td>
+      <td>698.899902</td>
+      <td>686.398201</td>
+      <td>24.979149</td>
+      <td>9020</td>
+      <td>79</td>
+      <td>1.823402e+06</td>
+      <td>1191.820653</td>
+      <td>5.742182e+05</td>
+      <td>1598.744614</td>
+      <td>-9.952314</td>
+      <td>0.003023</td>
+      <td>359.168153</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>776.520519</td>
+      <td>3882.919494</td>
+      <td>776.520519</td>
+      <td>3882.919494</td>
+      <td>0.0</td>
+      <td>11.921826</td>
+      <td>699.666199</td>
+      <td>689.402322</td>
+      <td>27.057238</td>
+      <td>8886</td>
+      <td>216</td>
+      <td>1.621077e+06</td>
+      <td>1127.682585</td>
+      <td>3.664258e+05</td>
+      <td>1613.695821</td>
+      <td>-9.464587</td>
+      <td>0.004781</td>
+      <td>227.072414</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1600.434322</td>
+      <td>3353.373197</td>
+      <td>1600.434322</td>
+      <td>3353.373197</td>
+      <td>0.0</td>
+      <td>11.943629</td>
+      <td>697.423889</td>
+      <td>686.289995</td>
+      <td>27.003879</td>
+      <td>8414</td>
+      <td>681</td>
+      <td>1.657278e+06</td>
+      <td>1139.423719</td>
+      <td>4.082910e+05</td>
+      <td>1620.303315</td>
+      <td>-9.582046</td>
+      <td>0.004309</td>
+      <td>251.984292</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3738.857578</td>
+      <td>2961.212126</td>
+      <td>3738.857578</td>
+      <td>2961.212126</td>
+      <td>0.0</td>
+      <td>12.383431</td>
+      <td>703.893646</td>
+      <td>681.853887</td>
+      <td>26.027390</td>
+      <td>9056</td>
+      <td>46</td>
+      <td>2.946660e+06</td>
+      <td>1498.786713</td>
+      <td>1.705747e+06</td>
+      <td>1865.265364</td>
+      <td>-11.134408</td>
+      <td>0.001187</td>
+      <td>914.479313</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3591.739585</td>
+      <td>2460.098066</td>
+      <td>3591.739585</td>
+      <td>2460.098066</td>
+      <td>0.0</td>
+      <td>12.371278</td>
+      <td>698.613129</td>
+      <td>681.875793</td>
+      <td>25.980785</td>
+      <td>9038</td>
+      <td>50</td>
+      <td>1.980840e+06</td>
+      <td>1239.435162</td>
+      <td>7.398863e+05</td>
+      <td>1662.721167</td>
+      <td>-10.227534</td>
+      <td>0.002440</td>
+      <td>444.985181</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3682.802596</td>
+      <td>2106.829978</td>
+      <td>3682.802596</td>
+      <td>2106.829978</td>
+      <td>0.0</td>
+      <td>12.307477</td>
+      <td>701.417389</td>
+      <td>683.637151</td>
+      <td>29.662955</td>
+      <td>8373</td>
+      <td>727</td>
+      <td>2.521552e+06</td>
+      <td>1390.604932</td>
+      <td>1.277393e+06</td>
+      <td>1880.187565</td>
+      <td>-10.820433</td>
+      <td>0.001598</td>
+      <td>679.396604</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3514.123997</td>
+      <td>500.461282</td>
+      <td>3514.123997</td>
+      <td>500.461282</td>
+      <td>0.0</td>
+      <td>12.089511</td>
+      <td>693.987732</td>
+      <td>678.218196</td>
+      <td>25.328658</td>
+      <td>9074</td>
+      <td>27</td>
+      <td>1.892077e+06</td>
+      <td>1212.820216</td>
+      <td>6.577801e+05</td>
+      <td>1624.339965</td>
+      <td>-10.099824</td>
+      <td>0.002681</td>
+      <td>404.952262</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1496.579152</td>
+      <td>637.077055</td>
+      <td>1496.579152</td>
+      <td>637.077055</td>
+      <td>0.0</td>
+      <td>12.137889</td>
+      <td>689.493286</td>
+      <td>676.748984</td>
+      <td>25.516357</td>
+      <td>8909</td>
+      <td>187</td>
+      <td>1.733619e+06</td>
+      <td>1163.795236</td>
+      <td>5.019956e+05</td>
+      <td>1593.529157</td>
+      <td>-9.806372</td>
+      <td>0.003447</td>
+      <td>315.021270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pick_fit</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0: 14
+y0: 14
+x: 14
+y: 14
+shift: 14
+fwhm: 14
+bkg_ginga: 14
+msky: 14
+ssky: 14
+nsky: 14
+nrej: 14
+aperture_sum: 14
+aperture_sum_err: 14
+source_sum: 14
+source_sum_err: 14
+mag: 14
+merr: 14
+snr: 14
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ypu</span><span class="o">.</span><span class="n">apphot_annulus</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function ysphotutilpy.apphot.apphot_annulus(ccd, aperture, annulus=None, gain=&#39;GAIN&#39;, rdnoise=&#39;RDNOISE&#39;, t_exposure=None, exposure_key=&#39;EXPTIME&#39;, error=None, mask=None, sky_keys=None, sky_min=None, aparea_exact=False, npix_mask_ap=2, verbose=False, pandas=True, **kwargs)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">PSFSIZE</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">nrow</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pick_log</span><span class="p">)</span> <span class="o">//</span> <span class="n">ncol</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">2.8</span> <span class="o">*</span> <span class="n">nrow</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#axs[0].</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">_cut</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/548c7102a22797ddf801b7fa3acc4ebd0e6f1c23c1c6e80405ca9e2eb12d9e46.png" src="../_images/548c7102a22797ddf801b7fa3acc4ebd0e6f1c23c1c6e80405ca9e2eb12d9e46.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pick</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ascii.csv&quot;</span><span class="p">,</span> 
+                  <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">data_start</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">pick_colnames</span><span class="p">)</span>
+<span class="c1"># NOTE: ginga pick has 1-indexing: https://github.com/ejeschke/ginga/issues/769</span>
+<span class="n">pick</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="n">pick</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># Only pixels near the stars in the txt file</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">pick</span><span class="p">:</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+    <span class="n">iy</span><span class="p">,</span> <span class="n">ix</span> <span class="o">=</span> <span class="n">Cutout2D</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">PSFSIZE</span><span class="p">)</span><span class="o">.</span><span class="n">bbox_original</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">iy</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">iy</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ix</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">ix</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">thresh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finding stars...&quot;</span><span class="p">)</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">DAOStarFinder</span><span class="p">(</span><span class="n">fwhm</span><span class="o">=</span><span class="n">FWHM_INIT</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">thresh</span><span class="p">,</span> <span class="n">exclude_border</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">found</span> <span class="o">=</span> <span class="n">finder</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stars initially selected for the PSF estimation: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pick</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pick</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!!!!! pick and found length not match !!!!!!&quot;</span><span class="p">)</span>
+
+<span class="n">found</span><span class="o">.</span><span class="n">remove_columns</span><span class="p">([</span><span class="s2">&quot;npix&quot;</span><span class="p">,</span> <span class="s2">&quot;sky&quot;</span><span class="p">])</span> <span class="c1"># remove confusing columns from DAOStarFinder</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">pick</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ascii.csv&quot;</span><span class="p">,</span>
+                      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chaps"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08-extended.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Extended Source Photometry</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10-psf02.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>PSF Photometry</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">4.1. Preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-fwhm">4.2. Initial FWHM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-pick-results">4.3. Load the <code class="docutils literal notranslate"><span class="pre">Pick</span></code> Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapare-cutouts-for-each-star">4.4. Prapare Cutouts for Each Star</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoonsoo P. Bach
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
