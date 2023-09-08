@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Python Spectroscopy Preface &#8212; SNU AO Class Python</title>
+    <title>3. Python Example of Longslit Spectroscopy &#8212; SNU AO Class Python</title>
   
   
   
@@ -63,12 +63,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/21-specpreface';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chaps/22-specexample';</script>
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Python Example of Longslit Spectroscopy" href="22-specexample.html" />
-    <link rel="prev" title="1. First Look at Longslit Data" href="20-specstat.html" />
+    <link rel="next" title="1. Cosmic-Ray Rejection" href="A0-crrej.html" />
+    <link rel="prev" title="2. Python Spectroscopy Preface" href="21-specpreface.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -194,8 +196,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Long-Slit Spectroscopy</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="20-specstat.html">1. First Look at Longslit Data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Python Spectroscopy Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="22-specexample.html">3. Python Example of Longslit Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21-specpreface.html">2. Python Spectroscopy Preface</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Python Example of Longslit Spectroscopy</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Materials</span></p>
 <ul class="nav bd-sidenav">
@@ -284,7 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/21-specpreface.ipynb" target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/edit/main/chaps/22-specexample.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -301,7 +303,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/21-specpreface.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ysBach/SNU_AOpython/issues/new?title=Issue%20on%20page%20%2Fchaps/22-specexample.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -331,7 +333,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/chaps/21-specpreface.ipynb" target="_blank"
+      <li><a href="../_sources/chaps/22-specexample.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -413,7 +415,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Python Spectroscopy Preface</h1>
+    <h1>Python Example of Longslit Spectroscopy</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,9 +425,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">2.1. General References</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">2.2. Available Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">2.3. Remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">3.1. About the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postprocessing">3.2. Postprocessing</a></li>
 </ul>
             </nav>
         </div>
@@ -437,56 +438,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="python-spectroscopy-preface">
-<span id="ch-specpreface"></span><h1><span class="section-number">2. </span>Python Spectroscopy Preface<a class="headerlink" href="#python-spectroscopy-preface" title="Permalink to this heading">#</a></h1>
-<p>This is a short note, originally written in 2016-2018. As of late 2023, the situation did not change much, unfortunately.</p>
-<p>However, importantly, <a class="reference external" href="https://github.com/pypeit/PypeIt">PypeIt</a> appeared after this lecture note. If a professional spectroscopic data reduction is requited (for research), you may consult with PypeIt for your work, and/or make a whole new pipeline for your specific instrument.</p>
-<p>In later notes, I will demonstrate how to do the spectroscopic data reduction using python. Since the concepts of the tasks, i.e., the procedures of what you should do, are clear, you must be able to do them in any language you can use.</p>
-<section id="general-references">
-<h2><span class="section-number">2.1. </span>General References<a class="headerlink" href="#general-references" title="Permalink to this heading">#</a></h2>
-<p>Some useful materials to understand spectroscopic data reduction:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="python-example-of-longslit-spectroscopy">
+<span id="ch-specexample"></span><h1><span class="section-number">3. </span>Python Example of Longslit Spectroscopy<a class="headerlink" href="#python-example-of-longslit-spectroscopy" title="Permalink to this heading">#</a></h1>
+<p>In this note, I show how a longslit spectrum data can be reduced.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://adsabs.harvard.edu/abs/1992ASPC...23..160W">Wagner’s writing in 1992</a></p>
+<li><p>Original data: 2-D FITS files (bias, dark, flat, lamp, science image)</p></li>
+<li><p>Final data: 1-D spectrum (flux at each λ)</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Let me repeat again: This lecture note is ignoring anything about preprocessing. If preprocessing-related lecture is required, I recommend <a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/00-00-Preface.html">Matthew Craig’s CCD Data Reduction Guide</a>.</p>
+</div>
+<section id="about-the-data">
+<h2><span class="section-number">3.1. </span>About the Data<a class="headerlink" href="#about-the-data" title="Permalink to this heading">#</a></h2>
+<p>The data we will use is the longslit spectrum data of a periodic comet, <a class="reference external" href="https://en.wikipedia.org/wiki/45P/Honda%E2%80%93Mrkos%E2%80%93Pajdu%C5%A1%C3%A1kov%C3%A1">45P/Honda–Mrkos–Pajdušáková</a>.</p>
+<div class="info admonition">
+<p class="admonition-title">Observational information</p>
+<ul class="simple">
+<li><p>Nishi-Harima Astronomical Observatory (NHAO).</p></li>
+<li><p>Nayuta Telescope (D=2.0m, F/12, Nasmyth)</p></li>
+<li><p>In 2017 February</p></li>
+<li><p>FLI PL230-BI CCD (pixel 15µm), 0.34 arcsec/pixel.</p></li>
+<li><p>Used MALLS (<a class="reference external" href="http://www.nhao.jp/~malls/malls_wiki/index.php?MALLS">official website in Japanese</a>).</p>
 <ul>
-<li><p>As far as I know, this is the most comprehensive article about spectroscopic data reduction, including theoretical background and practical usage (using IRAF).</p></li>
+<li><p>Grating: 150 lines/mm, so-called “Low1” (or just “Low”)</p></li>
+<li><p>Order cut filter: WG320</p></li>
+<li><p>λ = 3700–9500Å, total wavelength range = 5700Å</p></li>
+<li><p>Slit width = 1.6 arcsec</p></li>
+<li><p>resolution R~600 (&#64;550nm, under slit width 1.2”)</p></li>
+<li><p>Basic info is written in file headers.</p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="https://www.subarutelescope.org/Observing/DataReduction/Cookbooks/FOCAS_cookbook_2010jan05.pdf">FOCAS cookbook</a></p>
-<ul>
-<li><p>This is written specifically for FOCAS and is one of the available English manuals for that specific instrument. It gives you an idea of how to reduce data using IRAF.</p></li>
-<li><p>Even though you are not using FOCAS, Sections 5, 6, and Appendix B will generally be useful. Especially Sections 5.5 (and 5.7) are very valuable.</p></li>
 </ul>
-</li>
-<li><p>Among the <a class="reference external" href="http://iraf.noao.edu/iraf-ftp.html">IRAF archive</a>, the writing by <span class="xref myst">Massey et al. in 1992</span> is <strong>THE</strong> official manual for doing spectroscopic data reduction in IRAF.</p></li>
-</ul>
+</div>
 </section>
-<section id="available-packages">
-<h2><span class="section-number">2.2. </span>Available Packages<a class="headerlink" href="#available-packages" title="Permalink to this heading">#</a></h2>
-<p>As you can see, all the important materials are made for IRAF, not Python. I could only find a few informative packages, including <a class="reference external" href="https://github.com/jradavenport/pydis">PyDIS</a> by Dr. James Davenport. There is currently an ongoing discussion about making a spectroscopy package in astropy called <a class="reference external" href="https://github.com/astropy/specutils">specutils</a>.</p>
-<p>But currently, there are no useful packages as of 2021 (situation is similar as of 2023 Fall). One of the most recent discussions about this issue among the <em>Python users in Astronomy</em> group was <a class="reference external" href="https://www.facebook.com/groups/astropython/permalink/2473081482936527/">this</a>, with no hope.</p>
-<ul class="simple">
-<li><p>In our lecture note’s <a class="reference external" href="https://github.com/ysBach/SNU_AOclass/tree/master/references">references/</a>, you can find some materials related to spectroscopy.</p></li>
-<li><p>The astropy-affiliated package <a class="reference external" href="https://specutils.readthedocs.io/en/stable/"><code class="docutils literal notranslate"><span class="pre">specutils</span></code></a> is under development now. It will be released in a “usable” form only in 2019. It’s useful only after you’ve obtained the 1-D spectrum from your data.</p></li>
-<li><p>You may benchmark <a class="reference external" href="https://github.com/pypeit/PypeIt">PypeIt</a></p></li>
-</ul>
-</section>
-<section id="remarks">
-<h2><span class="section-number">2.3. </span>Remarks<a class="headerlink" href="#remarks" title="Permalink to this heading">#</a></h2>
-<p>In short, there are currently no perfect python tools or packages to satisfactorily do the spectroscopic data reduction in python (to replace IRAF). Among them, <a class="reference external" href="https://github.com/pypeit/PypeIt">PypeIt</a> has the biggest potential, but still not in a satisfactory stage. So my basic philosophy in producing this material is:</p>
+<section id="postprocessing">
+<h2><span class="section-number">3.2. </span>Postprocessing<a class="headerlink" href="#postprocessing" title="Permalink to this heading">#</a></h2>
+<p>First, the data should be preprocessed (bias subtraction, dark subtraction, flat fielding).</p>
+<p>Then the tricky part. There is no single best way, so we need a lot of interaction with computers. That includes</p>
 <ol class="arabic simple">
-<li><p>Make explicit codes step by step so that every process is visible.</p>
-<ul class="simple">
-<li><p>This means I intentionally do not make packages for all the processes. Only simple code snippets will be shown here.</p></li>
-<li><p>As I am not an expert in programming (and I believe a scientist sometimes <em>should not</em> think too much about these technical issues), the codes are never carefully optimized. But they work, at least.</p></li>
-</ul>
-</li>
-<li><p>Make the code similar to IRAF.</p>
-<ul class="simple">
-<li><p>This is basically because IRAF is still the <em>de facto</em> standard for spectroscopic data reduction. If I try to take some different approach than IRAF, it may require significant effort from my side (which is impossible due to my lack of ability), and I do believe that IRAF is very carefully designed.</p></li>
-</ul>
-</li>
+<li><p>Wavelength identification (ID): First, you cut a small fraction of the comparison lamp image and let the computer calculate the wavelength <span class="math notranslate nohighlight">\(\lambda = \lambda(x)\)</span> for given pixel value <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>Reidentification (REID): Then you must check that this function makes sense throughout the whole image. REID checks it.</p></li>
+<li><p>Aperture trace (aptrace): The object spectrum cannot be perfectly parallel to the dispersion direction. Aptrace (in IRAF, <code class="docutils literal notranslate"><span class="pre">APALL</span></code>) is to find how the source moves along the dispersion direction.</p></li>
+<li><p>Sky subtraction: The sky should be subtracted <em>at each wavelength</em>.</p></li>
+<li><p>Aperture sum: We then sum the pixel values within the selected aperture.</p></li>
 </ol>
-<p>In the following notes, I show my own code, which <strong>can be extremely slow and inefficient compared to optimized codes</strong>. I didn’t care much about technical details (faster calculation, etc.), basically due to my lack of ability plus time limits.</p>
 </section>
 </section>
 
@@ -522,20 +518,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="20-specstat.html"
+       href="21-specpreface.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>First Look at Longslit Data</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Python Spectroscopy Preface</p>
       </div>
     </a>
     <a class="right-next"
-       href="22-specexample.html"
+       href="A0-crrej.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Python Example of Longslit Spectroscopy</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Cosmic-Ray Rejection</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -557,9 +553,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-references">2.1. General References</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-packages">2.2. Available Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">2.3. Remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">3.1. About the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postprocessing">3.2. Postprocessing</a></li>
 </ul>
   </nav></div>
 
